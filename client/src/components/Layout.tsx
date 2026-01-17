@@ -55,7 +55,7 @@ export function Layout({ children }: LayoutProps) {
         className="fixed inset-0 bg-cover bg-center bg-no-repeat"
         style={{
           backgroundImage:
-            'url(https://images.unsplash.com/photo-1559511260-66a654ae982a?w=1920&q=80)',
+            'url(https://images.unsplash.com/Wc45W-dQFlA?w=1920&q=80)',
         }}
       >
         {/* Overlay for readability */}
@@ -108,7 +108,7 @@ export function Layout({ children }: LayoutProps) {
                     </svg>
                   </button>
                   {isDropdownOpen && (
-                    <div className="absolute right-0 mt-2 w-56 bg-white dark:bg-gray-800 rounded-xl shadow-2xl overflow-hidden z-50 border border-gray-200 dark:border-gray-700 max-h-96 overflow-y-auto">
+                    <div className="absolute right-0 mt-2 w-56 bg-white dark:bg-gray-800 rounded-xl shadow-2xl overflow-hidden border border-gray-200 dark:border-gray-700 max-h-96 overflow-y-auto" style={{ zIndex: 9999 }}>
                       {favoriteBeaches.length > 0 && (
                         <div className="border-b border-gray-100 dark:border-gray-700">
                           <p className="px-4 py-2 text-xs text-gray-500 dark:text-gray-400 uppercase font-medium">

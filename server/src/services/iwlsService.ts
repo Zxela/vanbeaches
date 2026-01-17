@@ -8,7 +8,8 @@ const TIDE_CACHE_TTL = 3600000; // 1 hour
 interface IWLSResponse {
   eventDate: string;
   value: number;
-  eventType: string;
+  qcFlagCode: string;
+  timeSeriesId: string;
 }
 
 export async function getTidePredictions(
@@ -36,11 +37,20 @@ export async function getTidePredictions(
 
         const data: IWLSResponse[] = await response.json();
 
-        const predictions: TidePrediction[] = data.slice(0, 6).map((item) => ({
-          time: item.eventDate,
-          height: Number(item.value.toFixed(2)),
-          type: item.eventType.toLowerCase().includes('high') ? 'high' : 'low',
-        }));
+        // Determine high/low by comparing to adjacent values
+        // In wlp-hilo data, points alternate between local maxima (high) and minima (low)
+        const predictions: TidePrediction[] = data.slice(0, 6).map((item, index, arr) => {
+          const prev = index > 0 ? arr[index - 1].value : item.value;
+          const next = index < arr.length - 1 ? arr[index + 1].value : item.value;
+          // If current value is greater than both neighbors, it's a high tide
+          // If current value is less than both neighbors, it's a low tide
+          const isHigh = item.value >= prev && item.value >= next;
+          return {
+            time: item.eventDate,
+            height: Number(item.value.toFixed(2)),
+            type: isHigh ? 'high' : 'low',
+          };
+        });
 
         return {
           beachId,

@@ -21,7 +21,10 @@ export function useSunTimes(latitude: number, longitude: number): SunTimes {
     const decRad = (declination * Math.PI) / 180;
 
     const hourAngle = (Math.acos(-Math.tan(latRad) * Math.tan(decRad)) * 180) / Math.PI;
-    const solarNoon = 12 - longitude / 15 + 8; // PST offset
+    // Get timezone offset in hours (negative for west of UTC)
+    const timezoneOffset = now.getTimezoneOffset() / 60;
+    // Solar noon: 12 UTC adjusted for longitude, then converted to local time
+    const solarNoon = 12 - longitude / 15 - timezoneOffset;
 
     const sunriseHour = solarNoon - hourAngle / 15;
     const sunsetHour = solarNoon + hourAngle / 15;
