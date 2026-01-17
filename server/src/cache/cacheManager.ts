@@ -50,14 +50,16 @@ export class CacheManager {
     const existing = this.inFlight.get(key) as Promise<T> | undefined;
     if (existing) return existing;
 
-    const promise = fetcher().then(async (value) => {
-      await this.set(key, value, ttlMs);
-      this.inFlight.delete(key);
-      return value;
-    }).catch((err) => {
-      this.inFlight.delete(key);
-      throw err;
-    });
+    const promise = fetcher()
+      .then(async (value) => {
+        await this.set(key, value, ttlMs);
+        this.inFlight.delete(key);
+        return value;
+      })
+      .catch((err) => {
+        this.inFlight.delete(key);
+        throw err;
+      });
 
     this.inFlight.set(key, promise);
     return promise;
@@ -77,7 +79,7 @@ export class CacheManager {
 
   private evictLRU(): void {
     let oldestKey: string | null = null;
-    let oldestTime = Infinity;
+    let oldestTime = Number.POSITIVE_INFINITY;
     for (const [key, entry] of this.cache) {
       if (entry.lastAccessed < oldestTime) {
         oldestTime = entry.lastAccessed;

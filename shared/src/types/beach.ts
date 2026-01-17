@@ -1,5 +1,17 @@
-import type { WeatherCondition } from './weather.js';
 import type { WaterQualityLevel } from './waterQuality.js';
+import type { WeatherCondition } from './weather.js';
+
+export interface BeachAmenities {
+  parking: 'free' | 'paid' | 'street' | 'none';
+  restrooms: boolean;
+  showers: boolean;
+  lifeguard: 'seasonal' | 'year-round' | 'none';
+  foodNearby: boolean;
+  dogFriendly: boolean;
+  wheelchairAccessible: boolean;
+  volleyballCourts: number;
+  firepits: boolean;
+}
 
 export interface Beach {
   id: string;
@@ -9,6 +21,12 @@ export interface Beach {
   tideStationId: string | null;
   hasWebcam: boolean;
   webcamUrl: string | null;
+  photoUrl?: string;
+  photoCredit?: string;
+  photoCreditUrl?: string;
+  description?: string;
+  amenities?: BeachAmenities;
+  activities?: string[];
 }
 
 export interface BeachSummary {

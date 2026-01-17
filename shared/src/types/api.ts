@@ -12,7 +12,11 @@ export interface ApiError {
   retryAfter: number | null;
 }
 
-export function createSuccessResponse<T>(data: T, cached = false, cachedAt: string | null = null): ApiResponse<T> {
+export function createSuccessResponse<T>(
+  data: T,
+  cached = false,
+  cachedAt: string | null = null,
+): ApiResponse<T> {
   return { success: true, data, error: null, cached, cachedAt };
 }
 

@@ -1,5 +1,5 @@
-import { useState, useEffect, useCallback } from 'react';
-import type { BeachSummary, ApiResponse } from '@van-beaches/shared';
+import type { ApiResponse, BeachSummary } from '@van-beaches/shared';
+import { useCallback, useEffect, useState } from 'react';
 
 export function useBeaches() {
   const [beaches, setBeaches] = useState<BeachSummary[]>([]);
@@ -13,10 +13,15 @@ export function useBeaches() {
       const data: ApiResponse<BeachSummary[]> = await response.json();
       if (data.success && data.data) setBeaches(data.data);
       else setError(data.error || 'Failed to fetch beaches');
-    } catch (err) { setError(err instanceof Error ? err.message : 'Network error'); }
-    finally { setLoading(false); }
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Network error');
+    } finally {
+      setLoading(false);
+    }
   }, []);
 
-  useEffect(() => { fetchBeaches(); }, [fetchBeaches]);
+  useEffect(() => {
+    fetchBeaches();
+  }, [fetchBeaches]);
   return { beaches, loading, error, refetch: fetchBeaches };
 }

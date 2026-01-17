@@ -1,10 +1,4 @@
-export type WeatherCondition =
-  | 'sunny'
-  | 'partly-cloudy'
-  | 'cloudy'
-  | 'rainy'
-  | 'stormy'
-  | 'foggy';
+export type WeatherCondition = 'sunny' | 'partly-cloudy' | 'cloudy' | 'rainy' | 'stormy' | 'foggy';
 
 export interface WeatherForecast {
   beachId: string;
@@ -21,6 +15,12 @@ export interface WeatherForecast {
     temperature: number;
     condition: WeatherCondition;
     precipitationProbability: number;
+  }>;
+  daily?: Array<{
+    date: string;
+    high: number;
+    low: number;
+    condition: WeatherCondition;
   }>;
   fetchedAt: string;
 }

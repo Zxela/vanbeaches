@@ -1,5 +1,5 @@
-import { useState, useEffect, useCallback } from 'react';
-import type { TideData, ApiResponse } from '@van-beaches/shared';
+import type { ApiResponse, TideData } from '@van-beaches/shared';
+import { useCallback, useEffect, useState } from 'react';
 
 interface UseTidesResult {
   tides: TideData | null;
@@ -18,7 +18,7 @@ export function useTides(beachId: string | undefined): UseTidesResult {
     setLoading(true);
     setError(null);
     try {
-      const response = await fetch('/api/tides/' + beachId);
+      const response = await fetch(`/api/tides/${beachId}`);
       const data: ApiResponse<TideData> = await response.json();
       if (data.success && data.data) {
         setTides(data.data);
@@ -32,6 +32,8 @@ export function useTides(beachId: string | undefined): UseTidesResult {
     }
   }, [beachId]);
 
-  useEffect(() => { fetchTides(); }, [fetchTides]);
+  useEffect(() => {
+    fetchTides();
+  }, [fetchTides]);
   return { tides, loading, error, refetch: fetchTides };
 }

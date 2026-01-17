@@ -16,13 +16,13 @@ class RateLimiter {
   async acquireSlot(apiName: string): Promise<boolean> {
     const config = this.configs.get(apiName) || { maxRequests: 10, windowMs: 1000 };
     this.refillTokens(apiName, config);
-    
+
     const tokens = this.tokens.get(apiName) || config.maxRequests;
     if (tokens > 0) {
       this.tokens.set(apiName, tokens - 1);
       return true;
     }
-    
+
     return new Promise((resolve) => {
       const q = this.queue.get(apiName) || [];
       q.push(() => resolve(true));

@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { test } from '@playwright/test';
 
 /**
  * E2E Tests for Beach Dashboard Display
@@ -13,7 +13,7 @@ test.describe('Beach Dashboard', () => {
 
   // AC: The system shall display all 9 Vancouver beaches on the main dashboard
   // Property: beaches.length === 9
-  test('displays all 9 Vancouver beaches', async ({ page }) => {
+  test('displays all 9 Vancouver beaches', async ({ page: _page }) => {
     // TODO: Implement - verify 9 beach cards are displayed
     // Expected beaches: English Bay, Jericho Beach, Kitsilano Beach, Locarno Beach,
     // Second Beach, Spanish Banks, Sunset Beach, Third Beach, Trout Lake
@@ -21,7 +21,9 @@ test.describe('Beach Dashboard', () => {
 
   // AC: When the dashboard loads, the system shall display each beach with name,
   // current conditions summary, and quick status indicators
-  test('displays beach cards with name, conditions, and status indicators', async ({ page }) => {
+  test('displays beach cards with name, conditions, and status indicators', async ({
+    page: _page,
+  }) => {
     // TODO: Implement - verify each card has:
     // - Beach name
     // - Current weather summary
@@ -31,7 +33,7 @@ test.describe('Beach Dashboard', () => {
 
   // AC: If any data source is unavailable, then the system shall display
   // "Data unavailable" with timestamp of last successful fetch
-  test('shows data unavailable message when API fails', async ({ page }) => {
+  test('shows data unavailable message when API fails', async ({ page: _page }) => {
     // TODO: Implement with mocked API failure
     // Verify "Data unavailable" message with timestamp
   });

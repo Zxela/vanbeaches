@@ -26,12 +26,6 @@
     }
   },
   "files": {
-    "ignore": [
-      "node_modules",
-      "dist",
-      "build",
-      ".next",
-      "coverage"
-    ]
+    "ignore": ["node_modules", "dist", "build", ".next", "coverage"]
   }
 }

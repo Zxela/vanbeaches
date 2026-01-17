@@ -1,5 +1,5 @@
-import { useState, useEffect, useCallback } from 'react';
-import type { WaterQualityStatus, ApiResponse } from '@van-beaches/shared';
+import type { ApiResponse, WaterQualityStatus } from '@van-beaches/shared';
+import { useCallback, useEffect, useState } from 'react';
 
 export function useWaterQuality(beachId: string | undefined) {
   const [waterQuality, setWaterQuality] = useState<WaterQualityStatus | null>(null);
@@ -11,14 +11,19 @@ export function useWaterQuality(beachId: string | undefined) {
     setLoading(true);
     setError(null);
     try {
-      const response = await fetch('/api/water-quality/' + beachId);
+      const response = await fetch(`/api/water-quality/${beachId}`);
       const data: ApiResponse<WaterQualityStatus> = await response.json();
       if (data.success && data.data) setWaterQuality(data.data);
       else setError(data.error || 'Failed to fetch water quality');
-    } catch (err) { setError(err instanceof Error ? err.message : 'Network error'); }
-    finally { setLoading(false); }
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Network error');
+    } finally {
+      setLoading(false);
+    }
   }, [beachId]);
 
-  useEffect(() => { fetch_(); }, [fetch_]);
+  useEffect(() => {
+    fetch_();
+  }, [fetch_]);
   return { waterQuality, loading, error, refetch: fetch_ };
 }

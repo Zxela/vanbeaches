@@ -1,11 +1,11 @@
-import type { Request, Response, NextFunction } from 'express';
 import type { ApiError } from '@van-beaches/shared';
+import type { NextFunction, Request, Response } from 'express';
 
 export class AppError extends Error {
   constructor(
     public code: ApiError['code'],
     message: string,
-    public retryAfter: number | null = null
+    public retryAfter: number | null = null,
   ) {
     super(message);
     this.name = 'AppError';
@@ -35,9 +35,13 @@ export function errorHandler(err: Error, _req: Request, res: Response, _next: Ne
 
 function getStatusCode(code: ApiError['code']): number {
   switch (code) {
-    case 'NOT_FOUND': return 404;
-    case 'RATE_LIMITED': return 429;
-    case 'SERVICE_UNAVAILABLE': return 503;
-    default: return 500;
+    case 'NOT_FOUND':
+      return 404;
+    case 'RATE_LIMITED':
+      return 429;
+    case 'SERVICE_UNAVAILABLE':
+      return 503;
+    default:
+      return 500;
   }
 }

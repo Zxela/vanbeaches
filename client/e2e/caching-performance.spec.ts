@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { expect, test } from '@playwright/test';
 
 /**
  * E2E Tests for Caching and Performance
@@ -23,7 +23,7 @@ test.describe('Caching and Performance', () => {
 
   // AC: If cache is empty and API is unavailable, then the system shall
   // return appropriate error message
-  test('shows error when cache empty and API unavailable', async ({ page }) => {
+  test('shows error when cache empty and API unavailable', async ({ page: _page }) => {
     // TODO: Mock empty cache + API failure
     // Verify appropriate error message displayed
   });
@@ -46,7 +46,7 @@ test.describe('Caching and Performance', () => {
     // TODO: Trigger refresh action
     // await page.click('[data-testid="refresh-button"]');
     // await page.waitForResponse('**/api/beaches/**');
-    const refreshTime = Date.now() - startTime;
+    const _refreshTime = Date.now() - startTime;
 
     // expect(refreshTime).toBeLessThan(1000);
   });
