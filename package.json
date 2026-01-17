@@ -1,0 +1,23 @@
+{
+  "name": "van-beaches",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Vancouver beach conditions dashboard",
+  "scripts": {
+    "dev": "pnpm -r --parallel dev",
+    "build": "pnpm -r build",
+    "test": "pnpm -r test",
+    "check": "biome check .",
+    "format": "biome format --write .",
+    "type-check": "pnpm -r type-check"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.9.4",
+    "typescript": "^5.7.2"
+  },
+  "packageManager": "pnpm@9.15.0",
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}
