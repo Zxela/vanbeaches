@@ -8,8 +8,8 @@ import { FavoriteButton } from '../components/FavoriteButton';
 import { FullscreenWebcam } from '../components/FullscreenWebcam';
 import { ShareButton } from '../components/ShareButton';
 import { SunTimesWidget } from '../components/SunTimesWidget';
-import { TideChart } from '../components/TideChart';
-import { TideTimeline } from '../components/TideTimeline';
+import { TideCanvas } from '../components/TideCanvas';
+import { TideForecast } from '../components/TideForecast';
 import { WaterQuality } from '../components/WaterQuality';
 import { WeatherForecast } from '../components/WeatherForecast';
 import { WeatherWidget } from '../components/WeatherWidget';
@@ -74,8 +74,8 @@ export function BeachDetail() {
             latitude={beach.location.latitude}
             longitude={beach.location.longitude}
           />
-          <TideTimeline predictions={tides?.predictions || []} loading={tidesLoading} />
-          <TideChart
+          <TideCanvas predictions={tides?.predictions || []} loading={tidesLoading} />
+          <TideForecast
             predictions={tides?.predictions || []}
             loading={tidesLoading}
             error={tidesError}

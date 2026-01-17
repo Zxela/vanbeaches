@@ -40,7 +40,9 @@ export function TideTimeline({ predictions, loading }: TideTimelineProps) {
   if (loading) {
     return (
       <div className="bg-gradient-to-br from-ocean-50 to-sky-50 dark:from-sand-800 dark:to-sand-800 rounded-xl shadow-lg p-4 border border-ocean-100 dark:border-sand-700">
-        <h3 className="text-lg font-semibold text-sand-900 dark:text-sand-100 mb-4">Today's Tides</h3>
+        <h3 className="text-lg font-semibold text-sand-900 dark:text-sand-100 mb-4">
+          Today's Tides
+        </h3>
         <div className="animate-pulse h-40 bg-ocean-100 dark:bg-sand-700 rounded" />
       </div>
     );
@@ -49,7 +51,9 @@ export function TideTimeline({ predictions, loading }: TideTimelineProps) {
   if (todayTides.length === 0) {
     return (
       <div className="bg-gradient-to-br from-ocean-50 to-sky-50 dark:from-sand-800 dark:to-sand-800 rounded-xl shadow-lg p-4 border border-ocean-100 dark:border-sand-700">
-        <h3 className="text-lg font-semibold text-sand-900 dark:text-sand-100 mb-4">Today's Tides</h3>
+        <h3 className="text-lg font-semibold text-sand-900 dark:text-sand-100 mb-4">
+          Today's Tides
+        </h3>
         <p className="text-sand-500 dark:text-sand-400">No tide data available</p>
       </div>
     );
@@ -79,15 +83,21 @@ export function TideTimeline({ predictions, loading }: TideTimelineProps) {
         <div className="flex-1 relative h-40">
           {/* Horizontal grid lines */}
           <div className="absolute inset-0 flex flex-col justify-between">
-            {yAxisLabels.map((_, i) => (
-              <div key={i} className="border-t border-ocean-200/50 dark:border-sand-700 w-full" />
+            {yAxisLabels.map((label) => (
+              <div
+                key={`grid-${label}`}
+                className="border-t border-ocean-200/50 dark:border-sand-700 w-full"
+              />
             ))}
           </div>
 
           {/* Vertical grid lines */}
           <div className="absolute inset-0 flex justify-between">
             {[0, 6, 12, 18, 24].map((hour) => (
-              <div key={hour} className="border-l border-ocean-200/50 dark:border-sand-700 h-full" />
+              <div
+                key={hour}
+                className="border-l border-ocean-200/50 dark:border-sand-700 h-full"
+              />
             ))}
           </div>
 

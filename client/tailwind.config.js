@@ -4,6 +4,11 @@ export default {
   darkMode: 'class',
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['Inter', 'system-ui', 'sans-serif'],
+        display: ['Inter', 'system-ui', 'sans-serif'],
+        mono: ['JetBrains Mono', 'SF Mono', 'monospace'],
+      },
       colors: {
         // Material Design 3 - Ocean/Beach Cool Palette
         ocean: {
@@ -54,9 +59,68 @@ export default {
           800: '#424242',
           900: '#212121',
         },
+        // Semantic tide colors
+        tide: {
+          high: '#10b981', // Emerald
+          low: '#06b6d4', // Cyan
+        },
       },
       maxWidth: {
         '8xl': '88rem',
+      },
+      boxShadow: {
+        // Elevated shadows with color
+        'ocean-sm': '0 2px 8px -2px rgba(0, 188, 212, 0.2)',
+        'ocean-md': '0 4px 14px -3px rgba(0, 188, 212, 0.25)',
+        'ocean-lg': '0 8px 24px -4px rgba(0, 188, 212, 0.3)',
+        'shore-sm': '0 2px 8px -2px rgba(0, 150, 136, 0.2)',
+        'shore-md': '0 4px 14px -3px rgba(0, 150, 136, 0.25)',
+        // Card shadow system
+        card: '0 4px 24px -8px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.5)',
+        'card-hover': '0 8px 32px -8px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.5)',
+        'card-dark': '0 4px 24px -8px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.05)',
+      },
+      borderRadius: {
+        '2xl': '1rem',
+        '3xl': '1.5rem',
+      },
+      animation: {
+        shimmer: 'shimmer 2s linear infinite',
+        'fade-in': 'fadeIn 0.3s ease-out',
+        'slide-up': 'slideUp 0.3s ease-out',
+        'scale-in': 'scaleIn 0.2s ease-out',
+        'pulse-glow': 'pulseGlow 2s ease-in-out infinite',
+      },
+      keyframes: {
+        shimmer: {
+          '0%': { backgroundPosition: '-200% 0' },
+          '100%': { backgroundPosition: '200% 0' },
+        },
+        fadeIn: {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
+        slideUp: {
+          '0%': { opacity: '0', transform: 'translateY(10px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+        scaleIn: {
+          '0%': { opacity: '0', transform: 'scale(0.95)' },
+          '100%': { opacity: '1', transform: 'scale(1)' },
+        },
+        pulseGlow: {
+          '0%, 100%': { opacity: '0.7' },
+          '50%': { opacity: '1' },
+        },
+      },
+      backgroundImage: {
+        'shimmer-gradient':
+          'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.4) 50%, transparent 100%)',
+        'shimmer-gradient-dark':
+          'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.1) 50%, transparent 100%)',
+      },
+      backdropBlur: {
+        xs: '2px',
       },
     },
   },

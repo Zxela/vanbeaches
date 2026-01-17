@@ -108,7 +108,10 @@ export function Layout({ children }: LayoutProps) {
                     </svg>
                   </button>
                   {isDropdownOpen && (
-                    <div className="absolute right-0 mt-2 w-56 bg-white dark:bg-sand-800 rounded-xl shadow-2xl overflow-hidden border border-sand-200 dark:border-sand-700 max-h-96 overflow-y-auto" style={{ zIndex: 9999 }}>
+                    <div
+                      className="absolute right-0 mt-2 w-56 bg-white dark:bg-sand-800 rounded-xl shadow-2xl overflow-hidden border border-sand-200 dark:border-sand-700 max-h-96 overflow-y-auto"
+                      style={{ zIndex: 9999 }}
+                    >
                       {favoriteBeaches.length > 0 && (
                         <div className="border-b border-sand-100 dark:border-sand-700">
                           <p className="px-4 py-2 text-xs text-sand-500 dark:text-sand-400 uppercase font-medium">

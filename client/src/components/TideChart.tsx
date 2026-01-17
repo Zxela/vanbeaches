@@ -64,7 +64,9 @@ export function TideChart({ predictions, loading, error }: TideChartProps) {
 
   return (
     <div className="bg-gradient-to-br from-ocean-50 to-sky-50 dark:from-sand-800 dark:to-sand-800 rounded-xl shadow-lg p-4 border border-ocean-100 dark:border-sand-700">
-      <h3 className="text-lg font-semibold text-sand-900 dark:text-sand-100 mb-3">Upcoming Tides</h3>
+      <h3 className="text-lg font-semibold text-sand-900 dark:text-sand-100 mb-3">
+        Upcoming Tides
+      </h3>
       <div className="space-y-4">
         {Object.entries(groupedTides).map(([date, tides]) => (
           <div key={date}>

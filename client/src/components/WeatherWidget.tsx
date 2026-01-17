@@ -97,7 +97,9 @@ export function WeatherWidget({ weather, loading, error }: WeatherWidgetProps) {
 
   return (
     <div className="bg-gradient-to-br from-ocean-50 to-sky-50 dark:from-sand-800 dark:to-sand-800 rounded-xl shadow-lg p-4 border border-ocean-100 dark:border-sand-700">
-      <h3 className="text-lg font-semibold text-sand-900 dark:text-sand-100 mb-3">Current Weather</h3>
+      <h3 className="text-lg font-semibold text-sand-900 dark:text-sand-100 mb-3">
+        Current Weather
+      </h3>
       <div className="flex items-center gap-4 mb-4">
         <span className="text-5xl">{icons[weather.current.condition] || '🌡️'}</span>
         <div>
@@ -115,7 +117,9 @@ export function WeatherWidget({ weather, loading, error }: WeatherWidgetProps) {
         <div className="flex items-center gap-2">
           <span className="text-2xl">💧</span>
           <div className="text-sm">
-            <p className="font-medium text-sand-900 dark:text-sand-100">{weather.current.humidity}%</p>
+            <p className="font-medium text-sand-900 dark:text-sand-100">
+              {weather.current.humidity}%
+            </p>
             <p className="text-sand-500 dark:text-sand-400 text-xs">Humidity</p>
           </div>
         </div>

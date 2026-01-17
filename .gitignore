@@ -7,3 +7,6 @@ dist/
 coverage/
 .vite/
 .claude/
+
+# Task files (ephemeral, generated per work session)
+docs/plans/tasks/
