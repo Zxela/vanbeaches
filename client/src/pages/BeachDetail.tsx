@@ -35,7 +35,7 @@ export function BeachDetail() {
     return (
       <div className="p-4 text-center">
         <p className="text-red-500 dark:text-red-400 mb-4">Beach not found</p>
-        <p className="text-gray-600 dark:text-gray-400">
+        <p className="text-sand-600 dark:text-sand-400">
           Select a beach from the dropdown menu above.
         </p>
       </div>
@@ -45,9 +45,9 @@ export function BeachDetail() {
     <div className="space-y-6">
       <div className="flex items-center justify-between flex-wrap gap-4">
         <div>
-          <h2 className="text-3xl font-bold text-gray-900 dark:text-white">{beach.name}</h2>
+          <h2 className="text-3xl font-bold text-sand-900 dark:text-sand-50">{beach.name}</h2>
           {beach.description && (
-            <p className="text-gray-600 dark:text-gray-400 mt-2 max-w-2xl">{beach.description}</p>
+            <p className="text-sand-600 dark:text-sand-400 mt-2 max-w-2xl">{beach.description}</p>
           )}
         </div>
         <div className="flex items-center gap-2">

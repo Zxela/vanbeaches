@@ -49,31 +49,31 @@ export function Layout({ children }: LayoutProps) {
   const otherBeaches = BEACHES.filter((b) => !favorites.includes(b.id));
 
   return (
-    <div className="min-h-screen relative">
+    <div className="min-h-screen relative bg-sand-100 dark:bg-sand-900">
       {/* Vancouver background image */}
       <div
         className="fixed inset-0 bg-cover bg-center bg-no-repeat"
         style={{
           backgroundImage:
-            'url(https://images.unsplash.com/Wc45W-dQFlA?w=1920&q=80)',
+            'url(https://images.unsplash.com/photo-1609825488888-3a766db05542?w=1920&q=80)',
         }}
       >
-        {/* Overlay for readability */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/60 dark:from-black/60 dark:via-black/40 dark:to-black/80" />
+        {/* Overlay for readability - cool tones */}
+        <div className="absolute inset-0 bg-gradient-to-b from-ocean-900/30 via-ocean-800/20 to-shore-900/50 dark:from-ocean-900/60 dark:via-sand-900/40 dark:to-sand-900/80" />
       </div>
 
       {/* App container */}
       <div className="relative z-10 min-h-screen flex flex-col">
-        <header className="bg-white/90 dark:bg-gray-900/90 backdrop-blur-md text-gray-900 dark:text-white shadow-xl border-b border-white/20">
-          <div className="container mx-auto px-4 py-4">
+        <header className="bg-white/90 dark:bg-sand-900/95 backdrop-blur-md text-sand-900 dark:text-sand-100 shadow-xl border-b border-ocean-200/30 dark:border-ocean-800/30">
+          <div className="container mx-auto max-w-7xl px-4 py-4">
             <div className="flex items-center justify-between">
               <Link to="/" className="flex items-center gap-3 hover:opacity-90 transition-opacity">
                 <span className="text-3xl">🏖️</span>
                 <div className="hidden sm:block">
-                  <h1 className="text-2xl font-bold tracking-tight bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">
+                  <h1 className="text-2xl font-bold tracking-tight bg-gradient-to-r from-ocean-600 to-shore-500 bg-clip-text text-transparent">
                     Van Beaches
                   </h1>
-                  <p className="text-gray-500 dark:text-gray-400 text-sm">
+                  <p className="text-sand-500 dark:text-sand-400 text-sm">
                     Vancouver Beach Conditions
                   </p>
                 </div>
@@ -81,7 +81,7 @@ export function Layout({ children }: LayoutProps) {
               <nav className="hidden sm:flex items-center gap-3">
                 <Link
                   to="/compare"
-                  className="px-3 py-2 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-lg transition-colors text-sm text-gray-700 dark:text-gray-300"
+                  className="px-3 py-2 bg-ocean-50 dark:bg-ocean-900/30 hover:bg-ocean-100 dark:hover:bg-ocean-800/40 rounded-lg transition-colors text-sm text-ocean-700 dark:text-ocean-300"
                 >
                   Compare
                 </Link>
@@ -89,7 +89,7 @@ export function Layout({ children }: LayoutProps) {
                   <button
                     type="button"
                     onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                    className="flex items-center gap-2 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition-colors text-sm font-medium shadow-md"
+                    className="flex items-center gap-2 bg-ocean-500 hover:bg-ocean-600 text-white px-4 py-2 rounded-lg transition-colors text-sm font-medium shadow-md"
                   >
                     <span>{currentBeach?.name || 'Select Beach'}</span>
                     <svg
@@ -108,10 +108,10 @@ export function Layout({ children }: LayoutProps) {
                     </svg>
                   </button>
                   {isDropdownOpen && (
-                    <div className="absolute right-0 mt-2 w-56 bg-white dark:bg-gray-800 rounded-xl shadow-2xl overflow-hidden border border-gray-200 dark:border-gray-700 max-h-96 overflow-y-auto" style={{ zIndex: 9999 }}>
+                    <div className="absolute right-0 mt-2 w-56 bg-white dark:bg-sand-800 rounded-xl shadow-2xl overflow-hidden border border-sand-200 dark:border-sand-700 max-h-96 overflow-y-auto" style={{ zIndex: 9999 }}>
                       {favoriteBeaches.length > 0 && (
-                        <div className="border-b border-gray-100 dark:border-gray-700">
-                          <p className="px-4 py-2 text-xs text-gray-500 dark:text-gray-400 uppercase font-medium">
+                        <div className="border-b border-sand-100 dark:border-sand-700">
+                          <p className="px-4 py-2 text-xs text-sand-500 dark:text-sand-400 uppercase font-medium">
                             Favorites
                           </p>
                           {favoriteBeaches.map((beach) => (
@@ -124,8 +124,8 @@ export function Layout({ children }: LayoutProps) {
                               }}
                               className={`w-full text-left px-4 py-2.5 text-sm transition-colors ${
                                 currentBeachId === beach.id
-                                  ? 'bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 font-medium'
-                                  : 'text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700'
+                                  ? 'bg-ocean-50 dark:bg-ocean-900/30 text-ocean-700 dark:text-ocean-300 font-medium'
+                                  : 'text-sand-700 dark:text-sand-300 hover:bg-sand-50 dark:hover:bg-sand-700'
                               }`}
                             >
                               ⭐ {beach.name}
@@ -144,8 +144,8 @@ export function Layout({ children }: LayoutProps) {
                             }}
                             className={`w-full text-left px-4 py-2.5 text-sm transition-colors ${
                               currentBeachId === beach.id
-                                ? 'bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 font-medium'
-                                : 'text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700'
+                                ? 'bg-ocean-50 dark:bg-ocean-900/30 text-ocean-700 dark:text-ocean-300 font-medium'
+                                : 'text-sand-700 dark:text-sand-300 hover:bg-sand-50 dark:hover:bg-sand-700'
                             }`}
                           >
                             {beach.name}
@@ -158,7 +158,7 @@ export function Layout({ children }: LayoutProps) {
                 <button
                   type="button"
                   onClick={toggleTheme}
-                  className="p-2 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-lg transition-colors"
+                  className="p-2 bg-ocean-50 dark:bg-ocean-900/30 hover:bg-ocean-100 dark:hover:bg-ocean-800/40 rounded-lg transition-colors"
                   title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
                 >
                   {theme === 'dark' ? '☀️' : '🌙'}
@@ -169,8 +169,8 @@ export function Layout({ children }: LayoutProps) {
         </header>
 
         {/* Main content with frosted glass effect */}
-        <main className="flex-1 container mx-auto px-4 py-6 pb-24 sm:pb-6">
-          <div className="bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm rounded-2xl shadow-2xl p-6 border border-white/20">
+        <main className="flex-1 container mx-auto max-w-7xl px-4 py-6 pb-24 sm:pb-6">
+          <div className="bg-white/95 dark:bg-sand-900/95 backdrop-blur-sm rounded-2xl shadow-2xl p-6 border border-ocean-100/50 dark:border-ocean-900/30">
             {children}
           </div>
         </main>

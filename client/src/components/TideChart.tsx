@@ -30,27 +30,27 @@ function formatDate(isoString: string): string {
 export function TideChart({ predictions, loading, error }: TideChartProps) {
   if (loading)
     return (
-      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-4">
-        <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">Tides</h3>
+      <div className="bg-gradient-to-br from-ocean-50 to-sky-50 dark:from-sand-800 dark:to-sand-800 rounded-xl shadow-lg p-4 border border-ocean-100 dark:border-sand-700">
+        <h3 className="text-lg font-semibold text-sand-900 dark:text-sand-100 mb-3">Tides</h3>
         <div className="animate-pulse space-y-2">
           {[1, 2, 3, 4, 5, 6].map((i) => (
-            <div key={i} className="h-8 bg-gray-200 dark:bg-gray-700 rounded" />
+            <div key={i} className="h-8 bg-ocean-100 dark:bg-sand-700 rounded" />
           ))}
         </div>
       </div>
     );
   if (error)
     return (
-      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-4">
-        <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">Tides</h3>
+      <div className="bg-gradient-to-br from-ocean-50 to-sky-50 dark:from-sand-800 dark:to-sand-800 rounded-xl shadow-lg p-4 border border-ocean-100 dark:border-sand-700">
+        <h3 className="text-lg font-semibold text-sand-900 dark:text-sand-100 mb-3">Tides</h3>
         <p className="text-red-500 dark:text-red-400">{error}</p>
       </div>
     );
   if (predictions.length === 0)
     return (
-      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-4">
-        <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">Tides</h3>
-        <p className="text-gray-500 dark:text-gray-400">Tide information not applicable</p>
+      <div className="bg-gradient-to-br from-ocean-50 to-sky-50 dark:from-sand-800 dark:to-sand-800 rounded-xl shadow-lg p-4 border border-ocean-100 dark:border-sand-700">
+        <h3 className="text-lg font-semibold text-sand-900 dark:text-sand-100 mb-3">Tides</h3>
+        <p className="text-sand-500 dark:text-sand-400">Tide information not applicable</p>
       </div>
     );
 
@@ -63,29 +63,29 @@ export function TideChart({ predictions, loading, error }: TideChartProps) {
   }
 
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-4">
-      <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">Upcoming Tides</h3>
+    <div className="bg-gradient-to-br from-ocean-50 to-sky-50 dark:from-sand-800 dark:to-sand-800 rounded-xl shadow-lg p-4 border border-ocean-100 dark:border-sand-700">
+      <h3 className="text-lg font-semibold text-sand-900 dark:text-sand-100 mb-3">Upcoming Tides</h3>
       <div className="space-y-4">
         {Object.entries(groupedTides).map(([date, tides]) => (
           <div key={date}>
-            <p className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-2">{date}</p>
+            <p className="text-sm font-medium text-sand-500 dark:text-sand-400 mb-2">{date}</p>
             <div className="space-y-2">
               {tides.map((tide) => (
                 <div
                   key={tide.time}
-                  className={`flex justify-between items-center p-3 rounded-lg ${tide.type === 'high' ? 'bg-cyan-50 dark:bg-cyan-900/20' : 'bg-gray-50 dark:bg-gray-700/50'}`}
+                  className={`flex justify-between items-center p-3 rounded-lg ${tide.type === 'high' ? 'bg-shore-50 dark:bg-shore-900/20' : 'bg-ocean-50 dark:bg-ocean-900/20'}`}
                 >
                   <span
                     className={
                       tide.type === 'high'
-                        ? 'text-cyan-600 dark:text-cyan-400 font-medium'
-                        : 'text-gray-600 dark:text-gray-400'
+                        ? 'text-shore-600 dark:text-shore-400 font-medium'
+                        : 'text-ocean-600 dark:text-ocean-400'
                     }
                   >
                     {tide.type === 'high' ? '▲ High' : '▼ Low'}
                   </span>
-                  <span className="text-gray-700 dark:text-gray-300">{formatTime(tide.time)}</span>
-                  <span className="font-mono text-gray-900 dark:text-white">
+                  <span className="text-sand-700 dark:text-sand-300">{formatTime(tide.time)}</span>
+                  <span className="font-mono text-sand-900 dark:text-sand-50">
                     {tide.height.toFixed(2)} m
                   </span>
                 </div>

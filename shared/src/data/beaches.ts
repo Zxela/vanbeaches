@@ -11,9 +11,9 @@ export const BEACHES: Beach[] = [
     tideStationId: '5cebf1de3d0f4a073c4bb943',
     hasWebcam: false,
     webcamUrl: null,
-    photoUrl: 'https://images.unsplash.com/Wc45W-dQFlA?w=1200&q=80',
+    photoUrl: 'https://images.unsplash.com/photo-1647655806923-e8202f4f2b8c?w=1200&q=80',
     photoCredit: 'Adrian Yu',
-    photoCreditUrl: 'https://unsplash.com/@adrianyu',
+    photoCreditUrl: 'https://unsplash.com/@visualstrance',
     description:
       "One of Vancouver's most popular urban beaches with stunning sunset views and a lively atmosphere.",
     amenities: {
@@ -37,7 +37,7 @@ export const BEACHES: Beach[] = [
     tideStationId: '5cebf1de3d0f4a073c4bb943',
     hasWebcam: false,
     webcamUrl: null,
-    photoUrl: 'https://images.unsplash.com/Yc9h5SJdEzI?w=1200&q=80',
+    photoUrl: 'https://images.unsplash.com/photo-1560813962-ff3d8fcf59ba?w=1200&q=80',
     photoCredit: 'Lee Robinson',
     photoCreditUrl: 'https://unsplash.com/@leerob',
     description:
@@ -63,7 +63,7 @@ export const BEACHES: Beach[] = [
     tideStationId: '5cebf1de3d0f4a073c4bb943',
     hasWebcam: false,
     webcamUrl: null,
-    photoUrl: 'https://images.unsplash.com/hrPcO1Zarzw?w=1200&q=80',
+    photoUrl: 'https://images.unsplash.com/photo-1595568080088-0d81298f449b?w=1200&q=80',
     photoCredit: 'Masaru Suzuki',
     photoCreditUrl: 'https://unsplash.com/@masarusuzuki',
     description:
@@ -89,7 +89,7 @@ export const BEACHES: Beach[] = [
     tideStationId: '5cebf1de3d0f4a073c4bb943',
     hasWebcam: false,
     webcamUrl: null,
-    photoUrl: 'https://images.unsplash.com/KcK6M-1Q0ys?w=1200&q=80',
+    photoUrl: 'https://images.unsplash.com/photo-1660219072150-3aac74f765d2?w=1200&q=80',
     photoCredit: 'Joshua Webb',
     photoCreditUrl: 'https://unsplash.com/@joshuawebb',
     description:
@@ -115,7 +115,7 @@ export const BEACHES: Beach[] = [
     tideStationId: '5cebf1de3d0f4a073c4bb943',
     hasWebcam: false,
     webcamUrl: null,
-    photoUrl: 'https://images.unsplash.com/WHHY-iBp3aI?w=1200&q=80',
+    photoUrl: 'https://images.unsplash.com/photo-1559511260-66a654ae982a?w=1200&q=80',
     photoCredit: 'Mike Benna',
     photoCreditUrl: 'https://unsplash.com/@mbenna',
     description:
@@ -141,7 +141,7 @@ export const BEACHES: Beach[] = [
     tideStationId: '5cebf1de3d0f4a073c4bb943',
     hasWebcam: false,
     webcamUrl: null,
-    photoUrl: 'https://images.unsplash.com/gpxrS_MpmbU?w=1200&q=80',
+    photoUrl: 'https://images.unsplash.com/photo-1559510859-42b76a39988f?w=1200&q=80',
     photoCredit: 'Mike Benna',
     photoCreditUrl: 'https://unsplash.com/@mbenna',
     description:
@@ -167,9 +167,9 @@ export const BEACHES: Beach[] = [
     tideStationId: '5cebf1de3d0f4a073c4bb943',
     hasWebcam: false,
     webcamUrl: null,
-    photoUrl: 'https://images.unsplash.com/dBp9dbQCh4Q?w=1200&q=80',
+    photoUrl: 'https://images.unsplash.com/photo-1609825488888-3a766db05542?w=1200&q=80',
     photoCredit: 'Matt Wang',
-    photoCreditUrl: 'https://unsplash.com/@mattwang',
+    photoCreditUrl: 'https://unsplash.com/@iseeworld',
     description:
       'Downtown beach along False Creek with ferry access and views of the city skyline.',
     amenities: {
@@ -193,7 +193,7 @@ export const BEACHES: Beach[] = [
     tideStationId: '5cebf1de3d0f4a073c4bb943',
     hasWebcam: false,
     webcamUrl: null,
-    photoUrl: 'https://images.unsplash.com/4MS-3QQTRv8?w=1200&q=80',
+    photoUrl: 'https://images.unsplash.com/photo-1623942078086-0991401f7dc4?w=1200&q=80',
     photoCredit: 'JP Holecka',
     photoCreditUrl: 'https://unsplash.com/@jaypiddy',
     description:
@@ -219,7 +219,7 @@ export const BEACHES: Beach[] = [
     tideStationId: null,
     hasWebcam: false,
     webcamUrl: null,
-    photoUrl: 'https://images.unsplash.com/1JVO-rMpbz0?w=1200&q=80',
+    photoUrl: 'https://images.unsplash.com/photo-1525806317844-ba151bfda4bb?w=1200&q=80',
     photoCredit: 'Natalia CraftTheWay',
     photoCreditUrl: 'https://unsplash.com/@crafttheway',
     description:

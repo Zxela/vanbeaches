@@ -50,13 +50,16 @@ export function WebcamEmbed({
       ref={ref}
       className="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden relative"
     >
-      {!isLoaded && <div className="animate-pulse bg-gray-200 dark:bg-gray-700 aspect-video" />}
+      {isVisible && !isLoaded && (
+        <div className="animate-pulse bg-ocean-100 dark:bg-sand-700 aspect-video" />
+      )}
       {isVisible && (
         <img
           src={displayUrl}
           alt={beachName}
-          className={`w-full aspect-video object-cover ${isLoaded ? '' : 'hidden'}`}
+          className={`w-full aspect-video object-cover ${isLoaded ? '' : 'absolute opacity-0'}`}
           onLoad={() => setIsLoaded(true)}
+          onError={() => setIsLoaded(true)}
         />
       )}
       {photoCredit && isLoaded && (
