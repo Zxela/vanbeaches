@@ -11,9 +11,9 @@ export const BEACHES: Beach[] = [
     tideStationId: '5cebf1de3d0f4a073c4bb943',
     hasWebcam: false,
     webcamUrl: null,
-    photoUrl: 'https://images.unsplash.com/photo-1559511260-66a654ae982a?w=1200&q=80',
-    photoCredit: 'Lee Robinson',
-    photoCreditUrl: 'https://unsplash.com/@leerob',
+    photoUrl: 'https://images.unsplash.com/Wc45W-dQFlA?w=1200&q=80',
+    photoCredit: 'Adrian Yu',
+    photoCreditUrl: 'https://unsplash.com/@adrianyu',
     description:
       "One of Vancouver's most popular urban beaches with stunning sunset views and a lively atmosphere.",
     amenities: {
@@ -37,9 +37,9 @@ export const BEACHES: Beach[] = [
     tideStationId: '5cebf1de3d0f4a073c4bb943',
     hasWebcam: false,
     webcamUrl: null,
-    photoUrl: 'https://images.unsplash.com/photo-1542224566-6e85f2e6772f?w=1200&q=80',
-    photoCredit: 'James Wheeler',
-    photoCreditUrl: 'https://unsplash.com/@souvenirpixels',
+    photoUrl: 'https://images.unsplash.com/Yc9h5SJdEzI?w=1200&q=80',
+    photoCredit: 'Lee Robinson',
+    photoCreditUrl: 'https://unsplash.com/@leerob',
     description:
       'Family-friendly beach with calm waters, a sailing centre, and grassy areas perfect for picnics.',
     amenities: {
@@ -63,9 +63,9 @@ export const BEACHES: Beach[] = [
     tideStationId: '5cebf1de3d0f4a073c4bb943',
     hasWebcam: false,
     webcamUrl: null,
-    photoUrl: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1200&q=80',
-    photoCredit: 'Markus Spiske',
-    photoCreditUrl: 'https://unsplash.com/@markusspiske',
+    photoUrl: 'https://images.unsplash.com/hrPcO1Zarzw?w=1200&q=80',
+    photoCredit: 'Masaru Suzuki',
+    photoCreditUrl: 'https://unsplash.com/@masarusuzuki',
     description:
       "Vancouver's largest and most popular beach featuring a heated saltwater pool, tennis courts, and basketball.",
     amenities: {
@@ -89,9 +89,9 @@ export const BEACHES: Beach[] = [
     tideStationId: '5cebf1de3d0f4a073c4bb943',
     hasWebcam: false,
     webcamUrl: null,
-    photoUrl: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&q=80',
-    photoCredit: 'Casey Horner',
-    photoCreditUrl: 'https://unsplash.com/@mischievous_penguins',
+    photoUrl: 'https://images.unsplash.com/KcK6M-1Q0ys?w=1200&q=80',
+    photoCredit: 'Joshua Webb',
+    photoCreditUrl: 'https://unsplash.com/@joshuawebb',
     description:
       'Quieter beach with shallow waters stretching far at low tide, popular for walking and beachcombing.',
     amenities: {
@@ -115,9 +115,9 @@ export const BEACHES: Beach[] = [
     tideStationId: '5cebf1de3d0f4a073c4bb943',
     hasWebcam: false,
     webcamUrl: null,
-    photoUrl: 'https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=1200&q=80',
-    photoCredit: 'Pietro De Grandi',
-    photoCreditUrl: 'https://unsplash.com/@peter_mc_greats',
+    photoUrl: 'https://images.unsplash.com/WHHY-iBp3aI?w=1200&q=80',
+    photoCredit: 'Mike Benna',
+    photoCreditUrl: 'https://unsplash.com/@mbenna',
     description:
       'Stanley Park beach with a heated outdoor pool, playground, and beautiful forest backdrop.',
     amenities: {
@@ -141,9 +141,9 @@ export const BEACHES: Beach[] = [
     tideStationId: '5cebf1de3d0f4a073c4bb943',
     hasWebcam: false,
     webcamUrl: null,
-    photoUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1200&q=80',
-    photoCredit: 'Joseph Gonzalez',
-    photoCreditUrl: 'https://unsplash.com/@miracletwentyone',
+    photoUrl: 'https://images.unsplash.com/gpxrS_MpmbU?w=1200&q=80',
+    photoCredit: 'Mike Benna',
+    photoCreditUrl: 'https://unsplash.com/@mbenna',
     description:
       'Expansive beach known for spectacular low tides, kiteboarding, and mountain views.',
     amenities: {
@@ -167,9 +167,9 @@ export const BEACHES: Beach[] = [
     tideStationId: '5cebf1de3d0f4a073c4bb943',
     hasWebcam: false,
     webcamUrl: null,
-    photoUrl: 'https://images.unsplash.com/photo-1414609245224-afa02bfb3fda?w=1200&q=80',
-    photoCredit: 'John Osborn',
-    photoCreditUrl: 'https://unsplash.com/@johnhosborn',
+    photoUrl: 'https://images.unsplash.com/dBp9dbQCh4Q?w=1200&q=80',
+    photoCredit: 'Matt Wang',
+    photoCreditUrl: 'https://unsplash.com/@mattwang',
     description:
       'Downtown beach along False Creek with ferry access and views of the city skyline.',
     amenities: {
@@ -193,9 +193,9 @@ export const BEACHES: Beach[] = [
     tideStationId: '5cebf1de3d0f4a073c4bb943',
     hasWebcam: false,
     webcamUrl: null,
-    photoUrl: 'https://images.unsplash.com/photo-1520454974749-611b7248ffdb?w=1200&q=80',
-    photoCredit: 'Kace Rodriguez',
-    photoCreditUrl: 'https://unsplash.com/@kace',
+    photoUrl: 'https://images.unsplash.com/4MS-3QQTRv8?w=1200&q=80',
+    photoCredit: 'JP Holecka',
+    photoCreditUrl: 'https://unsplash.com/@jaypiddy',
     description:
       'Secluded Stanley Park gem with stunning sunsets, rainforest trails, and a relaxed vibe.',
     amenities: {
@@ -219,9 +219,9 @@ export const BEACHES: Beach[] = [
     tideStationId: null,
     hasWebcam: false,
     webcamUrl: null,
-    photoUrl: 'https://images.unsplash.com/photo-1439066615861-d1af74d74000?w=1200&q=80',
-    photoCredit: 'Aaron Burden',
-    photoCreditUrl: 'https://unsplash.com/@aaronburden',
+    photoUrl: 'https://images.unsplash.com/1JVO-rMpbz0?w=1200&q=80',
+    photoCredit: 'Natalia CraftTheWay',
+    photoCreditUrl: 'https://unsplash.com/@crafttheway',
     description:
       'East Vancouver freshwater lake with a sandy beach, farmers market, and community vibe.',
     amenities: {
