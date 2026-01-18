@@ -1,8 +1,12 @@
 import { BEACHES } from '@van-beaches/shared';
+import { AnimatePresence, motion } from 'framer-motion';
+import { BarChart3, Home, Moon, Star, Sun, Waves } from 'lucide-react';
 import { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useTheme } from '../contexts/ThemeContext';
 import { useFavorites } from '../hooks/useFavorites';
+import { cn } from '../lib/utils';
+import { Icon } from './ui';
 
 export function MobileBottomNav() {
   const [isBeachesOpen, setIsBeachesOpen] = useState(false);
@@ -22,26 +26,65 @@ export function MobileBottomNav() {
   return (
     <>
       {/* Beach selector overlay */}
-      {isBeachesOpen && (
-        <>
-          <button
-            type="button"
-            className="fixed inset-0 bg-black/50 z-40 sm:hidden"
-            onClick={() => setIsBeachesOpen(false)}
-            aria-label="Close beach selector"
-          />
-          <div className="fixed bottom-16 left-0 right-0 bg-white dark:bg-gray-800 rounded-t-2xl max-h-[70vh] overflow-y-auto z-40 sm:hidden">
-            <div className="sticky top-0 bg-white dark:bg-gray-800 p-4 border-b border-gray-200 dark:border-gray-700">
-              <div className="w-12 h-1 bg-gray-300 dark:bg-gray-600 rounded-full mx-auto mb-3" />
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white text-center">
-                Select Beach
-              </h3>
-            </div>
+      <AnimatePresence>
+        {isBeachesOpen && (
+          <>
+            <motion.button
+              type="button"
+              className="fixed inset-0 bg-black/50 z-40 sm:hidden"
+              onClick={() => setIsBeachesOpen(false)}
+              aria-label="Close beach selector"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            />
+            <motion.div
+              className="fixed bottom-16 left-0 right-0 bg-white/95 dark:bg-sand-800/95 backdrop-blur-xl rounded-t-2xl max-h-[70vh] overflow-y-auto z-40 sm:hidden border-t border-sand-200 dark:border-sand-700"
+              initial={{ y: '100%' }}
+              animate={{ y: 0 }}
+              exit={{ y: '100%' }}
+              transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+            >
+              <div className="sticky top-0 bg-white/95 dark:bg-sand-800/95 backdrop-blur-xl p-4 border-b border-sand-200 dark:border-sand-700">
+                <div className="w-12 h-1 bg-sand-300 dark:bg-sand-600 rounded-full mx-auto mb-3" />
+                <h3 className="text-lg font-semibold text-sand-900 dark:text-sand-100 text-center flex items-center justify-center gap-2">
+                  <Icon icon={Waves} size="md" color="ocean" />
+                  Select Beach
+                </h3>
+              </div>
 
-            {favoriteBeaches.length > 0 && (
-              <div className="p-4 border-b border-gray-200 dark:border-gray-700">
-                <p className="text-xs text-gray-500 dark:text-gray-400 uppercase mb-2">Favorites</p>
-                {favoriteBeaches.map((beach) => (
+              {favoriteBeaches.length > 0 && (
+                <div className="p-4 border-b border-sand-200 dark:border-sand-700">
+                  <p className="text-xs text-sand-500 dark:text-sand-400 uppercase font-medium mb-2">
+                    Favorites
+                  </p>
+                  {favoriteBeaches.map((beach) => (
+                    <button
+                      type="button"
+                      key={beach.id}
+                      onClick={() => {
+                        navigate(`/beach/${beach.id}`);
+                        setIsBeachesOpen(false);
+                      }}
+                      className={cn(
+                        'w-full text-left px-3 py-2.5 rounded-lg mb-1 transition-colors flex items-center gap-2',
+                        currentBeachId === beach.id
+                          ? 'bg-ocean-50 dark:bg-ocean-900/30 text-ocean-700 dark:text-ocean-300 font-medium'
+                          : 'text-sand-700 dark:text-sand-300 hover:bg-sand-50 dark:hover:bg-sand-700',
+                      )}
+                    >
+                      <Icon icon={Star} size="sm" className="text-amber-400 fill-amber-400" />
+                      {beach.name}
+                    </button>
+                  ))}
+                </div>
+              )}
+
+              <div className="p-4">
+                <p className="text-xs text-sand-500 dark:text-sand-400 uppercase font-medium mb-2">
+                  All Beaches
+                </p>
+                {otherBeaches.map((beach) => (
                   <button
                     type="button"
                     key={beach.id}
@@ -49,114 +92,95 @@ export function MobileBottomNav() {
                       navigate(`/beach/${beach.id}`);
                       setIsBeachesOpen(false);
                     }}
-                    className={`w-full text-left px-3 py-2.5 rounded-lg mb-1 transition-colors ${
+                    className={cn(
+                      'w-full text-left px-3 py-2.5 rounded-lg mb-1 transition-colors',
                       currentBeachId === beach.id
-                        ? 'bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300'
-                        : 'text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700'
-                    }`}
+                        ? 'bg-ocean-50 dark:bg-ocean-900/30 text-ocean-700 dark:text-ocean-300 font-medium'
+                        : 'text-sand-700 dark:text-sand-300 hover:bg-sand-50 dark:hover:bg-sand-700',
+                    )}
                   >
-                    <span className="mr-2">⭐</span> {beach.name}
+                    {beach.name}
                   </button>
                 ))}
               </div>
-            )}
-
-            <div className="p-4">
-              <p className="text-xs text-gray-500 dark:text-gray-400 uppercase mb-2">All Beaches</p>
-              {otherBeaches.map((beach) => (
-                <button
-                  type="button"
-                  key={beach.id}
-                  onClick={() => {
-                    navigate(`/beach/${beach.id}`);
-                    setIsBeachesOpen(false);
-                  }}
-                  className={`w-full text-left px-3 py-2.5 rounded-lg mb-1 transition-colors ${
-                    currentBeachId === beach.id
-                      ? 'bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300'
-                      : 'text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700'
-                  }`}
-                >
-                  {beach.name}
-                </button>
-              ))}
-            </div>
-          </div>
-        </>
-      )}
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
 
       {/* Bottom nav bar */}
-      <nav className="fixed bottom-0 left-0 right-0 bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 sm:hidden z-50">
+      <nav className="fixed bottom-0 left-0 right-0 bg-white/95 dark:bg-sand-800/95 backdrop-blur-xl border-t border-sand-200 dark:border-sand-700 sm:hidden z-50 safe-area-inset-bottom">
         <div className="flex items-center justify-around h-16">
           <Link
             to="/"
-            className={`flex flex-col items-center justify-center w-16 h-full ${
-              isHome ? 'text-blue-600 dark:text-blue-400' : 'text-gray-500 dark:text-gray-400'
-            }`}
+            className={cn(
+              'flex flex-col items-center justify-center w-16 h-full transition-colors',
+              isHome ? 'text-ocean-600 dark:text-ocean-400' : 'text-sand-500 dark:text-sand-400',
+            )}
           >
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              aria-hidden="true"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
-              />
-            </svg>
-            <span className="text-xs mt-1">Home</span>
+            <Icon icon={Home} size="lg" />
+            <span className="text-xs mt-1 font-medium">Home</span>
           </Link>
 
-          <button
+          <motion.button
             type="button"
             onClick={() => setIsBeachesOpen(!isBeachesOpen)}
-            className={`flex flex-col items-center justify-center w-16 h-full ${
+            className={cn(
+              'flex flex-col items-center justify-center w-16 h-full transition-colors',
               isBeachesOpen || currentBeachId
-                ? 'text-blue-600 dark:text-blue-400'
-                : 'text-gray-500 dark:text-gray-400'
-            }`}
+                ? 'text-ocean-600 dark:text-ocean-400'
+                : 'text-sand-500 dark:text-sand-400',
+            )}
+            whileTap={{ scale: 0.95 }}
           >
-            <span className="text-xl">🏖️</span>
-            <span className="text-xs mt-1">Beaches</span>
-          </button>
+            <Icon icon={Waves} size="lg" />
+            <span className="text-xs mt-1 font-medium">Beaches</span>
+          </motion.button>
 
           <Link
             to="/compare"
-            className={`flex flex-col items-center justify-center w-16 h-full ${
+            className={cn(
+              'flex flex-col items-center justify-center w-16 h-full transition-colors',
               location.pathname === '/compare'
-                ? 'text-blue-600 dark:text-blue-400'
-                : 'text-gray-500 dark:text-gray-400'
-            }`}
+                ? 'text-ocean-600 dark:text-ocean-400'
+                : 'text-sand-500 dark:text-sand-400',
+            )}
           >
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              aria-hidden="true"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
-              />
-            </svg>
-            <span className="text-xs mt-1">Compare</span>
+            <Icon icon={BarChart3} size="lg" />
+            <span className="text-xs mt-1 font-medium">Compare</span>
           </Link>
 
-          <button
+          <motion.button
             type="button"
             onClick={toggleTheme}
-            className="flex flex-col items-center justify-center w-16 h-full text-gray-500 dark:text-gray-400"
+            className="flex flex-col items-center justify-center w-16 h-full text-sand-500 dark:text-sand-400 transition-colors"
+            whileTap={{ scale: 0.95 }}
           >
-            <span className="text-xl">{theme === 'dark' ? '☀️' : '🌙'}</span>
-            <span className="text-xs mt-1">{theme === 'dark' ? 'Light' : 'Dark'}</span>
-          </button>
+            <AnimatePresence mode="wait">
+              {theme === 'dark' ? (
+                <motion.span
+                  key="sun"
+                  initial={{ rotate: -90, opacity: 0 }}
+                  animate={{ rotate: 0, opacity: 1 }}
+                  exit={{ rotate: 90, opacity: 0 }}
+                  transition={{ duration: 0.15 }}
+                >
+                  <Icon icon={Sun} size="lg" color="warning" />
+                </motion.span>
+              ) : (
+                <motion.span
+                  key="moon"
+                  initial={{ rotate: 90, opacity: 0 }}
+                  animate={{ rotate: 0, opacity: 1 }}
+                  exit={{ rotate: -90, opacity: 0 }}
+                  transition={{ duration: 0.15 }}
+                >
+                  <Icon icon={Moon} size="lg" />
+                </motion.span>
+              )}
+            </AnimatePresence>
+            <span className="text-xs mt-1 font-medium">{theme === 'dark' ? 'Light' : 'Dark'}</span>
+          </motion.button>
         </div>
       </nav>
     </>
