@@ -68,7 +68,7 @@ export function Layout({ children }: LayoutProps) {
 
       {/* App container */}
       <div className="relative z-10 min-h-screen flex flex-col">
-        <header className="bg-white/90 dark:bg-sand-900/95 backdrop-blur-md text-sand-900 dark:text-sand-100 shadow-xl border-b border-ocean-200/30 dark:border-ocean-800/30">
+        <header className="relative z-50 bg-white/90 dark:bg-sand-900/95 backdrop-blur-md text-sand-900 dark:text-sand-100 shadow-xl border-b border-ocean-200/30 dark:border-ocean-800/30">
           <div className="container mx-auto max-w-7xl px-4 py-4">
             <div className="flex items-center justify-between">
               <Link to="/" className="flex items-center gap-3 group">
