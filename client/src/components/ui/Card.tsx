@@ -44,6 +44,12 @@ const cardVariants = cva('rounded-2xl border transition-all duration-200', {
         'border-shore-100 dark:border-sand-700',
         'shadow-shore-sm dark:shadow-card-dark',
       ],
+      sky: [
+        'bg-gradient-to-br from-sky-50 to-ocean-50',
+        'dark:from-sand-800 dark:to-sand-800',
+        'border-sky-100 dark:border-sand-700',
+        'shadow-ocean-sm dark:shadow-card-dark',
+      ],
     },
     padding: {
       none: 'p-0',

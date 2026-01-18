@@ -1,4 +1,17 @@
 import type { WeatherForecast } from '@van-beaches/shared';
+import { motion } from 'framer-motion';
+import {
+  Cloud,
+  CloudFog,
+  CloudLightning,
+  CloudRain,
+  Droplets,
+  Sun,
+  Thermometer,
+  Wind,
+} from 'lucide-react';
+import type { LucideIcon } from 'lucide-react';
+import { Card, CardContent, CardTitle, Icon } from './ui';
 
 interface WeatherWidgetProps {
   weather: WeatherForecast | null;
@@ -6,13 +19,22 @@ interface WeatherWidgetProps {
   error?: string | null;
 }
 
-const icons: Record<string, string> = {
-  sunny: '☀️',
-  'partly-cloudy': '⛅',
-  cloudy: '☁️',
-  rainy: '🌧️',
-  stormy: '⛈️',
-  foggy: '🌫️',
+const weatherIcons: Record<string, LucideIcon> = {
+  sunny: Sun,
+  'partly-cloudy': Cloud,
+  cloudy: Cloud,
+  rainy: CloudRain,
+  stormy: CloudLightning,
+  foggy: CloudFog,
+};
+
+const weatherColors: Record<string, string> = {
+  sunny: 'text-amber-500',
+  'partly-cloudy': 'text-sky-400',
+  cloudy: 'text-sand-400',
+  rainy: 'text-sky-500',
+  stormy: 'text-purple-500',
+  foggy: 'text-sand-400',
 };
 
 const windDirections: Record<string, number> = {
@@ -28,19 +50,20 @@ const windDirections: Record<string, number> = {
 
 function WindCompass({ direction, speed }: { direction: string; speed: number }) {
   const rotation = windDirections[direction] || 0;
+
   return (
-    <div className="flex items-center gap-2">
-      <div className="relative w-8 h-8 rounded-full border-2 border-ocean-300 dark:border-ocean-600">
-        <div
-          className="absolute top-1/2 left-1/2 w-0 h-0 -translate-x-1/2 -translate-y-1/2"
-          style={{ transform: `translate(-50%, -50%) rotate(${rotation}deg)` }}
-        >
-          <div className="w-0 h-0 border-l-4 border-r-4 border-b-8 border-l-transparent border-r-transparent border-b-ocean-500 -translate-y-1" />
-        </div>
-      </div>
-      <div className="text-sm">
-        <p className="font-medium text-sand-900 dark:text-sand-100">{speed} km/h</p>
-        <p className="text-sand-500 dark:text-sand-400 text-xs">{direction}</p>
+    <div className="flex items-center gap-3">
+      <motion.div
+        className="relative w-10 h-10 rounded-full bg-ocean-50 dark:bg-ocean-900/30 border-2 border-ocean-200 dark:border-ocean-700 flex items-center justify-center"
+        initial={{ rotate: 0 }}
+        animate={{ rotate: rotation }}
+        transition={{ type: 'spring', stiffness: 100, damping: 15 }}
+      >
+        <div className="w-0 h-0 border-l-[5px] border-r-[5px] border-b-[10px] border-l-transparent border-r-transparent border-b-ocean-500" />
+      </motion.div>
+      <div>
+        <p className="font-semibold text-sand-900 dark:text-sand-100">{speed} km/h</p>
+        <p className="text-xs text-sand-500 dark:text-sand-400">{direction}</p>
       </div>
     </div>
   );
@@ -48,7 +71,7 @@ function WindCompass({ direction, speed }: { direction: string; speed: number })
 
 function UVIndicator({ index }: { index: number }) {
   const getColor = (uv: number) => {
-    if (uv <= 2) return 'bg-shore-400';
+    if (uv <= 2) return 'bg-emerald-400';
     if (uv <= 5) return 'bg-yellow-400';
     if (uv <= 7) return 'bg-orange-400';
     if (uv <= 10) return 'bg-red-500';
@@ -64,66 +87,152 @@ function UVIndicator({ index }: { index: number }) {
   };
 
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex items-center gap-3">
       <div
-        className={`w-8 h-8 rounded-full ${getColor(index)} flex items-center justify-center text-white font-bold text-sm`}
+        className={`w-10 h-10 rounded-full ${getColor(index)} flex items-center justify-center text-white font-bold text-sm shadow-sm`}
       >
         {index}
       </div>
-      <div className="text-sm">
-        <p className="font-medium text-sand-900 dark:text-sand-100">UV Index</p>
-        <p className="text-sand-500 dark:text-sand-400 text-xs">{getLabel(index)}</p>
+      <div>
+        <p className="font-semibold text-sand-900 dark:text-sand-100">UV {getLabel(index)}</p>
+        <p className="text-xs text-sand-500 dark:text-sand-400">Index</p>
       </div>
     </div>
   );
 }
 
 export function WeatherWidget({ weather, loading, error }: WeatherWidgetProps) {
-  if (loading)
+  if (loading) {
     return (
-      <div className="bg-gradient-to-br from-ocean-50 to-sky-50 dark:from-sand-800 dark:to-sand-800 rounded-xl shadow-lg p-4 border border-ocean-100 dark:border-sand-700">
-        <h3 className="text-lg font-semibold text-sand-900 dark:text-sand-100 mb-3">Weather</h3>
-        <div className="animate-pulse h-24 bg-ocean-100 dark:bg-sand-700 rounded" />
-      </div>
+      <Card variant="sky">
+        <CardTitle className="flex items-center gap-2">
+          <Icon icon={Thermometer} size="lg" color="sky" />
+          Current Weather
+        </CardTitle>
+        <CardContent className="mt-4">
+          <div className="flex items-center gap-4 mb-4">
+            <div className="w-16 h-16 shimmer rounded-full" />
+            <div className="space-y-2">
+              <div className="w-20 h-8 shimmer rounded" />
+              <div className="w-24 h-4 shimmer rounded" />
+            </div>
+          </div>
+          <div className="grid grid-cols-2 gap-4 pt-4 border-t border-sky-200/50 dark:border-sand-700">
+            <div className="w-full h-12 shimmer rounded" />
+            <div className="w-full h-12 shimmer rounded" />
+          </div>
+        </CardContent>
+      </Card>
     );
-  if (error)
+  }
+
+  if (error) {
     return (
-      <div className="bg-gradient-to-br from-ocean-50 to-sky-50 dark:from-sand-800 dark:to-sand-800 rounded-xl shadow-lg p-4 border border-ocean-100 dark:border-sand-700">
-        <h3 className="text-lg font-semibold text-sand-900 dark:text-sand-100 mb-3">Weather</h3>
-        <p className="text-red-500 dark:text-red-400">{error}</p>
-      </div>
+      <Card variant="sky">
+        <CardTitle className="flex items-center gap-2">
+          <Icon icon={Thermometer} size="lg" color="sky" />
+          Current Weather
+        </CardTitle>
+        <CardContent className="mt-4">
+          <p className="text-red-500 dark:text-red-400">{error}</p>
+        </CardContent>
+      </Card>
     );
+  }
+
   if (!weather) return null;
 
+  const WeatherIcon = weatherIcons[weather.current.condition] || Thermometer;
+  const iconColor = weatherColors[weather.current.condition] || 'text-sand-500';
+
   return (
-    <div className="bg-gradient-to-br from-ocean-50 to-sky-50 dark:from-sand-800 dark:to-sand-800 rounded-xl shadow-lg p-4 border border-ocean-100 dark:border-sand-700">
-      <h3 className="text-lg font-semibold text-sand-900 dark:text-sand-100 mb-3">
+    <Card variant="sky" animated>
+      <CardTitle className="flex items-center gap-2">
+        <Icon icon={Thermometer} size="lg" color="sky" />
         Current Weather
-      </h3>
-      <div className="flex items-center gap-4 mb-4">
-        <span className="text-5xl">{icons[weather.current.condition] || '🌡️'}</span>
-        <div>
-          <p className="text-4xl font-bold text-sand-900 dark:text-sand-50">
-            {weather.current.temperature.toFixed(0)}°C
-          </p>
-          <p className="text-sand-600 dark:text-sand-400 capitalize">
-            {weather.current.condition.replace('-', ' ')}
-          </p>
-        </div>
-      </div>
-      <div className="grid grid-cols-2 gap-4 pt-4 border-t border-ocean-200/50 dark:border-sand-700">
-        <WindCompass direction={weather.current.windDirection} speed={weather.current.windSpeed} />
-        <UVIndicator index={weather.current.uvIndex} />
-        <div className="flex items-center gap-2">
-          <span className="text-2xl">💧</span>
-          <div className="text-sm">
-            <p className="font-medium text-sand-900 dark:text-sand-100">
-              {weather.current.humidity}%
-            </p>
-            <p className="text-sand-500 dark:text-sand-400 text-xs">Humidity</p>
+      </CardTitle>
+
+      <CardContent className="mt-4">
+        <div className="flex items-center gap-4 mb-4">
+          <motion.div
+            initial={{ scale: 0, rotate: -180 }}
+            animate={{ scale: 1, rotate: 0 }}
+            transition={{ type: 'spring', stiffness: 200, damping: 15, delay: 0.1 }}
+          >
+            <WeatherIcon className={`w-16 h-16 ${iconColor}`} strokeWidth={1.5} />
+          </motion.div>
+          <div>
+            <motion.p
+              className="text-4xl font-bold text-sand-900 dark:text-sand-50"
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.2 }}
+            >
+              {weather.current.temperature.toFixed(0)}°C
+            </motion.p>
+            <motion.p
+              className="text-sand-600 dark:text-sand-400 capitalize"
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.3 }}
+            >
+              {weather.current.condition.replace('-', ' ')}
+            </motion.p>
           </div>
         </div>
-      </div>
-    </div>
+
+        <div className="grid grid-cols-2 gap-4 pt-4 border-t border-sky-200/50 dark:border-sand-700">
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4 }}
+          >
+            <div className="flex items-center gap-2 mb-2">
+              <Icon icon={Wind} size="sm" color="ocean" />
+              <span className="text-xs font-medium text-sand-500 dark:text-sand-400 uppercase">
+                Wind
+              </span>
+            </div>
+            <WindCompass
+              direction={weather.current.windDirection}
+              speed={weather.current.windSpeed}
+            />
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5 }}
+          >
+            <div className="flex items-center gap-2 mb-2">
+              <Icon icon={Sun} size="sm" color="warning" />
+              <span className="text-xs font-medium text-sand-500 dark:text-sand-400 uppercase">
+                UV
+              </span>
+            </div>
+            <UVIndicator index={weather.current.uvIndex} />
+          </motion.div>
+
+          <motion.div
+            className="col-span-2 flex items-center gap-3 pt-3"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6 }}
+          >
+            <div className="flex items-center gap-3 flex-1">
+              <div className="w-10 h-10 rounded-full bg-sky-50 dark:bg-sky-900/30 flex items-center justify-center">
+                <Icon icon={Droplets} size="lg" color="ocean" />
+              </div>
+              <div>
+                <p className="font-semibold text-sand-900 dark:text-sand-100">
+                  {weather.current.humidity}%
+                </p>
+                <p className="text-xs text-sand-500 dark:text-sand-400">Humidity</p>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </CardContent>
+    </Card>
   );
 }
