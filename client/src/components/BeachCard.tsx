@@ -107,7 +107,7 @@ export function BeachCard({ beach }: BeachCardProps) {
       </Link>
 
       <div className="absolute top-3 right-3 z-10">
-        <FavoriteButton beachId={beach.id} size="sm" />
+        <FavoriteButton beachId={beach.id} beachName={beach.name} size="sm" />
       </div>
 
       <div className="h-1 bg-gradient-to-r from-ocean-400 to-shore-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />

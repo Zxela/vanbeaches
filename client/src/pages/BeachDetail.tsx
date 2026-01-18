@@ -51,7 +51,7 @@ export function BeachDetail() {
           )}
         </div>
         <div className="flex items-center gap-2">
-          <FavoriteButton beachId={beach.id} size="lg" />
+          <FavoriteButton beachId={beach.id} beachName={beach.name} size="lg" />
           <ShareButton beachName={beach.name} beachId={beach.id} />
         </div>
       </div>
