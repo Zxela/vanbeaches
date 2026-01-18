@@ -90,6 +90,12 @@ export function Layout({ children }: LayoutProps) {
               </Link>
               <nav className="hidden sm:flex items-center gap-3">
                 <Link
+                  to="/discover"
+                  className="px-3 py-2 bg-ocean-50 dark:bg-ocean-900/30 hover:bg-ocean-100 dark:hover:bg-ocean-800/40 rounded-lg transition-colors text-sm text-ocean-700 dark:text-ocean-300"
+                >
+                  Discover
+                </Link>
+                <Link
                   to="/compare"
                   className="px-3 py-2 bg-ocean-50 dark:bg-ocean-900/30 hover:bg-ocean-100 dark:hover:bg-ocean-800/40 rounded-lg transition-colors text-sm text-ocean-700 dark:text-ocean-300"
                 >

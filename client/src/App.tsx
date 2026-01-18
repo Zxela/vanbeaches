@@ -1,10 +1,10 @@
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Layout } from './components/Layout';
+import { SmartRedirect } from './components/SmartRedirect';
 import { ThemeProvider } from './contexts/ThemeContext';
 import { BeachDetail } from './pages/BeachDetail';
 import { Compare } from './pages/Compare';
-
-const DEFAULT_BEACH = 'kitsilano-beach';
+import { Discover } from './pages/Discover';
 
 export function App() {
   return (
@@ -12,7 +12,8 @@ export function App() {
       <BrowserRouter>
         <Layout>
           <Routes>
-            <Route path="/" element={<Navigate to={`/beach/${DEFAULT_BEACH}`} replace />} />
+            <Route path="/" element={<SmartRedirect />} />
+            <Route path="/discover" element={<Discover />} />
             <Route path="/beach/:slug" element={<BeachDetail />} />
             <Route path="/compare" element={<Compare />} />
           </Routes>

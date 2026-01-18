@@ -15,7 +15,7 @@ export function MobileBottomNav() {
   const { favorites } = useFavorites();
   const { theme, toggleTheme } = useTheme();
 
-  const isHome = location.pathname === '/';
+  const isDiscover = location.pathname === '/' || location.pathname === '/discover';
   const currentBeachId = location.pathname.startsWith('/beach/')
     ? location.pathname.split('/')[2]
     : null;
@@ -112,14 +112,16 @@ export function MobileBottomNav() {
       <nav className="fixed bottom-0 left-0 right-0 bg-white/95 dark:bg-sand-800/95 backdrop-blur-xl border-t border-sand-200 dark:border-sand-700 sm:hidden z-50 safe-area-inset-bottom">
         <div className="flex items-center justify-around h-16">
           <Link
-            to="/"
+            to="/discover"
             className={cn(
               'flex flex-col items-center justify-center w-16 h-full transition-colors',
-              isHome ? 'text-ocean-600 dark:text-ocean-400' : 'text-sand-500 dark:text-sand-400',
+              isDiscover
+                ? 'text-ocean-600 dark:text-ocean-400'
+                : 'text-sand-500 dark:text-sand-400',
             )}
           >
             <Icon icon={Home} size="lg" />
-            <span className="text-xs mt-1 font-medium">Home</span>
+            <span className="text-xs mt-1 font-medium">Discover</span>
           </Link>
 
           <motion.button
