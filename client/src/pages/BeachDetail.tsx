@@ -14,10 +14,12 @@ import { WaterQuality } from '../components/WaterQuality';
 import { WeatherForecast } from '../components/WeatherForecast';
 import { WeatherWidget } from '../components/WeatherWidget';
 import { WebcamEmbed } from '../components/WebcamEmbed';
+import { WebcamPlaceholder } from '../components/WebcamPlaceholder';
 import { useRecentBeaches } from '../hooks/useRecentBeaches';
 import { useTides } from '../hooks/useTides';
 import { useWaterQuality } from '../hooks/useWaterQuality';
 import { useWeather } from '../hooks/useWeather';
+import { useWebcamPreference } from '../hooks/useWebcamPreference';
 
 export function BeachDetail() {
   const { slug } = useParams<{ slug: string }>();
@@ -26,6 +28,13 @@ export function BeachDetail() {
   const { weather, loading: weatherLoading, error: weatherError } = useWeather(slug);
   const { waterQuality, loading: wqLoading, error: wqError } = useWaterQuality(slug);
   const { addRecent } = useRecentBeaches();
+  const { isHidden, hide, show } = useWebcamPreference();
+
+  // Webcam visibility logic
+  const webcamUrl = beach?.webcamUrl;
+  const hasWebcam = webcamUrl !== null && webcamUrl !== undefined && beach?.showWebcam === true;
+  const showWebcamEmbed = hasWebcam && !isHidden;
+  const showPlaceholder = hasWebcam && isHidden;
 
   useEffect(() => {
     if (slug) addRecent(slug);
@@ -58,16 +67,13 @@ export function BeachDetail() {
 
       <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
         <div className="xl:col-span-2 space-y-6">
-          <div className="relative">
-            <WebcamEmbed
-              url={beach.webcamUrl}
-              beachName={beach.name}
-              photoUrl={beach.photoUrl}
-              photoCredit={beach.photoCredit}
-              photoCreditUrl={beach.photoCreditUrl}
-            />
-            <FullscreenWebcam url={beach.photoUrl || beach.webcamUrl} beachName={beach.name} />
-          </div>
+          {showWebcamEmbed && webcamUrl && (
+            <div className="relative">
+              <WebcamEmbed url={webcamUrl} beachName={beach.name} onHide={hide} />
+              <FullscreenWebcam url={webcamUrl} beachName={beach.name} />
+            </div>
+          )}
+          {showPlaceholder && <WebcamPlaceholder onShow={show} />}
           <BestTimeToVisit
             weather={weather}
             tides={tides}
