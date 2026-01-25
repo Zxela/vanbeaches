@@ -4,8 +4,17 @@
   "worktree": "../beach-app-create-webcam-visibility-1cddd66f",
   "feature": "webcam-visibility",
   "created_at": "2026-01-25T12:00:00Z",
-  "phase": "planning",
-  "tasks": {},
+  "phase": "implementing",
+  "tasks": {
+    "001": { "status": "pending", "file": "docs/tasks/001-update-beach-type.md" },
+    "002": { "status": "pending", "file": "docs/tasks/002-update-beach-data.md" },
+    "003": { "status": "pending", "file": "docs/tasks/003-create-webcam-preference-hook.md" },
+    "004": { "status": "pending", "file": "docs/tasks/004-create-webcam-placeholder.md" },
+    "005": { "status": "pending", "file": "docs/tasks/005-update-webcam-embed.md" },
+    "006": { "status": "pending", "file": "docs/tasks/006-update-fullscreen-webcam.md" },
+    "007": { "status": "pending", "file": "docs/tasks/007-update-beach-detail.md" },
+    "008": { "status": "pending", "file": "docs/tasks/008-update-search-filter.md" }
+  },
   "current_task": null,
   "config": {
     "auto_mode": false,
