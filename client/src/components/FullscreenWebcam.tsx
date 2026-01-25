@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 interface FullscreenWebcamProps {
-  url: string | null;
+  url: string;
   beachName: string;
 }
 
@@ -13,7 +13,7 @@ export function FullscreenWebcam({ url, beachName }: FullscreenWebcamProps) {
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [refreshKey, setRefreshKey] = useState(0);
 
-  const isImage = url ? isImageUrl(url) : false;
+  const isImage = isImageUrl(url);
 
   useEffect(() => {
     if (!isFullscreen || !isImage) return;
@@ -34,8 +34,6 @@ export function FullscreenWebcam({ url, beachName }: FullscreenWebcamProps) {
       document.body.style.overflow = '';
     };
   }, [isFullscreen]);
-
-  if (!url) return null;
 
   const imageUrl = isImage ? `${url}?t=${refreshKey}` : url;
 
