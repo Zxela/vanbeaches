@@ -1,7 +1,5 @@
 import type { Beach } from '../types/beach.js';
 
-// Using Unsplash images which are free to use with attribution
-// All images are Vancouver beaches or similar Pacific Northwest beaches
 export const BEACHES: Beach[] = [
   {
     id: 'english-bay',
@@ -9,11 +7,7 @@ export const BEACHES: Beach[] = [
     slug: 'english-bay',
     location: { latitude: 49.2867, longitude: -123.1432 },
     tideStationId: '5cebf1de3d0f4a073c4bb943',
-    hasWebcam: false,
     webcamUrl: null,
-    photoUrl: 'https://images.unsplash.com/photo-1647655806923-e8202f4f2b8c?w=1200&q=80',
-    photoCredit: 'Adrian Yu',
-    photoCreditUrl: 'https://unsplash.com/@visualstrance',
     description:
       "One of Vancouver's most popular urban beaches with stunning sunset views and a lively atmosphere.",
     amenities: {
@@ -35,11 +29,7 @@ export const BEACHES: Beach[] = [
     slug: 'jericho-beach',
     location: { latitude: 49.2727, longitude: -123.1978 },
     tideStationId: '5cebf1de3d0f4a073c4bb943',
-    hasWebcam: false,
     webcamUrl: null,
-    photoUrl: 'https://images.unsplash.com/photo-1560813962-ff3d8fcf59ba?w=1200&q=80',
-    photoCredit: 'Lee Robinson',
-    photoCreditUrl: 'https://unsplash.com/@leerob',
     description:
       'Family-friendly beach with calm waters, a sailing centre, and grassy areas perfect for picnics.',
     amenities: {
@@ -61,11 +51,7 @@ export const BEACHES: Beach[] = [
     slug: 'kitsilano-beach',
     location: { latitude: 49.2732, longitude: -123.1536 },
     tideStationId: '5cebf1de3d0f4a073c4bb943',
-    hasWebcam: false,
     webcamUrl: null,
-    photoUrl: 'https://images.unsplash.com/photo-1595568080088-0d81298f449b?w=1200&q=80',
-    photoCredit: 'Masaru Suzuki',
-    photoCreditUrl: 'https://unsplash.com/@masarusuzuki',
     description:
       "Vancouver's largest and most popular beach featuring a heated saltwater pool, tennis courts, and basketball.",
     amenities: {
@@ -87,11 +73,7 @@ export const BEACHES: Beach[] = [
     slug: 'locarno-beach',
     location: { latitude: 49.2768, longitude: -123.2062 },
     tideStationId: '5cebf1de3d0f4a073c4bb943',
-    hasWebcam: false,
     webcamUrl: null,
-    photoUrl: 'https://images.unsplash.com/photo-1660219072150-3aac74f765d2?w=1200&q=80',
-    photoCredit: 'Joshua Webb',
-    photoCreditUrl: 'https://unsplash.com/@joshuawebb',
     description:
       'Quieter beach with shallow waters stretching far at low tide, popular for walking and beachcombing.',
     amenities: {
@@ -113,11 +95,7 @@ export const BEACHES: Beach[] = [
     slug: 'second-beach',
     location: { latitude: 49.2904, longitude: -123.1464 },
     tideStationId: '5cebf1de3d0f4a073c4bb943',
-    hasWebcam: false,
     webcamUrl: null,
-    photoUrl: 'https://images.unsplash.com/photo-1559511260-66a654ae982a?w=1200&q=80',
-    photoCredit: 'Mike Benna',
-    photoCreditUrl: 'https://unsplash.com/@mbenna',
     description:
       'Stanley Park beach with a heated outdoor pool, playground, and beautiful forest backdrop.',
     amenities: {
@@ -139,11 +117,7 @@ export const BEACHES: Beach[] = [
     slug: 'spanish-banks',
     location: { latitude: 49.2766, longitude: -123.2249 },
     tideStationId: '5cebf1de3d0f4a073c4bb943',
-    hasWebcam: false,
     webcamUrl: null,
-    photoUrl: 'https://images.unsplash.com/photo-1559510859-42b76a39988f?w=1200&q=80',
-    photoCredit: 'Mike Benna',
-    photoCreditUrl: 'https://unsplash.com/@mbenna',
     description:
       'Expansive beach known for spectacular low tides, kiteboarding, and mountain views.',
     amenities: {
@@ -165,11 +139,7 @@ export const BEACHES: Beach[] = [
     slug: 'sunset-beach',
     location: { latitude: 49.2785, longitude: -123.1352 },
     tideStationId: '5cebf1de3d0f4a073c4bb943',
-    hasWebcam: false,
     webcamUrl: null,
-    photoUrl: 'https://images.unsplash.com/photo-1609825488888-3a766db05542?w=1200&q=80',
-    photoCredit: 'Matt Wang',
-    photoCreditUrl: 'https://unsplash.com/@iseeworld',
     description:
       'Downtown beach along False Creek with ferry access and views of the city skyline.',
     amenities: {
@@ -191,11 +161,7 @@ export const BEACHES: Beach[] = [
     slug: 'third-beach',
     location: { latitude: 49.2994, longitude: -123.1585 },
     tideStationId: '5cebf1de3d0f4a073c4bb943',
-    hasWebcam: false,
     webcamUrl: null,
-    photoUrl: 'https://images.unsplash.com/photo-1623942078086-0991401f7dc4?w=1200&q=80',
-    photoCredit: 'JP Holecka',
-    photoCreditUrl: 'https://unsplash.com/@jaypiddy',
     description:
       'Secluded Stanley Park gem with stunning sunsets, rainforest trails, and a relaxed vibe.',
     amenities: {
@@ -217,11 +183,7 @@ export const BEACHES: Beach[] = [
     slug: 'trout-lake',
     location: { latitude: 49.2554, longitude: -123.0643 },
     tideStationId: null,
-    hasWebcam: false,
     webcamUrl: null,
-    photoUrl: 'https://images.unsplash.com/photo-1525806317844-ba151bfda4bb?w=1200&q=80',
-    photoCredit: 'Natalia CraftTheWay',
-    photoCreditUrl: 'https://unsplash.com/@crafttheway',
     description:
       'East Vancouver freshwater lake with a sandy beach, farmers market, and community vibe.',
     amenities: {
