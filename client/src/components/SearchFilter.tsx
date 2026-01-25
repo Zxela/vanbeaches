@@ -26,7 +26,7 @@ export function SearchFilter({ onFilter }: SearchFilterProps) {
 
       // Feature filters
       if (filters.dogFriendly && !beach.amenities?.dogFriendly) return false;
-      if (filters.hasWebcam && !beach.hasWebcam) return false;
+      if (filters.hasWebcam && beach.webcamUrl === null) return false;
       if (filters.lifeguard && beach.amenities?.lifeguard === 'none') return false;
       if (filters.firepits && !beach.amenities?.firepits) return false;
       if (
