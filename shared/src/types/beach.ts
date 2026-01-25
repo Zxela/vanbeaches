@@ -19,11 +19,8 @@ export interface Beach {
   slug: string;
   location: { latitude: number; longitude: number };
   tideStationId: string | null;
-  hasWebcam: boolean;
   webcamUrl: string | null;
-  photoUrl?: string;
-  photoCredit?: string;
-  photoCreditUrl?: string;
+  showWebcam?: boolean;
   description?: string;
   amenities?: BeachAmenities;
   activities?: string[];
@@ -48,7 +45,6 @@ export function isBeach(value: unknown): value is Beach {
     typeof obj.location === 'object' &&
     obj.location !== null &&
     (obj.tideStationId === null || typeof obj.tideStationId === 'string') &&
-    typeof obj.hasWebcam === 'boolean' &&
     (obj.webcamUrl === null || typeof obj.webcamUrl === 'string')
   );
 }
