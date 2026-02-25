@@ -109,7 +109,7 @@ function RecommendedSection({
             key={beach.id}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6 + idx * 0.1 }}
+            transition={{ delay: 0.1 + idx * 0.05 }}
           >
             <Card variant="ocean" className="h-full">
               <CardContent className="p-4">
@@ -172,7 +172,7 @@ function AllBeachesSection({ loading, beaches }: { loading: boolean; beaches: im
               key={beach.id}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.8 + idx * 0.05 }}
+              transition={{ delay: 0.1 + idx * 0.02 }}
             >
               <BeachCard beach={beach} />
             </motion.div>
