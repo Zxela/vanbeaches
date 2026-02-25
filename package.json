@@ -5,7 +5,7 @@
   "type": "module",
   "description": "Vancouver beach conditions dashboard",
   "scripts": {
-    "dev": "wrangler pages dev",
+    "dev": "wrangler pages dev client/dist",
     "build": "pnpm -r build",
     "test": "pnpm -r test",
     "check": "biome check .",
