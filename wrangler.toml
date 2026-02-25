@@ -1,5 +1,6 @@
 name = "van-beach"
 compatibility_date = "2026-02-01"
+pages_build_output_dir = "client/dist"
 
 [[kv_namespaces]]
 binding = "BEACH_CACHE"

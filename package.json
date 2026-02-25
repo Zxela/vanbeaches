@@ -5,14 +5,14 @@
   "type": "module",
   "description": "Vancouver beach conditions dashboard",
   "scripts": {
-    "dev": "wrangler pages dev --compatibility-date=2026-02-01 -- pnpm --filter @van-beaches/client dev",
+    "dev": "wrangler pages dev",
     "build": "pnpm -r build",
     "test": "pnpm -r test",
     "check": "biome check .",
     "format": "biome format --write .",
     "type-check": "pnpm -r type-check",
-    "deploy:preview": "wrangler pages deploy client/dist --project-name=van-beach",
-    "deploy:production": "wrangler pages deploy client/dist --project-name=van-beach --branch=master"
+    "deploy:preview": "wrangler pages deploy",
+    "deploy:production": "wrangler pages deploy --branch=master"
   },
   "dependencies": {
     "@van-beaches/shared": "workspace:*"
@@ -21,7 +21,7 @@
     "@biomejs/biome": "^1.9.4",
     "@cloudflare/workers-types": "^4.20260201.0",
     "typescript": "^5.7.2",
-    "wrangler": "^3.101.0"
+    "wrangler": "^4.68.1"
   },
   "packageManager": "pnpm@9.15.0",
   "engines": {
