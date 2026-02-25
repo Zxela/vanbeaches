@@ -68,14 +68,14 @@ jobs:
 
       - name: Deploy Pages (preview)
         if: github.event_name == 'pull_request'
-        run: npx wrangler pages deploy client/dist --project-name=van-beach --branch=${{ github.head_ref }}
+        run: npx wrangler pages deploy client/dist --project-name=vanbeaches --branch=${{ github.head_ref }}
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
 
       - name: Deploy Pages (production)
         if: github.event_name == 'push' && github.ref == 'refs/heads/master'
-        run: npx wrangler pages deploy client/dist --project-name=van-beach --branch=master
+        run: npx wrangler pages deploy client/dist --project-name=vanbeaches --branch=master
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
