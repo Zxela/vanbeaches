@@ -12,12 +12,6 @@ export default defineConfig({
   },
   server: {
     port: 5173,
-    proxy: {
-      '/api': {
-        target: 'http://localhost:3000',
-        changeOrigin: true,
-      },
-    },
   },
   test: {
     exclude: ['**/node_modules/**', '**/dist/**', '**/e2e/**'],
