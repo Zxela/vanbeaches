@@ -1,8 +1,10 @@
 import { BEACHES } from '@van-beaches/shared';
 import { motion } from 'framer-motion';
 import { Calendar, Cloud, MapPin, Sparkles, Sun, TrendingUp, Waves } from 'lucide-react';
-import { useMemo } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { BeachCard } from '../components/BeachCard';
+import { BeachMap } from '../components/BeachMap';
+import { SearchFilter } from '../components/SearchFilter';
 import { Card, CardContent, Icon } from '../components/ui';
 import { SkeletonCard } from '../components/ui/Skeleton';
 import { useBeaches } from '../hooks/useBeaches';
@@ -133,19 +135,30 @@ function RecommendedSection({
   );
 }
 
-function AllBeachesSection({ loading, beaches }: { loading: boolean; beaches: import('@van-beaches/shared').BeachSummary[] }) {
+function AllBeachesSection({
+  loading,
+  beaches,
+  filteredIds,
+}: {
+  loading: boolean;
+  beaches: import('@van-beaches/shared').BeachSummary[];
+  filteredIds: string[] | null;
+}) {
   const { favorites } = useFavorites();
 
-  // Sort beaches: favorites first, then alphabetically
+  // Sort beaches: favorites first, then alphabetically; apply filter if active
   const sortedBeaches = useMemo(() => {
-    return [...beaches].sort((a, b) => {
+    const visibleBeaches = filteredIds !== null
+      ? beaches.filter((b) => filteredIds.includes(b.id))
+      : beaches;
+    return [...visibleBeaches].sort((a, b) => {
       const aFav = favorites.includes(a.id);
       const bFav = favorites.includes(b.id);
       if (aFav && !bFav) return -1;
       if (!aFav && bFav) return 1;
       return a.name.localeCompare(b.name);
     });
-  }, [favorites, beaches]);
+  }, [favorites, beaches, filteredIds]);
 
   return (
     <motion.section
@@ -185,6 +198,12 @@ function AllBeachesSection({ loading, beaches }: { loading: boolean; beaches: im
 
 export function Discover() {
   const { beaches, loading } = useBeaches();
+  const [filteredBeachIds, setFilteredBeachIds] = useState<string[] | null>(null);
+
+  const handleFilter = useCallback((ids: string[]) => {
+    // If all beaches are shown (no filter active), treat as null for sort-only mode
+    setFilteredBeachIds(ids.length === BEACHES.length ? null : ids);
+  }, []);
 
   // Simple ranking algorithm based on current conditions
   const recommendedBeaches = useMemo(() => {
@@ -234,8 +253,14 @@ export function Discover() {
   return (
     <div className="space-y-2">
       <HeroSection />
+      <div className="mt-4">
+        <SearchFilter onFilter={handleFilter} />
+      </div>
       <RecommendedSection beaches={recommendedBeaches} loading={loading} />
-      <AllBeachesSection loading={loading} beaches={beaches} />
+      <AllBeachesSection loading={loading} beaches={beaches} filteredIds={filteredBeachIds} />
+      <section className="mt-8">
+        <BeachMap />
+      </section>
 
       {/* Future: Sponsored content zone (hidden for now) */}
       {/* <ContentSlot id="sponsored-nearby" hidden /> */}

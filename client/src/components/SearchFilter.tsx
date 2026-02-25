@@ -1,6 +1,6 @@
 import { BEACHES } from '@van-beaches/shared';
 import { Search, X } from 'lucide-react';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Card, Icon } from './ui';
 
 interface SearchFilterProps {
@@ -37,7 +37,7 @@ export function SearchFilter({ onFilter }: SearchFilterProps) {
     });
   }, [search, filters]);
 
-  useMemo(() => {
+  useEffect(() => {
     onFilter(filteredBeaches.map((b) => b.id));
   }, [filteredBeaches, onFilter]);
 
