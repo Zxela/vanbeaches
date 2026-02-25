@@ -628,7 +628,16 @@
       "depends_on": ["007", "013"],
       "traces_to": {
         "user_stories": ["US-001", "US-002"],
-        "acceptance_criteria": ["AC-001", "AC-002", "AC-003", "AC-004", "AC-005", "AC-006", "AC-007", "AC-008"],
+        "acceptance_criteria": [
+          "AC-001",
+          "AC-002",
+          "AC-003",
+          "AC-004",
+          "AC-005",
+          "AC-006",
+          "AC-007",
+          "AC-008"
+        ],
         "adr_decisions": ["ADR-001"]
       },
       "technical_notes": "Two jobs: 'ci' and 'deploy'. CI job: checkout, setup pnpm, install deps, biome check, type-check, test, build client. Deploy job: needs ci, uses wrangler pages deploy. Preview deploy uses github.head_ref for branch name. Production deploy uses --branch=master. Also deploy the worker separately using wrangler deploy from the worker/ directory. Use pnpm 9 and Node 20.",

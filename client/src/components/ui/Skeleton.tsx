@@ -59,6 +59,7 @@ const SkeletonText = forwardRef<HTMLDivElement, SkeletonTextProps>(
       <div ref={ref} className={cn('space-y-2', className)} {...props}>
         {Array.from({ length: lines }).map((_, i) => (
           <Skeleton
+            // biome-ignore lint/suspicious/noArrayIndexKey: static skeleton placeholders never reorder
             key={`${id}-line-${i}`}
             animation={animation}
             className="h-4"
@@ -170,6 +171,7 @@ const SkeletonGroup = forwardRef<HTMLDivElement, SkeletonGroupProps>(
       >
         {Array.from({ length: count }).map((_, i) => (
           <motion.div
+            // biome-ignore lint/suspicious/noArrayIndexKey: static skeleton placeholders never reorder
             key={`${id}-item-${i}`}
             variants={{
               hidden: { opacity: 0, y: 10 },

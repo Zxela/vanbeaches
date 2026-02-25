@@ -195,11 +195,7 @@
       "external_dependency_replacement",
       "complex_async"
     ],
-    "docs_to_generate": [
-      "prd",
-      "adr",
-      "technical_design"
-    ]
+    "docs_to_generate": ["prd", "adr", "technical_design"]
   },
   "token_tracking": {
     "enabled": true,
@@ -219,13 +215,7 @@
   },
   "dialogue_state": {
     "turns_completed": 9,
-    "categories_covered": [
-      "purpose",
-      "users",
-      "scope",
-      "constraints",
-      "edge_cases"
-    ],
+    "categories_covered": ["purpose", "users", "scope", "constraints", "edge_cases"],
     "categories_remaining": [],
     "last_question_category": "scope",
     "warnings_shown": false
