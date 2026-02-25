@@ -6,6 +6,7 @@ dist/
 .DS_Store
 coverage/
 .vite/
+*.tsbuildinfo
 .claude/
 
 # Task files (ephemeral, generated per work session)
