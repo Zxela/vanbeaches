@@ -1,70 +1,82 @@
 import type { WeatherForecast as ForecastType } from '@van-beaches/shared';
+import { BarChart3 } from 'lucide-react';
+import { getWeatherColor, getWeatherIcon } from '../lib/weatherIcons';
+import { Card, CardContent, CardTitle, Icon } from './ui';
 
 interface WeatherForecastProps {
   forecast: ForecastType | null;
   loading?: boolean;
 }
 
-const icons: Record<string, string> = {
-  sunny: '☀️',
-  'partly-cloudy': '⛅',
-  cloudy: '☁️',
-  rainy: '🌧️',
-  stormy: '⛈️',
-  foggy: '🌫️',
-};
-
 export function WeatherForecast({ forecast, loading }: WeatherForecastProps) {
   if (loading) {
     return (
-      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-4">
-        <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">5-Day Forecast</h3>
-        <div className="grid grid-cols-5 gap-2">
-          {[1, 2, 3, 4, 5].map((i) => (
-            <div key={i} className="animate-pulse">
-              <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded mb-2" />
-              <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded mb-2" />
-              <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded" />
-            </div>
-          ))}
-        </div>
-      </div>
+      <Card variant="sky">
+        <CardTitle className="flex items-center gap-2">
+          <Icon icon={BarChart3} size="lg" color="sky" />
+          5-Day Forecast
+        </CardTitle>
+        <CardContent className="mt-4">
+          <div className="grid grid-cols-5 gap-2">
+            {[1, 2, 3, 4, 5].map((i) => (
+              <div key={i} className="text-center">
+                <div className="h-4 shimmer rounded mb-2" />
+                <div className="h-8 shimmer rounded mb-2 mx-auto w-8" />
+                <div className="h-4 shimmer rounded mb-1" />
+                <div className="h-3 shimmer rounded" />
+              </div>
+            ))}
+          </div>
+        </CardContent>
+      </Card>
     );
   }
 
   if (!forecast?.daily || forecast.daily.length === 0) {
     return (
-      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-4">
-        <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">5-Day Forecast</h3>
-        <p className="text-gray-500 dark:text-gray-400">Forecast unavailable</p>
-      </div>
+      <Card variant="sky">
+        <CardTitle className="flex items-center gap-2">
+          <Icon icon={BarChart3} size="lg" color="sky" />
+          5-Day Forecast
+        </CardTitle>
+        <CardContent className="mt-4">
+          <p className="text-sand-500 dark:text-sand-400">Forecast unavailable</p>
+        </CardContent>
+      </Card>
     );
   }
 
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-4">
-      <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">5-Day Forecast</h3>
-      <div className="grid grid-cols-5 gap-2">
-        {forecast.daily.slice(0, 5).map((day, idx) => {
-          const date = new Date(day.date);
-          const dayName =
-            idx === 0 ? 'Today' : date.toLocaleDateString('en-US', { weekday: 'short' });
+    <Card variant="sky">
+      <CardTitle className="flex items-center gap-2">
+        <Icon icon={BarChart3} size="lg" color="sky" />
+        5-Day Forecast
+      </CardTitle>
+      <CardContent className="mt-4">
+        <div className="grid grid-cols-5 gap-2">
+          {forecast.daily.slice(0, 5).map((day, idx) => {
+            const date = new Date(day.date);
+            const dayName =
+              idx === 0 ? 'Today' : date.toLocaleDateString('en-US', { weekday: 'short' });
+            const WeatherIcon = getWeatherIcon(day.condition);
+            const iconColor = getWeatherColor(day.condition);
 
-          return (
-            <div
-              key={day.date}
-              className="text-center p-2 rounded-lg bg-gray-50 dark:bg-gray-700/50"
-            >
-              <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">{dayName}</p>
-              <span className="text-2xl block mb-1">{icons[day.condition] || '🌡️'}</span>
-              <p className="text-sm font-semibold text-gray-900 dark:text-white">
-                {day.high.toFixed(0)}°
-              </p>
-              <p className="text-xs text-gray-500 dark:text-gray-400">{day.low.toFixed(0)}°</p>
-            </div>
-          );
-        })}
-      </div>
-    </div>
+            return (
+              <div
+                key={day.date}
+                className="text-center p-2 rounded-lg bg-sky-50/60 dark:bg-sand-700/50"
+              >
+                <p className="text-xs text-sand-500 dark:text-sand-400 mb-1">{dayName}</p>
+                <WeatherIcon className={"w-6 h-6 mx-auto mb-1 " + iconColor} strokeWidth={1.5} />
+                <p className="text-sm font-semibold text-sand-900 dark:text-sand-100">
+                  {day.high.toFixed(0)}°
+                </p>
+                <p className="text-xs text-sand-500 dark:text-sand-400">{day.low.toFixed(0)}°</p>
+              </div>
+            );
+          })}
+        </div>
+      </CardContent>
+    </Card>
   );
 }
