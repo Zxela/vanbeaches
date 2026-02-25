@@ -1,0 +1,7 @@
+name = "van-beaches"
+compatibility_date = "2026-02-01"
+
+[[kv_namespaces]]
+binding = "BEACH_CACHE"
+id = "<KV_NAMESPACE_ID>"
+preview_id = "<PREVIEW_KV_NAMESPACE_ID>"
