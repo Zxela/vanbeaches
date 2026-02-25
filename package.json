@@ -14,6 +14,9 @@
     "deploy:preview": "wrangler pages deploy client/dist --project-name=van-beach",
     "deploy:production": "wrangler pages deploy client/dist --project-name=van-beach --branch=master"
   },
+  "dependencies": {
+    "@van-beaches/shared": "workspace:*"
+  },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
     "@cloudflare/workers-types": "^4.20260201.0",

@@ -7,6 +7,10 @@ settings:
 importers:
 
   .:
+    dependencies:
+      '@van-beaches/shared':
+        specifier: workspace:*
+        version: link:shared
     devDependencies:
       '@biomejs/biome':
         specifier: ^1.9.4
