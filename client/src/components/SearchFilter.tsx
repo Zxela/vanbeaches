@@ -125,11 +125,11 @@ function FilterChip({
     <button
       type="button"
       onClick={onClick}
-      className={"flex items-center gap-1 px-3 py-1.5 rounded-full text-sm transition-colors " + (
+      className={`flex items-center gap-1 px-3 py-1.5 rounded-full text-sm transition-colors ${
         active
           ? 'bg-ocean-500 text-white'
           : 'bg-sand-100 dark:bg-sand-700 text-sand-700 dark:text-sand-300 hover:bg-sand-200 dark:hover:bg-sand-600'
-      )}
+      }`}
     >
       <span>{icon}</span>
       <span>{label}</span>

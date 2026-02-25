@@ -1,4 +1,5 @@
 import { fireEvent, render, screen } from '@testing-library/react';
+import type { BeachSummary } from '@van-beaches/shared';
 import { MemoryRouter } from 'react-router-dom';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
@@ -7,27 +8,40 @@ vi.mock('../hooks/useBeaches', () => ({
 }));
 
 vi.mock('../hooks/useFavorites', () => ({
-  useFavorites: vi.fn(() => ({ favorites: [], toggleFavorite: vi.fn(), isFavorite: vi.fn(() => false) })),
+  useFavorites: vi.fn(() => ({
+    favorites: [],
+    toggleFavorite: vi.fn(),
+    isFavorite: vi.fn(() => false),
+  })),
 }));
 
 vi.mock('../hooks/useWebcamPreference', () => ({
-  useWebcamPreference: vi.fn(() => ({ isHidden: false, hide: vi.fn(), show: vi.fn(), toggle: vi.fn() })),
+  useWebcamPreference: vi.fn(() => ({
+    isHidden: false,
+    hide: vi.fn(),
+    show: vi.fn(),
+    toggle: vi.fn(),
+  })),
 }));
 
 vi.mock('../components/BeachMap', () => ({
-  BeachMap: () => <div><h3>Beach Map</h3></div>,
+  BeachMap: () => (
+    <div>
+      <h3>Beach Map</h3>
+    </div>
+  ),
 }));
 
 import { useBeaches } from '../hooks/useBeaches';
 import { Discover } from './Discover';
 
-const mockBeachSummaries = [
+const mockBeachSummaries: BeachSummary[] = [
   {
     id: 'kitsilano',
     name: 'Kitsilano Beach',
     currentWeather: { temperature: 18, condition: 'sunny', icon: 'sunny' },
-    nextTide: { type: 'high' as const, time: '14:30', height: 4.2 },
-    waterQuality: 'good' as const,
+    nextTide: { type: 'high', time: '14:30', height: 4.2 },
+    waterQuality: 'good',
     lastUpdated: new Date().toISOString(),
   },
   {
@@ -35,7 +49,7 @@ const mockBeachSummaries = [
     name: 'English Bay Beach',
     currentWeather: null,
     nextTide: null,
-    waterQuality: 'unknown' as const,
+    waterQuality: 'unknown',
     lastUpdated: new Date().toISOString(),
   },
 ];
@@ -60,9 +74,15 @@ vi.mock('@van-beaches/shared', () => ({
       showWebcam: false,
       description: '',
       amenities: {
-        parking: 'free', restrooms: true, showers: true,
-        lifeguard: 'seasonal', foodNearby: true, dogFriendly: true,
-        wheelchairAccessible: true, volleyballCourts: 0, firepits: false,
+        parking: 'free',
+        restrooms: true,
+        showers: true,
+        lifeguard: 'seasonal',
+        foodNearby: true,
+        dogFriendly: true,
+        wheelchairAccessible: true,
+        volleyballCourts: 0,
+        firepits: false,
       },
       activities: ['swimming'],
     },
@@ -76,9 +96,15 @@ vi.mock('@van-beaches/shared', () => ({
       showWebcam: false,
       description: '',
       amenities: {
-        parking: 'paid', restrooms: true, showers: false,
-        lifeguard: 'none', foodNearby: true, dogFriendly: false,
-        wheelchairAccessible: false, volleyballCourts: 0, firepits: false,
+        parking: 'paid',
+        restrooms: true,
+        showers: false,
+        lifeguard: 'none',
+        foodNearby: true,
+        dogFriendly: false,
+        wheelchairAccessible: false,
+        volleyballCourts: 0,
+        firepits: false,
       },
       activities: ['walking'],
     },
@@ -129,7 +155,9 @@ describe('Discover page - BeachCard data wiring (task-006)', () => {
 
     const { container } = renderDiscover();
     // Should show skeleton cards (not actual beach cards)
-    expect(container.querySelectorAll('.shimmer, [data-testid="skeleton-card"]').length).toBeGreaterThanOrEqual(0);
+    expect(
+      container.querySelectorAll('.shimmer, [data-testid="skeleton-card"]').length,
+    ).toBeGreaterThanOrEqual(0);
     // Should not show beach names
     expect(screen.queryByText('Kitsilano Beach')).not.toBeInTheDocument();
   });

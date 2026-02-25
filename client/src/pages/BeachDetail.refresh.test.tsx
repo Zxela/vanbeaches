@@ -22,9 +22,15 @@ vi.mock('@van-beaches/shared', () => ({
     showWebcam: false,
     description: 'Test beach',
     amenities: {
-      parking: 'free', restrooms: true, showers: true,
-      lifeguard: 'seasonal', foodNearby: true, dogFriendly: false,
-      wheelchairAccessible: true, volleyballCourts: 2, firepits: false,
+      parking: 'free',
+      restrooms: true,
+      showers: true,
+      lifeguard: 'seasonal',
+      foodNearby: true,
+      dogFriendly: false,
+      wheelchairAccessible: true,
+      volleyballCourts: 2,
+      firepits: false,
     },
     activities: ['swimming'],
   }),
@@ -38,8 +44,16 @@ vi.mock('../hooks/useWeather', () => ({
   useWeather: () => ({
     weather: {
       beachId: 'kitsilano',
-      current: { temperature: 18, condition: 'sunny', humidity: 60, windSpeed: 10, windDirection: 'N', uvIndex: 3 },
-      hourly: [], fetchedAt: new Date(Date.now() - 5 * 60000).toISOString(),
+      current: {
+        temperature: 18,
+        condition: 'sunny',
+        humidity: 60,
+        windSpeed: 10,
+        windDirection: 'N',
+        uvIndex: 3,
+      },
+      hourly: [],
+      fetchedAt: new Date(Date.now() - 5 * 60000).toISOString(),
     },
     loading: false,
     error: null,
@@ -48,7 +62,12 @@ vi.mock('../hooks/useWeather', () => ({
 }));
 
 vi.mock('../hooks/useWaterQuality', () => ({
-  useWaterQuality: () => ({ waterQuality: null, loading: false, error: null, refetch: mockRefetchWaterQuality }),
+  useWaterQuality: () => ({
+    waterQuality: null,
+    loading: false,
+    error: null,
+    refetch: mockRefetchWaterQuality,
+  }),
 }));
 
 vi.mock('../hooks/useRecentBeaches', () => ({
@@ -61,8 +80,10 @@ vi.mock('../hooks/useWebcamPreference', () => ({
 
 vi.mock('../hooks/useSunTimes', () => ({
   useSunTimes: () => ({
-    sunrise: new Date(), sunset: new Date(),
-    goldenHourStart: new Date(), goldenHourEnd: new Date(),
+    sunrise: new Date(),
+    sunset: new Date(),
+    goldenHourStart: new Date(),
+    goldenHourEnd: new Date(),
   }),
   formatSunTime: () => '5:00 PM',
 }));

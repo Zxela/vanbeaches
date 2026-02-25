@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react';
-import { describe, expect, it, vi, afterEach, beforeEach } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 describe('TideCanvas - stale now marker fix', () => {
   beforeEach(() => {
@@ -15,17 +15,10 @@ describe('TideCanvas - stale now marker fix', () => {
     const { TideCanvas } = await import('./TideCanvas');
     const setIntervalSpy = vi.spyOn(global, 'setInterval');
 
-    render(
-      <TideCanvas
-        predictions={[]}
-        loading={false}
-      />,
-    );
+    render(<TideCanvas predictions={[]} loading={false} />);
 
     // Check that setInterval was called with 60000ms interval
-    const wasCalledWith60s = setIntervalSpy.mock.calls.some(
-      (call) => call[1] === 60000,
-    );
+    const wasCalledWith60s = setIntervalSpy.mock.calls.some((call) => call[1] === 60000);
     expect(wasCalledWith60s).toBe(true);
 
     setIntervalSpy.mockRestore();
@@ -35,12 +28,7 @@ describe('TideCanvas - stale now marker fix', () => {
     const { TideCanvas } = await import('./TideCanvas');
     const clearIntervalSpy = vi.spyOn(global, 'clearInterval');
 
-    const { unmount } = render(
-      <TideCanvas
-        predictions={[]}
-        loading={false}
-      />,
-    );
+    const { unmount } = render(<TideCanvas predictions={[]} loading={false} />);
 
     unmount();
 

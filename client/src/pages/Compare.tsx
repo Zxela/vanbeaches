@@ -161,14 +161,46 @@ function CompareCard({
           <div>
             <h4 className="text-sm font-medium text-sand-500 dark:text-sand-400 mb-2">Amenities</h4>
             <div className="flex flex-wrap gap-1 text-sand-600 dark:text-sand-300">
-              {amenities.restrooms && <span className="text-sm px-2 py-0.5 bg-sand-100 dark:bg-sand-700 rounded-full">Restrooms</span>}
-              {amenities.showers && <span className="text-sm px-2 py-0.5 bg-sand-100 dark:bg-sand-700 rounded-full">Showers</span>}
-              {amenities.lifeguard !== 'none' && <span className="text-sm px-2 py-0.5 bg-sand-100 dark:bg-sand-700 rounded-full">Lifeguard</span>}
-              {amenities.foodNearby && <span className="text-sm px-2 py-0.5 bg-sand-100 dark:bg-sand-700 rounded-full">Food</span>}
-              {amenities.dogFriendly && <span className="text-sm px-2 py-0.5 bg-sand-100 dark:bg-sand-700 rounded-full">Dogs OK</span>}
-              {amenities.wheelchairAccessible && <span className="text-sm px-2 py-0.5 bg-sand-100 dark:bg-sand-700 rounded-full">Accessible</span>}
-              {amenities.volleyballCourts > 0 && <span className="text-sm px-2 py-0.5 bg-sand-100 dark:bg-sand-700 rounded-full">Volleyball</span>}
-              {amenities.firepits && <span className="text-sm px-2 py-0.5 bg-sand-100 dark:bg-sand-700 rounded-full">Firepits</span>}
+              {amenities.restrooms && (
+                <span className="text-sm px-2 py-0.5 bg-sand-100 dark:bg-sand-700 rounded-full">
+                  Restrooms
+                </span>
+              )}
+              {amenities.showers && (
+                <span className="text-sm px-2 py-0.5 bg-sand-100 dark:bg-sand-700 rounded-full">
+                  Showers
+                </span>
+              )}
+              {amenities.lifeguard !== 'none' && (
+                <span className="text-sm px-2 py-0.5 bg-sand-100 dark:bg-sand-700 rounded-full">
+                  Lifeguard
+                </span>
+              )}
+              {amenities.foodNearby && (
+                <span className="text-sm px-2 py-0.5 bg-sand-100 dark:bg-sand-700 rounded-full">
+                  Food
+                </span>
+              )}
+              {amenities.dogFriendly && (
+                <span className="text-sm px-2 py-0.5 bg-sand-100 dark:bg-sand-700 rounded-full">
+                  Dogs OK
+                </span>
+              )}
+              {amenities.wheelchairAccessible && (
+                <span className="text-sm px-2 py-0.5 bg-sand-100 dark:bg-sand-700 rounded-full">
+                  Accessible
+                </span>
+              )}
+              {amenities.volleyballCourts > 0 && (
+                <span className="text-sm px-2 py-0.5 bg-sand-100 dark:bg-sand-700 rounded-full">
+                  Volleyball
+                </span>
+              )}
+              {amenities.firepits && (
+                <span className="text-sm px-2 py-0.5 bg-sand-100 dark:bg-sand-700 rounded-full">
+                  Firepits
+                </span>
+              )}
             </div>
           </div>
         )}

@@ -120,7 +120,11 @@ export function BestTimeToVisit({ weather, tides, latitude, longitude }: BestTim
           {bestSlots.map((slot, idx) => (
             <div
               key={slot.time}
-              className={"flex items-center gap-3 p-3 rounded-lg " + (idx === 0 ? 'bg-white/70 dark:bg-sand-800/70 shadow-sm' : 'bg-white/40 dark:bg-sand-800/40')}
+              className={`flex items-center gap-3 p-3 rounded-lg ${
+                idx === 0
+                  ? 'bg-white/70 dark:bg-sand-800/70 shadow-sm'
+                  : 'bg-white/40 dark:bg-sand-800/40'
+              }`}
             >
               <div className="text-center min-w-[60px]">
                 <p className="text-lg font-bold text-sand-900 dark:text-sand-100">{slot.time}</p>
@@ -136,7 +140,7 @@ export function BestTimeToVisit({ weather, tides, latitude, longitude }: BestTim
                       style={{ width: `${slot.score}%` }}
                     />
                   </div>
-                  <span className={"text-sm font-medium " + getScoreColor(slot.score)}>
+                  <span className={`text-sm font-medium ${getScoreColor(slot.score)}`}>
                     {getScoreLabel(slot.score)}
                   </span>
                 </div>

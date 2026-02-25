@@ -23,9 +23,24 @@ const mockWeather = {
     uvIndex: 3,
   },
   hourly: [
-    { time: new Date(Date.now() + 2 * 3600000).toISOString(), temperature: 18, condition: 'sunny' as const, precipitationProbability: 0 },
-    { time: new Date(Date.now() + 6 * 3600000).toISOString(), temperature: 24, condition: 'partly-cloudy' as const, precipitationProbability: 10 },
-    { time: new Date(Date.now() + 10 * 3600000).toISOString(), temperature: 20, condition: 'sunny' as const, precipitationProbability: 0 },
+    {
+      time: new Date(Date.now() + 2 * 3600000).toISOString(),
+      temperature: 18,
+      condition: 'sunny' as const,
+      precipitationProbability: 0,
+    },
+    {
+      time: new Date(Date.now() + 6 * 3600000).toISOString(),
+      temperature: 24,
+      condition: 'partly-cloudy' as const,
+      precipitationProbability: 10,
+    },
+    {
+      time: new Date(Date.now() + 10 * 3600000).toISOString(),
+      temperature: 20,
+      condition: 'sunny' as const,
+      precipitationProbability: 0,
+    },
   ],
   fetchedAt: new Date().toISOString(),
 };
@@ -51,16 +66,25 @@ describe('BestTimeToVisit', () => {
 
   it('uses hourly forecast data when available for temperature/condition', () => {
     // Component renders without errors when hourly data is present
-    expect(() => render(
-      <BestTimeToVisit weather={mockWeather} tides={null} latitude={49.28} longitude={-123.12} />,
-    )).not.toThrow();
+    expect(() =>
+      render(
+        <BestTimeToVisit weather={mockWeather} tides={null} latitude={49.28} longitude={-123.12} />,
+      ),
+    ).not.toThrow();
   });
 
   it('falls back to current conditions when hourly data is empty', () => {
     const weatherNoHourly = { ...mockWeather, hourly: [] };
-    expect(() => render(
-      <BestTimeToVisit weather={weatherNoHourly} tides={null} latitude={49.28} longitude={-123.12} />,
-    )).not.toThrow();
+    expect(() =>
+      render(
+        <BestTimeToVisit
+          weather={weatherNoHourly}
+          tides={null}
+          latitude={49.28}
+          longitude={-123.12}
+        />,
+      ),
+    ).not.toThrow();
   });
 
   it('renders nothing when weather is null', () => {

@@ -82,11 +82,11 @@ export function BeachAmenities({ amenities, activities }: BeachAmenitiesProps) {
 function AmenityBadge({ icon, label, active }: { icon: string; label: string; active: boolean }) {
   return (
     <div
-      className={"flex items-center gap-2 px-2 py-1.5 rounded-lg text-sm " + (
+      className={`flex items-center gap-2 px-2 py-1.5 rounded-lg text-sm ${
         active
           ? 'bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-300'
           : 'bg-sand-50 dark:bg-sand-700 text-sand-400 dark:text-sand-500'
-      )}
+      }`}
     >
       <span>{icon}</span>
       <span className={active ? '' : 'line-through'}>{label}</span>

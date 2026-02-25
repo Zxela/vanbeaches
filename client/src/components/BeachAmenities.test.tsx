@@ -16,26 +16,20 @@ const mockAmenities = {
 
 describe('BeachAmenities', () => {
   it('wraps content in a Card component instead of raw div', () => {
-    const { container } = render(
-      <BeachAmenities amenities={mockAmenities} />,
-    );
+    const { container } = render(<BeachAmenities amenities={mockAmenities} />);
     const html = container.innerHTML;
     expect(html).not.toContain('bg-white dark:bg-gray-800');
   });
 
   it('replaces gray-* color classes with sand-* equivalents', () => {
-    const { container } = render(
-      <BeachAmenities amenities={mockAmenities} />,
-    );
+    const { container } = render(<BeachAmenities amenities={mockAmenities} />);
     const html = container.innerHTML;
     expect(html).not.toContain('text-gray-900');
     expect(html).not.toContain('bg-gray-50');
   });
 
   it('replaces activity tag blue-* colors with ocean-* colors', () => {
-    const { container } = render(
-      <BeachAmenities activities={['swimming', 'volleyball']} />,
-    );
+    const { container } = render(<BeachAmenities activities={['swimming', 'volleyball']} />);
     const html = container.innerHTML;
     expect(html).not.toContain('bg-blue-50');
     expect(html).not.toContain('text-blue-700');

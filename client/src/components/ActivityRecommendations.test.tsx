@@ -18,9 +18,7 @@ const mockWeather = {
 
 describe('ActivityRecommendations', () => {
   it('wraps content in a Card component instead of raw div', () => {
-    const { container } = render(
-      <ActivityRecommendations weather={mockWeather} />,
-    );
+    const { container } = render(<ActivityRecommendations weather={mockWeather} />);
     // Card component means no bg-white raw class at root level
     const html = container.innerHTML;
     expect(html).not.toContain('bg-white dark:bg-gray-800');
@@ -36,9 +34,7 @@ describe('ActivityRecommendations', () => {
         windSpeed: 30,
       },
     };
-    const { container } = render(
-      <ActivityRecommendations weather={poorWeather} />,
-    );
+    const { container } = render(<ActivityRecommendations weather={poorWeather} />);
     const html = container.innerHTML;
     // Poor rating should use sand-* not gray-*
     expect(html).not.toContain('bg-gray-100');
@@ -46,9 +42,7 @@ describe('ActivityRecommendations', () => {
   });
 
   it('replaces gray-* color classes in heading', () => {
-    const { container } = render(
-      <ActivityRecommendations weather={mockWeather} />,
-    );
+    const { container } = render(<ActivityRecommendations weather={mockWeather} />);
     const html = container.innerHTML;
     expect(html).not.toContain('text-gray-900');
     expect(html).not.toContain('dark:text-white');
@@ -60,9 +54,7 @@ describe('ActivityRecommendations', () => {
   });
 
   it('renders nothing when weather is null', () => {
-    const { container } = render(
-      <ActivityRecommendations weather={null} />,
-    );
+    const { container } = render(<ActivityRecommendations weather={null} />);
     expect(container.firstChild).toBeNull();
   });
 });

@@ -1,6 +1,6 @@
 import type { WeatherForecast } from '@van-beaches/shared';
-import { Card, CardContent, CardTitle } from './ui';
 import { Star } from 'lucide-react';
+import { Card, CardContent, CardTitle } from './ui';
 import { Icon } from './ui';
 
 interface ActivityRecommendationsProps {
@@ -144,7 +144,7 @@ export function ActivityRecommendations({ weather, activities }: ActivityRecomme
           {recommendations.map((rec) => (
             <div
               key={rec.activity}
-              className={"flex items-center gap-3 p-3 rounded-lg border " + ratingColors[rec.rating]}
+              className={`flex items-center gap-3 p-3 rounded-lg border ${ratingColors[rec.rating]}`}
             >
               <span className="text-2xl">{rec.icon}</span>
               <div className="flex-1 min-w-0">

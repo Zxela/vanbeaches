@@ -148,9 +148,8 @@ function AllBeachesSection({
 
   // Sort beaches: favorites first, then alphabetically; apply filter if active
   const sortedBeaches = useMemo(() => {
-    const visibleBeaches = filteredIds !== null
-      ? beaches.filter((b) => filteredIds.includes(b.id))
-      : beaches;
+    const visibleBeaches =
+      filteredIds !== null ? beaches.filter((b) => filteredIds.includes(b.id)) : beaches;
     return [...visibleBeaches].sort((a, b) => {
       const aFav = favorites.includes(a.id);
       const bFav = favorites.includes(b.id);

@@ -26,8 +26,18 @@ export function BeachDetail() {
   const { slug } = useParams<{ slug: string }>();
   const beach = slug ? getBeachById(slug) : undefined;
   const { tides, loading: tidesLoading, error: tidesError, refetch: refetchTides } = useTides(slug);
-  const { weather, loading: weatherLoading, error: weatherError, refetch: refetchWeather } = useWeather(slug);
-  const { waterQuality, loading: wqLoading, error: wqError, refetch: refetchWaterQuality } = useWaterQuality(slug);
+  const {
+    weather,
+    loading: weatherLoading,
+    error: weatherError,
+    refetch: refetchWeather,
+  } = useWeather(slug);
+  const {
+    waterQuality,
+    loading: wqLoading,
+    error: wqError,
+    refetch: refetchWaterQuality,
+  } = useWaterQuality(slug);
   const { addRecent } = useRecentBeaches();
   const { isHidden, hide, show } = useWebcamPreference();
 
@@ -89,7 +99,7 @@ export function BeachDetail() {
             {refreshSuccess ? (
               <Check className="w-4 h-4 text-green-500" />
             ) : (
-              <RefreshCw className={"w-4 h-4 " + (isRefreshing ? 'animate-spin' : '')} />
+              <RefreshCw className={`w-4 h-4 ${isRefreshing ? 'animate-spin' : ''}`} />
             )}
             <span>Refresh</span>
           </button>
