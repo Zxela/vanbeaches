@@ -14,13 +14,22 @@ export async function getWeatherForecast(
     cacheKey,
     async () => {
       // Using Open-Meteo as fallback (Environment Canada API is complex)
-      const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,weather_code,relative_humidity_2m,wind_speed_10m,wind_direction_10m,uv_index&hourly=temperature_2m,weather_code,precipitation_probability&timezone=America/Vancouver&forecast_hours=24`;
+      const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,weather_code,relative_humidity_2m,wind_speed_10m,wind_direction_10m,uv_index&hourly=temperature_2m,weather_code,precipitation_probability&daily=weather_code,temperature_2m_max,temperature_2m_min&timezone=America/Vancouver&forecast_hours=24&forecast_days=5`;
 
       const response = await fetch(url);
       if (!response.ok) throw new Error(`Weather API error: ${response.status}`);
 
       const data = await response.json();
       const condition = mapWeatherCode(data.current.weather_code);
+
+      const daily = data.daily
+        ? (data.daily.time as string[]).map((date: string, i: number) => ({
+            date,
+            high: Math.round(data.daily.temperature_2m_max[i] * 10) / 10,
+            low: Math.round(data.daily.temperature_2m_min[i] * 10) / 10,
+            condition: mapWeatherCode(data.daily.weather_code[i]),
+          }))
+        : undefined;
 
       return {
         beachId,
@@ -38,6 +47,7 @@ export async function getWeatherForecast(
           condition: mapWeatherCode(data.hourly.weather_code[i]),
           precipitationProbability: data.hourly.precipitation_probability[i] || 0,
         })),
+        daily,
         fetchedAt: new Date().toISOString(),
       };
     },
