@@ -66,6 +66,12 @@ jobs:
       - name: Build client
         run: pnpm --filter @van-beaches/client build
 
+      - name: Create Pages project (if needed)
+        run: npx wrangler pages project create vanbeaches --production-branch=master || true
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+
       - name: Deploy Pages (preview)
         if: github.event_name == 'pull_request'
         run: npx wrangler pages deploy client/dist --project-name=vanbeaches --branch=${{ github.head_ref }}
