@@ -1,0 +1,688 @@
+{
+  "tasks": [
+    {
+      "id": "001",
+      "title": "Update workspace configuration for Cloudflare migration",
+      "objective": "Update pnpm-workspace.yaml to replace 'server' with 'worker', update root package.json scripts to use wrangler, add wrangler as a devDependency, and create root wrangler.toml for Pages project configuration.",
+      "task_type": "add_config",
+      "methodology": "direct",
+      "acceptance_criteria": [
+        {
+          "id": "001-AC1",
+          "criterion": "pnpm-workspace.yaml lists 'client', 'shared', and 'worker' packages (server removed)",
+          "test_assertion": "expect(yaml.packages).toEqual(['client', 'shared', 'worker'])"
+        },
+        {
+          "id": "001-AC2",
+          "criterion": "Root package.json 'dev' script uses wrangler pages dev",
+          "test_assertion": "expect(pkg.scripts.dev).toContain('wrangler pages dev')"
+        },
+        {
+          "id": "001-AC3",
+          "criterion": "Root wrangler.toml exists with name='van-beaches', compatibility_date, and BEACH_CACHE KV binding",
+          "test_assertion": "expect(fs.existsSync('wrangler.toml')).toBe(true)"
+        }
+      ],
+      "test_file": null,
+      "no_test_reason": "Configuration files only -- validated by type-check and workspace resolution in subsequent tasks",
+      "status": "pending",
+      "depends_on": [],
+      "traces_to": {
+        "user_stories": ["US-005"],
+        "acceptance_criteria": ["AC-017", "AC-019"],
+        "adr_decisions": ["ADR-001"]
+      },
+      "technical_notes": "Root package.json scripts: dev='wrangler pages dev --compatibility-date=2026-02-01 -- pnpm --filter @van-beaches/client dev', build='pnpm -r build', test='pnpm -r test', check='biome check .', format='biome format --write .', type-check='pnpm -r type-check', deploy:preview='wrangler pages deploy client/dist --project-name=van-beaches', deploy:production='wrangler pages deploy client/dist --project-name=van-beaches --branch=master'. Add wrangler and @cloudflare/workers-types as root devDependencies.",
+      "embedded_context": {
+        "relevant_interfaces": "// Current pnpm-workspace.yaml:\npackages:\n  - 'server'\n  - 'client'\n  - 'shared'\n\n// Target:\npackages:\n  - 'client'\n  - 'shared'\n  - 'worker'",
+        "existing_patterns": "// Current root package.json scripts:\n\"dev\": \"pnpm -r --parallel dev\",\n\"build\": \"pnpm -r build\",\n\"test\": \"pnpm -r test\",\n\"check\": \"biome check .\",\n\"format\": \"biome format --write .\",\n\"type-check\": \"pnpm -r type-check\"",
+        "constraints": "ADR-001: Use Cloudflare Pages + Functions + KV. Non-scope: Do NOT modify client/src/, shared/src/, biome.json, or tsconfig.base.json. Root wrangler.toml KV namespace IDs should use placeholder values (filled in at deploy time)."
+      },
+      "model": "haiku"
+    },
+    {
+      "id": "002",
+      "title": "Create worker package scaffold",
+      "objective": "Create the worker/ directory with package.json, tsconfig.json, wrangler.toml (with cron triggers), and src/ directory structure. This establishes the Cron Trigger Worker as a workspace package.",
+      "task_type": "add_config",
+      "methodology": "direct",
+      "acceptance_criteria": [
+        {
+          "id": "002-AC1",
+          "criterion": "worker/package.json exists with name '@van-beaches/worker', depends on @van-beaches/shared workspace:*",
+          "test_assertion": "expect(pkg.name).toBe('@van-beaches/worker')"
+        },
+        {
+          "id": "002-AC2",
+          "criterion": "worker/wrangler.toml has cron triggers: */30 * * * *, 0 * * * *, 0 */6 * * *",
+          "test_assertion": "expect(toml.triggers.crons).toContain('*/30 * * * *')"
+        },
+        {
+          "id": "002-AC3",
+          "criterion": "worker/tsconfig.json extends ../tsconfig.base.json with Workers-compatible settings",
+          "test_assertion": "expect(tsconfig.extends).toBe('../tsconfig.base.json')"
+        },
+        {
+          "id": "002-AC4",
+          "criterion": "worker/src/ directory exists with empty index.ts exporting a placeholder scheduled handler",
+          "test_assertion": "expect(fs.existsSync('worker/src/index.ts')).toBe(true)"
+        }
+      ],
+      "test_file": null,
+      "no_test_reason": "Configuration/scaffold files only -- validated by TypeScript compilation in subsequent tasks",
+      "status": "pending",
+      "depends_on": ["001"],
+      "traces_to": {
+        "user_stories": ["US-004"],
+        "acceptance_criteria": ["AC-012", "AC-013", "AC-014"],
+        "adr_decisions": ["ADR-001"]
+      },
+      "technical_notes": "worker/wrangler.toml must bind the same BEACH_CACHE KV namespace as root wrangler.toml. worker/package.json scripts: dev='wrangler dev --test-scheduled', build='wrangler deploy --dry-run', type-check='tsc --noEmit', test='vitest run --passWithNoTests'. The worker/src/index.ts should export a default object with a scheduled(event, env, ctx) handler that logs which cron was triggered. Devdeps: wrangler, @cloudflare/workers-types, vitest.",
+      "embedded_context": {
+        "relevant_interfaces": "// Cloudflare Worker scheduled handler signature:\nexport default {\n  async scheduled(event: ScheduledEvent, env: Env, ctx: ExecutionContext): Promise<void> {\n    // event.cron contains the cron pattern that triggered this invocation\n  }\n};\n\ninterface Env {\n  BEACH_CACHE: KVNamespace;\n}",
+        "existing_patterns": "// server/package.json pattern:\n{\n  \"name\": \"@van-beaches/server\",\n  \"dependencies\": { \"@van-beaches/shared\": \"workspace:*\" }\n}",
+        "constraints": "ADR-001: Cron Triggers require a standalone Worker (cannot use Pages Functions). Three schedules: weather every 30min, tides every 60min, water quality every 6hr. Non-scope: Do NOT touch shared/ package."
+      },
+      "model": "haiku"
+    },
+    {
+      "id": "003",
+      "title": "Create KV cache wrapper with soft lock",
+      "objective": "Create worker/src/cache/kvCache.ts implementing get<T>, set<T>, and getOrFetch<T> operations against Cloudflare KV, replacing the in-memory CacheManager. Include best-effort soft lock for request coalescing.",
+      "task_type": "create_service",
+      "methodology": "tdd",
+      "acceptance_criteria": [
+        {
+          "id": "003-AC1",
+          "criterion": "get<T>(kv, key) returns parsed JSON value or null when key is missing",
+          "test_assertion": "expect(await kvCache.get(mockKv, 'missing')).toBeNull()"
+        },
+        {
+          "id": "003-AC2",
+          "criterion": "set<T>(kv, key, value, ttlSeconds) writes JSON string to KV with expirationTtl",
+          "test_assertion": "expect(mockKv.put).toHaveBeenCalledWith('weather:test', expect.any(String), { expirationTtl: 1800 })"
+        },
+        {
+          "id": "003-AC3",
+          "criterion": "getOrFetch returns cached value on hit without calling fetcher",
+          "test_assertion": "expect(fetcher).not.toHaveBeenCalled()"
+        },
+        {
+          "id": "003-AC4",
+          "criterion": "getOrFetch calls fetcher on cache miss and writes result to KV",
+          "test_assertion": "expect(fetcher).toHaveBeenCalledOnce(); expect(mockKv.put).toHaveBeenCalled()"
+        },
+        {
+          "id": "003-AC5",
+          "criterion": "getOrFetch writes a fetching:{key} soft lock marker with 30s TTL before calling fetcher",
+          "test_assertion": "expect(mockKv.put).toHaveBeenCalledWith('fetching:weather:test', '1', { expirationTtl: 30 })"
+        }
+      ],
+      "test_file": "worker/src/cache/kvCache.test.ts",
+      "status": "pending",
+      "depends_on": ["002"],
+      "traces_to": {
+        "user_stories": ["US-003", "US-004"],
+        "acceptance_criteria": ["AC-009", "AC-011", "AC-015"],
+        "adr_decisions": ["ADR-001"]
+      },
+      "technical_notes": "The KV mock should implement { get(key): Promise<string|null>, put(key, value, opts): Promise<void>, delete(key): Promise<void> }. The soft lock pattern: on cache miss, check if fetching:{key} exists -> if yes, wait 500ms and retry get once -> if still null, proceed to fetch. The lock marker uses 30s TTL so it auto-expires. This is best-effort, not guaranteed single-flight.",
+      "embedded_context": {
+        "relevant_interfaces": "// KV Namespace interface (from @cloudflare/workers-types):\ninterface KVNamespace {\n  get(key: string, options?: { type?: 'text' | 'json' | 'arrayBuffer' | 'stream' }): Promise<string | null>;\n  put(key: string, value: string, options?: { expirationTtl?: number; expiration?: number }): Promise<void>;\n  delete(key: string): Promise<void>;\n}\n\n// Existing CacheManager API being replaced:\n// get<T>(key: string): Promise<T | null>\n// set<T>(key: string, value: T, ttlMs: number): Promise<void>\n// getOrFetch<T>(key: string, fetcher: () => Promise<T>, ttlMs: number): Promise<T>",
+        "existing_patterns": "// Current in-memory CacheManager from server/src/cache/cacheManager.ts:\n// Uses Map<string, CacheEntry<unknown>> with TTL via expiresAt timestamp\n// Request coalescing via inFlight Map tracking pending promises\n// The KV version replaces: Map -> KV get/put, inFlight -> fetching: soft lock marker",
+        "constraints": "ADR-001: KV has eventual consistency (reads may be stale for up to 60s). Best-effort coalescing is acceptable (NG-008). Free tier: < 1000 KV writes/day target, so set operations must use expirationTtl in seconds (not ms). Note: KV TTL is in seconds, existing CacheManager uses milliseconds -- conversion needed."
+      },
+      "model": "sonnet"
+    },
+    {
+      "id": "004",
+      "title": "Create weather service for worker",
+      "objective": "Create worker/src/services/weatherService.ts that fetches weather data from Open-Meteo API and writes to KV, producing WeatherForecast objects identical to the current server implementation.",
+      "task_type": "create_service",
+      "methodology": "tdd",
+      "acceptance_criteria": [
+        {
+          "id": "004-AC1",
+          "criterion": "fetchWeatherForBeach(kv, beachId, lat, lon) fetches from Open-Meteo and returns a WeatherForecast",
+          "test_assertion": "expect(result.beachId).toBe('english-bay'); expect(result.current.temperature).toBeDefined()"
+        },
+        {
+          "id": "004-AC2",
+          "criterion": "The returned WeatherForecast matches the shared type shape (beachId, current, hourly, daily, fetchedAt)",
+          "test_assertion": "expect(isWeatherForecast(result)).toBe(true)"
+        },
+        {
+          "id": "004-AC3",
+          "criterion": "Weather data is written to KV under key weather:{beachId} with 1800s TTL",
+          "test_assertion": "expect(mockKv.put).toHaveBeenCalledWith('weather:english-bay', expect.any(String), { expirationTtl: 1800 })"
+        },
+        {
+          "id": "004-AC4",
+          "criterion": "On fetch failure, the function throws an error (does not swallow it)",
+          "test_assertion": "await expect(fetchWeatherForBeach(mockKv, 'test', 0, 0)).rejects.toThrow()"
+        }
+      ],
+      "test_file": "worker/src/services/weatherService.test.ts",
+      "status": "pending",
+      "depends_on": ["003"],
+      "traces_to": {
+        "user_stories": ["US-004"],
+        "acceptance_criteria": ["AC-012", "AC-016"],
+        "adr_decisions": ["ADR-001"]
+      },
+      "technical_notes": "Port the data transformation logic from server/src/services/weatherService.ts. Key differences: (1) No cacheManager.getOrFetch -- this service is called by the cron handler and writes directly to KV via kvCache.set. (2) The function signature changes to accept KVNamespace as first parameter. (3) mapWeatherCode and getWindDirection helper functions are identical -- copy them. (4) The Open-Meteo URL and response parsing is identical to the existing implementation.",
+      "embedded_context": {
+        "relevant_interfaces": "// From shared/src/types/weather.ts:\ntype WeatherCondition = 'sunny' | 'partly-cloudy' | 'cloudy' | 'rainy' | 'stormy' | 'foggy';\ninterface WeatherForecast {\n  beachId: string;\n  current: { temperature: number; condition: WeatherCondition; humidity: number; windSpeed: number; windDirection: string; uvIndex: number; };\n  hourly: Array<{ time: string; temperature: number; condition: WeatherCondition; precipitationProbability: number; }>;\n  daily?: Array<{ date: string; high: number; low: number; condition: WeatherCondition; }>;\n  fetchedAt: string;\n}",
+        "existing_patterns": "// From server/src/services/weatherService.ts:\n// URL: https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,weather_code,relative_humidity_2m,wind_speed_10m,wind_direction_10m,uv_index&hourly=temperature_2m,weather_code,precipitation_probability&daily=weather_code,temperature_2m_max,temperature_2m_min&timezone=America/Vancouver&forecast_hours=24&forecast_days=5\n// mapWeatherCode: 0-1=sunny, 2-3=partly-cloudy, 4-48=cloudy, 49-67=rainy, 68-77=foggy, else=stormy\n// getWindDirection: dirs = ['N','NE','E','SE','S','SW','W','NW'], index = Math.round(degrees/45) % 8",
+        "constraints": "Non-scope: Do NOT change the Open-Meteo URL or data transformation logic. The response shape must be identical to what the existing Express route returns. Do NOT import from server/ -- re-implement the pure functions in the worker package."
+      },
+      "model": "haiku"
+    },
+    {
+      "id": "005",
+      "title": "Create IWLS tide service for worker",
+      "objective": "Create worker/src/services/iwlsService.ts that fetches tide predictions from the IWLS/DFO API and writes to KV. Must skip beaches with null tideStationId and deduplicate by station ID.",
+      "task_type": "create_service",
+      "methodology": "tdd",
+      "acceptance_criteria": [
+        {
+          "id": "005-AC1",
+          "criterion": "fetchTidesForStation(kv, stationId, beachId, beachName) fetches from IWLS API and returns TideData",
+          "test_assertion": "expect(result.stationId).toBe('5cebf1de3d0f4a073c4bb943'); expect(result.predictions.length).toBeGreaterThan(0)"
+        },
+        {
+          "id": "005-AC2",
+          "criterion": "The returned TideData has predictions with correct high/low classification",
+          "test_assertion": "expect(result.predictions[0]).toHaveProperty('type'); expect(['high','low']).toContain(result.predictions[0].type)"
+        },
+        {
+          "id": "005-AC3",
+          "criterion": "Tide data is written to KV under key tides:{stationId} with 3600s TTL",
+          "test_assertion": "expect(mockKv.put).toHaveBeenCalledWith('tides:5cebf1de3d0f4a073c4bb943', expect.any(String), { expirationTtl: 3600 })"
+        },
+        {
+          "id": "005-AC4",
+          "criterion": "On fetch failure, the function throws an error",
+          "test_assertion": "await expect(fetchTidesForStation(mockKv, 'bad-id', 'test', 'Test')).rejects.toThrow()"
+        }
+      ],
+      "test_file": "worker/src/services/iwlsService.test.ts",
+      "status": "pending",
+      "depends_on": ["003"],
+      "traces_to": {
+        "user_stories": ["US-004"],
+        "acceptance_criteria": ["AC-013", "AC-016"],
+        "adr_decisions": ["ADR-001"]
+      },
+      "technical_notes": "Port from server/src/services/iwlsService.ts. Key differences: (1) No rateLimiter -- cron runs sequentially so rate limiting is not needed. (2) No cacheManager.getOrFetch -- writes directly to KV. (3) The tide high/low detection logic (comparing to neighbors) must be identical. (4) Station deduplication and null-tideStationId skipping are handled in the cron handler (task 007), not in this service function.",
+      "embedded_context": {
+        "relevant_interfaces": "// From shared/src/types/tide.ts:\ninterface TidePrediction { time: string; height: number; type: 'high' | 'low'; }\ninterface TideData { beachId: string; stationId: string; stationName: string; predictions: TidePrediction[]; fetchedAt: string; }\n\n// IWLS API response shape:\ninterface IWLSResponse { eventDate: string; value: number; qcFlagCode: string; timeSeriesId: string; }",
+        "existing_patterns": "// From server/src/services/iwlsService.ts:\n// URL: https://api-iwls.dfo-mpo.gc.ca/api/v1/stations/${stationId}/data?time-series-code=wlp-hilo&from=${from.toISOString()}&to=${to.toISOString()}\n// from = now, to = now + 48 hours\n// Predictions: data.slice(0, 6).map with neighbor comparison for high/low\n// Station name format: `${beachName} (Vancouver)`",
+        "constraints": "Non-scope: Do NOT change the IWLS API URL or tide prediction logic. The response shape must match existing Express route output exactly. Rate limiter is NOT needed in the worker (cron runs sequentially). Do NOT import from server/."
+      },
+      "model": "haiku"
+    },
+    {
+      "id": "006",
+      "title": "Create water quality service for worker",
+      "objective": "Create worker/src/services/waterQualityService.ts that generates synthetic/mock water quality data and writes to KV. Port the existing mock logic as-is (no real external API).",
+      "task_type": "create_service",
+      "methodology": "tdd",
+      "acceptance_criteria": [
+        {
+          "id": "006-AC1",
+          "criterion": "fetchWaterQualityForBeach(kv, beachId) returns a WaterQualityStatus object",
+          "test_assertion": "expect(result.beachId).toBe('english-bay'); expect(result).toHaveProperty('level')"
+        },
+        {
+          "id": "006-AC2",
+          "criterion": "Returns 'off-season' level during October through April",
+          "test_assertion": "expect(result.level).toBe('off-season')"
+        },
+        {
+          "id": "006-AC3",
+          "criterion": "Water quality data is written to KV under key waterquality:{beachId} with 21600s TTL",
+          "test_assertion": "expect(mockKv.put).toHaveBeenCalledWith('waterquality:english-bay', expect.any(String), { expirationTtl: 21600 })"
+        },
+        {
+          "id": "006-AC4",
+          "criterion": "The returned WaterQualityStatus matches the shared type shape",
+          "test_assertion": "expect(isWaterQualityStatus(result)).toBe(true)"
+        }
+      ],
+      "test_file": "worker/src/services/waterQualityService.test.ts",
+      "status": "pending",
+      "depends_on": ["003"],
+      "traces_to": {
+        "user_stories": ["US-004"],
+        "acceptance_criteria": ["AC-014", "AC-016"],
+        "adr_decisions": ["ADR-001"]
+      },
+      "technical_notes": "Direct port from server/src/services/waterQualityService.ts. This service uses NO external API -- it generates mock/synthetic data. The off-season logic (month >= 10 || month <= 4) and the random mock status distribution must be identical. Key difference: writes to KV instead of in-memory cache.",
+      "embedded_context": {
+        "relevant_interfaces": "// From shared/src/types/waterQuality.ts:\ntype WaterQualityLevel = 'good' | 'advisory' | 'closed' | 'unknown' | 'off-season';\ninterface WaterQualityStatus { beachId: string; level: WaterQualityLevel; ecoliCount: number | null; advisoryReason: string | null; sampleDate: string | null; fetchedAt: string; }",
+        "existing_patterns": "// From server/src/services/waterQualityService.ts:\n// Off-season: month >= 10 || month <= 4 -> returns level='off-season', ecoliCount=null, advisoryReason=null, sampleDate=null\n// In-season: random from ['good','good','good','advisory','good']\n// E.coli: good = random 0-100, advisory = random 200-500\n// sampleDate: random 0-7 days ago",
+        "constraints": "Non-scope: Do NOT add a real water quality API. Port the mock/synthetic data logic as-is. The response shape must match the existing implementation exactly."
+      },
+      "model": "haiku"
+    },
+    {
+      "id": "007",
+      "title": "Implement cron handler entry point with scheduled dispatch",
+      "objective": "Implement worker/src/index.ts with the scheduled event handler that dispatches to weather, tide, and water quality refresh functions based on event.cron. Tide refresh must skip null tideStationId beaches and deduplicate by station ID.",
+      "task_type": "create_service",
+      "methodology": "tdd",
+      "acceptance_criteria": [
+        {
+          "id": "007-AC1",
+          "criterion": "When event.cron matches '*/30 * * * *', the handler refreshes weather for all 9 beaches",
+          "test_assertion": "expect(weatherService.fetchWeatherForBeach).toHaveBeenCalledTimes(9)"
+        },
+        {
+          "id": "007-AC2",
+          "criterion": "When event.cron matches '0 * * * *', the handler refreshes tides for unique non-null stations only (1 station currently)",
+          "test_assertion": "expect(iwlsService.fetchTidesForStation).toHaveBeenCalledTimes(1)"
+        },
+        {
+          "id": "007-AC3",
+          "criterion": "When event.cron matches '0 */6 * * *', the handler refreshes water quality for all 9 beaches",
+          "test_assertion": "expect(waterQualityService.fetchWaterQualityForBeach).toHaveBeenCalledTimes(9)"
+        },
+        {
+          "id": "007-AC4",
+          "criterion": "Tide refresh skips beaches where tideStationId is null (Trout Lake)",
+          "test_assertion": "const calls = vi.mocked(iwlsService.fetchTidesForStation).mock.calls; calls.forEach(([_kv, stationId]) => expect(stationId).not.toBeNull())"
+        },
+        {
+          "id": "007-AC5",
+          "criterion": "If one beach refresh fails, the handler continues processing remaining beaches and does not throw",
+          "test_assertion": "await expect(handler(event, env, ctx)).resolves.not.toThrow()"
+        }
+      ],
+      "test_file": "worker/src/index.test.ts",
+      "status": "pending",
+      "depends_on": ["004", "005", "006"],
+      "traces_to": {
+        "user_stories": ["US-004"],
+        "acceptance_criteria": ["AC-012", "AC-013", "AC-014", "AC-015", "AC-016"],
+        "adr_decisions": ["ADR-001"]
+      },
+      "technical_notes": "The handler inspects event.cron to determine which refresh to run. Use BEACHES from @van-beaches/shared. For tides: filter out beaches with null tideStationId, then deduplicate by stationId using a Set (same pattern as server/src/jobs/dataRefreshJob.ts). Each individual beach refresh must be wrapped in try/catch -- log errors and continue. The ctx.waitUntil() should wrap the entire refresh operation to ensure it completes before the worker is terminated.",
+      "embedded_context": {
+        "relevant_interfaces": "// Worker scheduled handler:\nexport default {\n  async scheduled(event: ScheduledEvent, env: Env, ctx: ExecutionContext): Promise<void> { ... }\n};\ninterface Env { BEACH_CACHE: KVNamespace; }\n\n// From @van-beaches/shared:\nconst BEACHES: Beach[] = [ /* 9 beaches, Trout Lake has tideStationId: null */ ];",
+        "existing_patterns": "// From server/src/jobs/dataRefreshJob.ts (tide dedup pattern):\nconst seenStationIds = new Set<string>();\nfor (const beach of BEACHES) {\n  if (!beach.tideStationId) continue;\n  if (seenStationIds.has(beach.tideStationId)) continue;\n  seenStationIds.add(beach.tideStationId);\n  try {\n    await getTidePredictions(beach.tideStationId, beach.id, beach.name);\n  } catch (e) { console.error(...); }\n}",
+        "constraints": "ADR-001: Cron Triggers run on a standalone Worker. Free tier target: < 800 KV writes/day. Tide refresh MUST skip null tideStationId beaches. Error in one beach must not abort the entire refresh. Non-scope: Do NOT change BEACHES data."
+      },
+      "model": "sonnet"
+    },
+    {
+      "id": "008",
+      "title": "Create Pages Functions middleware for CORS and error handling",
+      "objective": "Create functions/_middleware.ts that handles CORS headers and error handling for all Pages Functions, replacing the Express cors and errorHandler middleware.",
+      "task_type": "create_middleware",
+      "methodology": "tdd",
+      "acceptance_criteria": [
+        {
+          "id": "008-AC1",
+          "criterion": "All responses include Access-Control-Allow-Origin header",
+          "test_assertion": "expect(response.headers.get('Access-Control-Allow-Origin')).toBe('*')"
+        },
+        {
+          "id": "008-AC2",
+          "criterion": "OPTIONS requests return 204 with correct CORS headers without calling the next handler",
+          "test_assertion": "expect(response.status).toBe(204)"
+        },
+        {
+          "id": "008-AC3",
+          "criterion": "When the downstream handler throws, the middleware returns a JSON error response matching ApiResponse<null> shape",
+          "test_assertion": "expect(body).toEqual({ success: false, data: null, error: expect.any(String), cached: false, cachedAt: null })"
+        },
+        {
+          "id": "008-AC4",
+          "criterion": "The error response status code is 404 for NOT_FOUND errors, 500 for unhandled errors",
+          "test_assertion": "expect(response.status).toBe(404)"
+        }
+      ],
+      "test_file": "functions/_middleware.test.ts",
+      "status": "pending",
+      "depends_on": ["001"],
+      "traces_to": {
+        "user_stories": ["US-003"],
+        "acceptance_criteria": ["AC-009", "AC-010"],
+        "adr_decisions": ["ADR-001"]
+      },
+      "technical_notes": "Pages Functions middleware uses the onRequest export and calls context.next() to invoke the downstream handler. CORS headers: Access-Control-Allow-Origin: *, Access-Control-Allow-Methods: GET,OPTIONS, Access-Control-Allow-Headers: Content-Type. Error handling should catch exceptions from context.next() and return Response.json() with the ApiResponse<null> error shape. Define an AppError class (or use a simple error code check) for structured errors like NOT_FOUND.",
+      "embedded_context": {
+        "relevant_interfaces": "// Pages Function middleware pattern:\nexport const onRequest: PagesFunction<Env> = async (context) => {\n  // Pre-processing (CORS, etc.)\n  const response = await context.next();\n  // Post-processing (add headers, etc.)\n  return response;\n};\n\n// ApiResponse error shape (from shared/src/types/api.ts):\n// { success: false, data: null, error: string, cached: false, cachedAt: null }",
+        "existing_patterns": "// From server/src/middleware/errorHandler.ts:\nclass AppError extends Error {\n  constructor(public code: ApiError['code'], message: string, public retryAfter: number | null = null) { ... }\n}\n// Status codes: NOT_FOUND=404, RATE_LIMITED=429, SERVICE_UNAVAILABLE=503, default=500\n\n// Express CORS (current): app.use(cors()) -- allows all origins",
+        "constraints": "Non-scope: Do NOT change the ApiResponse<T> type. The error response shape must match what the Express errorHandler currently returns. CORS must allow all origins (matching current Express cors() default)."
+      },
+      "model": "sonnet"
+    },
+    {
+      "id": "009",
+      "title": "Create health endpoint Pages Function",
+      "objective": "Create functions/api/health.ts that returns { status: 'ok', timestamp: ISO string }, matching the current Express health route.",
+      "task_type": "add_endpoint",
+      "methodology": "tdd",
+      "acceptance_criteria": [
+        {
+          "id": "009-AC1",
+          "criterion": "GET /api/health returns JSON with status 'ok' and a timestamp",
+          "test_assertion": "expect(body.status).toBe('ok'); expect(body.timestamp).toBeDefined()"
+        },
+        {
+          "id": "009-AC2",
+          "criterion": "Response status code is 200",
+          "test_assertion": "expect(response.status).toBe(200)"
+        }
+      ],
+      "test_file": "functions/api/health.test.ts",
+      "status": "pending",
+      "depends_on": ["008"],
+      "traces_to": {
+        "user_stories": ["US-003"],
+        "acceptance_criteria": ["AC-009"],
+        "adr_decisions": ["ADR-001"]
+      },
+      "technical_notes": "Simple endpoint. Export onRequestGet PagesFunction. No KV dependency. Return Response.json({ status: 'ok', timestamp: new Date().toISOString() }).",
+      "embedded_context": {
+        "relevant_interfaces": "// Pages Function handler:\nexport const onRequestGet: PagesFunction<Env> = async (context) => {\n  return Response.json(data);\n};",
+        "existing_patterns": "// From server/src/routes/health.ts:\nrouter.get('/health', (_req, res) => {\n  res.json({ status: 'ok', timestamp: new Date().toISOString() });\n});",
+        "constraints": "Response shape must be identical to current Express health route. No KV needed."
+      },
+      "model": "haiku"
+    },
+    {
+      "id": "010",
+      "title": "Create beaches endpoint Pages Function",
+      "objective": "Create functions/api/beaches.ts that reads cached weather and tide data from KV and returns BeachSummary[] wrapped in ApiResponse<T>, matching the current Express beaches route.",
+      "task_type": "add_endpoint_complex",
+      "methodology": "tdd",
+      "acceptance_criteria": [
+        {
+          "id": "010-AC1",
+          "criterion": "GET /api/beaches returns ApiResponse<BeachSummary[]> with all 9 beaches",
+          "test_assertion": "expect(body.success).toBe(true); expect(body.data).toHaveLength(9)"
+        },
+        {
+          "id": "010-AC2",
+          "criterion": "Each beach summary includes currentWeather from KV cache (or null if not cached)",
+          "test_assertion": "expect(beach.currentWeather).not.toBeNull() // when cached"
+        },
+        {
+          "id": "010-AC3",
+          "criterion": "Each beach summary includes nextTide from KV cache (or null if not cached or tideStationId is null)",
+          "test_assertion": "expect(troutLake.nextTide).toBeNull()"
+        },
+        {
+          "id": "010-AC4",
+          "criterion": "Per-beach KV read failures return null for the failed field, not a 500 error",
+          "test_assertion": "expect(response.status).toBe(200); expect(beach.currentWeather).toBeNull()"
+        }
+      ],
+      "test_file": "functions/api/beaches.test.ts",
+      "status": "pending",
+      "depends_on": ["008", "003"],
+      "traces_to": {
+        "user_stories": ["US-003"],
+        "acceptance_criteria": ["AC-009", "AC-011"],
+        "adr_decisions": ["ADR-001"]
+      },
+      "technical_notes": "Port logic from server/src/routes/beachesRoute.ts. Key changes: (1) Use env.BEACH_CACHE KV instead of cacheManager, (2) Use kvCache.get() instead of cacheManager.get(), (3) Use Response.json() instead of res.json(), (4) Use createSuccessResponse from @van-beaches/shared. The beach summary construction logic (extracting currentWeather from WeatherForecast, finding nextTide from TideData predictions) must be identical.",
+      "embedded_context": {
+        "relevant_interfaces": "// From shared/src/types/beach.ts:\ninterface BeachSummary {\n  id: string;\n  name: string;\n  currentWeather: { temperature: number; condition: WeatherCondition; icon: string } | null;\n  nextTide: { type: 'high' | 'low'; time: string; height: number } | null;\n  waterQuality: WaterQualityLevel;\n  lastUpdated: string;\n}\n\n// ApiResponse wrapper:\nfunction createSuccessResponse<T>(data: T, cached?: boolean, cachedAt?: string | null): ApiResponse<T>",
+        "existing_patterns": "// From server/src/routes/beachesRoute.ts:\n// For each beach: read weather:{beach.id} and tides:{beach.tideStationId} from cache\n// Extract currentWeather: { temperature, condition, icon: condition }\n// Find nextTide: predictions.find(p => new Date(p.time) > now)\n// waterQuality: 'unknown' (hardcoded)\n// Per-beach try/catch: cache read failure -> null for that field, not 500",
+        "constraints": "Non-scope: Do NOT change BeachSummary shape. The response must be identical to what the Express route returns. waterQuality is hardcoded to 'unknown' in the summary endpoint (not fetched per-request)."
+      },
+      "model": "sonnet"
+    },
+    {
+      "id": "011",
+      "title": "Create weather endpoint Pages Function",
+      "objective": "Create functions/api/weather/[beachId].ts that reads weather data from KV (or fetches on miss via getOrFetch) and returns it wrapped in ApiResponse<WeatherForecast>.",
+      "task_type": "add_endpoint",
+      "methodology": "tdd",
+      "acceptance_criteria": [
+        {
+          "id": "011-AC1",
+          "criterion": "GET /api/weather/:beachId returns ApiResponse<WeatherForecast> on cache hit",
+          "test_assertion": "expect(body.success).toBe(true); expect(body.data.beachId).toBe('english-bay')"
+        },
+        {
+          "id": "011-AC2",
+          "criterion": "Returns 404 with error response for unknown beachId",
+          "test_assertion": "expect(response.status).toBe(404); expect(body.success).toBe(false)"
+        },
+        {
+          "id": "011-AC3",
+          "criterion": "On cache miss, fetches from Open-Meteo and returns the result",
+          "test_assertion": "expect(global.fetch).toHaveBeenCalled(); expect(body.data.current).toBeDefined()"
+        }
+      ],
+      "test_file": "functions/api/weather/beachId.test.ts",
+      "status": "pending",
+      "depends_on": ["008", "003"],
+      "traces_to": {
+        "user_stories": ["US-003"],
+        "acceptance_criteria": ["AC-009", "AC-011"],
+        "adr_decisions": ["ADR-001"]
+      },
+      "technical_notes": "Port logic from server/src/routes/weatherRoute.ts. Use getBeachById from @van-beaches/shared to validate beachId. On cache miss, use kvCache.getOrFetch with the same Open-Meteo fetch logic as the worker weather service. The data transformation functions (mapWeatherCode, getWindDirection) should be shared -- either import from a shared util within functions/ or inline them. Use createSuccessResponse(data, true, data.fetchedAt) for the response.",
+      "embedded_context": {
+        "relevant_interfaces": "// Pages Function with dynamic route:\n// File: functions/api/weather/[beachId].ts\nexport const onRequestGet: PagesFunction<Env> = async (context) => {\n  const beachId = context.params.beachId as string;\n  // ...\n};",
+        "existing_patterns": "// From server/src/routes/weatherRoute.ts:\nconst beach = getBeachById(beachId);\nif (!beach) throw new AppError('NOT_FOUND', `Beach not found: ${beachId}`);\nconst weather = await getWeatherForecast(beachId, beach.location.latitude, beach.location.longitude);\nres.json(createSuccessResponse(weather, true, weather.fetchedAt));",
+        "constraints": "Non-scope: Do NOT change the API response shape. The response must match the current Express route. Use kvCache.getOrFetch so the endpoint can serve on-demand fetches (not just cron-populated data)."
+      },
+      "model": "sonnet"
+    },
+    {
+      "id": "012",
+      "title": "Create tides endpoint Pages Function",
+      "objective": "Create functions/api/tides/[beachId].ts that reads tide data from KV and returns it wrapped in ApiResponse<TideData>. Must handle beaches with null tideStationId by returning empty predictions.",
+      "task_type": "add_endpoint",
+      "methodology": "tdd",
+      "acceptance_criteria": [
+        {
+          "id": "012-AC1",
+          "criterion": "GET /api/tides/:beachId returns ApiResponse<TideData> on cache hit",
+          "test_assertion": "expect(body.success).toBe(true); expect(body.data.predictions.length).toBeGreaterThan(0)"
+        },
+        {
+          "id": "012-AC2",
+          "criterion": "Returns 404 for unknown beachId",
+          "test_assertion": "expect(response.status).toBe(404)"
+        },
+        {
+          "id": "012-AC3",
+          "criterion": "For beaches with null tideStationId (Trout Lake), returns empty predictions with message",
+          "test_assertion": "expect(body.data.predictions).toEqual([]); expect(body.data.message).toContain('not applicable')"
+        }
+      ],
+      "test_file": "functions/api/tides/beachId.test.ts",
+      "status": "pending",
+      "depends_on": ["008", "003"],
+      "traces_to": {
+        "user_stories": ["US-003"],
+        "acceptance_criteria": ["AC-009", "AC-011"],
+        "adr_decisions": ["ADR-001"]
+      },
+      "technical_notes": "Port logic from server/src/routes/tidesRoute.ts. Key behavior: when beach.tideStationId is null, return createSuccessResponse({ beachId, stationId: '', stationName: 'N/A', predictions: [], fetchedAt: new Date().toISOString(), message: 'Tide information not applicable for this location' }). On cache miss for a valid station, use kvCache.getOrFetch with IWLS API fetch logic.",
+      "embedded_context": {
+        "relevant_interfaces": "// From shared/src/types/tide.ts:\ninterface TideData { beachId: string; stationId: string; stationName: string; predictions: TidePrediction[]; fetchedAt: string; }\n\n// Dynamic route file: functions/api/tides/[beachId].ts",
+        "existing_patterns": "// From server/src/routes/tidesRoute.ts (null station handling):\nif (!beach.tideStationId) {\n  res.json(createSuccessResponse({\n    beachId,\n    stationId: '',\n    stationName: 'N/A',\n    predictions: [],\n    fetchedAt: new Date().toISOString(),\n    message: 'Tide information not applicable for this location',\n  }));\n  return;\n}",
+        "constraints": "Non-scope: Do NOT change the API response shape. Must handle null tideStationId identically to the Express route (Trout Lake case). The tides KV key uses stationId, not beachId."
+      },
+      "model": "sonnet"
+    },
+    {
+      "id": "013",
+      "title": "Create water quality endpoint Pages Function",
+      "objective": "Create functions/api/water-quality/[beachId].ts that reads water quality data from KV and returns it wrapped in ApiResponse<WaterQualityStatus>.",
+      "task_type": "add_endpoint",
+      "methodology": "tdd",
+      "acceptance_criteria": [
+        {
+          "id": "013-AC1",
+          "criterion": "GET /api/water-quality/:beachId returns ApiResponse<WaterQualityStatus> on cache hit",
+          "test_assertion": "expect(body.success).toBe(true); expect(body.data.beachId).toBe('english-bay')"
+        },
+        {
+          "id": "013-AC2",
+          "criterion": "Returns 404 for unknown beachId",
+          "test_assertion": "expect(response.status).toBe(404)"
+        },
+        {
+          "id": "013-AC3",
+          "criterion": "On cache miss, generates synthetic data and returns it (same as cron service logic)",
+          "test_assertion": "expect(body.data.level).toBeDefined()"
+        }
+      ],
+      "test_file": "functions/api/water-quality/beachId.test.ts",
+      "status": "pending",
+      "depends_on": ["008", "003"],
+      "traces_to": {
+        "user_stories": ["US-003"],
+        "acceptance_criteria": ["AC-009", "AC-011"],
+        "adr_decisions": ["ADR-001"]
+      },
+      "technical_notes": "Port logic from server/src/routes/waterQualityRoute.ts. On cache miss, use kvCache.getOrFetch with the same mock/synthetic data generation logic as the worker water quality service. Use createSuccessResponse(status, true, status.fetchedAt) for the response.",
+      "embedded_context": {
+        "relevant_interfaces": "// From shared/src/types/waterQuality.ts:\ninterface WaterQualityStatus { beachId: string; level: WaterQualityLevel; ecoliCount: number | null; advisoryReason: string | null; sampleDate: string | null; fetchedAt: string; }\n\n// Dynamic route file: functions/api/water-quality/[beachId].ts",
+        "existing_patterns": "// From server/src/routes/waterQualityRoute.ts:\nconst beach = getBeachById(beachId);\nif (!beach) throw new AppError('NOT_FOUND', ...);\nconst status = await getWaterQuality(beachId);\nres.json(createSuccessResponse(status, true, status.fetchedAt));",
+        "constraints": "Non-scope: Do NOT change the API response shape. Water quality uses mock/synthetic data (no real API). The response must match the existing Express route output."
+      },
+      "model": "haiku"
+    },
+    {
+      "id": "014",
+      "title": "Remove Vite dev proxy from client config",
+      "objective": "Remove the server proxy configuration from client/vite.config.ts since wrangler pages dev serves both the SPA and API functions, making the proxy unnecessary.",
+      "task_type": "add_config",
+      "methodology": "direct",
+      "acceptance_criteria": [
+        {
+          "id": "014-AC1",
+          "criterion": "client/vite.config.ts no longer contains a proxy configuration for /api",
+          "test_assertion": "expect(viteConfig).not.toContain('proxy')"
+        },
+        {
+          "id": "014-AC2",
+          "criterion": "The server.port configuration is preserved",
+          "test_assertion": "expect(viteConfig).toContain('port: 5173')"
+        }
+      ],
+      "test_file": null,
+      "no_test_reason": "Configuration change only -- validated by successful local dev startup. Existing client tests do not test proxy config.",
+      "status": "pending",
+      "depends_on": ["001"],
+      "traces_to": {
+        "user_stories": ["US-005"],
+        "acceptance_criteria": ["AC-017", "AC-018"],
+        "adr_decisions": ["ADR-001"]
+      },
+      "technical_notes": "Remove the proxy block from the server configuration in vite.config.ts. Keep the port setting. The resolve.alias and test configurations must remain unchanged.",
+      "embedded_context": {
+        "relevant_interfaces": "// Current client/vite.config.ts server block:\nserver: {\n  port: 5173,\n  proxy: {\n    '/api': {\n      target: 'http://localhost:3000',\n      changeOrigin: true,\n    },\n  },\n},",
+        "existing_patterns": "// Target server block (proxy removed):\nserver: {\n  port: 5173,\n},",
+        "constraints": "Non-scope: Do NOT modify any other part of vite.config.ts (plugins, resolve.alias, test config). Only remove the proxy block."
+      },
+      "model": "haiku"
+    },
+    {
+      "id": "015",
+      "title": "Create GitHub Actions CI/CD workflow",
+      "objective": "Create .github/workflows/deploy.yml that runs lint, type-check, and test on every PR and push to master, then deploys to Cloudflare Pages (preview for PRs, production for master).",
+      "task_type": "add_config",
+      "methodology": "direct",
+      "acceptance_criteria": [
+        {
+          "id": "015-AC1",
+          "criterion": "Workflow triggers on pull_request and push to master",
+          "test_assertion": "expect(workflow.on).toHaveProperty('pull_request'); expect(workflow.on.push.branches).toContain('master')"
+        },
+        {
+          "id": "015-AC2",
+          "criterion": "Workflow has ci job that runs pnpm install, biome check, type-check, and test steps",
+          "test_assertion": "expect(ciSteps).toContain('pnpm check'); expect(ciSteps).toContain('pnpm type-check'); expect(ciSteps).toContain('pnpm test')"
+        },
+        {
+          "id": "015-AC3",
+          "criterion": "Deploy job depends on CI job and only runs when CI passes",
+          "test_assertion": "expect(deployJob.needs).toContain('ci')"
+        },
+        {
+          "id": "015-AC4",
+          "criterion": "Deploy job uses CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID secrets",
+          "test_assertion": "expect(deploySteps).toContain('CLOUDFLARE_API_TOKEN'); expect(deploySteps).toContain('CLOUDFLARE_ACCOUNT_ID')"
+        },
+        {
+          "id": "015-AC5",
+          "criterion": "PR deploys use --branch flag for preview, master deploys use --branch=master for production",
+          "test_assertion": "expect(deployCommand).toContain('--branch')"
+        }
+      ],
+      "test_file": null,
+      "no_test_reason": "CI/CD configuration file -- validated by GitHub Actions execution, not unit tests",
+      "status": "pending",
+      "depends_on": ["007", "013"],
+      "traces_to": {
+        "user_stories": ["US-001", "US-002"],
+        "acceptance_criteria": ["AC-001", "AC-002", "AC-003", "AC-004", "AC-005", "AC-006", "AC-007", "AC-008"],
+        "adr_decisions": ["ADR-001"]
+      },
+      "technical_notes": "Two jobs: 'ci' and 'deploy'. CI job: checkout, setup pnpm, install deps, biome check, type-check, test, build client. Deploy job: needs ci, uses wrangler pages deploy. Preview deploy uses github.head_ref for branch name. Production deploy uses --branch=master. Also deploy the worker separately using wrangler deploy from the worker/ directory. Use pnpm 9 and Node 20.",
+      "embedded_context": {
+        "relevant_interfaces": "// Deploy commands from TECHNICAL_DESIGN:\n# Preview: npx wrangler pages deploy dist/ --project-name=van-beaches --branch=${{ github.head_ref }}\n# Production: npx wrangler pages deploy dist/ --project-name=van-beaches --branch=master",
+        "existing_patterns": "// No existing CI/CD workflow. Current scripts:\n// pnpm check (biome), pnpm type-check (tsc --noEmit), pnpm test (vitest)",
+        "constraints": "ADR-001: GitHub Actions must gate deployments on passing lint, type-check, and test. Required secrets: CLOUDFLARE_API_TOKEN, CLOUDFLARE_ACCOUNT_ID. Must deploy both Pages (SPA + Functions) and Worker (cron) separately."
+      },
+      "model": "sonnet"
+    },
+    {
+      "id": "016",
+      "title": "Delete server directory and final cleanup",
+      "objective": "Delete the entire server/ directory and remove any remaining references to it. Verify that the workspace resolves correctly without the server package and that all tests pass.",
+      "task_type": "rename_refactor",
+      "methodology": "direct",
+      "acceptance_criteria": [
+        {
+          "id": "016-AC1",
+          "criterion": "server/ directory no longer exists",
+          "test_assertion": "expect(fs.existsSync('server')).toBe(false)"
+        },
+        {
+          "id": "016-AC2",
+          "criterion": "pnpm install succeeds without errors (no dangling server references)",
+          "test_assertion": "expect(pnpmInstallExitCode).toBe(0)"
+        },
+        {
+          "id": "016-AC3",
+          "criterion": "pnpm type-check passes across all remaining packages",
+          "test_assertion": "expect(typeCheckExitCode).toBe(0)"
+        },
+        {
+          "id": "016-AC4",
+          "criterion": "pnpm test passes across all packages",
+          "test_assertion": "expect(testExitCode).toBe(0)"
+        }
+      ],
+      "test_file": null,
+      "no_test_reason": "Delete dead code -- validated by existing tests continuing to pass and workspace resolution succeeding",
+      "status": "pending",
+      "depends_on": ["015"],
+      "traces_to": {
+        "user_stories": ["US-001", "US-002"],
+        "acceptance_criteria": ["AC-001", "AC-005"],
+        "adr_decisions": ["ADR-001"]
+      },
+      "technical_notes": "Delete the entire server/ directory (14 source files + dist/). Run pnpm install to regenerate the lockfile without the server package. Verify no import references to @van-beaches/server remain anywhere. The root tsconfig.json references may need updating if it includes server/. Run the full test suite to confirm nothing is broken.",
+      "embedded_context": {
+        "relevant_interfaces": "// Files to delete:\n// server/src/index.ts, server/src/cache/cacheManager.ts, server/src/cache/rateLimiter.ts\n// server/src/services/weatherService.ts, server/src/services/iwlsService.ts, server/src/services/waterQualityService.ts\n// server/src/routes/health.ts, beachesRoute.ts, tidesRoute.ts, weatherRoute.ts, waterQualityRoute.ts\n// server/src/middleware/errorHandler.ts, server/src/jobs/dataRefreshJob.ts, server/src/jobs/scheduler.ts\n// server/package.json, server/tsconfig.json, server/vitest.config.ts, server/dist/",
+        "existing_patterns": "// server/ is referenced in pnpm-workspace.yaml (already removed in task 001)\n// Root tsconfig.json may reference server",
+        "constraints": "IMPORTANT: Only delete server/ AFTER all replacement code (functions/, worker/) is in place and tested. This is the last task for safety. Verify pnpm-lock.yaml regenerates cleanly."
+      },
+      "model": "haiku"
+    }
+  ]
+}
