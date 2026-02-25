@@ -163,13 +163,8 @@ describe('Discover page - SearchFilter and BeachMap wiring (task-019)', () => {
     const searchInput = screen.getByPlaceholderText(/search beaches/i);
     fireEvent.change(searchInput, { target: { value: 'kitsilano' } });
 
-    // After filtering, English Bay should not appear as a BeachCard
-    // (it may still appear in BeachMap tooltips, so query for BeachCard-specific elements)
-    // BeachCards are in the beaches grid - look for the beach name in card context
-    const allEnglishBay = screen.queryAllByText('English Bay Beach');
-    // All remaining "English Bay Beach" text should only be in BeachMap tooltips, not BeachCards
-    // The simplest check: the card-based occurrence count drops to 0 in AllBeachesSection
-    // We check that the grid section no longer shows the english bay heading
+    // After filtering, English Bay should not appear as a BeachCard link
+    // (it may still appear in BeachMap tooltips, but not as a navigable card)
     expect(screen.queryByRole('link', { name: /english bay/i })).not.toBeInTheDocument();
     expect(screen.getAllByText('Kitsilano Beach').length).toBeGreaterThanOrEqual(1);
   });

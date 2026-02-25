@@ -76,7 +76,7 @@ import { Compare } from './Compare';
 
 describe('Compare page - design system overhaul (task-016)', () => {
   it('renders a BarChart3 Lucide icon in the page header', () => {
-    const { container } = renderCompare();
+    renderCompare();
     // Lucide icons render as SVG elements; check for svg near the heading area
     const heading = screen.getByText('Compare Beaches');
     // Walk up to find the outer header div that contains both icon and heading
@@ -85,9 +85,9 @@ describe('Compare page - design system overhaul (task-016)', () => {
   });
 
   it('does not use gray-900 or gray-500 text classes in the header', () => {
-    const { container } = renderCompare();
-    expect(container.innerHTML).not.toMatch(/text-gray-900/);
-    expect(container.innerHTML).not.toMatch(/text-gray-500/);
+    const { container: headerContainer } = renderCompare();
+    expect(headerContainer.innerHTML).not.toMatch(/text-gray-900/);
+    expect(headerContainer.innerHTML).not.toMatch(/text-gray-500/);
   });
 
   it('beach selector uses ocean-500 active state instead of blue-500', () => {

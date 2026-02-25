@@ -18,7 +18,7 @@ describe('TideCanvas - stale now marker fix', () => {
     render(
       <TideCanvas
         predictions={[]}
-        beachName="Test Beach"
+        loading={false}
       />,
     );
 
@@ -38,7 +38,7 @@ describe('TideCanvas - stale now marker fix', () => {
     const { unmount } = render(
       <TideCanvas
         predictions={[]}
-        beachName="Test Beach"
+        loading={false}
       />,
     );
 
