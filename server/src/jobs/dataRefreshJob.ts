@@ -1,4 +1,5 @@
 import { BEACHES } from '@van-beaches/shared';
+import { getTidePredictions } from '../services/iwlsService.js';
 import { getWaterQuality } from '../services/waterQualityService.js';
 import { getWeatherForecast } from '../services/weatherService.js';
 import { scheduleJob } from './scheduler.js';
@@ -22,6 +23,21 @@ export function setupDataRefreshJobs(): void {
         await getWaterQuality(beach.id);
       } catch (e) {
         console.error(`Water quality refresh failed for ${beach.id}`, e);
+      }
+    }
+  });
+
+  // Refresh tide data every hour (deduplicated by stationId)
+  scheduleJob('tide-refresh', '0 * * * *', async () => {
+    const seenStationIds = new Set<string>();
+    for (const beach of BEACHES) {
+      if (!beach.tideStationId) continue;
+      if (seenStationIds.has(beach.tideStationId)) continue;
+      seenStationIds.add(beach.tideStationId);
+      try {
+        await getTidePredictions(beach.tideStationId, beach.id, beach.name);
+      } catch (e) {
+        console.error(`Tide refresh failed for station ${beach.tideStationId}`, e);
       }
     }
   });
