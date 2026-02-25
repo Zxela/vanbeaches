@@ -1,17 +1,7 @@
 import type { BeachSummary } from '@van-beaches/shared';
 import { motion } from 'framer-motion';
-import {
-  Cloud,
-  CloudFog,
-  CloudLightning,
-  CloudRain,
-  Sun,
-  Thermometer,
-  TrendingDown,
-  TrendingUp,
-  Waves,
-} from 'lucide-react';
-import type { LucideIcon } from 'lucide-react';
+import { Thermometer, TrendingDown, TrendingUp, Waves } from 'lucide-react';
+import { getWeatherColor, getWeatherIcon } from '../lib/weatherIcons';
 import { Link } from 'react-router-dom';
 import { FavoriteButton } from './FavoriteButton';
 import { Card, Icon } from './ui';
@@ -20,30 +10,12 @@ interface BeachCardProps {
   beach: BeachSummary;
 }
 
-const weatherIcons: Record<string, LucideIcon> = {
-  sunny: Sun,
-  'partly-cloudy': Cloud,
-  cloudy: Cloud,
-  rainy: CloudRain,
-  stormy: CloudLightning,
-  foggy: CloudFog,
-};
-
-const weatherColors: Record<string, string> = {
-  sunny: 'text-amber-500',
-  'partly-cloudy': 'text-sky-400',
-  cloudy: 'text-sand-400',
-  rainy: 'text-sky-500',
-  stormy: 'text-purple-500',
-  foggy: 'text-sand-400',
-};
-
 export function BeachCard({ beach }: BeachCardProps) {
   const WeatherIcon = beach.currentWeather
-    ? weatherIcons[beach.currentWeather.condition] || Thermometer
+    ? getWeatherIcon(beach.currentWeather.condition)
     : null;
   const weatherColor = beach.currentWeather
-    ? weatherColors[beach.currentWeather.condition] || 'text-sand-500'
+    ? getWeatherColor(beach.currentWeather.condition)
     : '';
 
   return (

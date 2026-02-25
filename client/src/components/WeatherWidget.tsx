@@ -1,16 +1,7 @@
 import type { WeatherForecast } from '@van-beaches/shared';
 import { motion } from 'framer-motion';
-import {
-  Cloud,
-  CloudFog,
-  CloudLightning,
-  CloudRain,
-  Droplets,
-  Sun,
-  Thermometer,
-  Wind,
-} from 'lucide-react';
-import type { LucideIcon } from 'lucide-react';
+import { Droplets, Sun, Thermometer, Wind } from 'lucide-react';
+import { getWeatherColor, getWeatherIcon } from '../lib/weatherIcons';
 import { Card, CardContent, CardTitle, Icon } from './ui';
 
 interface WeatherWidgetProps {
@@ -18,24 +9,6 @@ interface WeatherWidgetProps {
   loading?: boolean;
   error?: string | null;
 }
-
-const weatherIcons: Record<string, LucideIcon> = {
-  sunny: Sun,
-  'partly-cloudy': Cloud,
-  cloudy: Cloud,
-  rainy: CloudRain,
-  stormy: CloudLightning,
-  foggy: CloudFog,
-};
-
-const weatherColors: Record<string, string> = {
-  sunny: 'text-amber-500',
-  'partly-cloudy': 'text-sky-400',
-  cloudy: 'text-sand-400',
-  rainy: 'text-sky-500',
-  stormy: 'text-purple-500',
-  foggy: 'text-sand-400',
-};
 
 const windDirections: Record<string, number> = {
   N: 0,
@@ -142,8 +115,8 @@ export function WeatherWidget({ weather, loading, error }: WeatherWidgetProps) {
 
   if (!weather) return null;
 
-  const WeatherIcon = weatherIcons[weather.current.condition] || Thermometer;
-  const iconColor = weatherColors[weather.current.condition] || 'text-sand-500';
+  const WeatherIcon = getWeatherIcon(weather.current.condition);
+  const iconColor = getWeatherColor(weather.current.condition);
 
   return (
     <Card variant="sky" animated>
