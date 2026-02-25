@@ -34,8 +34,8 @@ export function BeachMap({ selectedBeachId, onSelectBeach }: BeachMapProps) {
   };
 
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-xl p-4 shadow-lg">
-      <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Beach Map</h3>
+    <div className="bg-white dark:bg-sand-800 rounded-xl p-4 shadow-lg">
+      <h3 className="text-lg font-semibold text-sand-900 dark:text-sand-50 mb-4">Beach Map</h3>
       <div className="relative aspect-[16/9] rounded-lg overflow-hidden">
         {/* SVG Map of Vancouver coastline */}
         <svg
@@ -150,7 +150,7 @@ export function BeachMap({ selectedBeachId, onSelectBeach }: BeachMapProps) {
                     ? 'bg-orange-500 border-white scale-150 shadow-lg'
                     : isFav
                       ? 'bg-red-500 border-white hover:scale-125'
-                      : 'bg-white border-gray-700 hover:scale-125 hover:border-orange-500'
+                      : 'bg-white border-sand-700 hover:scale-125 hover:border-orange-500'
                 }
               `}
               >
@@ -161,18 +161,18 @@ export function BeachMap({ selectedBeachId, onSelectBeach }: BeachMapProps) {
                 )}
               </div>
               <div className="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-20">
-                <div className="bg-gray-900 text-white text-xs px-2 py-1 rounded whitespace-nowrap shadow-lg">
+                <div className="bg-sand-900 text-white text-xs px-2 py-1 rounded whitespace-nowrap shadow-lg">
                   {beach.name}
                 </div>
-                <div className="absolute left-1/2 -translate-x-1/2 top-full w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-900" />
+                <div className="absolute left-1/2 -translate-x-1/2 top-full w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-sand-900" />
               </div>
             </button>
           );
         })}
       </div>
-      <div className="flex items-center justify-center gap-6 mt-4 text-xs text-gray-600 dark:text-gray-400">
+      <div className="flex items-center justify-center gap-6 mt-4 text-xs text-sand-600 dark:text-sand-400">
         <span className="flex items-center gap-1.5">
-          <span className="w-3 h-3 rounded-full bg-white border-2 border-gray-700 shadow-sm" />{' '}
+          <span className="w-3 h-3 rounded-full bg-white border-2 border-sand-700 shadow-sm" />{' '}
           Beach
         </span>
         <span className="flex items-center gap-1.5">
