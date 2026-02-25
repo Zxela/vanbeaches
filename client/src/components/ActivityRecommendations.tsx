@@ -1,4 +1,7 @@
 import type { WeatherForecast } from '@van-beaches/shared';
+import { Card, CardContent, CardTitle } from './ui';
+import { Star } from 'lucide-react';
+import { Icon } from './ui';
 
 interface ActivityRecommendationsProps {
   weather: WeatherForecast | null;
@@ -32,7 +35,7 @@ export function ActivityRecommendations({ weather, activities }: ActivityRecomme
       recs.push({ activity: 'Swimming', icon: '🏊', rating: 'fair', reason: 'Water may be cool' });
     }
 
-    // Sunbathing - require warm temperature (at least 18°C)
+    // Sunbathing
     if (temperature >= 18 && ['sunny', 'partly-cloudy'].includes(condition) && windSpeed < 20) {
       if (uvIndex <= 5) {
         recs.push({
@@ -125,33 +128,36 @@ export function ActivityRecommendations({ weather, activities }: ActivityRecomme
   const ratingColors = {
     excellent:
       'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 border-green-200 dark:border-green-800',
-    good: 'bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 border-blue-200 dark:border-blue-800',
+    good: 'bg-ocean-50 dark:bg-ocean-900/30 text-ocean-700 dark:text-ocean-300 border-ocean-200 dark:border-ocean-800',
     fair: 'bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-300 border-yellow-200 dark:border-yellow-800',
-    poor: 'bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-400 border-gray-200 dark:border-gray-600',
+    poor: 'bg-sand-100 dark:bg-sand-700 text-sand-500 dark:text-sand-400 border-sand-200 dark:border-sand-600',
   };
 
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-4">
-      <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">
+    <Card variant="default">
+      <CardTitle className="flex items-center gap-2">
+        <Icon icon={Star} size="lg" color="warning" />
         Recommended Activities
-      </h3>
-      <div className="space-y-2">
-        {recommendations.map((rec) => (
-          <div
-            key={rec.activity}
-            className={`flex items-center gap-3 p-3 rounded-lg border ${ratingColors[rec.rating]}`}
-          >
-            <span className="text-2xl">{rec.icon}</span>
-            <div className="flex-1 min-w-0">
-              <p className="font-medium">{rec.activity}</p>
-              <p className="text-xs opacity-75 truncate">{rec.reason}</p>
+      </CardTitle>
+      <CardContent className="mt-3">
+        <div className="space-y-2">
+          {recommendations.map((rec) => (
+            <div
+              key={rec.activity}
+              className={"flex items-center gap-3 p-3 rounded-lg border " + ratingColors[rec.rating]}
+            >
+              <span className="text-2xl">{rec.icon}</span>
+              <div className="flex-1 min-w-0">
+                <p className="font-medium">{rec.activity}</p>
+                <p className="text-xs opacity-75 truncate">{rec.reason}</p>
+              </div>
+              <span className="text-xs font-medium uppercase px-2 py-1 rounded bg-white/50 dark:bg-black/20">
+                {rec.rating}
+              </span>
             </div>
-            <span className="text-xs font-medium uppercase px-2 py-1 rounded bg-white/50 dark:bg-black/20">
-              {rec.rating}
-            </span>
-          </div>
-        ))}
-      </div>
-    </div>
+          ))}
+        </div>
+      </CardContent>
+    </Card>
   );
 }
