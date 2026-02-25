@@ -60,8 +60,12 @@ export function TideCanvas({ predictions, loading, className }: TideCanvasProps)
   const [isDark, setIsDark] = useState(false);
   const [animationProgress, setAnimationProgress] = useState(0);
 
-  // Get today's data
-  const now = useMemo(() => new Date(), []);
+  // Get today's data - update every 60 seconds so the now marker stays accurate
+  const [now, setNow] = useState(() => new Date());
+  useEffect(() => {
+    const interval = setInterval(() => setNow(new Date()), 60000);
+    return () => clearInterval(interval);
+  }, []);
   const todayStart = useMemo(
     () => new Date(now.getFullYear(), now.getMonth(), now.getDate()),
     [now],
