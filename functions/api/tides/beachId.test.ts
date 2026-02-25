@@ -1,4 +1,4 @@
-import { describe, expect, it, vi, beforeEach, afterEach } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { onRequestGet } from './[beachId]';
 
 function createMockKV(store: Record<string, unknown> = {}) {
@@ -125,10 +125,8 @@ describe('GET /api/tides/:beachId', () => {
     const context = createMockContext('english-bay', kv);
     await onRequestGet(context);
 
-    expect(kv.put).toHaveBeenCalledWith(
-      'tides:5cebf1de3d0f4a073c4bb943',
-      expect.any(String),
-      { expirationTtl: 3600 },
-    );
+    expect(kv.put).toHaveBeenCalledWith('tides:5cebf1de3d0f4a073c4bb943', expect.any(String), {
+      expirationTtl: 3600,
+    });
   });
 });

@@ -7,12 +7,7 @@ async function get<T>(kv: KVNamespace, key: string): Promise<T | null> {
   return JSON.parse(raw) as T;
 }
 
-async function set<T>(
-  kv: KVNamespace,
-  key: string,
-  value: T,
-  ttlSeconds: number,
-): Promise<void> {
+async function set<T>(kv: KVNamespace, key: string, value: T, ttlSeconds: number): Promise<void> {
   await kv.put(key, JSON.stringify(value), { expirationTtl: ttlSeconds });
 }
 
@@ -37,7 +32,7 @@ async function getOrFetch<T>(
   }
 
   // Acquire soft lock
-  await kv.put(lockKey, "1", { expirationTtl: LOCK_TTL_SECONDS });
+  await kv.put(lockKey, '1', { expirationTtl: LOCK_TTL_SECONDS });
 
   // Fetch and cache
   const value = await fetcher();

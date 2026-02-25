@@ -1,22 +1,22 @@
-import { describe, it, expect, vi, beforeEach } from "vitest";
-import { BEACHES } from "@van-beaches/shared";
+import { BEACHES } from '@van-beaches/shared';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-vi.mock("./services/weatherService", () => ({
+vi.mock('./services/weatherService', () => ({
   fetchWeatherForBeach: vi.fn().mockResolvedValue({}),
 }));
 
-vi.mock("./services/iwlsService", () => ({
+vi.mock('./services/iwlsService', () => ({
   fetchTidesForStation: vi.fn().mockResolvedValue({}),
 }));
 
-vi.mock("./services/waterQualityService", () => ({
+vi.mock('./services/waterQualityService', () => ({
   fetchWaterQualityForBeach: vi.fn().mockResolvedValue({}),
 }));
 
-import { fetchWeatherForBeach } from "./services/weatherService";
-import { fetchTidesForStation } from "./services/iwlsService";
-import { fetchWaterQualityForBeach } from "./services/waterQualityService";
-import worker from "./index";
+import worker from './index';
+import { fetchTidesForStation } from './services/iwlsService';
+import { fetchWaterQualityForBeach } from './services/waterQualityService';
+import { fetchWeatherForBeach } from './services/weatherService';
 
 function createMockKv() {
   return {
@@ -37,7 +37,7 @@ function createMockCtx() {
   } as unknown as ExecutionContext & { _promises: Promise<unknown>[] };
 }
 
-describe("cron handler", () => {
+describe('cron handler', () => {
   let mockKv: KVNamespace;
   let env: { BEACH_CACHE: KVNamespace };
   let ctx: ReturnType<typeof createMockCtx>;
@@ -49,8 +49,8 @@ describe("cron handler", () => {
     ctx = createMockCtx();
   });
 
-  it("refreshes weather for all 9 beaches on */30 * * * *", async () => {
-    const event = { cron: "*/30 * * * *", scheduledTime: Date.now() } as ScheduledEvent;
+  it('refreshes weather for all 9 beaches on */30 * * * *', async () => {
+    const event = { cron: '*/30 * * * *', scheduledTime: Date.now() } as ScheduledEvent;
 
     await worker.scheduled(event, env, ctx);
     await Promise.all(ctx._promises);
@@ -58,8 +58,8 @@ describe("cron handler", () => {
     expect(fetchWeatherForBeach).toHaveBeenCalledTimes(9);
   });
 
-  it("refreshes tides for unique non-null stations only on 0 * * * *", async () => {
-    const event = { cron: "0 * * * *", scheduledTime: Date.now() } as ScheduledEvent;
+  it('refreshes tides for unique non-null stations only on 0 * * * *', async () => {
+    const event = { cron: '0 * * * *', scheduledTime: Date.now() } as ScheduledEvent;
 
     await worker.scheduled(event, env, ctx);
     await Promise.all(ctx._promises);
@@ -68,8 +68,8 @@ describe("cron handler", () => {
     expect(fetchTidesForStation).toHaveBeenCalledTimes(1);
   });
 
-  it("refreshes water quality for all 9 beaches on 0 */6 * * *", async () => {
-    const event = { cron: "0 */6 * * *", scheduledTime: Date.now() } as ScheduledEvent;
+  it('refreshes water quality for all 9 beaches on 0 */6 * * *', async () => {
+    const event = { cron: '0 */6 * * *', scheduledTime: Date.now() } as ScheduledEvent;
 
     await worker.scheduled(event, env, ctx);
     await Promise.all(ctx._promises);
@@ -77,8 +77,8 @@ describe("cron handler", () => {
     expect(fetchWaterQualityForBeach).toHaveBeenCalledTimes(9);
   });
 
-  it("skips beaches where tideStationId is null", async () => {
-    const event = { cron: "0 * * * *", scheduledTime: Date.now() } as ScheduledEvent;
+  it('skips beaches where tideStationId is null', async () => {
+    const event = { cron: '0 * * * *', scheduledTime: Date.now() } as ScheduledEvent;
 
     await worker.scheduled(event, env, ctx);
     await Promise.all(ctx._promises);
@@ -89,12 +89,12 @@ describe("cron handler", () => {
     }
   });
 
-  it("continues processing if one beach refresh fails", async () => {
+  it('continues processing if one beach refresh fails', async () => {
     vi.mocked(fetchWeatherForBeach)
-      .mockRejectedValueOnce(new Error("API down"))
+      .mockRejectedValueOnce(new Error('API down'))
       .mockResolvedValue({} as never);
 
-    const event = { cron: "*/30 * * * *", scheduledTime: Date.now() } as ScheduledEvent;
+    const event = { cron: '*/30 * * * *', scheduledTime: Date.now() } as ScheduledEvent;
 
     await worker.scheduled(event, env, ctx);
     await expect(Promise.all(ctx._promises)).resolves.not.toThrow();

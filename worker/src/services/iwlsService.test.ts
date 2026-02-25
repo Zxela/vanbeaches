@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { fetchTidesForStation } from './iwlsService';
 
 function createMockKv() {
@@ -36,10 +36,13 @@ describe('iwlsService', () => {
   });
 
   it('fetches from IWLS API and returns TideData', async () => {
-    vi.stubGlobal('fetch', vi.fn().mockResolvedValue({
-      ok: true,
-      json: () => Promise.resolve(MOCK_IWLS_RESPONSE),
-    }));
+    vi.stubGlobal(
+      'fetch',
+      vi.fn().mockResolvedValue({
+        ok: true,
+        json: () => Promise.resolve(MOCK_IWLS_RESPONSE),
+      }),
+    );
 
     const result = await fetchTidesForStation(
       mockKv,
@@ -57,10 +60,13 @@ describe('iwlsService', () => {
   });
 
   it('returns predictions with correct high/low classification', async () => {
-    vi.stubGlobal('fetch', vi.fn().mockResolvedValue({
-      ok: true,
-      json: () => Promise.resolve(MOCK_IWLS_RESPONSE),
-    }));
+    vi.stubGlobal(
+      'fetch',
+      vi.fn().mockResolvedValue({
+        ok: true,
+        json: () => Promise.resolve(MOCK_IWLS_RESPONSE),
+      }),
+    );
 
     const result = await fetchTidesForStation(
       mockKv,
@@ -82,33 +88,32 @@ describe('iwlsService', () => {
   });
 
   it('writes tide data to KV with 3600s TTL', async () => {
-    vi.stubGlobal('fetch', vi.fn().mockResolvedValue({
-      ok: true,
-      json: () => Promise.resolve(MOCK_IWLS_RESPONSE),
-    }));
-
-    await fetchTidesForStation(
-      mockKv,
-      '5cebf1de3d0f4a073c4bb943',
-      'english-bay',
-      'English Bay',
+    vi.stubGlobal(
+      'fetch',
+      vi.fn().mockResolvedValue({
+        ok: true,
+        json: () => Promise.resolve(MOCK_IWLS_RESPONSE),
+      }),
     );
 
-    expect(mockKv.put).toHaveBeenCalledWith(
-      'tides:5cebf1de3d0f4a073c4bb943',
-      expect.any(String),
-      { expirationTtl: 3600 },
-    );
+    await fetchTidesForStation(mockKv, '5cebf1de3d0f4a073c4bb943', 'english-bay', 'English Bay');
+
+    expect(mockKv.put).toHaveBeenCalledWith('tides:5cebf1de3d0f4a073c4bb943', expect.any(String), {
+      expirationTtl: 3600,
+    });
   });
 
   it('throws on fetch failure', async () => {
-    vi.stubGlobal('fetch', vi.fn().mockResolvedValue({
-      ok: false,
-      status: 503,
-    }));
+    vi.stubGlobal(
+      'fetch',
+      vi.fn().mockResolvedValue({
+        ok: false,
+        status: 503,
+      }),
+    );
 
-    await expect(
-      fetchTidesForStation(mockKv, 'bad-id', 'test', 'Test'),
-    ).rejects.toThrow('IWLS API error: 503');
+    await expect(fetchTidesForStation(mockKv, 'bad-id', 'test', 'Test')).rejects.toThrow(
+      'IWLS API error: 503',
+    );
   });
 });

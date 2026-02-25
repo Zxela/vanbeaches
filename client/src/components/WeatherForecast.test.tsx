@@ -36,7 +36,7 @@ describe('WeatherForecast', () => {
   it('uses Lucide icon components instead of emoji strings for weather icons', () => {
     render(<WeatherForecast forecast={mockForecast} />);
     // Lucide icons render as SVG elements - no emoji text content
-    const emojiPattern = /[☀️⛅☁️🌧️⛈️🌫️🌡️]/u;
+    const emojiPattern = /☀️|⛅|☁️|🌧️|⛈️|🌫️|🌡️/u;
     // Get all text nodes
     const allText = document.body.textContent || '';
     expect(allText).not.toMatch(emojiPattern);

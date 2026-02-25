@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { fetchWeatherForBeach } from './weatherService';
 
 function createMockKv() {
@@ -49,10 +49,13 @@ describe('weatherService', () => {
   });
 
   it('fetches from Open-Meteo and returns a WeatherForecast', async () => {
-    vi.stubGlobal('fetch', vi.fn().mockResolvedValue({
-      ok: true,
-      json: () => Promise.resolve(MOCK_OPEN_METEO_RESPONSE),
-    }));
+    vi.stubGlobal(
+      'fetch',
+      vi.fn().mockResolvedValue({
+        ok: true,
+        json: () => Promise.resolve(MOCK_OPEN_METEO_RESPONSE),
+      }),
+    );
 
     const result = await fetchWeatherForBeach(mockKv, 'english-bay', 49.2867, -123.1432);
 
@@ -66,10 +69,13 @@ describe('weatherService', () => {
   });
 
   it('returns a WeatherForecast matching the shared type shape', async () => {
-    vi.stubGlobal('fetch', vi.fn().mockResolvedValue({
-      ok: true,
-      json: () => Promise.resolve(MOCK_OPEN_METEO_RESPONSE),
-    }));
+    vi.stubGlobal(
+      'fetch',
+      vi.fn().mockResolvedValue({
+        ok: true,
+        json: () => Promise.resolve(MOCK_OPEN_METEO_RESPONSE),
+      }),
+    );
 
     const result = await fetchWeatherForBeach(mockKv, 'english-bay', 49.2867, -123.1432);
 
@@ -78,34 +84,38 @@ describe('weatherService', () => {
     expect(Array.isArray(result.hourly)).toBe(true);
     expect(result.hourly.length).toBe(24);
     expect(result.daily).toBeDefined();
-    expect(result.daily!.length).toBe(5);
+    expect(result.daily?.length).toBe(5);
     expect(result.fetchedAt).toBeDefined();
   });
 
   it('writes weather data to KV with 1800s TTL', async () => {
-    vi.stubGlobal('fetch', vi.fn().mockResolvedValue({
-      ok: true,
-      json: () => Promise.resolve(MOCK_OPEN_METEO_RESPONSE),
-    }));
+    vi.stubGlobal(
+      'fetch',
+      vi.fn().mockResolvedValue({
+        ok: true,
+        json: () => Promise.resolve(MOCK_OPEN_METEO_RESPONSE),
+      }),
+    );
 
     await fetchWeatherForBeach(mockKv, 'english-bay', 49.2867, -123.1432);
 
-    expect(mockKv.put).toHaveBeenCalledWith(
-      'weather:english-bay',
-      expect.any(String),
-      { expirationTtl: 1800 },
-    );
+    expect(mockKv.put).toHaveBeenCalledWith('weather:english-bay', expect.any(String), {
+      expirationTtl: 1800,
+    });
   });
 
   it('throws on fetch failure', async () => {
-    vi.stubGlobal('fetch', vi.fn().mockResolvedValue({
-      ok: false,
-      status: 500,
-    }));
+    vi.stubGlobal(
+      'fetch',
+      vi.fn().mockResolvedValue({
+        ok: false,
+        status: 500,
+      }),
+    );
 
-    await expect(
-      fetchWeatherForBeach(mockKv, 'test', 0, 0),
-    ).rejects.toThrow('Weather API error: 500');
+    await expect(fetchWeatherForBeach(mockKv, 'test', 0, 0)).rejects.toThrow(
+      'Weather API error: 500',
+    );
   });
 
   it('handles missing daily data gracefully', async () => {
@@ -114,10 +124,13 @@ describe('weatherService', () => {
       daily: undefined,
     };
 
-    vi.stubGlobal('fetch', vi.fn().mockResolvedValue({
-      ok: true,
-      json: () => Promise.resolve(responseWithoutDaily),
-    }));
+    vi.stubGlobal(
+      'fetch',
+      vi.fn().mockResolvedValue({
+        ok: true,
+        json: () => Promise.resolve(responseWithoutDaily),
+      }),
+    );
 
     const result = await fetchWeatherForBeach(mockKv, 'english-bay', 49.2867, -123.1432);
 

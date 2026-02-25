@@ -57,9 +57,7 @@ function generateWaterQualityStatus(beachId: string): WaterQualityStatus {
         ? Math.floor(Math.random() * 100)
         : Math.floor(Math.random() * 300) + 200,
     advisoryReason: randomLevel === 'advisory' ? 'Elevated E.coli levels detected' : null,
-    sampleDate: new Date(
-      now.getTime() - 86400000 * Math.floor(Math.random() * 7),
-    ).toISOString(),
+    sampleDate: new Date(now.getTime() - 86400000 * Math.floor(Math.random() * 7)).toISOString(),
     fetchedAt: new Date().toISOString(),
   };
 }

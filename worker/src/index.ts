@@ -1,7 +1,7 @@
-import { BEACHES } from "@van-beaches/shared";
-import { fetchWeatherForBeach } from "./services/weatherService";
-import { fetchTidesForStation } from "./services/iwlsService";
-import { fetchWaterQualityForBeach } from "./services/waterQualityService";
+import { BEACHES } from '@van-beaches/shared';
+import { fetchTidesForStation } from './services/iwlsService';
+import { fetchWaterQualityForBeach } from './services/waterQualityService';
+import { fetchWeatherForBeach } from './services/weatherService';
 
 export interface Env {
   BEACH_CACHE: KVNamespace;
@@ -10,12 +10,7 @@ export interface Env {
 async function refreshWeather(kv: KVNamespace): Promise<void> {
   for (const beach of BEACHES) {
     try {
-      await fetchWeatherForBeach(
-        kv,
-        beach.id,
-        beach.location.latitude,
-        beach.location.longitude,
-      );
+      await fetchWeatherForBeach(kv, beach.id, beach.location.latitude, beach.location.longitude);
     } catch (e) {
       console.error(`Weather refresh failed for ${beach.id}`, e);
     }
@@ -31,10 +26,7 @@ async function refreshTides(kv: KVNamespace): Promise<void> {
     try {
       await fetchTidesForStation(kv, beach.tideStationId, beach.id, beach.name);
     } catch (e) {
-      console.error(
-        `Tide refresh failed for station ${beach.tideStationId}`,
-        e,
-      );
+      console.error(`Tide refresh failed for station ${beach.tideStationId}`, e);
     }
   }
 }
@@ -50,23 +42,19 @@ async function refreshWaterQuality(kv: KVNamespace): Promise<void> {
 }
 
 export default {
-  async scheduled(
-    event: ScheduledEvent,
-    env: Env,
-    ctx: ExecutionContext,
-  ): Promise<void> {
+  async scheduled(event: ScheduledEvent, env: Env, ctx: ExecutionContext): Promise<void> {
     const task = async () => {
       switch (event.cron) {
-        case "*/30 * * * *":
-          console.log("Cron triggered: weather refresh");
+        case '*/30 * * * *':
+          console.log('Cron triggered: weather refresh');
           await refreshWeather(env.BEACH_CACHE);
           break;
-        case "0 * * * *":
-          console.log("Cron triggered: tide refresh");
+        case '0 * * * *':
+          console.log('Cron triggered: tide refresh');
           await refreshTides(env.BEACH_CACHE);
           break;
-        case "0 */6 * * *":
-          console.log("Cron triggered: water quality refresh");
+        case '0 */6 * * *':
+          console.log('Cron triggered: water quality refresh');
           await refreshWaterQuality(env.BEACH_CACHE);
           break;
         default:

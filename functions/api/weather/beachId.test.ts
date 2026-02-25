@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { onRequestGet } from './[beachId]';
 
 const MOCK_WEATHER_FORECAST = {
@@ -17,9 +17,7 @@ const MOCK_WEATHER_FORECAST = {
     condition: 'sunny' as const,
     precipitationProbability: 10,
   })),
-  daily: [
-    { date: '2026-02-25', high: 20, low: 12, condition: 'sunny' as const },
-  ],
+  daily: [{ date: '2026-02-25', high: 20, low: 12, condition: 'sunny' as const }],
   fetchedAt: '2026-02-25T00:00:00.000Z',
 };
 
@@ -82,7 +80,7 @@ describe('GET /api/weather/:beachId', () => {
     });
     const context = createMockContext('english-bay', kv);
     const response = await onRequestGet(context);
-    const body = await response.json() as Record<string, unknown>;
+    const body = (await response.json()) as Record<string, unknown>;
 
     expect(response.status).toBe(200);
     expect(body.success).toBe(true);
@@ -100,14 +98,17 @@ describe('GET /api/weather/:beachId', () => {
 
   it('on cache miss, fetches from Open-Meteo and returns the result', async () => {
     const kv = createMockKv();
-    vi.stubGlobal('fetch', vi.fn().mockResolvedValue({
-      ok: true,
-      json: () => Promise.resolve(MOCK_OPEN_METEO_RESPONSE),
-    }));
+    vi.stubGlobal(
+      'fetch',
+      vi.fn().mockResolvedValue({
+        ok: true,
+        json: () => Promise.resolve(MOCK_OPEN_METEO_RESPONSE),
+      }),
+    );
 
     const context = createMockContext('english-bay', kv);
     const response = await onRequestGet(context);
-    const body = await response.json() as Record<string, unknown>;
+    const body = (await response.json()) as Record<string, unknown>;
 
     expect(global.fetch).toHaveBeenCalled();
     expect(body.success).toBe(true);
@@ -119,18 +120,19 @@ describe('GET /api/weather/:beachId', () => {
 
   it('writes fetched weather data to KV on cache miss', async () => {
     const kv = createMockKv();
-    vi.stubGlobal('fetch', vi.fn().mockResolvedValue({
-      ok: true,
-      json: () => Promise.resolve(MOCK_OPEN_METEO_RESPONSE),
-    }));
+    vi.stubGlobal(
+      'fetch',
+      vi.fn().mockResolvedValue({
+        ok: true,
+        json: () => Promise.resolve(MOCK_OPEN_METEO_RESPONSE),
+      }),
+    );
 
     const context = createMockContext('english-bay', kv);
     await onRequestGet(context);
 
-    expect(kv.put).toHaveBeenCalledWith(
-      'weather:english-bay',
-      expect.any(String),
-      { expirationTtl: 1800 },
-    );
+    expect(kv.put).toHaveBeenCalledWith('weather:english-bay', expect.any(String), {
+      expirationTtl: 1800,
+    });
   });
 });

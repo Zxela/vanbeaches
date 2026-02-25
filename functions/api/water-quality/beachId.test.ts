@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { onRequestGet } from './[beachId]';
 
 const MOCK_WATER_QUALITY: Record<string, unknown> = {
@@ -80,10 +80,8 @@ describe('GET /api/water-quality/:beachId', () => {
     const context = createMockContext('english-bay', kv);
     await onRequestGet(context);
 
-    expect(kv.put).toHaveBeenCalledWith(
-      'waterquality:english-bay',
-      expect.any(String),
-      { expirationTtl: 21600 },
-    );
+    expect(kv.put).toHaveBeenCalledWith('waterquality:english-bay', expect.any(String), {
+      expirationTtl: 21600,
+    });
   });
 });

@@ -1,4 +1,9 @@
 {
   "files": [],
-  "references": [{ "path": "./shared" }, { "path": "./client" }, { "path": "./worker" }, { "path": "./functions" }]
+  "references": [
+    { "path": "./shared" },
+    { "path": "./client" },
+    { "path": "./worker" },
+    { "path": "./functions" }
+  ]
 }

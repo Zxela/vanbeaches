@@ -1,8 +1,8 @@
 import type { BeachSummary } from '@van-beaches/shared';
 import { motion } from 'framer-motion';
 import { Thermometer, TrendingDown, TrendingUp, Waves } from 'lucide-react';
-import { getWeatherColor, getWeatherIcon } from '../lib/weatherIcons';
 import { Link } from 'react-router-dom';
+import { getWeatherColor, getWeatherIcon } from '../lib/weatherIcons';
 import { FavoriteButton } from './FavoriteButton';
 import { Card, Icon } from './ui';
 
@@ -11,12 +11,8 @@ interface BeachCardProps {
 }
 
 export function BeachCard({ beach }: BeachCardProps) {
-  const WeatherIcon = beach.currentWeather
-    ? getWeatherIcon(beach.currentWeather.condition)
-    : null;
-  const weatherColor = beach.currentWeather
-    ? getWeatherColor(beach.currentWeather.condition)
-    : '';
+  const WeatherIcon = beach.currentWeather ? getWeatherIcon(beach.currentWeather.condition) : null;
+  const weatherColor = beach.currentWeather ? getWeatherColor(beach.currentWeather.condition) : '';
 
   return (
     <Card variant="interactive" padding="none" className="group relative overflow-hidden">

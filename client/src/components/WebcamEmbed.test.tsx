@@ -20,8 +20,9 @@ describe('WebcamEmbed', () => {
 
   beforeEach(() => {
     vi.clearAllMocks();
-    // Reset touch device detection - delete ontouchstart to simulate non-touch device
+    // Reset touch device detection - remove ontouchstart to simulate non-touch device
     if ('ontouchstart' in window) {
+      // biome-ignore lint/performance/noDelete: needed to fully remove touch indicator in tests
       delete (window as { ontouchstart?: unknown }).ontouchstart;
     }
     Object.defineProperty(navigator, 'maxTouchPoints', {
@@ -92,7 +93,7 @@ describe('WebcamEmbed', () => {
     expect(hideButton).toHaveClass('opacity-0');
 
     // Hover over the container
-    fireEvent.mouseEnter(container!);
+    if (container) fireEvent.mouseEnter(container);
 
     // Now hide button should be visible (opacity-100)
     await waitFor(() => {
@@ -100,7 +101,7 @@ describe('WebcamEmbed', () => {
     });
 
     // Mouse leave should hide the button again
-    fireEvent.mouseLeave(container!);
+    if (container) fireEvent.mouseLeave(container);
     expect(hideButton).toHaveClass('opacity-0');
   });
 

@@ -54,22 +54,22 @@ describe('weatherIcons', () => {
 
   describe('weatherLabels', () => {
     it('maps sunny to Sunny', () => {
-      expect(weatherLabels['sunny']).toBe('Sunny');
+      expect(weatherLabels.sunny).toBe('Sunny');
     });
     it('maps partly-cloudy to Partly Cloudy', () => {
       expect(weatherLabels['partly-cloudy']).toBe('Partly Cloudy');
     });
     it('maps cloudy to Cloudy', () => {
-      expect(weatherLabels['cloudy']).toBe('Cloudy');
+      expect(weatherLabels.cloudy).toBe('Cloudy');
     });
     it('maps rainy to Rainy', () => {
-      expect(weatherLabels['rainy']).toBe('Rainy');
+      expect(weatherLabels.rainy).toBe('Rainy');
     });
     it('maps stormy to Stormy', () => {
-      expect(weatherLabels['stormy']).toBe('Stormy');
+      expect(weatherLabels.stormy).toBe('Stormy');
     });
     it('maps foggy to Foggy', () => {
-      expect(weatherLabels['foggy']).toBe('Foggy');
+      expect(weatherLabels.foggy).toBe('Foggy');
     });
   });
 });

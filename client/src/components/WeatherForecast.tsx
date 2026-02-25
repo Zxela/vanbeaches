@@ -67,7 +67,7 @@ export function WeatherForecast({ forecast, loading }: WeatherForecastProps) {
                 className="text-center p-2 rounded-lg bg-sky-50/60 dark:bg-sand-700/50"
               >
                 <p className="text-xs text-sand-500 dark:text-sand-400 mb-1">{dayName}</p>
-                <WeatherIcon className={"w-6 h-6 mx-auto mb-1 " + iconColor} strokeWidth={1.5} />
+                <WeatherIcon className={`w-6 h-6 mx-auto mb-1 ${iconColor}`} strokeWidth={1.5} />
                 <p className="text-sm font-semibold text-sand-900 dark:text-sand-100">
                   {day.high.toFixed(0)}°
                 </p>

@@ -1,5 +1,5 @@
-import { describe, it, expect, vi, beforeEach } from "vitest";
-import { kvCache } from "./kvCache";
+import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { kvCache } from './kvCache';
 
 function createMockKv() {
   const store = new Map<string, string>();
@@ -17,83 +17,67 @@ function createMockKv() {
   } as unknown as KVNamespace & { _store: Map<string, string> };
 }
 
-describe("kvCache", () => {
+describe('kvCache', () => {
   let mockKv: ReturnType<typeof createMockKv>;
 
   beforeEach(() => {
     mockKv = createMockKv();
   });
 
-  describe("get", () => {
-    it("returns null when key is missing", async () => {
-      expect(await kvCache.get(mockKv, "missing")).toBeNull();
+  describe('get', () => {
+    it('returns null when key is missing', async () => {
+      expect(await kvCache.get(mockKv, 'missing')).toBeNull();
     });
 
-    it("returns parsed JSON value when key exists", async () => {
-      mockKv._store.set("weather:test", JSON.stringify({ temperature: 20 }));
-      const result = await kvCache.get<{ temperature: number }>(mockKv, "weather:test");
+    it('returns parsed JSON value when key exists', async () => {
+      mockKv._store.set('weather:test', JSON.stringify({ temperature: 20 }));
+      const result = await kvCache.get<{ temperature: number }>(mockKv, 'weather:test');
       expect(result).toEqual({ temperature: 20 });
     });
   });
 
-  describe("set", () => {
-    it("writes JSON string to KV with expirationTtl", async () => {
-      await kvCache.set(mockKv, "weather:test", { temperature: 20 }, 1800);
-      expect(mockKv.put).toHaveBeenCalledWith(
-        "weather:test",
-        expect.any(String),
-        { expirationTtl: 1800 },
-      );
-      const stored = JSON.parse(mockKv._store.get("weather:test")!);
+  describe('set', () => {
+    it('writes JSON string to KV with expirationTtl', async () => {
+      await kvCache.set(mockKv, 'weather:test', { temperature: 20 }, 1800);
+      expect(mockKv.put).toHaveBeenCalledWith('weather:test', expect.any(String), {
+        expirationTtl: 1800,
+      });
+      const stored = JSON.parse(mockKv._store.get('weather:test') ?? 'null');
       expect(stored).toEqual({ temperature: 20 });
     });
   });
 
-  describe("getOrFetch", () => {
-    it("returns cached value on hit without calling fetcher", async () => {
-      mockKv._store.set("weather:test", JSON.stringify({ temperature: 20 }));
+  describe('getOrFetch', () => {
+    it('returns cached value on hit without calling fetcher', async () => {
+      mockKv._store.set('weather:test', JSON.stringify({ temperature: 20 }));
       const fetcher = vi.fn();
 
-      const result = await kvCache.getOrFetch(
-        mockKv,
-        "weather:test",
-        fetcher,
-        1800,
-      );
+      const result = await kvCache.getOrFetch(mockKv, 'weather:test', fetcher, 1800);
 
       expect(result).toEqual({ temperature: 20 });
       expect(fetcher).not.toHaveBeenCalled();
     });
 
-    it("calls fetcher on cache miss and writes result to KV", async () => {
+    it('calls fetcher on cache miss and writes result to KV', async () => {
       const fetcher = vi.fn().mockResolvedValue({ temperature: 25 });
 
-      const result = await kvCache.getOrFetch(
-        mockKv,
-        "weather:test",
-        fetcher,
-        1800,
-      );
+      const result = await kvCache.getOrFetch(mockKv, 'weather:test', fetcher, 1800);
 
       expect(result).toEqual({ temperature: 25 });
       expect(fetcher).toHaveBeenCalledOnce();
       expect(mockKv.put).toHaveBeenCalled();
     });
 
-    it("writes a fetching:{key} soft lock marker with 30s TTL before calling fetcher", async () => {
+    it('writes a fetching:{key} soft lock marker with 30s TTL before calling fetcher', async () => {
       const fetcher = vi.fn().mockResolvedValue({ temperature: 25 });
 
-      await kvCache.getOrFetch(mockKv, "weather:test", fetcher, 1800);
+      await kvCache.getOrFetch(mockKv, 'weather:test', fetcher, 1800);
 
-      expect(mockKv.put).toHaveBeenCalledWith(
-        "fetching:weather:test",
-        "1",
-        { expirationTtl: 30 },
-      );
+      expect(mockKv.put).toHaveBeenCalledWith('fetching:weather:test', '1', { expirationTtl: 30 });
     });
 
-    it("waits and retries KV read when soft lock exists on cache miss", async () => {
-      mockKv._store.set("fetching:weather:test", "1");
+    it('waits and retries KV read when soft lock exists on cache miss', async () => {
+      mockKv._store.set('fetching:weather:test', '1');
 
       // On first get call, return null (cache miss)
       // On lock check, return "1" (lock exists)
@@ -101,9 +85,9 @@ describe("kvCache", () => {
       let getCalls = 0;
       (mockKv.get as ReturnType<typeof vi.fn>).mockImplementation((key: string) => {
         getCalls++;
-        if (key === "fetching:weather:test") return Promise.resolve("1");
+        if (key === 'fetching:weather:test') return Promise.resolve('1');
         // First call for data key returns null, second returns data
-        if (key === "weather:test" && getCalls > 2) {
+        if (key === 'weather:test' && getCalls > 2) {
           return Promise.resolve(JSON.stringify({ temperature: 30 }));
         }
         return Promise.resolve(null);
@@ -111,44 +95,34 @@ describe("kvCache", () => {
 
       const fetcher = vi.fn().mockResolvedValue({ temperature: 25 });
 
-      const result = await kvCache.getOrFetch(
-        mockKv,
-        "weather:test",
-        fetcher,
-        1800,
-      );
+      const result = await kvCache.getOrFetch(mockKv, 'weather:test', fetcher, 1800);
 
       expect(result).toEqual({ temperature: 30 });
       expect(fetcher).not.toHaveBeenCalled();
     });
 
-    it("proceeds to fetch if retry after lock wait still returns null", async () => {
-      mockKv._store.set("fetching:weather:test", "1");
+    it('proceeds to fetch if retry after lock wait still returns null', async () => {
+      mockKv._store.set('fetching:weather:test', '1');
 
       (mockKv.get as ReturnType<typeof vi.fn>).mockImplementation((key: string) => {
-        if (key === "fetching:weather:test") return Promise.resolve("1");
+        if (key === 'fetching:weather:test') return Promise.resolve('1');
         return Promise.resolve(null);
       });
 
       const fetcher = vi.fn().mockResolvedValue({ temperature: 25 });
 
-      const result = await kvCache.getOrFetch(
-        mockKv,
-        "weather:test",
-        fetcher,
-        1800,
-      );
+      const result = await kvCache.getOrFetch(mockKv, 'weather:test', fetcher, 1800);
 
       expect(result).toEqual({ temperature: 25 });
       expect(fetcher).toHaveBeenCalledOnce();
     });
 
-    it("deletes soft lock marker after successful fetch", async () => {
+    it('deletes soft lock marker after successful fetch', async () => {
       const fetcher = vi.fn().mockResolvedValue({ temperature: 25 });
 
-      await kvCache.getOrFetch(mockKv, "weather:test", fetcher, 1800);
+      await kvCache.getOrFetch(mockKv, 'weather:test', fetcher, 1800);
 
-      expect(mockKv.delete).toHaveBeenCalledWith("fetching:weather:test");
+      expect(mockKv.delete).toHaveBeenCalledWith('fetching:weather:test');
     });
   });
 });
