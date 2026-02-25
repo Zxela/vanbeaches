@@ -11,8 +11,8 @@
     "check": "biome check .",
     "format": "biome format --write .",
     "type-check": "pnpm -r type-check",
-    "deploy:preview": "wrangler pages deploy client/dist --project-name=van-beaches",
-    "deploy:production": "wrangler pages deploy client/dist --project-name=van-beaches --branch=master"
+    "deploy:preview": "wrangler pages deploy client/dist --project-name=van-beach",
+    "deploy:production": "wrangler pages deploy client/dist --project-name=van-beach --branch=master"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",

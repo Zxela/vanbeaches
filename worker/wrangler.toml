@@ -1,4 +1,4 @@
-name = "van-beaches-worker"
+name = "van-beach-worker"
 main = "src/index.ts"
 compatibility_date = "2026-02-01"
 
@@ -11,5 +11,5 @@ crons = [
 
 [[kv_namespaces]]
 binding = "BEACH_CACHE"
-id = "<KV_NAMESPACE_ID>"
-preview_id = "<PREVIEW_KV_NAMESPACE_ID>"
+id = "d3f1191b50b34b749b5d2999e22b540d"
+preview_id = "0a8235f0fd0f4914b7ad8430e17f1fcd"
