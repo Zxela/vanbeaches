@@ -1,5 +1,7 @@
 import type { TideData, WeatherForecast } from '@van-beaches/shared';
+import { Target } from 'lucide-react';
 import { formatSunTime, useSunTimes } from '../hooks/useSunTimes';
+import { Card, CardContent, CardTitle, Icon } from './ui';
 
 interface BestTimeToVisitProps {
   weather: WeatherForecast | null;
@@ -27,14 +29,22 @@ export function BestTimeToVisit({ weather, tides, latitude, longitude }: BestTim
     let score = 50;
     const reasons: string[] = [];
 
+    // Use hourly forecast data if available, fall back to current conditions
+    const hourlyEntry = weather.hourly.find((h) => {
+      const hDate = new Date(h.time);
+      return hDate.getHours() === hour;
+    });
+
+    const condition = hourlyEntry?.condition ?? weather.current.condition;
+    const temp = hourlyEntry?.temperature ?? weather.current.temperature;
+
     // Weather bonus
-    if (['sunny', 'partly-cloudy'].includes(weather.current.condition)) {
+    if (['sunny', 'partly-cloudy'].includes(condition)) {
       score += 20;
       reasons.push('Good weather');
     }
 
     // Temperature bonus (optimal around 22-26°C)
-    const temp = weather.current.temperature;
     if (temp >= 22 && temp <= 26) {
       score += 15;
       reasons.push('Perfect temperature');
@@ -87,9 +97,9 @@ export function BestTimeToVisit({ weather, tides, latitude, longitude }: BestTim
 
   const getScoreColor = (score: number) => {
     if (score >= 80) return 'text-green-600 dark:text-green-400';
-    if (score >= 60) return 'text-blue-600 dark:text-blue-400';
+    if (score >= 60) return 'text-ocean-600 dark:text-ocean-400';
     if (score >= 40) return 'text-yellow-600 dark:text-yellow-400';
-    return 'text-gray-500 dark:text-gray-400';
+    return 'text-sand-500 dark:text-sand-400';
   };
 
   const getScoreLabel = (score: number) => {
@@ -100,44 +110,47 @@ export function BestTimeToVisit({ weather, tides, latitude, longitude }: BestTim
   };
 
   return (
-    <div className="bg-gradient-to-br from-indigo-50 to-purple-50 dark:from-indigo-900/20 dark:to-purple-900/20 rounded-xl p-4">
-      <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3 flex items-center gap-2">
-        <span>🎯</span> Best Time to Visit
-      </h3>
-      <div className="space-y-2">
-        {bestSlots.map((slot, idx) => (
-          <div
-            key={slot.time}
-            className={`flex items-center gap-3 p-3 rounded-lg ${idx === 0 ? 'bg-white dark:bg-gray-800 shadow-sm' : 'bg-white/50 dark:bg-gray-800/50'}`}
-          >
-            <div className="text-center min-w-[60px]">
-              <p className="text-lg font-bold text-gray-900 dark:text-white">{slot.time}</p>
-              {idx === 0 && (
-                <span className="text-xs text-indigo-600 dark:text-indigo-400">Best</span>
-              )}
-            </div>
-            <div className="flex-1">
-              <div className="flex items-center gap-2">
-                <div className="flex-1 h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
-                  <div
-                    className="h-full bg-gradient-to-r from-green-400 to-blue-500 rounded-full transition-all"
-                    style={{ width: `${slot.score}%` }}
-                  />
-                </div>
-                <span className={`text-sm font-medium ${getScoreColor(slot.score)}`}>
-                  {getScoreLabel(slot.score)}
-                </span>
+    <Card variant="ocean">
+      <CardTitle className="flex items-center gap-2">
+        <Icon icon={Target} size="lg" color="ocean" />
+        Best Time to Visit
+      </CardTitle>
+      <CardContent className="mt-3">
+        <div className="space-y-2">
+          {bestSlots.map((slot, idx) => (
+            <div
+              key={slot.time}
+              className={"flex items-center gap-3 p-3 rounded-lg " + (idx === 0 ? 'bg-white/70 dark:bg-sand-800/70 shadow-sm' : 'bg-white/40 dark:bg-sand-800/40')}
+            >
+              <div className="text-center min-w-[60px]">
+                <p className="text-lg font-bold text-sand-900 dark:text-sand-100">{slot.time}</p>
+                {idx === 0 && (
+                  <span className="text-xs text-ocean-600 dark:text-ocean-400">Best</span>
+                )}
               </div>
-              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                {slot.reasons.slice(0, 2).join(' • ')}
-              </p>
+              <div className="flex-1">
+                <div className="flex items-center gap-2">
+                  <div className="flex-1 h-2 bg-sand-200 dark:bg-sand-700 rounded-full overflow-hidden">
+                    <div
+                      className="h-full bg-gradient-to-r from-green-400 to-ocean-500 rounded-full transition-all"
+                      style={{ width: `${slot.score}%` }}
+                    />
+                  </div>
+                  <span className={"text-sm font-medium " + getScoreColor(slot.score)}>
+                    {getScoreLabel(slot.score)}
+                  </span>
+                </div>
+                <p className="text-xs text-sand-500 dark:text-sand-400 mt-1">
+                  {slot.reasons.slice(0, 2).join(' • ')}
+                </p>
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
-      <p className="text-xs text-gray-500 dark:text-gray-400 mt-3 text-center">
-        Sunset at {formatSunTime(sunTimes.sunset)}
-      </p>
-    </div>
+          ))}
+        </div>
+        <p className="text-xs text-sand-500 dark:text-sand-400 mt-3 text-center">
+          Sunset at {formatSunTime(sunTimes.sunset)}
+        </p>
+      </CardContent>
+    </Card>
   );
 }
