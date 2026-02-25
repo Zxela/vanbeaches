@@ -37,7 +37,7 @@ export function WebcamEmbed({ url, beachName, onHide }: WebcamEmbedProps) {
   return (
     <div
       ref={ref}
-      className="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden relative"
+      className="bg-white dark:bg-sand-800 rounded-xl shadow-lg overflow-hidden relative"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
