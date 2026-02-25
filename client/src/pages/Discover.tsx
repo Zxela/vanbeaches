@@ -133,19 +133,19 @@ function RecommendedSection({
   );
 }
 
-function AllBeachesSection({ loading }: { loading: boolean }) {
+function AllBeachesSection({ loading, beaches }: { loading: boolean; beaches: import('@van-beaches/shared').BeachSummary[] }) {
   const { favorites } = useFavorites();
 
   // Sort beaches: favorites first, then alphabetically
   const sortedBeaches = useMemo(() => {
-    return [...BEACHES].sort((a, b) => {
+    return [...beaches].sort((a, b) => {
       const aFav = favorites.includes(a.id);
       const bFav = favorites.includes(b.id);
       if (aFav && !bFav) return -1;
       if (!aFav && bFav) return 1;
       return a.name.localeCompare(b.name);
     });
-  }, [favorites]);
+  }, [favorites, beaches]);
 
   return (
     <motion.section
@@ -174,16 +174,7 @@ function AllBeachesSection({ loading }: { loading: boolean }) {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.8 + idx * 0.05 }}
             >
-              <BeachCard
-                beach={{
-                  id: beach.id,
-                  name: beach.name,
-                  currentWeather: null,
-                  nextTide: null,
-                  waterQuality: 'unknown',
-                  lastUpdated: new Date().toISOString(),
-                }}
-              />
+              <BeachCard beach={beach} />
             </motion.div>
           ))}
         </div>
@@ -244,7 +235,7 @@ export function Discover() {
     <div className="space-y-2">
       <HeroSection />
       <RecommendedSection beaches={recommendedBeaches} loading={loading} />
-      <AllBeachesSection loading={loading} />
+      <AllBeachesSection loading={loading} beaches={beaches} />
 
       {/* Future: Sponsored content zone (hidden for now) */}
       {/* <ContentSlot id="sponsored-nearby" hidden /> */}
