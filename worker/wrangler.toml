@@ -1,0 +1,15 @@
+name = "van-beaches-worker"
+main = "src/index.ts"
+compatibility_date = "2026-02-01"
+
+[triggers]
+crons = [
+  "*/30 * * * *",
+  "0 * * * *",
+  "0 */6 * * *"
+]
+
+[[kv_namespaces]]
+binding = "BEACH_CACHE"
+id = "<KV_NAMESPACE_ID>"
+preview_id = "<PREVIEW_KV_NAMESPACE_ID>"

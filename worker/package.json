@@ -1,0 +1,20 @@
+{
+  "name": "@van-beaches/worker",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev --test-scheduled",
+    "build": "wrangler deploy --dry-run",
+    "type-check": "tsc --noEmit",
+    "test": "vitest run --passWithNoTests"
+  },
+  "dependencies": {
+    "@van-beaches/shared": "workspace:*"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20260201.0",
+    "vitest": "^2.1.8",
+    "wrangler": "^3.101.0"
+  }
+}
