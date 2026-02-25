@@ -90,6 +90,7 @@ export default {
         'slide-up': 'slideUp 0.3s ease-out',
         'scale-in': 'scaleIn 0.2s ease-out',
         'pulse-glow': 'pulseGlow 2s ease-in-out infinite',
+        wave: 'wave 1.5s ease-in-out infinite',
       },
       keyframes: {
         shimmer: {
@@ -111,6 +112,10 @@ export default {
         pulseGlow: {
           '0%, 100%': { opacity: '0.7' },
           '50%': { opacity: '1' },
+        },
+        wave: {
+          '0%, 100%': { transform: 'scaleY(0.5)' },
+          '50%': { transform: 'scaleY(1)' },
         },
       },
       backgroundImage: {
