@@ -1,5 +1,7 @@
 import { BEACHES } from '@van-beaches/shared';
+import { Search, X } from 'lucide-react';
 import { useMemo, useState } from 'react';
+import { Card, Icon } from './ui';
 
 interface SearchFilterProps {
   onFilter: (beachIds: string[]) => void;
@@ -19,12 +21,9 @@ export function SearchFilter({ onFilter }: SearchFilterProps) {
 
   const filteredBeaches = useMemo(() => {
     return BEACHES.filter((beach) => {
-      // Search filter
       if (search && !beach.name.toLowerCase().includes(search.toLowerCase())) {
         return false;
       }
-
-      // Feature filters
       if (filters.dogFriendly && !beach.amenities?.dogFriendly) return false;
       if (filters.hasWebcam && beach.webcamUrl === null) return false;
       if (filters.lifeguard && beach.amenities?.lifeguard === 'none') return false;
@@ -34,7 +33,6 @@ export function SearchFilter({ onFilter }: SearchFilterProps) {
         (!beach.amenities?.volleyballCourts || beach.amenities.volleyballCourts === 0)
       )
         return false;
-
       return true;
     });
   }, [search, filters]);
@@ -50,49 +48,27 @@ export function SearchFilter({ onFilter }: SearchFilterProps) {
   const activeFilterCount = Object.values(filters).filter(Boolean).length;
 
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-4">
+    <Card variant="default" className="p-4">
       <div className="relative">
         <input
           type="text"
           placeholder="Search beaches..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="w-full px-4 py-2 pl-10 bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full px-4 py-2 pl-10 bg-sand-50 dark:bg-sand-700 border border-sand-200 dark:border-sand-600 rounded-lg text-sand-900 dark:text-sand-100 placeholder-sand-500 dark:placeholder-sand-400 focus:outline-none focus:ring-2 focus:ring-ocean-500"
         />
-        <svg
-          className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-          aria-hidden="true"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-          />
-        </svg>
+        <Icon
+          icon={Search}
+          size="sm"
+          className="absolute left-3 top-1/2 -translate-y-1/2 text-sand-400"
+        />
         {search && (
           <button
             type="button"
             onClick={() => setSearch('')}
-            className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+            className="absolute right-3 top-1/2 -translate-y-1/2 text-sand-400 hover:text-sand-600"
           >
-            <svg
-              className="w-4 h-4"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              aria-hidden="true"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M6 18L18 6M6 6l12 12"
-              />
-            </svg>
+            <Icon icon={X} size="sm" />
           </button>
         )}
       </div>
@@ -131,11 +107,11 @@ export function SearchFilter({ onFilter }: SearchFilterProps) {
       </div>
 
       {(search || activeFilterCount > 0) && (
-        <div className="mt-3 text-sm text-gray-500 dark:text-gray-400">
+        <div className="mt-3 text-sm text-sand-500 dark:text-sand-400">
           Showing {filteredBeaches.length} of {BEACHES.length} beaches
         </div>
       )}
-    </div>
+    </Card>
   );
 }
 
@@ -149,11 +125,11 @@ function FilterChip({
     <button
       type="button"
       onClick={onClick}
-      className={`flex items-center gap-1 px-3 py-1.5 rounded-full text-sm transition-colors ${
+      className={"flex items-center gap-1 px-3 py-1.5 rounded-full text-sm transition-colors " + (
         active
-          ? 'bg-blue-500 text-white'
-          : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
-      }`}
+          ? 'bg-ocean-500 text-white'
+          : 'bg-sand-100 dark:bg-sand-700 text-sand-700 dark:text-sand-300 hover:bg-sand-200 dark:hover:bg-sand-600'
+      )}
     >
       <span>{icon}</span>
       <span>{label}</span>
