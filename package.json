@@ -11,8 +11,8 @@
     "check": "biome check .",
     "format": "biome format --write .",
     "type-check": "pnpm -r type-check",
-    "deploy:preview": "wrangler pages deploy",
-    "deploy:production": "wrangler pages deploy --branch=master"
+    "deploy:preview": "wrangler pages deploy client/dist --project-name=vanbeaches",
+    "deploy:production": "wrangler pages deploy client/dist --project-name=vanbeaches --branch=master"
   },
   "dependencies": {
     "@van-beaches/shared": "workspace:*"
