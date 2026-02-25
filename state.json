@@ -1,26 +1,246 @@
 {
-  "session_id": "webcam-visibility-1cddd66f",
-  "branch": "create/webcam-visibility-1cddd66f",
-  "worktree": "../beach-app-create-webcam-visibility-1cddd66f",
-  "feature": "webcam-visibility",
-  "created_at": "2026-01-25T12:00:00Z",
-  "phase": "implementing",
-  "tasks": {
-    "001": { "status": "pending", "file": "docs/tasks/001-update-beach-type.md" },
-    "002": { "status": "pending", "file": "docs/tasks/002-update-beach-data.md" },
-    "003": { "status": "pending", "file": "docs/tasks/003-create-webcam-preference-hook.md" },
-    "004": { "status": "pending", "file": "docs/tasks/004-create-webcam-placeholder.md" },
-    "005": { "status": "pending", "file": "docs/tasks/005-update-webcam-embed.md" },
-    "006": { "status": "pending", "file": "docs/tasks/006-update-fullscreen-webcam.md" },
-    "007": { "status": "pending", "file": "docs/tasks/007-update-beach-detail.md" },
-    "008": { "status": "pending", "file": "docs/tasks/008-update-search-filter.md" }
+  "session_id": "cloudflare-migration-92d4850b",
+  "branch": "create/cloudflare-migration-92d4850b",
+  "worktree": "/home/zxela/beach-app-create-cloudflare-migration-92d4850b",
+  "feature": "cloudflare-migration",
+  "created_at": "2026-02-24T22:00:00Z",
+  "phase": "discovery",
+  "homerun_docs_dir": "/home/zxela/.claude/homerun/48b1e21a/cloudflare-migration-92d4850b",
+  "spec_paths": {
+    "prd": "/home/zxela/.claude/homerun/48b1e21a/cloudflare-migration-92d4850b/PRD.md",
+    "adr": "/home/zxela/.claude/homerun/48b1e21a/cloudflare-migration-92d4850b/ADR.md",
+    "technical_design": "/home/zxela/.claude/homerun/48b1e21a/cloudflare-migration-92d4850b/TECHNICAL_DESIGN.md"
   },
+  "tasks_file": "docs/tasks.json",
+  "traceability": {
+    "user_stories": {
+      "US-001": {
+        "title": "Developer deploys changes via pull request",
+        "acceptance_criteria": ["AC-001", "AC-002", "AC-003", "AC-004"],
+        "tasks": []
+      },
+      "US-002": {
+        "title": "Developer deploys to production",
+        "acceptance_criteria": ["AC-005", "AC-006", "AC-007", "AC-008"],
+        "tasks": []
+      },
+      "US-003": {
+        "title": "End user views beach conditions with low latency",
+        "acceptance_criteria": ["AC-009", "AC-010", "AC-011"],
+        "tasks": []
+      },
+      "US-004": {
+        "title": "System maintains fresh data via scheduled refresh",
+        "acceptance_criteria": ["AC-012", "AC-013", "AC-014", "AC-015", "AC-016"],
+        "tasks": []
+      },
+      "US-005": {
+        "title": "Developer runs the application locally",
+        "acceptance_criteria": ["AC-017", "AC-018", "AC-019"],
+        "tasks": []
+      }
+    },
+    "acceptance_criteria": {
+      "AC-001": {
+        "description": "When a pull request is opened or updated, the CI pipeline shall run lint, type-check, and test steps",
+        "story": "US-001",
+        "pattern": "When",
+        "tasks": []
+      },
+      "AC-002": {
+        "description": "If all CI checks pass, then the pipeline shall deploy a preview to a unique Cloudflare Pages URL",
+        "story": "US-001",
+        "pattern": "If-Then",
+        "tasks": []
+      },
+      "AC-003": {
+        "description": "If any CI check fails, then the pipeline shall block the preview deployment and report the failure",
+        "story": "US-001",
+        "pattern": "If-Then",
+        "tasks": []
+      },
+      "AC-004": {
+        "description": "When a pull request preview is deployed, the preview URL shall be posted as a comment or status check on the PR",
+        "story": "US-001",
+        "pattern": "When",
+        "tasks": []
+      },
+      "AC-005": {
+        "description": "When a commit is pushed to the master branch, the CI pipeline shall run lint, type-check, and test steps",
+        "story": "US-002",
+        "pattern": "When",
+        "tasks": []
+      },
+      "AC-006": {
+        "description": "If all CI checks pass on master, then the pipeline shall deploy to the production Cloudflare Pages environment",
+        "story": "US-002",
+        "pattern": "If-Then",
+        "tasks": []
+      },
+      "AC-007": {
+        "description": "If any CI check fails on master, then the pipeline shall not deploy and shall notify the team of the failure",
+        "story": "US-002",
+        "pattern": "If-Then",
+        "tasks": []
+      },
+      "AC-008": {
+        "description": "The production deployment shall be accessible at vanbeaches.com within 5 minutes of a successful pipeline run",
+        "story": "US-002",
+        "pattern": "None",
+        "tasks": []
+      },
+      "AC-009": {
+        "description": "While cached data exists in KV, the API shall return responses in < 200ms at the 95th percentile",
+        "story": "US-003",
+        "pattern": "While",
+        "tasks": []
+      },
+      "AC-010": {
+        "description": "When the dashboard loads, the system shall serve the SPA from edge locations via Cloudflare Pages",
+        "story": "US-003",
+        "pattern": "When",
+        "tasks": []
+      },
+      "AC-011": {
+        "description": "If cached data is missing for a beach, then the API shall fetch from the upstream source and return the result within < 3 seconds",
+        "story": "US-003",
+        "pattern": "If-Then",
+        "tasks": []
+      },
+      "AC-012": {
+        "description": "The system shall refresh weather data for all 9 beaches every 30 minutes via a cron trigger",
+        "story": "US-004",
+        "pattern": "None",
+        "tasks": []
+      },
+      "AC-013": {
+        "description": "The system shall refresh tide data for all unique tide stations every 60 minutes via a cron trigger",
+        "story": "US-004",
+        "pattern": "None",
+        "tasks": []
+      },
+      "AC-014": {
+        "description": "The system shall refresh water quality data for all 9 beaches every 6 hours via a cron trigger",
+        "story": "US-004",
+        "pattern": "None",
+        "tasks": []
+      },
+      "AC-015": {
+        "description": "While operating on the free tier, the system shall consume fewer than 1,000 KV writes per day (Target: < 700 writes/day)",
+        "story": "US-004",
+        "pattern": "While",
+        "tasks": []
+      },
+      "AC-016": {
+        "description": "If an upstream API call fails during a scheduled refresh, then the system shall log the error and continue refreshing remaining beaches",
+        "story": "US-004",
+        "pattern": "If-Then",
+        "tasks": []
+      },
+      "AC-017": {
+        "description": "When the developer runs the local dev command, the system shall serve both the SPA and API functions locally",
+        "story": "US-005",
+        "pattern": "When",
+        "tasks": []
+      },
+      "AC-018": {
+        "description": "While developing locally, the developer shall be able to make changes to functions and see them reflected without restarting",
+        "story": "US-005",
+        "pattern": "While",
+        "tasks": []
+      },
+      "AC-019": {
+        "description": "The local development experience shall not require a Cloudflare account or network access to Cloudflare services for basic development",
+        "story": "US-005",
+        "pattern": "None",
+        "tasks": []
+      }
+    },
+    "adr_decisions": {
+      "ADR-001": {
+        "title": "Use Cloudflare Pages + Functions + KV + Cron Triggers over Vercel or keeping Express",
+        "rationale": "Eliminates infrastructure management, free tier covers workload, KV maps directly to existing cache pattern, co-located SPA+API in one project",
+        "tasks_affected": []
+      }
+    },
+    "non_goals": [
+      "NG-001: Changing the React client UI",
+      "NG-002: Changing the shared TypeScript types package",
+      "NG-003: Changing external API integrations",
+      "NG-004: Changing the API response shape (ApiResponse<T>)",
+      "NG-005: Adding new features or data sources",
+      "NG-006: Implementing user authentication",
+      "NG-007: Migrating to D1 relational database",
+      "NG-008: Guaranteed single-flight request coalescing (best-effort is acceptable)"
+    ]
+  },
+  "tasks": {},
   "current_task": null,
   "config": {
     "auto_mode": false,
+    "timeout_minutes": 30,
+    "max_identical_rejections": 3,
+    "max_iterations_without_progress": 3,
     "retries": {
       "same_agent": 2,
       "fresh_agent": 1
     }
-  }
+  },
+  "scale": {
+    "estimated": "large",
+    "file_count": 25,
+    "adr_triggers": [
+      "architecture_change",
+      "data_flow_change",
+      "external_dependency_replacement",
+      "complex_async"
+    ],
+    "docs_to_generate": [
+      "prd",
+      "adr",
+      "technical_design"
+    ]
+  },
+  "token_tracking": {
+    "enabled": true,
+    "config": {
+      "window_size": 200000,
+      "target_usage_percent": 50,
+      "refresh_threshold_percent": 40,
+      "warning_threshold_percent": 60
+    },
+    "phases": {
+      "discovery": {
+        "started_at": "2026-02-24T22:00:00Z",
+        "dialogue_turns": 9
+      }
+    },
+    "refresh_log": []
+  },
+  "dialogue_state": {
+    "turns_completed": 9,
+    "categories_covered": [
+      "purpose",
+      "users",
+      "scope",
+      "constraints",
+      "edge_cases"
+    ],
+    "categories_remaining": [],
+    "last_question_category": "scope",
+    "warnings_shown": false
+  },
+  "progress": {
+    "iteration": 0,
+    "tasks_completed_this_iteration": 0,
+    "last_completion_iteration": 0
+  },
+  "skill_log": [
+    {
+      "skill": "homerun:discovery",
+      "action": "dialogue_complete",
+      "timestamp": "2026-02-24T22:00:00Z",
+      "details": "9 turns, all 5 categories covered"
+    }
+  ]
 }
