@@ -1,41 +1,91 @@
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
 import { SearchFilter } from './SearchFilter';
 
 describe('SearchFilter', () => {
-  it('uses sand-* colors instead of gray-* in container', () => {
-    const { container } = render(<SearchFilter onFilter={vi.fn()} />);
-    const html = container.innerHTML;
-    expect(html).not.toContain('bg-white dark:bg-gray-800');
-    expect(html).not.toContain('bg-gray-50');
-    expect(html).not.toContain('bg-gray-100 dark:bg-gray-700');
-  });
-
-  it('uses ocean-500 for active filter chips instead of blue-500', () => {
-    const { container } = render(<SearchFilter onFilter={vi.fn()} />);
-    // Trigger an active filter by checking if the class structure uses ocean
-    const html = container.innerHTML;
-    // No blue-500 should appear
-    expect(html).not.toContain('bg-blue-500');
-  });
-
-  it('uses Lucide Search icon instead of inline SVG', () => {
-    const { container } = render(<SearchFilter onFilter={vi.fn()} />);
-    const html = container.innerHTML;
-    // Old SVG had specific path data for search icon
-    expect(html).not.toContain('M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z');
-  });
-
-  it('uses Lucide X icon instead of inline SVG for clear', () => {
-    const { container } = render(<SearchFilter onFilter={vi.fn()} />);
-    // Old had explicit path for X icon
-    expect(container.innerHTML).not.toContain('M6 18L18 6M6 6l12 12');
-  });
-
-  it('renders all intent filter pills', () => {
+  // AC1: All 10 intent pill buttons render with correct labels
+  it('renders all 10 intent pill buttons with correct labels', () => {
     render(<SearchFilter onFilter={vi.fn()} />);
-    expect(screen.getByText('Go swimming')).toBeInTheDocument();
-    expect(screen.getByText('Walk my dog')).toBeInTheDocument();
-    expect(screen.getByText('Watch sunset')).toBeInTheDocument();
+    expect(screen.getByText('Swimming')).toBeInTheDocument();
+    expect(screen.getByText('Water sports')).toBeInTheDocument();
+    expect(screen.getByText('Dog friendly')).toBeInTheDocument();
+    expect(screen.getByText('Sunset')).toBeInTheDocument();
+    expect(screen.getByText('Sports')).toBeInTheDocument();
+    expect(screen.getByText('Bonfire')).toBeInTheDocument();
+    expect(screen.getByText('Quiet escape')).toBeInTheDocument();
+    expect(screen.getByText('Family day')).toBeInTheDocument();
+    expect(screen.getByText('Picnic')).toBeInTheDocument();
+    expect(screen.getByText('Cycling / walking')).toBeInTheDocument();
+  });
+
+  // AC2: No text input element (search bar removed)
+  it('does not render a text input element (search bar removed)', () => {
+    render(<SearchFilter onFilter={vi.fn()} />);
+    expect(screen.queryByPlaceholderText('Search beaches...')).not.toBeInTheDocument();
+    expect(screen.queryByRole('textbox')).not.toBeInTheDocument();
+  });
+
+  // AC3: Pill container uses flex-wrap instead of overflow-x-auto
+  it('pill container uses flex-wrap layout instead of overflow-x-auto', () => {
+    const { container } = render(<SearchFilter onFilter={vi.fn()} />);
+    const pillContainer = container.querySelector('.flex-wrap');
+    expect(pillContainer).toBeInTheDocument();
+    expect(pillContainer).not.toHaveClass('overflow-x-auto');
+  });
+
+  // AC4: Water sports pill calls onFilter with correct beaches
+  it('tapping Water sports calls onFilter with only beaches with water sport activities', () => {
+    const onFilter = vi.fn();
+    render(<SearchFilter onFilter={onFilter} />);
+
+    fireEvent.click(screen.getByText('Water sports'));
+
+    // jericho-beach (sailing, windsurfing, kayaking), sunset-beach (kayaking, paddleboarding), spanish-banks (kiteboarding)
+    const expectedIds = ['jericho-beach', 'spanish-banks', 'sunset-beach'];
+    const lastCall = onFilter.mock.calls[onFilter.mock.calls.length - 1][0] as string[];
+    expect(lastCall.slice().sort()).toEqual(expectedIds.sort());
+  });
+
+  // AC5: Two pills apply AND logic
+  it('tapping two pills calls onFilter with only beaches matching both intents', () => {
+    const onFilter = vi.fn();
+    render(<SearchFilter onFilter={onFilter} />);
+
+    // Sunset matches: english-bay, spanish-banks, third-beach
+    // Bonfire matches: spanish-banks, third-beach
+    // Intersection: spanish-banks, third-beach
+    fireEvent.click(screen.getByText('Sunset'));
+    fireEvent.click(screen.getByText('Bonfire'));
+
+    const expectedIds = ['spanish-banks', 'third-beach'];
+    const lastCall = onFilter.mock.calls[onFilter.mock.calls.length - 1][0] as string[];
+    expect(lastCall.slice().sort()).toEqual(expectedIds.sort());
+  });
+
+  // AC6: No active pills → onFilter called with all 9 beach IDs
+  it('when no pills are active, onFilter is called with all 9 beach IDs', () => {
+    const onFilter = vi.fn();
+    render(<SearchFilter onFilter={onFilter} />);
+
+    const allBeachIds = [
+      'english-bay',
+      'jericho-beach',
+      'kitsilano-beach',
+      'locarno-beach',
+      'second-beach',
+      'spanish-banks',
+      'sunset-beach',
+      'third-beach',
+      'trout-lake',
+    ];
+
+    const lastCall = onFilter.mock.calls[onFilter.mock.calls.length - 1][0] as string[];
+    expect(lastCall.slice().sort()).toEqual(allBeachIds.sort());
+  });
+
+  // AC7: When no pills are active, "Showing X of Y" counter is not rendered
+  it('when no pills are active, the Showing counter is not rendered', () => {
+    render(<SearchFilter onFilter={vi.fn()} />);
+    expect(screen.queryByText(/Showing/)).not.toBeInTheDocument();
   });
 });

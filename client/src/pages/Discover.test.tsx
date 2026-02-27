@@ -179,25 +179,26 @@ describe('Discover page - SearchFilter and BeachMap wiring (task-019)', () => {
     });
   });
 
-  it('renders SearchFilter on the Discover page', () => {
+  it('renders SearchFilter on the Discover page with intent pills', () => {
     renderDiscover();
-    expect(screen.getByPlaceholderText(/search beaches/i)).toBeInTheDocument();
+    // Search bar removed; verify SearchFilter renders via its intent pills
+    expect(screen.queryByPlaceholderText(/search beaches/i)).not.toBeInTheDocument();
+    expect(screen.getByText('Swimming')).toBeInTheDocument();
+    expect(screen.getByText('Water sports')).toBeInTheDocument();
   });
 
-  it('filters AllBeachesSection when user types in the search field', async () => {
+  it('filters AllBeachesSection when user clicks an intent pill', async () => {
     renderDiscover();
 
     // Both beaches should be visible initially
     expect(screen.getAllByText('Kitsilano Beach').length).toBeGreaterThanOrEqual(1);
     expect(screen.getAllByText('English Bay Beach').length).toBeGreaterThanOrEqual(1);
 
-    // Type to filter
-    const searchInput = screen.getByPlaceholderText(/search beaches/i);
-    fireEvent.change(searchInput, { target: { value: 'kitsilano' } });
+    // Click Swimming pill — kitsilano has swimming, english-bay has walking (no match)
+    fireEvent.click(screen.getByText('Swimming'));
 
     // The All Beaches section should filter out English Bay
-    // (Recommended section is independent of search filter)
-    // Find the "All Beaches" heading and check its sibling content
+    // (Recommended section is independent of the filter)
     const allBeachesHeading = screen.getByText('All Beaches');
     const allBeachesSection = allBeachesHeading.closest('section');
     if (allBeachesSection) {

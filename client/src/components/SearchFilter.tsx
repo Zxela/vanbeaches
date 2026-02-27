@@ -1,13 +1,21 @@
 import { BEACHES } from '@van-beaches/shared';
-import { Search, X } from 'lucide-react';
 import { useEffect, useMemo, useState } from 'react';
-import { Icon } from './ui';
 
 interface SearchFilterProps {
   onFilter: (beachIds: string[]) => void;
 }
 
-type IntentKey = 'swimming' | 'dogWalk' | 'sunset' | 'sports' | 'bonfire' | 'quiet' | 'family';
+type IntentKey =
+  | 'swimming'
+  | 'waterSports'
+  | 'dogFriendly'
+  | 'sunset'
+  | 'sports'
+  | 'bonfire'
+  | 'quiet'
+  | 'family'
+  | 'picnic'
+  | 'cycling';
 
 interface IntentDef {
   label: string;
@@ -16,59 +24,79 @@ interface IntentDef {
 }
 
 const INTENTS: IntentDef[] = [
-  { label: 'Go swimming', icon: '\u{1F3CA}', key: 'swimming' },
-  { label: 'Walk my dog', icon: '\u{1F415}', key: 'dogWalk' },
-  { label: 'Watch sunset', icon: '\u{1F305}', key: 'sunset' },
-  { label: 'Play sports', icon: '\u{1F3D0}', key: 'sports' },
-  { label: 'Have a bonfire', icon: '\u{1F525}', key: 'bonfire' },
-  { label: 'Somewhere quiet', icon: '\u{1F343}', key: 'quiet' },
+  { label: 'Swimming', icon: '\u{1F3CA}', key: 'swimming' },
+  { label: 'Water sports', icon: '\u{1F6A3}', key: 'waterSports' },
+  { label: 'Dog friendly', icon: '\u{1F415}', key: 'dogFriendly' },
+  { label: 'Sunset', icon: '\u{1F305}', key: 'sunset' },
+  { label: 'Sports', icon: '\u{1F3D0}', key: 'sports' },
+  { label: 'Bonfire', icon: '\u{1F525}', key: 'bonfire' },
+  { label: 'Quiet escape', icon: '\u{1F343}', key: 'quiet' },
   { label: 'Family day', icon: '\u{1F46A}', key: 'family' },
+  { label: 'Picnic', icon: '\u{1F9FA}', key: 'picnic' },
+  { label: 'Cycling / walking', icon: '\u{1F6B4}', key: 'cycling' },
 ];
 
 function matchesIntent(beach: (typeof BEACHES)[number], intent: IntentKey): boolean {
   switch (intent) {
     case 'swimming':
-      return beach.activities?.includes('swimming') ?? false;
-    case 'dogWalk':
+      return (
+        (beach.activities?.some((a) => ['swimming', 'pool swimming', 'wading'].includes(a)) ??
+          false)
+      );
+    case 'waterSports':
+      return (
+        (beach.activities?.some((a) =>
+          ['kayaking', 'paddleboarding', 'sailing', 'windsurfing', 'kiteboarding'].includes(a),
+        ) ?? false)
+      );
+    case 'dogFriendly':
       return beach.amenities?.dogFriendly === true;
     case 'sunset':
       return beach.activities?.includes('sunset viewing') ?? false;
     case 'sports':
       return (
-        (beach.amenities?.volleyballCourts ?? 0) > 0 ||
-        (beach.activities?.some((a) =>
-          ['volleyball', 'basketball', 'tennis', 'kiteboarding'].includes(a),
-        ) ??
-          false)
+        (beach.activities?.some((a) => ['volleyball', 'basketball', 'tennis'].includes(a)) ?? false)
       );
     case 'bonfire':
-      return beach.amenities?.firepits === true;
+      return (
+        beach.amenities?.firepits === true ||
+        (beach.activities?.includes('bonfires') ?? false)
+      );
     case 'quiet':
-      return beach.amenities?.lifeguard === 'none' && !beach.amenities?.foodNearby;
+      return (
+        (beach.activities?.some((a) =>
+          ['beachcombing', 'birdwatching', 'photography'].includes(a),
+        ) ?? false)
+      );
     case 'family':
       return (
-        beach.amenities?.restrooms === true &&
-        beach.amenities?.lifeguard !== 'none' &&
-        beach.amenities?.wheelchairAccessible === true
+        (beach.amenities?.restrooms === true &&
+          beach.amenities?.lifeguard !== 'none' &&
+          beach.amenities?.wheelchairAccessible === true) ||
+        (beach.activities?.includes('playground') ?? false)
+      );
+    case 'picnic':
+      return beach.activities?.includes('picnicking') ?? false;
+    case 'cycling':
+      return (
+        (beach.activities?.some((a) =>
+          ['cycling', 'walking', 'hiking', 'rollerblading'].includes(a),
+        ) ?? false)
       );
   }
 }
 
 export function SearchFilter({ onFilter }: SearchFilterProps) {
-  const [search, setSearch] = useState('');
   const [activeIntents, setActiveIntents] = useState<Set<IntentKey>>(new Set());
 
   const filteredBeaches = useMemo(() => {
     return BEACHES.filter((beach) => {
-      if (search && !beach.name.toLowerCase().includes(search.toLowerCase())) {
-        return false;
-      }
       for (const intent of activeIntents) {
         if (!matchesIntent(beach, intent)) return false;
       }
       return true;
     });
-  }, [search, activeIntents]);
+  }, [activeIntents]);
 
   useEffect(() => {
     onFilter(filteredBeaches.map((b) => b.id));
@@ -86,37 +114,12 @@ export function SearchFilter({ onFilter }: SearchFilterProps) {
     });
   };
 
-  const hasFilters = search || activeIntents.size > 0;
+  const hasFilters = activeIntents.size > 0;
 
   return (
     <div className="space-y-4">
-      {/* Search bar */}
-      <div className="relative">
-        <input
-          type="text"
-          placeholder="Search beaches..."
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          className="w-full px-5 py-3.5 pl-12 bg-white dark:bg-sand-800 border border-sand-200 dark:border-sand-700 rounded-2xl text-sand-900 dark:text-sand-100 placeholder-sand-400 dark:placeholder-sand-500 focus:outline-none focus:ring-2 focus:ring-ocean-500 shadow-sm text-base"
-        />
-        <Icon
-          icon={Search}
-          size="md"
-          className="absolute left-4 top-1/2 -translate-y-1/2 text-sand-400"
-        />
-        {search && (
-          <button
-            type="button"
-            onClick={() => setSearch('')}
-            className="absolute right-4 top-1/2 -translate-y-1/2 text-sand-400 hover:text-sand-600"
-          >
-            <Icon icon={X} size="sm" />
-          </button>
-        )}
-      </div>
-
-      {/* Intent pills - horizontal scroll on mobile */}
-      <div className="flex gap-2 overflow-x-auto pb-1 scrollbar-hide">
+      {/* Intent pills - wrapping layout */}
+      <div className="flex flex-wrap gap-2">
         {INTENTS.map((intent) => (
           <button
             key={intent.key}
