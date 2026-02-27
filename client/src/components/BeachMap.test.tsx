@@ -1,5 +1,5 @@
-import type React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
+import type React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
@@ -49,11 +49,8 @@ vi.mock('react-leaflet', () => ({
     'data-has-heart'?: string;
     'data-transform'?: string;
   }) => (
-    <div
-      className="leaflet-marker"
-      onClick={eventHandlers?.click}
-      data-beach-id={beachId}
-    >
+    // biome-ignore lint/a11y/useKeyWithClickEvents: test mock for Leaflet Marker component
+    <div className="leaflet-marker" onClick={eventHandlers?.click} data-beach-id={beachId}>
       <div
         className="beach-marker"
         data-bg-color={bgColor}
@@ -74,11 +71,21 @@ vi.mock('react-leaflet', () => ({
 // Mock leaflet L.divIcon
 vi.mock('leaflet', () => ({
   default: {
-    divIcon: (opts: { html: string; className: string; iconSize: number[]; iconAnchor: number[] }) => ({
+    divIcon: (opts: {
+      html: string;
+      className: string;
+      iconSize: number[];
+      iconAnchor: number[];
+    }) => ({
       options: opts,
     }),
   },
-  divIcon: (opts: { html: string; className: string; iconSize: number[]; iconAnchor: number[] }) => ({
+  divIcon: (opts: {
+    html: string;
+    className: string;
+    iconSize: number[];
+    iconAnchor: number[];
+  }) => ({
     options: opts,
   }),
 }));

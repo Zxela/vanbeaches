@@ -1,8 +1,8 @@
 import 'leaflet/dist/leaflet.css';
+import { BEACHES } from '@van-beaches/shared';
 import L from 'leaflet';
 import { MapContainer, Marker, TileLayer, Tooltip } from 'react-leaflet';
 import { useNavigate } from 'react-router-dom';
-import { BEACHES } from '@van-beaches/shared';
 import { useFavorites } from '../hooks/useFavorites';
 
 // Design token hex values (used in divIcon inline styles since Tailwind classes
@@ -44,7 +44,8 @@ function getMarkerConfig(isSelected: boolean, isFav: boolean): MarkerConfig {
       size: 12,
       border: '2px solid white',
       shadow: '0 1px 4px rgba(0,150,136,0.5)',
-      heartHtml: '<span style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:white;font-size:6px;line-height:1;">&#x2665;</span>',
+      heartHtml:
+        '<span style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:white;font-size:6px;line-height:1;">&#x2665;</span>',
       transform: '',
     };
   }
@@ -69,7 +70,9 @@ function createMarkerIcon(isSelected: boolean, isFav: boolean): L.DivIcon {
     `box-shadow:${cfg.shadow}`,
     cfg.transform ? `transform:${cfg.transform}` : '',
     'position:relative',
-  ].filter(Boolean).join(';');
+  ]
+    .filter(Boolean)
+    .join(';');
 
   const html = `<div class="beach-marker" style="${styleStr}">${cfg.heartHtml}</div>`;
 
