@@ -19,6 +19,12 @@ export interface BeachImage {
   credit: { name: string; username: string };
 }
 
+export interface BeachHighlights {
+  bestFor: string[];
+  vibe: string;
+  crowdLevel: string;
+}
+
 export interface Beach {
   id: string;
   name: string;
@@ -32,6 +38,8 @@ export interface Beach {
   images?: BeachImage;
   amenities?: BeachAmenities;
   activities?: string[];
+  highlights?: BeachHighlights;
+  safetyNotes?: string[];
 }
 
 export interface BeachSummary {
