@@ -16,7 +16,7 @@
   }
 
   body {
-    @apply font-sans antialiased text-sand-900 dark:text-sand-100 bg-sand-50 dark:bg-sand-900;
+    @apply font-sans antialiased text-sand-900 bg-sand-50;
     margin: 0;
     /* Optimize text rendering */
     -webkit-font-smoothing: antialiased;
