@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 import { BeachAmenities } from './BeachAmenities';
-import { Accessibility, Bath, Flame, ParkingCircle, ShieldCheck, ShowerHead, UtensilsCrossed } from 'lucide-react';
+
 
 const mockAmenities = {
   parking: 'free' as const,
