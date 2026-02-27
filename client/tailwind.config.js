@@ -48,8 +48,9 @@ export default {
           900: '#01579b',
         },
         sand: {
-          50: '#fafafa',
-          100: '#f5f5f5',
+          25: '#FEFDFB',
+          50: '#FBF9F7',
+          100: '#F5F0EB',
           200: '#eeeeee',
           300: '#e0e0e0',
           400: '#bdbdbd',

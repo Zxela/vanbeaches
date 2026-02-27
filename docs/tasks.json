@@ -1,0 +1,497 @@
+{
+  "tasks": [
+    {
+      "id": "001",
+      "title": "Extend Beach type with highlights and safetyNotes fields",
+      "objective": "Add optional BeachHighlights interface and safetyNotes field to the Beach type in shared/src/types/beach.ts, as specified in the TECHNICAL_DESIGN Data Models section.",
+      "task_type": "add_field",
+      "methodology": "direct",
+      "acceptance_criteria": [
+        {
+          "id": "001-AC1",
+          "criterion": "BeachHighlights interface exists with bestFor (string[]), vibe (string), and crowdLevel (string) fields",
+          "test_assertion": "TypeScript compilation succeeds with BeachHighlights usage"
+        },
+        {
+          "id": "001-AC2",
+          "criterion": "Beach interface has optional highlights?: BeachHighlights field",
+          "test_assertion": "TypeScript compilation succeeds with beach.highlights access"
+        },
+        {
+          "id": "001-AC3",
+          "criterion": "Beach interface has optional safetyNotes?: string[] field",
+          "test_assertion": "TypeScript compilation succeeds with beach.safetyNotes access"
+        }
+      ],
+      "test_file": null,
+      "no_test_reason": "Type definitions only - verified by TypeScript compiler",
+      "status": "pending",
+      "depends_on": [],
+      "traces_to": {
+        "user_stories": ["US-005", "US-008"],
+        "acceptance_criteria": ["AC-016", "AC-021"],
+        "adr_decisions": []
+      },
+      "technical_notes": "Add BeachHighlights interface before Beach interface. All new fields are optional to maintain backward compatibility. No changes to isBeach type guard needed since new fields are optional.",
+      "context_refs": {
+        "interface_locations": ["shared/src/types/beach.ts:Beach interface", "TECHNICAL_DESIGN.md:## Data Models"],
+        "pattern_files": ["shared/src/types/beach.ts"],
+        "grep_patterns": ["export interface Beach", "BeachHighlights"],
+        "constraints_section": "TECHNICAL_DESIGN.md:## Non-Scope Declaration"
+      },
+      "model": "haiku"
+    },
+    {
+      "id": "002",
+      "title": "Update Tailwind config with warm sand tones and index.css background",
+      "objective": "Add warmer sand tone colors (sand-25, updated sand-50/100) to tailwind.config.js and update index.css body styles to use warm background without dark mode variant.",
+      "task_type": "add_config",
+      "methodology": "direct",
+      "acceptance_criteria": [
+        {
+          "id": "002-AC1",
+          "criterion": "tailwind.config.js sand palette includes sand-25 (#FEFDFB), updated sand-50 (#FBF9F7), and updated sand-100 (#F5F0EB)",
+          "test_assertion": "Tailwind config file contains the new color values"
+        },
+        {
+          "id": "002-AC2",
+          "criterion": "index.css body styles use bg-sand-50 without dark: variant for background",
+          "test_assertion": "index.css body rule does not contain dark:bg-sand-900"
+        }
+      ],
+      "test_file": null,
+      "no_test_reason": "Configuration files - static data with no logic, verified by build succeeding",
+      "status": "pending",
+      "depends_on": [],
+      "traces_to": {
+        "user_stories": ["US-003"],
+        "acceptance_criteria": ["AC-009", "AC-010"],
+        "adr_decisions": ["ADR-001"]
+      },
+      "technical_notes": "Keep darkMode: 'class' in tailwind.config.js per ADR-001 (retain code). Only add/update sand color values. In index.css, remove the dark:text-sand-100 and dark:bg-sand-900 from the body @apply but keep the light mode classes.",
+      "context_refs": {
+        "interface_locations": ["client/tailwind.config.js:colors.sand", "client/src/index.css:body"],
+        "pattern_files": ["client/tailwind.config.js"],
+        "grep_patterns": ["sand:", "dark:bg-sand", "@apply.*bg-sand"],
+        "constraints_section": "ADR.md:## ADR-001"
+      },
+      "model": "haiku"
+    },
+    {
+      "id": "003",
+      "title": "Simplify ThemeContext to light-only and remove theme toggle from Layout",
+      "objective": "Modify ThemeContext.tsx to always use light theme (remove localStorage/toggle logic) and remove the dark mode toggle button and keyboard shortcut from Layout.tsx, per ADR-001.",
+      "task_type": "bug_fix",
+      "methodology": "tdd",
+      "acceptance_criteria": [
+        {
+          "id": "003-AC1",
+          "criterion": "ThemeContext always returns theme: 'light' and does not read/write localStorage for theme",
+          "test_assertion": "expect(result.current.theme).toBe('light')"
+        },
+        {
+          "id": "003-AC2",
+          "criterion": "ThemeProvider removes 'dark' class from document.documentElement",
+          "test_assertion": "expect(document.documentElement.classList.contains('dark')).toBe(false)"
+        },
+        {
+          "id": "003-AC3",
+          "criterion": "Layout.tsx does not render a theme toggle button (no Moon/Sun icon toggle visible)",
+          "test_assertion": "expect(screen.queryByTitle(/switch to/i)).not.toBeInTheDocument()"
+        },
+        {
+          "id": "003-AC4",
+          "criterion": "The 'd' keyboard shortcut no longer toggles dark mode in Layout.tsx",
+          "test_assertion": "After pressing 'd', document.documentElement still has no 'dark' class"
+        }
+      ],
+      "test_file": "client/src/components/Layout.test.tsx",
+      "status": "pending",
+      "depends_on": [],
+      "traces_to": {
+        "user_stories": ["US-003"],
+        "acceptance_criteria": ["AC-008", "AC-011"],
+        "adr_decisions": ["ADR-001"]
+      },
+      "technical_notes": "Per ADR-001: remove toggle UI but keep ThemeProvider and dark: CSS classes in other files. Remove Moon/Sun imports from Layout.tsx. Remove toggleTheme from useTheme destructuring. Remove the keyboard shortcut 'd' handler. The useTheme hook should still export theme (always 'light') but toggleTheme can be removed from the interface.",
+      "context_refs": {
+        "interface_locations": ["client/src/contexts/ThemeContext.tsx:ThemeProvider", "client/src/components/Layout.tsx:toggleTheme"],
+        "pattern_files": ["client/src/contexts/ThemeContext.tsx"],
+        "grep_patterns": ["toggleTheme", "useTheme", "Moon|Sun.*lucide", "key === 'd'"],
+        "constraints_section": "ADR.md:## ADR-001"
+      },
+      "model": "sonnet"
+    },
+    {
+      "id": "004",
+      "title": "Update beach data with correct Vancouver photos, expanded descriptions, highlights, and safety notes",
+      "objective": "Update BEACHES array in shared/src/data/beaches.ts with correct Vancouver beach Unsplash photo URLs, expanded multi-paragraph descriptions, BeachHighlights data, and safetyNotes for each beach.",
+      "task_type": "add_config",
+      "methodology": "direct",
+      "acceptance_criteria": [
+        {
+          "id": "004-AC1",
+          "criterion": "All 9 beaches have updated Unsplash image URLs that reference actual Vancouver beach photos (not generic tropical photos)",
+          "test_assertion": "Each beach.images.hero URL contains a different Unsplash photo ID from the current generic ones"
+        },
+        {
+          "id": "004-AC2",
+          "criterion": "Each beach has an expanded description of at least 2 sentences covering unique features and practical tips",
+          "test_assertion": "beach.description.split('.').length >= 2 for each beach"
+        },
+        {
+          "id": "004-AC3",
+          "criterion": "Each beach has a highlights object with bestFor (non-empty array), vibe (non-empty string), and crowdLevel (non-empty string)",
+          "test_assertion": "beach.highlights.bestFor.length > 0 && beach.highlights.vibe.length > 0"
+        },
+        {
+          "id": "004-AC4",
+          "criterion": "Each beach has safetyNotes array with at least one safety note",
+          "test_assertion": "beach.safetyNotes.length >= 1 for each beach"
+        },
+        {
+          "id": "004-AC5",
+          "criterion": "Photo credit fields are updated to match the new photo's actual photographer",
+          "test_assertion": "beach.images.credit.name is non-empty and differs from old generic credits where photos changed"
+        }
+      ],
+      "test_file": "shared/src/data/beaches.test.ts",
+      "status": "pending",
+      "depends_on": ["001"],
+      "traces_to": {
+        "user_stories": ["US-004", "US-005", "US-008"],
+        "acceptance_criteria": ["AC-012", "AC-013", "AC-014", "AC-015", "AC-016", "AC-021"],
+        "adr_decisions": ["ADR-002"]
+      },
+      "technical_notes": "Search Unsplash for each specific beach name + 'Vancouver'. Use w=1200&q=80 for hero, w=600&q=80 for thumb. If a beach has no good Unsplash result, keep the gradient fallback by setting images to undefined. Update credit fields to match actual photographer. For highlights, use realistic data: bestFor should list 2-4 activities, vibe should be a short phrase, crowdLevel should be descriptive. For safetyNotes, include relevant warnings like 'No lifeguard', 'Cold water year-round', etc.",
+      "context_refs": {
+        "interface_locations": ["shared/src/data/beaches.ts:BEACHES array", "shared/src/types/beach.ts:Beach interface"],
+        "pattern_files": ["shared/src/data/beaches.ts"],
+        "grep_patterns": ["hero:.*unsplash", "description:", "credit:"],
+        "constraints_section": "ADR.md:## ADR-002"
+      },
+      "model": "sonnet"
+    },
+    {
+      "id": "005",
+      "title": "Redesign TideCanvas with improved layout, larger chart, and key tides summary",
+      "objective": "Redesign TideCanvas.tsx to have a cleaner title row (no inline tide values), 220px chart height, and a new 'Key Tides' grid section below the chart showing high/low tide values prominently.",
+      "task_type": "add_endpoint_complex",
+      "methodology": "tdd",
+      "acceptance_criteria": [
+        {
+          "id": "005-AC1",
+          "criterion": "TideCanvas card title row displays only the 'Today's Tides' label without inline high/low values crammed next to it",
+          "test_assertion": "The CardTitle element contains only 'Today's Tides' text and wave icon, no tide height values"
+        },
+        {
+          "id": "005-AC2",
+          "criterion": "The chart container height is 220px (h-[220px] class applied)",
+          "test_assertion": "Chart container element has the h-[220px] class"
+        },
+        {
+          "id": "005-AC3",
+          "criterion": "A Key Tides summary grid appears below the chart displaying each high/low tide with icon, height (at least 16px / text-base), and time (at least 14px / text-sm)",
+          "test_assertion": "Key tides section renders tide entries with TrendingUp/TrendingDown icons, heights, and times"
+        },
+        {
+          "id": "005-AC4",
+          "criterion": "Canvas uses light-mode-optimized colors from TECHNICAL_DESIGN (curve: #0097a7, high: #10b981, low: #06b6d4)",
+          "test_assertion": "CANVAS_CONFIG.colors.light.curve === '#0097a7'"
+        },
+        {
+          "id": "005-AC5",
+          "criterion": "The Now marker displays on the tide curve indicating current time position",
+          "test_assertion": "Canvas renders a vertical line at the current time position"
+        }
+      ],
+      "test_file": "client/src/components/TideCanvas.test.tsx",
+      "status": "pending",
+      "depends_on": ["002"],
+      "traces_to": {
+        "user_stories": ["US-001"],
+        "acceptance_criteria": ["AC-001", "AC-002", "AC-003", "AC-004"],
+        "adr_decisions": ["ADR-003"]
+      },
+      "technical_notes": "Keep existing canvas drawing logic largely intact. Main changes are structural layout around the canvas. Remove tide values from CardTitle area. Add a new div below the canvas with a grid (grid-cols-2 sm:grid-cols-4) showing each tide. Use TrendingUp for high, TrendingDown for low. Update CANVAS_CONFIG padding to { top: 20, right: 16, bottom: 36, left: 44 }. Write new code as light-mode-only (no new dark: classes per ADR-001).",
+      "context_refs": {
+        "interface_locations": ["client/src/components/TideCanvas.tsx:CANVAS_CONFIG", "TECHNICAL_DESIGN.md:### 1. TideCanvas.tsx Redesign"],
+        "pattern_files": ["client/src/components/TideCanvas.tsx"],
+        "grep_patterns": ["CANVAS_CONFIG", "CardTitle.*Today", "class.*h-\\["],
+        "constraints_section": "TECHNICAL_DESIGN.md:### 1. TideCanvas.tsx Redesign"
+      },
+      "model": "sonnet"
+    },
+    {
+      "id": "006",
+      "title": "Redesign TideForecast with wider day cards and larger mini tide curves",
+      "objective": "Update TideForecast.tsx day cards to 160px width with 140x60px mini tide curves, larger typography, and horizontal scroll with snap behavior.",
+      "task_type": "add_endpoint_complex",
+      "methodology": "tdd",
+      "acceptance_criteria": [
+        {
+          "id": "006-AC1",
+          "criterion": "Day cards render at 160px width (w-40 Tailwind class instead of w-36)",
+          "test_assertion": "Day card elements have the w-40 class"
+        },
+        {
+          "id": "006-AC2",
+          "criterion": "Mini tide curve SVG dimensions are at least 140px wide and 60px tall",
+          "test_assertion": "MiniTideCurve SVG has width >= 140 and height >= 60"
+        },
+        {
+          "id": "006-AC3",
+          "criterion": "Tide values in day cards use text-sm (14px) instead of text-xs (12px)",
+          "test_assertion": "Tide value text elements have the text-sm class"
+        },
+        {
+          "id": "006-AC4",
+          "criterion": "Horizontal scrolling container has snap behavior (scroll-snap-type: x mandatory)",
+          "test_assertion": "Scroll container has snap-x and snap-mandatory classes"
+        }
+      ],
+      "test_file": "client/src/components/TideForecast.test.tsx",
+      "status": "pending",
+      "depends_on": ["002"],
+      "traces_to": {
+        "user_stories": ["US-002"],
+        "acceptance_criteria": ["AC-005", "AC-006", "AC-007"],
+        "adr_decisions": ["ADR-003"]
+      },
+      "technical_notes": "Update DayCard width from w-36 to w-40. Update MiniTideCurve internal width/height constants from 120/40 to 140/60. Update SVG viewBox accordingly. Change text-xs to text-sm for tide values. Add snap-x snap-mandatory to scroll container, snap-start to each day card. Write new styles light-mode-only.",
+      "context_refs": {
+        "interface_locations": ["client/src/components/TideForecast.tsx:DayCard", "client/src/components/TideForecast.tsx:MiniTideCurve"],
+        "pattern_files": ["client/src/components/TideForecast.tsx"],
+        "grep_patterns": ["w-36", "width = 120", "height = 40", "text-xs"],
+        "constraints_section": "TECHNICAL_DESIGN.md:### 2. TideForecast.tsx Redesign"
+      },
+      "model": "sonnet"
+    },
+    {
+      "id": "007",
+      "title": "Replace emoji icons with Lucide icons in BeachAmenities component",
+      "objective": "Replace all emoji icons in BeachAmenities.tsx with Lucide React icons and update the visual treatment to distinguish available (emerald) from unavailable (sand/strikethrough) amenities.",
+      "task_type": "create_service",
+      "methodology": "tdd",
+      "acceptance_criteria": [
+        {
+          "id": "007-AC1",
+          "criterion": "AmenityBadge renders a Lucide icon component instead of an emoji string",
+          "test_assertion": "No emoji characters rendered in amenity badges; Lucide SVG elements present"
+        },
+        {
+          "id": "007-AC2",
+          "criterion": "Available amenities display with emerald-toned background (bg-emerald-50) and colored icon",
+          "test_assertion": "Active amenity badges contain bg-emerald-50 class"
+        },
+        {
+          "id": "007-AC3",
+          "criterion": "Unavailable amenities display with sand background (bg-sand-50), grayed icon (text-sand-400), and strikethrough text",
+          "test_assertion": "Inactive amenity badges contain bg-sand-50 and line-through classes"
+        }
+      ],
+      "test_file": "client/src/components/BeachAmenities.test.tsx",
+      "status": "pending",
+      "depends_on": ["002"],
+      "traces_to": {
+        "user_stories": ["US-007"],
+        "acceptance_criteria": ["AC-019", "AC-020"],
+        "adr_decisions": []
+      },
+      "technical_notes": "Icon mapping: parking -> ParkingCircle, restrooms -> Bath, showers -> ShowerHead, lifeguard -> ShieldCheck, food -> UtensilsCrossed, dog -> Dog, wheelchair -> Accessibility, volleyball -> Circle, firepits -> Flame. Change AmenityBadge to accept icon as LucideIcon type instead of string. Update active/inactive color classes. Remove dark: variants from new code. Existing test checks for emoji absence and ocean colors - update tests accordingly.",
+      "context_refs": {
+        "interface_locations": ["client/src/components/BeachAmenities.tsx:AmenityBadge", "TECHNICAL_DESIGN.md:### 7. BeachAmenities.tsx"],
+        "pattern_files": ["client/src/components/BeachAmenities.tsx"],
+        "grep_patterns": ["AmenityBadge", "icon.*emoji", "lucide-react"],
+        "constraints_section": "TECHNICAL_DESIGN.md:### 7. BeachAmenities.tsx - Lucide Icons"
+      },
+      "model": "sonnet"
+    },
+    {
+      "id": "008",
+      "title": "Create BeachScore component with scoring algorithm and recommendation text",
+      "objective": "Create a new BeachScore.tsx component that synthesizes weather, tide, UV, wind, and water quality data into a 0-100 score with a natural-language recommendation, as specified in the TECHNICAL_DESIGN.",
+      "task_type": "create_service",
+      "methodology": "tdd",
+      "acceptance_criteria": [
+        {
+          "id": "008-AC1",
+          "criterion": "BeachScore component renders a numeric score between 0-100 based on weather, temperature, wind, UV, water quality, and tide inputs",
+          "test_assertion": "Given sunny weather at 22C, wind 12km/h, UV 5, good water quality: score >= 80"
+        },
+        {
+          "id": "008-AC2",
+          "criterion": "BeachScore displays a visual progress bar with gradient coloring reflecting the score quality",
+          "test_assertion": "Progress bar element has width proportional to score and appropriate color class"
+        },
+        {
+          "id": "008-AC3",
+          "criterion": "BeachScore displays a natural-language recommendation string describing top contributing factors",
+          "test_assertion": "Recommendation text is non-empty and references weather conditions"
+        },
+        {
+          "id": "008-AC4",
+          "criterion": "BeachScore gracefully handles null/missing data by hiding entirely when weather data is unavailable",
+          "test_assertion": "When weather prop is null, component returns null"
+        }
+      ],
+      "test_file": "client/src/components/BeachScore.test.tsx",
+      "status": "pending",
+      "depends_on": ["002"],
+      "traces_to": {
+        "user_stories": ["US-006"],
+        "acceptance_criteria": ["AC-017", "AC-018"],
+        "adr_decisions": []
+      },
+      "technical_notes": "Scoring algorithm from TECHNICAL_DESIGN: Base 50, Weather +20/-20, Temperature +15/+10/+5, Wind +10/-15, UV +5/-5, Water quality +5/-30, Tide timing +5. Props: weather (WeatherForecast | null), tides (TideData | null), waterQuality (WaterQualityStatus | null). Generate recommendation text from the top 2-3 positive/negative contributing factors. Use Lucide Target icon for the section header. Light-mode-only styles.",
+      "context_refs": {
+        "interface_locations": ["shared/src/types/weather.ts:WeatherForecast", "shared/src/types/tide.ts:TideData", "shared/src/types/waterQuality.ts:WaterQualityStatus"],
+        "pattern_files": ["client/src/components/BestTimeToVisit.tsx"],
+        "grep_patterns": ["WeatherForecast", "TideData", "WaterQualityStatus"],
+        "constraints_section": "TECHNICAL_DESIGN.md:### 5. BeachScore.tsx"
+      },
+      "model": "sonnet"
+    },
+    {
+      "id": "009",
+      "title": "Create SafetyInfo component with water quality alerts and safety warnings",
+      "objective": "Create a new SafetyInfo.tsx component that displays beach safety information including water quality advisories, lifeguard status, and beach-specific safety notes.",
+      "task_type": "create_service",
+      "methodology": "tdd",
+      "acceptance_criteria": [
+        {
+          "id": "009-AC1",
+          "criterion": "SafetyInfo displays a prominent warning banner when water quality is 'advisory' or 'closed'",
+          "test_assertion": "When waterQuality.level === 'advisory', a warning banner with amber/red background is rendered"
+        },
+        {
+          "id": "009-AC2",
+          "criterion": "SafetyInfo shows positive status indicators (green check icons) when no warnings apply (e.g., water quality good, lifeguard on duty)",
+          "test_assertion": "When waterQuality.level === 'good', green check icon and 'Water quality is good' text displayed"
+        },
+        {
+          "id": "009-AC3",
+          "criterion": "SafetyInfo displays beach-specific safety notes from beach.safetyNotes array",
+          "test_assertion": "Each string in safetyNotes array is rendered as a list item"
+        },
+        {
+          "id": "009-AC4",
+          "criterion": "SafetyInfo shows informational message (not warning) for 'unknown' or 'off-season' water quality",
+          "test_assertion": "When waterQuality.level === 'off-season', info icon shown, no warning banner"
+        }
+      ],
+      "test_file": "client/src/components/SafetyInfo.test.tsx",
+      "status": "pending",
+      "depends_on": ["001", "002"],
+      "traces_to": {
+        "user_stories": ["US-008"],
+        "acceptance_criteria": ["AC-021", "AC-022"],
+        "adr_decisions": []
+      },
+      "technical_notes": "Props: beach (Beach), waterQuality (WaterQualityStatus | null), weather (WeatherForecast | null). Display water quality status with appropriate severity. Show lifeguard info from beach.amenities.lifeguard. Show beach.safetyNotes items. Add dynamic warnings for high UV (>7) and high wind (>30 km/h) from weather data. Include disclaimer that safety info is not real-time. Use ShieldCheck icon for section header. Light-mode-only styles.",
+      "context_refs": {
+        "interface_locations": ["shared/src/types/beach.ts:Beach", "shared/src/types/waterQuality.ts:WaterQualityStatus", "TECHNICAL_DESIGN.md:### 6. SafetyInfo.tsx"],
+        "pattern_files": ["client/src/components/WaterQuality.tsx"],
+        "grep_patterns": ["WaterQualityStatus", "waterQuality.*level", "advisory|closed"],
+        "constraints_section": "TECHNICAL_DESIGN.md:### 6. SafetyInfo.tsx"
+      },
+      "model": "sonnet"
+    },
+    {
+      "id": "010",
+      "title": "Integrate new components into BeachDetail page and add About section",
+      "objective": "Update BeachDetail.tsx to integrate BeachScore, SafetyInfo, the About section with highlights, and photo credit attribution. Reorder sections per the wireframe layout.",
+      "task_type": "add_endpoint_complex",
+      "methodology": "tdd",
+      "acceptance_criteria": [
+        {
+          "id": "010-AC1",
+          "criterion": "BeachDetail page renders a BeachScore component in the 'Should you go today?' section alongside existing BestTimeToVisit and ActivityRecommendations",
+          "test_assertion": "BeachScore component is present within the 'Should you go today?' section"
+        },
+        {
+          "id": "010-AC2",
+          "criterion": "BeachDetail page renders a Safety section with SafetyInfo component between Webcam and Plan Your Visit sections",
+          "test_assertion": "SafetyInfo component renders with 'Beach Safety' heading"
+        },
+        {
+          "id": "010-AC3",
+          "criterion": "The Plan Your Visit section includes an 'About [Beach Name]' subsection with the expanded description text and Beach Highlights (bestFor, vibe, crowdLevel)",
+          "test_assertion": "About section renders with beach name, multi-sentence description, and highlights badges"
+        },
+        {
+          "id": "010-AC4",
+          "criterion": "Hero image displays photo credit attribution (photographer name) overlaid or below the image",
+          "test_assertion": "Photo credit text (photographer name) is rendered near the hero image"
+        },
+        {
+          "id": "010-AC5",
+          "criterion": "Section heading h2 elements use light-mode-only text classes (no dark: variants on new code)",
+          "test_assertion": "New section headings do not contain dark: class prefixes"
+        }
+      ],
+      "test_file": "client/src/pages/BeachDetail.test.tsx",
+      "status": "pending",
+      "depends_on": ["004", "005", "006", "007", "008", "009"],
+      "traces_to": {
+        "user_stories": ["US-004", "US-005", "US-006", "US-008"],
+        "acceptance_criteria": ["AC-013", "AC-015", "AC-016", "AC-017", "AC-021"],
+        "adr_decisions": ["ADR-001"]
+      },
+      "technical_notes": "Import BeachScore and SafetyInfo. Add BeachScore to the 'Should you go today?' grid. Add Safety section after Webcam. In PlanYourVisit or as a new section, add About with beach.description and beach.highlights rendering. Add photo credit overlay on the hero image (bottom-right, semi-transparent). Pass waterQuality and weather to new components. Keep existing components and layout structure for unchanged sections. Do not modify existing dark: classes in the file per ADR-001.",
+      "context_refs": {
+        "interface_locations": ["client/src/pages/BeachDetail.tsx", "WIREFRAMES.md:## W-001"],
+        "pattern_files": ["client/src/pages/BeachDetail.tsx"],
+        "grep_patterns": ["Should you go today", "Plan your visit", "import.*BeachScore", "import.*SafetyInfo"],
+        "constraints_section": "TECHNICAL_DESIGN.md:## Non-Scope Declaration"
+      },
+      "model": "sonnet"
+    },
+    {
+      "id": "011",
+      "title": "Delete unused TideTimeline and TideChart components",
+      "objective": "Remove the unused TideTimeline.tsx and TideChart.tsx component files that are superseded by the redesigned TideCanvas and TideForecast, per the TECHNICAL_DESIGN files-to-delete list.",
+      "task_type": "rename_refactor",
+      "methodology": "direct",
+      "acceptance_criteria": [
+        {
+          "id": "011-AC1",
+          "criterion": "TideTimeline.tsx file is deleted from client/src/components/",
+          "test_assertion": "File client/src/components/TideTimeline.tsx does not exist"
+        },
+        {
+          "id": "011-AC2",
+          "criterion": "TideChart.tsx file is deleted from client/src/components/",
+          "test_assertion": "File client/src/components/TideChart.tsx does not exist"
+        },
+        {
+          "id": "011-AC3",
+          "criterion": "No remaining imports reference TideTimeline or TideChart in any source file",
+          "test_assertion": "grep for 'TideTimeline|TideChart' across client/src/ returns zero results"
+        },
+        {
+          "id": "011-AC4",
+          "criterion": "All existing tests pass after deletion",
+          "test_assertion": "pnpm test exits with code 0"
+        }
+      ],
+      "test_file": null,
+      "no_test_reason": "Dead code removal - existing tests passing is the verification",
+      "status": "pending",
+      "depends_on": ["010"],
+      "traces_to": {
+        "user_stories": [],
+        "acceptance_criteria": [],
+        "adr_decisions": ["ADR-003"]
+      },
+      "technical_notes": "These components are not imported or used anywhere in the current codebase. Verify with grep before deleting. If any imports are found, remove them. Run full test suite to confirm no breakage.",
+      "context_refs": {
+        "interface_locations": ["client/src/components/TideTimeline.tsx", "client/src/components/TideChart.tsx"],
+        "pattern_files": [],
+        "grep_patterns": ["import.*TideTimeline", "import.*TideChart", "from.*TideTimeline", "from.*TideChart"],
+        "constraints_section": "TECHNICAL_DESIGN.md:### Files to Delete"
+      },
+      "model": "haiku"
+    }
+  ]
+}

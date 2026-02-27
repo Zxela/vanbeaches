@@ -133,11 +133,11 @@ function DayCard({ day, isToday }: DayCardProps) {
   return (
     <div
       className={cn(
-        'flex-shrink-0 w-36 rounded-xl p-3',
+        'flex-shrink-0 w-40 rounded-xl p-3',
         'border transition-all duration-200',
         isToday
-          ? 'bg-ocean-100 dark:bg-ocean-900/30 border-ocean-300 dark:border-ocean-700'
-          : 'bg-white/50 dark:bg-sand-800/50 border-sand-200/50 dark:border-sand-700/50 hover:border-ocean-200 dark:hover:border-ocean-800',
+          ? 'bg-ocean-100 dark:bg-ocean-900/30 border-ocean-300 dark:border-ocean-700 ring-2 ring-ocean-200'
+          : 'bg-white dark:bg-sand-800/50 border-sand-200 dark:border-sand-700/50 hover:border-ocean-200 dark:hover:border-ocean-800',
       )}
     >
       {/* Day label */}
@@ -161,7 +161,7 @@ function DayCard({ day, isToday }: DayCardProps) {
           .filter((t) => t.type === 'high')
           .slice(0, 2)
           .map((tide) => (
-            <div key={tide.time} className="flex items-center justify-between text-xs">
+            <div key={tide.time} className="flex items-center justify-between text-sm">
               <span className="flex items-center gap-1 text-tide-high">
                 <Icon icon={TrendingUp} size="xs" />
                 <span className="font-medium">{formatNumber(tide.height)}m</span>
@@ -175,7 +175,7 @@ function DayCard({ day, isToday }: DayCardProps) {
           .filter((t) => t.type === 'low')
           .slice(0, 2)
           .map((tide) => (
-            <div key={tide.time} className="flex items-center justify-between text-xs">
+            <div key={tide.time} className="flex items-center justify-between text-sm">
               <span className="flex items-center gap-1 text-tide-low">
                 <Icon icon={TrendingDown} size="xs" />
                 <span className="font-medium">{formatNumber(tide.height)}m</span>
@@ -195,8 +195,8 @@ interface MiniTideCurveProps {
 }
 
 function MiniTideCurve({ tides }: MiniTideCurveProps) {
-  const width = 120;
-  const height = 40;
+  const width = 140;
+  const height = 60;
   const padding = 4;
 
   const { path, fillPath, points } = useMemo(() => {

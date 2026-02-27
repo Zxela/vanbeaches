@@ -1,9 +1,8 @@
 import { BEACHES } from '@van-beaches/shared';
 import { AnimatePresence, motion } from 'framer-motion';
-import { BarChart3, Home, Moon, Star, Sun, Waves } from 'lucide-react';
+import { BarChart3, Home, Star, Waves } from 'lucide-react';
 import { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { useTheme } from '../contexts/ThemeContext';
 import { useFavorites } from '../hooks/useFavorites';
 import { cn } from '../lib/utils';
 import { Icon } from './ui';
@@ -13,7 +12,6 @@ export function MobileBottomNav() {
   const location = useLocation();
   const navigate = useNavigate();
   const { favorites } = useFavorites();
-  const { theme, toggleTheme } = useTheme();
 
   const isDiscover = location.pathname === '/' || location.pathname === '/discover';
   const currentBeachId = location.pathname.startsWith('/beach/')
@@ -152,37 +150,6 @@ export function MobileBottomNav() {
             <span className="text-xs mt-1 font-medium">Compare</span>
           </Link>
 
-          <motion.button
-            type="button"
-            onClick={toggleTheme}
-            className="flex flex-col items-center justify-center w-16 h-full text-sand-500 dark:text-sand-400 transition-colors"
-            whileTap={{ scale: 0.95 }}
-          >
-            <AnimatePresence mode="wait">
-              {theme === 'dark' ? (
-                <motion.span
-                  key="sun"
-                  initial={{ rotate: -90, opacity: 0 }}
-                  animate={{ rotate: 0, opacity: 1 }}
-                  exit={{ rotate: 90, opacity: 0 }}
-                  transition={{ duration: 0.15 }}
-                >
-                  <Icon icon={Sun} size="lg" color="warning" />
-                </motion.span>
-              ) : (
-                <motion.span
-                  key="moon"
-                  initial={{ rotate: 90, opacity: 0 }}
-                  animate={{ rotate: 0, opacity: 1 }}
-                  exit={{ rotate: -90, opacity: 0 }}
-                  transition={{ duration: 0.15 }}
-                >
-                  <Icon icon={Moon} size="lg" />
-                </motion.span>
-              )}
-            </AnimatePresence>
-            <span className="text-xs mt-1 font-medium">{theme === 'dark' ? 'Light' : 'Dark'}</span>
-          </motion.button>
         </div>
       </nav>
     </>
