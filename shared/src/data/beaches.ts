@@ -9,12 +9,12 @@ export const BEACHES: Beach[] = [
     tideStationId: '5cebf1de3d0f4a073c4bb943',
     webcamUrl: null,
     description:
-      "One of Vancouver's most popular urban beaches with stunning sunset views and a lively atmosphere.",
+      "English Bay is Vancouver's most iconic urban beach, stretching along the West End with sweeping views of the North Shore mountains and spectacular Pacific sunsets. The wide sandy beach draws thousands of visitors year-round, hosting everything from casual swims to major events like the Honda Celebration of Light fireworks festival. With the seawall running along its edge and countless restaurants and cafes steps away, English Bay is the beating heart of Vancouver's beach culture.",
     tagline: "Vancouver's golden sunset amphitheatre",
     images: {
-      hero: 'https://images.unsplash.com/photo-1559128010-7c1ad6e1b6a5?w=1200&q=80',
-      thumb: 'https://images.unsplash.com/photo-1559128010-7c1ad6e1b6a5?w=600&q=80',
-      credit: { name: 'Frank McKenna', username: 'frankiefoto' },
+      hero: 'https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=1200&q=80',
+      thumb: 'https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=600&q=80',
+      credit: { name: 'Vadim Sherbakov', username: 'madebyvadim' },
     },
     amenities: {
       parking: 'street',
@@ -28,6 +28,17 @@ export const BEACHES: Beach[] = [
       firepits: false,
     },
     activities: ['swimming', 'volleyball', 'sunbathing', 'people-watching', 'sunset viewing'],
+    highlights: {
+      bestFor: ['sunset viewing', 'people-watching', 'swimming', 'events'],
+      vibe: 'Lively urban beach with a festive atmosphere',
+      crowdLevel: 'Very busy in summer, especially evenings',
+    },
+    safetyNotes: [
+      'Lifeguard on duty late June through Labour Day',
+      'Cold water year-round — average summer temperature 17-20°C',
+      'Jellyfish occasionally present in late summer',
+      'Strong currents possible during storm events',
+    ],
   },
   {
     id: 'jericho-beach',
@@ -37,12 +48,12 @@ export const BEACHES: Beach[] = [
     tideStationId: '5cebf1de3d0f4a073c4bb943',
     webcamUrl: null,
     description:
-      'Family-friendly beach with calm waters, a sailing centre, and grassy areas perfect for picnics.',
+      'Jericho Beach stretches along the western edge of Vancouver with a broad sandy foreshore, calm sheltered waters, and magnificent views across English Bay toward the North Shore mountains. Home to the Jericho Sailing Centre — one of the largest sailing clubs in Canada — the beach is a hub for watersport enthusiasts of all skill levels. Expansive grassy picnic areas and the historic Jericho Arts Centre make it equally popular with families and festival-goers.',
     tagline: 'Where sails meet mountains',
     images: {
-      hero: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1200&q=80',
-      thumb: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=80',
-      credit: { name: 'Sean Oulashin', username: 'oulashin' },
+      hero: 'https://images.unsplash.com/photo-1560969184-10fe8719e047?w=1200&q=80',
+      thumb: 'https://images.unsplash.com/photo-1560969184-10fe8719e047?w=600&q=80',
+      credit: { name: 'Keagan Henman', username: 'henmankk' },
     },
     amenities: {
       parking: 'paid',
@@ -56,6 +67,17 @@ export const BEACHES: Beach[] = [
       firepits: false,
     },
     activities: ['swimming', 'sailing', 'windsurfing', 'kayaking', 'picnicking'],
+    highlights: {
+      bestFor: ['sailing', 'kayaking', 'picnicking', 'family outings'],
+      vibe: 'Relaxed and sporty with a sailing-club energy',
+      crowdLevel: 'Moderate — quieter than Kits or English Bay',
+    },
+    safetyNotes: [
+      'Lifeguard on duty late June through Labour Day',
+      'Cold water year-round — average summer temperature 17-19°C',
+      'Shallow gradient — good for young swimmers close to shore',
+      'No lifeguard outside summer season',
+    ],
   },
   {
     id: 'kitsilano-beach',
@@ -65,12 +87,12 @@ export const BEACHES: Beach[] = [
     tideStationId: '5cebf1de3d0f4a073c4bb943',
     webcamUrl: null,
     description:
-      "Vancouver's largest and most popular beach featuring a heated saltwater pool, tennis courts, and basketball.",
+      "Kitsilano Beach — affectionately known as Kits — is Vancouver's largest and most energetic beach, beloved for its endless sports courts, the enormous heated outdoor saltwater pool, and postcard-perfect views of the downtown skyline and North Shore peaks. The beach draws a young, active crowd who come to play volleyball, basketball, and tennis before cooling off in the pool or the ocean. Kits Pool is the longest outdoor pool in Canada at 137 metres, making it a destination in itself.",
     tagline: 'The sporty heart of the westside',
     images: {
-      hero: 'https://images.unsplash.com/photo-1473116763249-2faaef81ccda?w=1200&q=80',
-      thumb: 'https://images.unsplash.com/photo-1473116763249-2faaef81ccda?w=600&q=80',
-      credit: { name: 'Cristina Gottardi', username: 'cristina_gottardi' },
+      hero: 'https://images.unsplash.com/photo-1598902108854-10e335adac99?w=1200&q=80',
+      thumb: 'https://images.unsplash.com/photo-1598902108854-10e335adac99?w=600&q=80',
+      credit: { name: 'James Wheeler', username: 'souvenirpixels' },
     },
     amenities: {
       parking: 'paid',
@@ -84,6 +106,17 @@ export const BEACHES: Beach[] = [
       firepits: false,
     },
     activities: ['swimming', 'volleyball', 'basketball', 'tennis', 'pool swimming'],
+    highlights: {
+      bestFor: ['volleyball', 'swimming', 'pool swimming', 'sunbathing'],
+      vibe: 'Active and social — the beach to be seen at',
+      crowdLevel: 'Very busy all summer long',
+    },
+    safetyNotes: [
+      'Lifeguard on duty late June through Labour Day',
+      'Cold ocean water year-round — heated pool available as alternative',
+      'Can get very crowded on hot days — arrive early for parking',
+      'Strong undertow possible during westerly swells',
+    ],
   },
   {
     id: 'locarno-beach',
@@ -93,12 +126,12 @@ export const BEACHES: Beach[] = [
     tideStationId: '5cebf1de3d0f4a073c4bb943',
     webcamUrl: null,
     description:
-      'Quieter beach with shallow waters stretching far at low tide, popular for walking and beachcombing.',
+      "Locarno Beach is a quiet, unhurried stretch of sand nestled between Jericho and Spanish Banks, offering some of the most dramatic low-tide exposed flats on Vancouver's shoreline. At low tide the ocean retreats hundreds of metres, revealing a vast sandy playground for beachcombers, waders, and birders. The beach's free parking, relaxed atmosphere, and dog-friendly zones make it a favourite neighbourhood escape away from the busier westside beaches.",
     tagline: 'Peaceful shores and endless tidal flats',
     images: {
-      hero: 'https://images.unsplash.com/photo-1520942702018-0862200e6873?w=1200&q=80',
-      thumb: 'https://images.unsplash.com/photo-1520942702018-0862200e6873?w=600&q=80',
-      credit: { name: 'Khachik Simonian', username: 'khachiksimonian' },
+      hero: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1200&q=80',
+      thumb: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=80',
+      credit: { name: 'Sean Oulashin', username: 'oulashin' },
     },
     amenities: {
       parking: 'free',
@@ -112,6 +145,17 @@ export const BEACHES: Beach[] = [
       firepits: false,
     },
     activities: ['beachcombing', 'dog walking', 'walking', 'wading', 'birdwatching'],
+    highlights: {
+      bestFor: ['beachcombing', 'dog walking', 'birdwatching', 'peaceful walks'],
+      vibe: 'Quiet and unhurried — a neighbourhood gem',
+      crowdLevel: 'Low to moderate — rarely crowded',
+    },
+    safetyNotes: [
+      'No lifeguard on duty',
+      'Cold water year-round — not recommended for extended swimming',
+      'Tidal flats can be slippery with algae at low tide',
+      'Currents can be unpredictable in the tidal channels',
+    ],
   },
   {
     id: 'second-beach',
@@ -121,12 +165,12 @@ export const BEACHES: Beach[] = [
     tideStationId: '5cebf1de3d0f4a073c4bb943',
     webcamUrl: null,
     description:
-      'Stanley Park beach with a heated outdoor pool, playground, and beautiful forest backdrop.',
+      "Second Beach sits in the southern corner of Stanley Park, offering a family-friendly atmosphere with the park's towering Douglas firs as a dramatic backdrop. The beach is anchored by a large heated outdoor pool — open in summer — and a playground that keeps younger visitors entertained for hours. Walking or cycling the Stanley Park seawall to reach Second Beach is half the adventure, with views across English Bay to the Strait of Georgia.",
     tagline: 'Stanley Park pool days and forest trails',
     images: {
-      hero: 'https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?w=1200&q=80',
-      thumb: 'https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?w=600&q=80',
-      credit: { name: 'Shifaaz Shamoon', username: 'sotti' },
+      hero: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=1200&q=80',
+      thumb: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=600&q=80',
+      credit: { name: 'Anastasia Taioglou', username: 'taisiia_shestopal' },
     },
     amenities: {
       parking: 'paid',
@@ -140,6 +184,17 @@ export const BEACHES: Beach[] = [
       firepits: false,
     },
     activities: ['swimming', 'pool swimming', 'playground', 'cycling', 'rollerblading'],
+    highlights: {
+      bestFor: ['family outings', 'pool swimming', 'cycling', 'playground'],
+      vibe: 'Family-friendly with a Stanley Park forest backdrop',
+      crowdLevel: 'Busy on summer weekends, manageable mid-week',
+    },
+    safetyNotes: [
+      'Lifeguard on duty late June through Labour Day (beach and pool)',
+      'Cold ocean water year-round — heated pool available',
+      'Seawall can be busy with cyclists — watch for bikes near the path',
+      'No lifeguard on duty outside summer season',
+    ],
   },
   {
     id: 'spanish-banks',
@@ -149,12 +204,12 @@ export const BEACHES: Beach[] = [
     tideStationId: '5cebf1de3d0f4a073c4bb943',
     webcamUrl: null,
     description:
-      'Expansive beach known for spectacular low tides, kiteboarding, and mountain views.',
+      "Spanish Banks is Vancouver's widest and most expansive beach, stretching over three kilometres from the UBC endowment lands with views that take in the entire North Shore and Vancouver Island on a clear day. At low tide the beach extends so far seaward that it feels almost limitless — making it a paradise for kiteboarding, kite flying, and long barefoot walks. Firepits in designated areas make it one of the few places in the city where you can legally enjoy an evening bonfire on the sand.",
     tagline: 'Vast sands, big kites, bigger mountains',
     images: {
-      hero: 'https://images.unsplash.com/photo-1471922694854-ff1b63b20054?w=1200&q=80',
-      thumb: 'https://images.unsplash.com/photo-1471922694854-ff1b63b20054?w=600&q=80',
-      credit: { name: 'Elizeu Dias', username: 'elishavision' },
+      hero: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1200&q=80',
+      thumb: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=600&q=80',
+      credit: { name: 'Chris Lawton', username: 'chrislawton' },
     },
     amenities: {
       parking: 'free',
@@ -168,6 +223,18 @@ export const BEACHES: Beach[] = [
       firepits: true,
     },
     activities: ['kiteboarding', 'volleyball', 'dog walking', 'bonfires', 'sunset viewing'],
+    highlights: {
+      bestFor: ['kiteboarding', 'bonfires', 'dog walking', 'sunset viewing'],
+      vibe: 'Wide-open and windswept — great for kite sports',
+      crowdLevel: 'Moderate — spreads out across a huge area',
+    },
+    safetyNotes: [
+      'No lifeguard on duty',
+      'Cold water year-round — not recommended for extended swimming',
+      'Strong onshore winds can make conditions challenging for swimmers',
+      'Kiteboarding zone — watch for kites and lines near the water',
+      'Bonfires permitted in designated metal firepits only',
+    ],
   },
   {
     id: 'sunset-beach',
@@ -177,12 +244,12 @@ export const BEACHES: Beach[] = [
     tideStationId: '5cebf1de3d0f4a073c4bb943',
     webcamUrl: null,
     description:
-      'Downtown beach along False Creek with ferry access and views of the city skyline.',
+      "Sunset Beach lines the False Creek shoreline in the West End, offering an intimate urban beach experience with stunning views of the Burrard Bridge and the city skyline reflected in the water. The beach is a key stop on the seawall between the West End and Granville Island, drawing cyclists, rollerbladers, kayakers, and paddleboarders alongside sunbathers. Aquabus and False Creek Ferries stop nearby, making it easy to explore Granville Island and beyond without a car.",
     tagline: 'City skyline meets ocean breeze',
     images: {
-      hero: 'https://images.unsplash.com/photo-1505142468610-359e7d316be0?w=1200&q=80',
-      thumb: 'https://images.unsplash.com/photo-1505142468610-359e7d316be0?w=600&q=80',
-      credit: { name: 'Linus Nylund', username: 'dreamsoftheoceans' },
+      hero: 'https://images.unsplash.com/photo-1559494007-9f5847c49d94?w=1200&q=80',
+      thumb: 'https://images.unsplash.com/photo-1559494007-9f5847c49d94?w=600&q=80',
+      credit: { name: 'Ralph (Ravi) Kayden', username: 'ralphkayden' },
     },
     amenities: {
       parking: 'street',
@@ -196,6 +263,17 @@ export const BEACHES: Beach[] = [
       firepits: false,
     },
     activities: ['swimming', 'volleyball', 'kayaking', 'paddleboarding', 'cycling'],
+    highlights: {
+      bestFor: ['cycling', 'paddleboarding', 'people-watching', 'swimming'],
+      vibe: 'Urban and active — right in the heart of the city',
+      crowdLevel: 'Busy year-round, very busy in summer',
+    },
+    safetyNotes: [
+      'Lifeguard on duty late June through Labour Day',
+      'Cold water year-round — average summer temperature 17-20°C',
+      'Seawall traffic heavy — cyclists have right of way on the path',
+      'Boat traffic on False Creek — stay clear of the navigation channel',
+    ],
   },
   {
     id: 'third-beach',
@@ -205,7 +283,7 @@ export const BEACHES: Beach[] = [
     tideStationId: '5cebf1de3d0f4a073c4bb943',
     webcamUrl: null,
     description:
-      'Secluded Stanley Park gem with stunning sunsets, rainforest trails, and a relaxed vibe.',
+      "Third Beach is Stanley Park's best-kept secret — a crescent of golden sand tucked beneath old-growth cedar and Douglas fir, accessible only by foot or bike along the seawall. The seclusion keeps crowds manageable even on peak summer days, and the west-facing orientation delivers some of the finest sunsets in the city, made even better by a legal bonfire in one of the designated firepits. Locals know to arrive early on warm evenings to claim a firepit spot before they disappear.",
     tagline: 'Hidden rainforest cove with bonfire sunsets',
     images: {
       hero: 'https://images.unsplash.com/photo-1519046904884-53103b34b206?w=1200&q=80',
@@ -224,6 +302,18 @@ export const BEACHES: Beach[] = [
       firepits: true,
     },
     activities: ['sunset viewing', 'bonfires', 'hiking', 'swimming', 'photography'],
+    highlights: {
+      bestFor: ['sunset viewing', 'bonfires', 'photography', 'secluded swimming'],
+      vibe: 'Secluded and atmospheric — old-growth forest meets sea',
+      crowdLevel: 'Low to moderate — no road access keeps it quiet',
+    },
+    safetyNotes: [
+      'No lifeguard on duty',
+      'Cold water year-round — average summer temperature 16-19°C',
+      'No road access — arrive by seawall on foot or bicycle',
+      'Bonfires permitted in designated metal firepits only',
+      'Rocky sections of beach — water shoes recommended',
+    ],
   },
   {
     id: 'trout-lake',
@@ -233,12 +323,12 @@ export const BEACHES: Beach[] = [
     tideStationId: null,
     webcamUrl: null,
     description:
-      'East Vancouver freshwater lake with a sandy beach, farmers market, and community vibe.',
+      "Trout Lake — officially John Hendry Park — is East Vancouver's beloved freshwater swimming hole, offering warm lake water that heats up far more than the ocean ever does in summer. The sandy beach, supervised swim area, and grassy park make it a community staple, especially on hot days when the ocean beaches are too crowded or the water too cold. The famous Trout Lake Farmers Market runs on Saturdays from May through October right in the park, adding a vibrant community atmosphere.",
     tagline: 'East Van freshwater escape and community hub',
     images: {
       hero: 'https://images.unsplash.com/photo-1506953823976-52e1fdc0149a?w=1200&q=80',
       thumb: 'https://images.unsplash.com/photo-1506953823976-52e1fdc0149a?w=600&q=80',
-      credit: { name: 'Michael Block', username: 'michael_block' },
+      credit: { name: 'Hans Isaacson', username: 'mcatelier' },
     },
     amenities: {
       parking: 'street',
@@ -252,6 +342,17 @@ export const BEACHES: Beach[] = [
       firepits: false,
     },
     activities: ['swimming', 'dog walking', 'picnicking', 'farmers market', 'community events'],
+    highlights: {
+      bestFor: ['freshwater swimming', 'picnicking', 'farmers market', 'dog walking'],
+      vibe: 'Laid-back East Van community — warm and welcoming',
+      crowdLevel: 'Busy on hot weekends, calm mid-week mornings',
+    },
+    safetyNotes: [
+      'Lifeguard on duty late June through Labour Day in designated swim area',
+      'Freshwater lake — warmer than ocean beaches in summer',
+      'Blue-green algae (cyanobacteria) advisories may be issued in late summer — check City of Vancouver notices',
+      'Dogs must be leashed in the swim area and on the beach',
+    ],
   },
 ];
 
