@@ -1,7 +1,16 @@
 import type { WeatherForecast } from '@van-beaches/shared';
 import { Star } from 'lucide-react';
-import { Card, CardContent, CardTitle } from './ui';
-import { Icon } from './ui';
+import {
+  type ActivityRating,
+  BAD_WEATHER,
+  FAIR_WEATHER,
+  GOOD_WEATHER,
+  RATING_COLORS,
+  TEMP,
+  UV,
+  WIND,
+} from '../lib/constants';
+import { Card, CardContent, CardTitle, Icon } from './ui';
 
 interface ActivityRecommendationsProps {
   weather: WeatherForecast | null;
@@ -11,127 +20,158 @@ interface ActivityRecommendationsProps {
 interface Recommendation {
   activity: string;
   icon: string;
-  rating: 'excellent' | 'good' | 'fair' | 'poor';
+  rating: ActivityRating;
   reason: string;
+}
+
+interface Conditions {
+  temperature: number;
+  windSpeed: number;
+  condition: string;
+  uvIndex: number;
+}
+
+type ActivityRule = {
+  activity: string;
+  icon: string;
+  requires?: string;
+  evaluate: (c: Conditions) => { rating: ActivityRating; reason: string } | null;
+};
+
+const ACTIVITY_RULES: ActivityRule[] = [
+  {
+    activity: 'Swimming',
+    icon: '\u{1F3CA}',
+    evaluate: ({ temperature, condition }) => {
+      if (temperature >= TEMP.SWIMMING_MIN && GOOD_WEATHER.includes(condition as typeof GOOD_WEATHER[number])) {
+        return {
+          rating: temperature >= TEMP.SWIMMING_EXCELLENT ? 'excellent' : 'good',
+          reason: 'Great water conditions',
+        };
+      }
+      if (temperature >= TEMP.WALKING_MIN) {
+        return { rating: 'fair', reason: 'Water may be cool' };
+      }
+      return null;
+    },
+  },
+  {
+    activity: 'Sunbathing',
+    icon: '\u2600\uFE0F',
+    evaluate: ({ temperature, windSpeed, condition, uvIndex }) => {
+      if (
+        temperature < TEMP.SUNBATHING_MIN ||
+        windSpeed >= WIND.MODERATE ||
+        !GOOD_WEATHER.includes(condition as typeof GOOD_WEATHER[number])
+      ) {
+        return null;
+      }
+      if (uvIndex <= UV.MODERATE) {
+        return {
+          rating: temperature >= TEMP.SUNBATHING_EXCELLENT ? 'excellent' : 'good',
+          reason: 'Perfect sun, moderate UV',
+        };
+      }
+      if (uvIndex <= UV.HIGH) {
+        return { rating: 'good', reason: `Use sunscreen (UV ${uvIndex})` };
+      }
+      return { rating: 'fair', reason: 'High UV - limit exposure' };
+    },
+  },
+  {
+    activity: 'Beach Walking',
+    icon: '\u{1F6B6}',
+    evaluate: ({ windSpeed, condition }) => {
+      if (BAD_WEATHER.includes(condition as typeof BAD_WEATHER[number])) {
+        return { rating: 'poor', reason: 'Poor weather for walking' };
+      }
+      return {
+        rating: windSpeed < WIND.CALM ? 'excellent' : 'good',
+        reason: windSpeed >= WIND.CALM ? 'Breezy conditions' : 'Pleasant for walking',
+      };
+    },
+  },
+  {
+    activity: 'Volleyball',
+    icon: '\u{1F3D0}',
+    requires: 'volleyball',
+    evaluate: ({ windSpeed, condition }) => {
+      if (
+        !FAIR_WEATHER.includes(condition as typeof FAIR_WEATHER[number]) ||
+        windSpeed >= WIND.BREEZY
+      ) {
+        return null;
+      }
+      return {
+        rating: windSpeed < WIND.CALM ? 'excellent' : 'good',
+        reason: windSpeed < WIND.CALM ? 'Ideal conditions' : 'Slightly windy',
+      };
+    },
+  },
+  {
+    activity: 'Kiteboarding',
+    icon: '\u{1FA81}',
+    evaluate: ({ windSpeed, condition }) => {
+      if (
+        windSpeed < WIND.CALM ||
+        windSpeed > WIND.STRONG ||
+        BAD_WEATHER.includes(condition as typeof BAD_WEATHER[number])
+      ) {
+        return null;
+      }
+      return {
+        rating: windSpeed >= WIND.MODERATE ? 'excellent' : 'good',
+        reason: `${windSpeed} km/h winds`,
+      };
+    },
+  },
+  {
+    activity: 'Photography',
+    icon: '\u{1F4F8}',
+    evaluate: ({ condition }) => {
+      if (!GOOD_WEATHER.includes(condition as typeof GOOD_WEATHER[number])) return null;
+      return { rating: 'excellent', reason: 'Great lighting conditions' };
+    },
+  },
+  {
+    activity: 'Picnic',
+    icon: '\u{1F9FA}',
+    evaluate: ({ temperature, windSpeed, condition }) => {
+      if (
+        temperature < TEMP.OUTDOOR_MIN ||
+        windSpeed >= WIND.MODERATE ||
+        BAD_WEATHER.includes(condition as typeof BAD_WEATHER[number])
+      ) {
+        return null;
+      }
+      return {
+        rating: temperature >= TEMP.OUTDOOR_EXCELLENT ? 'excellent' : 'good',
+        reason: 'Nice weather for outdoors',
+      };
+    },
+  },
+];
+
+function evaluateActivities(conditions: Conditions, availableActivities?: string[]): Recommendation[] {
+  const results: Recommendation[] = [];
+
+  for (const rule of ACTIVITY_RULES) {
+    if (rule.requires && !availableActivities?.includes(rule.requires)) continue;
+    const result = rule.evaluate(conditions);
+    if (result) {
+      results.push({ activity: rule.activity, icon: rule.icon, ...result });
+    }
+    if (results.length >= 4) break;
+  }
+
+  return results;
 }
 
 export function ActivityRecommendations({ weather, activities }: ActivityRecommendationsProps) {
   if (!weather) return null;
 
-  const { temperature, windSpeed, condition, uvIndex } = weather.current;
-
-  const getRecommendations = (): Recommendation[] => {
-    const recs: Recommendation[] = [];
-
-    // Swimming
-    if (temperature >= 20 && ['sunny', 'partly-cloudy'].includes(condition)) {
-      recs.push({
-        activity: 'Swimming',
-        icon: '🏊',
-        rating: temperature >= 25 ? 'excellent' : 'good',
-        reason: 'Great water conditions',
-      });
-    } else if (temperature >= 15) {
-      recs.push({ activity: 'Swimming', icon: '🏊', rating: 'fair', reason: 'Water may be cool' });
-    }
-
-    // Sunbathing
-    if (temperature >= 18 && ['sunny', 'partly-cloudy'].includes(condition) && windSpeed < 20) {
-      if (uvIndex <= 5) {
-        recs.push({
-          activity: 'Sunbathing',
-          icon: '☀️',
-          rating: temperature >= 22 ? 'excellent' : 'good',
-          reason: 'Perfect sun, moderate UV',
-        });
-      } else if (uvIndex <= 7) {
-        recs.push({
-          activity: 'Sunbathing',
-          icon: '☀️',
-          rating: 'good',
-          reason: `Use sunscreen (UV ${uvIndex})`,
-        });
-      } else {
-        recs.push({
-          activity: 'Sunbathing',
-          icon: '☀️',
-          rating: 'fair',
-          reason: 'High UV - limit exposure',
-        });
-      }
-    }
-
-    // Beach walking
-    recs.push({
-      activity: 'Beach Walking',
-      icon: '🚶',
-      rating:
-        windSpeed < 15 && !['rainy', 'stormy'].includes(condition)
-          ? 'excellent'
-          : condition === 'rainy'
-            ? 'poor'
-            : 'good',
-      reason: windSpeed >= 15 ? 'Breezy conditions' : 'Pleasant for walking',
-    });
-
-    // Volleyball
-    if (
-      activities?.includes('volleyball') &&
-      ['sunny', 'partly-cloudy', 'cloudy'].includes(condition) &&
-      windSpeed < 25
-    ) {
-      recs.push({
-        activity: 'Volleyball',
-        icon: '🏐',
-        rating: windSpeed < 15 ? 'excellent' : 'good',
-        reason: windSpeed < 15 ? 'Ideal conditions' : 'Slightly windy',
-      });
-    }
-
-    // Kiteboarding/Windsurfing
-    if (windSpeed >= 15 && windSpeed <= 35 && !['rainy', 'stormy'].includes(condition)) {
-      recs.push({
-        activity: 'Kiteboarding',
-        icon: '🪁',
-        rating: windSpeed >= 20 ? 'excellent' : 'good',
-        reason: `${windSpeed} km/h winds`,
-      });
-    }
-
-    // Photography
-    if (['sunny', 'partly-cloudy'].includes(condition)) {
-      recs.push({
-        activity: 'Photography',
-        icon: '📸',
-        rating: 'excellent',
-        reason: 'Great lighting conditions',
-      });
-    }
-
-    // Picnicking
-    if (temperature >= 15 && windSpeed < 20 && !['rainy', 'stormy'].includes(condition)) {
-      recs.push({
-        activity: 'Picnic',
-        icon: '🧺',
-        rating: temperature >= 20 ? 'excellent' : 'good',
-        reason: 'Nice weather for outdoors',
-      });
-    }
-
-    return recs.slice(0, 4);
-  };
-
-  const recommendations = getRecommendations();
-
+  const recommendations = evaluateActivities(weather.current, activities);
   if (recommendations.length === 0) return null;
-
-  const ratingColors = {
-    excellent:
-      'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 border-green-200 dark:border-green-800',
-    good: 'bg-ocean-50 dark:bg-ocean-900/30 text-ocean-700 dark:text-ocean-300 border-ocean-200 dark:border-ocean-800',
-    fair: 'bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-300 border-yellow-200 dark:border-yellow-800',
-    poor: 'bg-sand-100 dark:bg-sand-700 text-sand-500 dark:text-sand-400 border-sand-200 dark:border-sand-600',
-  };
 
   return (
     <Card variant="default">
@@ -144,7 +184,7 @@ export function ActivityRecommendations({ weather, activities }: ActivityRecomme
           {recommendations.map((rec) => (
             <div
               key={rec.activity}
-              className={`flex items-center gap-3 p-3 rounded-lg border ${ratingColors[rec.rating]}`}
+              className={`flex items-center gap-3 p-3 rounded-lg border ${RATING_COLORS[rec.rating]}`}
             >
               <span className="text-2xl">{rec.icon}</span>
               <div className="flex-1 min-w-0">

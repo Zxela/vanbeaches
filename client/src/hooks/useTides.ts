@@ -1,39 +1,9 @@
-import type { ApiResponse, TideData } from '@van-beaches/shared';
-import { useCallback, useEffect, useState } from 'react';
+import type { TideData } from '@van-beaches/shared';
+import { useApiQuery } from './useApiQuery';
 
-interface UseTidesResult {
-  tides: TideData | null;
-  loading: boolean;
-  error: string | null;
-  refetch: () => void;
-}
-
-export function useTides(beachId: string | undefined): UseTidesResult {
-  const [tides, setTides] = useState<TideData | null>(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-
-  const fetchTides = useCallback(async () => {
-    if (!beachId) return;
-    setLoading(true);
-    setError(null);
-    try {
-      const response = await fetch(`/api/tides/${beachId}`);
-      const data: ApiResponse<TideData> = await response.json();
-      if (data.success && data.data) {
-        setTides(data.data);
-      } else {
-        setError(data.error || 'Failed to fetch tide data');
-      }
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Network error');
-    } finally {
-      setLoading(false);
-    }
-  }, [beachId]);
-
-  useEffect(() => {
-    fetchTides();
-  }, [fetchTides]);
-  return { tides, loading, error, refetch: fetchTides };
+export function useTides(beachId: string | undefined) {
+  const { data: tides, ...rest } = useApiQuery<TideData>(
+    beachId ? `/api/tides/${beachId}` : null,
+  );
+  return { tides, ...rest };
 }
