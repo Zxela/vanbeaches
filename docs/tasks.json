@@ -59,6 +59,7 @@
       "objective": "Replace the SVG-based BeachMap implementation with a Leaflet MapContainer rendering OpenStreetMap tiles and custom divIcon markers for all 9 beaches. Preserve the existing BeachMapProps interface. Implement map configuration (center, zoom bounds), custom marker rendering with ocean/shore design tokens, click handling (onSelectBeach callback or navigate), and OpenStreetMap attribution.",
       "task_type": "create_service",
       "methodology": "tdd",
+      "status": "completed",
       "acceptance_criteria": [
         {
           "id": "002-AC1",
@@ -92,7 +93,6 @@
         }
       ],
       "test_file": "client/src/components/BeachMap.test.tsx",
-      "status": "pending",
       "depends_on": ["001"],
       "traces_to": {
         "user_stories": ["US-001", "US-002", "US-003"],
