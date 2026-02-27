@@ -176,7 +176,12 @@ export function BeachScore({ weather, tides, waterQuality }: BeachScoreProps) {
         <CardContent>
           {/* Score display */}
           <div className="flex items-end gap-3 mb-3">
-            <span data-testid="beach-score-value" className={`text-5xl font-bold tabular-nums ${scoreTextColor}`}>{score}</span>
+            <span
+              data-testid="beach-score-value"
+              className={`text-5xl font-bold tabular-nums ${scoreTextColor}`}
+            >
+              {score}
+            </span>
             <div className="pb-1">
               <span className="text-sand-400 text-lg">/100</span>
               <p className={`text-sm font-semibold ${scoreTextColor}`}>{label}</p>
@@ -186,6 +191,7 @@ export function BeachScore({ weather, tides, waterQuality }: BeachScoreProps) {
           {/* Progress bar */}
           <div
             role="progressbar"
+            tabIndex={0}
             aria-valuenow={score}
             aria-valuemin={0}
             aria-valuemax={100}
@@ -208,9 +214,7 @@ export function BeachScore({ weather, tides, waterQuality }: BeachScoreProps) {
                 <span
                   key={factor.label}
                   className={`inline-flex items-center gap-1 text-xs px-2 py-1 rounded-full ${
-                    factor.delta > 0
-                      ? 'bg-emerald-50 text-emerald-700'
-                      : 'bg-red-50 text-red-700'
+                    factor.delta > 0 ? 'bg-emerald-50 text-emerald-700' : 'bg-red-50 text-red-700'
                   }`}
                 >
                   {factor.delta > 0 ? '+' : ''}

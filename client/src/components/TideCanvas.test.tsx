@@ -7,10 +7,26 @@ function makeTodayTides(): TidePrediction[] {
   const today = new Date();
   today.setHours(0, 0, 0, 0);
   return [
-    { time: new Date(today.getTime() + 2 * 60 * 60 * 1000).toISOString(), height: 0.3, type: 'low' },
-    { time: new Date(today.getTime() + 8 * 60 * 60 * 1000).toISOString(), height: 3.2, type: 'high' },
-    { time: new Date(today.getTime() + 14 * 60 * 60 * 1000).toISOString(), height: 0.5, type: 'low' },
-    { time: new Date(today.getTime() + 20 * 60 * 60 * 1000).toISOString(), height: 3.0, type: 'high' },
+    {
+      time: new Date(today.getTime() + 2 * 60 * 60 * 1000).toISOString(),
+      height: 0.3,
+      type: 'low',
+    },
+    {
+      time: new Date(today.getTime() + 8 * 60 * 60 * 1000).toISOString(),
+      height: 3.2,
+      type: 'high',
+    },
+    {
+      time: new Date(today.getTime() + 14 * 60 * 60 * 1000).toISOString(),
+      height: 0.5,
+      type: 'low',
+    },
+    {
+      time: new Date(today.getTime() + 20 * 60 * 60 * 1000).toISOString(),
+      height: 3.0,
+      type: 'high',
+    },
   ];
 }
 

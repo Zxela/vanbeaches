@@ -1,5 +1,5 @@
-import type { TideData, WaterQualityStatus, WeatherForecast } from '@van-beaches/shared';
 import { render, screen } from '@testing-library/react';
+import type { TideData, WaterQualityStatus, WeatherForecast } from '@van-beaches/shared';
 import { describe, expect, it } from 'vitest';
 import { BeachScore } from './BeachScore';
 
@@ -40,17 +40,13 @@ const mockWaterQuality: WaterQualityStatus = {
 describe('BeachScore', () => {
   // AC-001: Returns null when weather is null (graceful degradation)
   it('returns null when weather is null', () => {
-    const { container } = render(
-      <BeachScore weather={null} tides={null} waterQuality={null} />,
-    );
+    const { container } = render(<BeachScore weather={null} tides={null} waterQuality={null} />);
     expect(container.firstChild).toBeNull();
   });
 
   // AC-002: Renders with Target icon and section header
   it('renders section header with Target icon and title', () => {
-    render(
-      <BeachScore weather={mockWeather} tides={null} waterQuality={null} />,
-    );
+    render(<BeachScore weather={mockWeather} tides={null} waterQuality={null} />);
     expect(screen.getByText(/beach score/i)).toBeInTheDocument();
     // Target icon renders as SVG
     const svgs = document.querySelectorAll('svg');
@@ -59,11 +55,9 @@ describe('BeachScore', () => {
 
   // AC-003: Displays a numeric score between 0-100
   it('displays a numeric score between 0 and 100', () => {
-    render(
-      <BeachScore weather={mockWeather} tides={mockTides} waterQuality={mockWaterQuality} />,
-    );
+    render(<BeachScore weather={mockWeather} tides={mockTides} waterQuality={mockWaterQuality} />);
     const scoreEl = screen.getByTestId('beach-score-value');
-    const score = parseInt(scoreEl.textContent || '0', 10);
+    const score = Number.parseInt(scoreEl.textContent || '0', 10);
     expect(score).toBeGreaterThanOrEqual(0);
     expect(score).toBeLessThanOrEqual(100);
   });
@@ -81,14 +75,14 @@ describe('BeachScore', () => {
 
   // AC-005: Natural-language recommendation text is shown
   it('displays a natural-language recommendation', () => {
-    render(
-      <BeachScore weather={mockWeather} tides={null} waterQuality={null} />,
-    );
+    render(<BeachScore weather={mockWeather} tides={null} waterQuality={null} />);
     // Should show some recommendation text
     const html = document.body.textContent || '';
     // Any of these words indicate a recommendation
     const hasRecommendation =
-      /great|good|excellent|fair|poor|perfect|ideal|warning|caution|sunny|warm|cool|cold|windy|rain|storm/i.test(html);
+      /great|good|excellent|fair|poor|perfect|ideal|warning|caution|sunny|warm|cool|cold|windy|rain|storm/i.test(
+        html,
+      );
     expect(hasRecommendation).toBe(true);
   });
 
@@ -126,9 +120,7 @@ describe('BeachScore', () => {
   // AC-008: Scoring algorithm - water quality closed greatly reduces score
   it('greatly reduces score when water quality is closed', () => {
     const closedQuality: WaterQualityStatus = { ...mockWaterQuality, level: 'closed' };
-    render(
-      <BeachScore weather={mockWeather} tides={null} waterQuality={closedQuality} />,
-    );
+    render(<BeachScore weather={mockWeather} tides={null} waterQuality={closedQuality} />);
     const closedScore = extractScore(document.body);
     // closed should reduce by 30, putting a base score in low range
     // base 50 + weather +20 + wind +10 + UV +5 - 30 = 55 (may vary)
@@ -150,9 +142,7 @@ describe('BeachScore', () => {
       },
     };
     const closedQuality: WaterQualityStatus = { ...mockWaterQuality, level: 'closed' };
-    render(
-      <BeachScore weather={worstWeather} tides={null} waterQuality={closedQuality} />,
-    );
+    render(<BeachScore weather={worstWeather} tides={null} waterQuality={closedQuality} />);
     const score = extractScore(document.body);
     expect(score).toBeGreaterThanOrEqual(0);
     expect(score).toBeLessThanOrEqual(100);
@@ -160,18 +150,16 @@ describe('BeachScore', () => {
 
   // AC-010: Light-mode-only styles (no dark: classes in BeachScore's own markup)
   it('uses light-mode-only styles in BeachScore-specific elements', () => {
-    render(
-      <BeachScore weather={mockWeather} tides={null} waterQuality={null} />,
-    );
+    render(<BeachScore weather={mockWeather} tides={null} waterQuality={null} />);
     // The score value element itself should not have dark: classes
     const scoreEl = screen.getByTestId('beach-score-value');
     expect(scoreEl.className).not.toContain('dark:');
     // The recommendation text should not have dark: classes
     const allP = document.querySelectorAll('p.text-sand-700');
     expect(allP.length).toBeGreaterThan(0);
-    allP.forEach((el) => {
+    for (const el of allP) {
       expect(el.className).not.toContain('dark:');
-    });
+    }
   });
 
   // AC-011: Tide timing bonus for low tide within 2 hours
@@ -207,9 +195,7 @@ describe('BeachScore', () => {
     );
     const scoreWithNearLowTide = extractScore(document.body);
 
-    rerender(
-      <BeachScore weather={weatherWithRoom} tides={tidesLater} waterQuality={null} />,
-    );
+    rerender(<BeachScore weather={weatherWithRoom} tides={tidesLater} waterQuality={null} />);
     const scoreWithFarLowTide = extractScore(document.body);
 
     expect(scoreWithNearLowTide).toBeGreaterThan(scoreWithFarLowTide);
@@ -220,6 +206,6 @@ describe('BeachScore', () => {
 function extractScore(body: HTMLElement): number {
   const el = body.querySelector('[data-testid="beach-score-value"]');
   if (!el) return 0;
-  const n = parseInt(el.textContent || '0', 10);
-  return isNaN(n) ? 0 : n;
+  const n = Number.parseInt(el.textContent || '0', 10);
+  return Number.isNaN(n) ? 0 : n;
 }

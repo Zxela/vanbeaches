@@ -5,12 +5,12 @@ import {
   Circle,
   Dog,
   Flame,
+  type LucideIcon,
   MapPin,
   ParkingCircle,
   ShieldCheck,
   ShowerHead,
   UtensilsCrossed,
-  type LucideIcon,
 } from 'lucide-react';
 import { Card, CardContent, CardTitle, Icon } from './ui';
 
@@ -55,9 +55,17 @@ export function BeachAmenities({ amenities, activities }: BeachAmenitiesProps) {
               label={lifeguardLabels[amenities.lifeguard]}
               active={amenities.lifeguard !== 'none'}
             />
-            <AmenityBadge icon={UtensilsCrossed} label="Food Nearby" active={amenities.foodNearby} />
+            <AmenityBadge
+              icon={UtensilsCrossed}
+              label="Food Nearby"
+              active={amenities.foodNearby}
+            />
             <AmenityBadge icon={Dog} label="Dog Friendly" active={amenities.dogFriendly} />
-            <AmenityBadge icon={Accessibility} label="Accessible" active={amenities.wheelchairAccessible} />
+            <AmenityBadge
+              icon={Accessibility}
+              label="Accessible"
+              active={amenities.wheelchairAccessible}
+            />
             {amenities.volleyballCourts > 0 && (
               <AmenityBadge
                 icon={Circle}
@@ -103,9 +111,7 @@ function AmenityBadge({
   return (
     <div
       className={`flex items-center gap-2 px-2 py-1.5 rounded-lg text-sm ${
-        active
-          ? 'bg-emerald-50 text-emerald-700'
-          : 'bg-sand-50 text-sand-400'
+        active ? 'bg-emerald-50 text-emerald-700' : 'bg-sand-50 text-sand-400'
       }`}
     >
       <IconComponent

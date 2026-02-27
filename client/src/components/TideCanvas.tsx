@@ -444,9 +444,7 @@ export function TideCanvas({ predictions, loading, className }: TideCanvasProps)
           Today's Tides
         </CardTitle>
         <CardContent className="mt-4">
-          <p className="text-sand-500 text-center py-8">
-            No tide data available for today
-          </p>
+          <p className="text-sand-500 text-center py-8">No tide data available for today</p>
         </CardContent>
       </Card>
     );
@@ -538,10 +536,7 @@ export function TideCanvas({ predictions, loading, className }: TideCanvasProps)
         <p className="text-xs font-medium uppercase tracking-wide text-sand-500 mb-2">Key Tides</p>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
           {todayTides.map((tide) => (
-            <div
-              key={tide.time}
-              className="flex items-center gap-2 p-2 rounded-lg bg-ocean-50/50"
-            >
+            <div key={tide.time} className="flex items-center gap-2 p-2 rounded-lg bg-ocean-50/50">
               {tide.type === 'high' ? (
                 <TrendingUp className="w-4 h-4 text-tide-high shrink-0" />
               ) : (

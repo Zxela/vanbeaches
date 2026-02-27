@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { BEACHES, getBeachById, getBeachBySlug } from './beaches.js';
 
 describe('BEACHES data', () => {
@@ -9,36 +9,36 @@ describe('BEACHES data', () => {
   it('every beach has a highlights field', () => {
     for (const beach of BEACHES) {
       expect(beach.highlights, `${beach.id} is missing highlights`).toBeDefined();
-      expect(beach.highlights!.bestFor).toBeInstanceOf(Array);
-      expect(beach.highlights!.bestFor.length).toBeGreaterThanOrEqual(2);
-      expect(typeof beach.highlights!.vibe).toBe('string');
-      expect(beach.highlights!.vibe.length).toBeGreaterThan(0);
-      expect(typeof beach.highlights!.crowdLevel).toBe('string');
-      expect(beach.highlights!.crowdLevel.length).toBeGreaterThan(0);
+      expect(beach.highlights?.bestFor).toBeInstanceOf(Array);
+      expect(beach.highlights?.bestFor.length).toBeGreaterThanOrEqual(2);
+      expect(typeof beach.highlights?.vibe).toBe('string');
+      expect(beach.highlights?.vibe.length).toBeGreaterThan(0);
+      expect(typeof beach.highlights?.crowdLevel).toBe('string');
+      expect(beach.highlights?.crowdLevel.length).toBeGreaterThan(0);
     }
   });
 
   it('every beach has safetyNotes', () => {
     for (const beach of BEACHES) {
       expect(beach.safetyNotes, `${beach.id} is missing safetyNotes`).toBeDefined();
-      expect(beach.safetyNotes!.length).toBeGreaterThanOrEqual(1);
+      expect(beach.safetyNotes?.length).toBeGreaterThanOrEqual(1);
     }
   });
 
   it('every beach has an expanded description (at least 100 characters)', () => {
     for (const beach of BEACHES) {
       expect(beach.description, `${beach.id} is missing description`).toBeDefined();
-      expect(beach.description!.length).toBeGreaterThanOrEqual(100);
+      expect(beach.description?.length).toBeGreaterThanOrEqual(100);
     }
   });
 
   it('every beach has an images field with hero, thumb, and credit', () => {
     for (const beach of BEACHES) {
       expect(beach.images, `${beach.id} is missing images`).toBeDefined();
-      expect(beach.images!.hero).toMatch(/^https:\/\//);
-      expect(beach.images!.thumb).toMatch(/^https:\/\//);
-      expect(beach.images!.credit.name.length).toBeGreaterThan(0);
-      expect(beach.images!.credit.username.length).toBeGreaterThan(0);
+      expect(beach.images?.hero).toMatch(/^https:\/\//);
+      expect(beach.images?.thumb).toMatch(/^https:\/\//);
+      expect(beach.images?.credit.name.length).toBeGreaterThan(0);
+      expect(beach.images?.credit.username.length).toBeGreaterThan(0);
     }
   });
 
@@ -65,18 +65,18 @@ describe('BEACHES data', () => {
   it('getBeachById returns correct beach', () => {
     const beach = getBeachById('english-bay');
     expect(beach).toBeDefined();
-    expect(beach!.name).toBe('English Bay');
+    expect(beach?.name).toBe('English Bay');
   });
 
   it('getBeachBySlug returns correct beach', () => {
     const beach = getBeachBySlug('kitsilano-beach');
     expect(beach).toBeDefined();
-    expect(beach!.name).toBe('Kitsilano Beach');
+    expect(beach?.name).toBe('Kitsilano Beach');
   });
 
   it('trout-lake has no tideStationId (freshwater lake)', () => {
     const troutLake = getBeachById('trout-lake');
-    expect(troutLake!.tideStationId).toBeNull();
+    expect(troutLake?.tideStationId).toBeNull();
   });
 
   it('all ocean beaches have a tideStationId', () => {
@@ -101,9 +101,7 @@ describe('BEACHES data', () => {
   it('beaches with firepits include bonfire safety notes', () => {
     const beachesWithFirepits = BEACHES.filter((b) => b.amenities?.firepits);
     for (const beach of beachesWithFirepits) {
-      const hasFireNote = beach.safetyNotes?.some((note) =>
-        note.toLowerCase().includes('fire'),
-      );
+      const hasFireNote = beach.safetyNotes?.some((note) => note.toLowerCase().includes('fire'));
       expect(hasFireNote, `${beach.id} has firepits but no bonfire safety note`).toBe(true);
     }
   });

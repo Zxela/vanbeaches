@@ -2,7 +2,6 @@ import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 import { BeachAmenities } from './BeachAmenities';
 
-
 const mockAmenities = {
   parking: 'free' as const,
   restrooms: true,

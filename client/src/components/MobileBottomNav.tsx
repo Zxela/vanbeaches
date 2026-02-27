@@ -149,7 +149,6 @@ export function MobileBottomNav() {
             <Icon icon={BarChart3} size="lg" />
             <span className="text-xs mt-1 font-medium">Compare</span>
           </Link>
-
         </div>
       </nav>
     </>

@@ -244,7 +244,7 @@ export const BEACHES: Beach[] = [
     tideStationId: '5cebf1de3d0f4a073c4bb943',
     webcamUrl: null,
     description:
-      "Sunset Beach lines the False Creek shoreline in the West End, offering an intimate urban beach experience with stunning views of the Burrard Bridge and the city skyline reflected in the water. The beach is a key stop on the seawall between the West End and Granville Island, drawing cyclists, rollerbladers, kayakers, and paddleboarders alongside sunbathers. Aquabus and False Creek Ferries stop nearby, making it easy to explore Granville Island and beyond without a car.",
+      'Sunset Beach lines the False Creek shoreline in the West End, offering an intimate urban beach experience with stunning views of the Burrard Bridge and the city skyline reflected in the water. The beach is a key stop on the seawall between the West End and Granville Island, drawing cyclists, rollerbladers, kayakers, and paddleboarders alongside sunbathers. Aquabus and False Creek Ferries stop nearby, making it easy to explore Granville Island and beyond without a car.',
     tagline: 'City skyline meets ocean breeze',
     images: {
       hero: 'https://images.unsplash.com/photo-1559494007-9f5847c49d94?w=1200&q=80',

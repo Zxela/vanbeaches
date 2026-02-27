@@ -80,17 +80,23 @@ export function SafetyInfo({ beach, waterQuality, weather }: SafetyInfoProps) {
           <div className="space-y-2">
             {highUV && (
               <div className="flex items-center gap-3 rounded-lg p-3 bg-orange-50 border border-orange-200 text-orange-800">
-                <AlertTriangle className="w-4 h-4 text-orange-500 flex-shrink-0" aria-hidden="true" />
+                <AlertTriangle
+                  className="w-4 h-4 text-orange-500 flex-shrink-0"
+                  aria-hidden="true"
+                />
                 <p className="text-sm">
-                  High UV index ({weather!.current.uvIndex}) — wear sunscreen and limit exposure.
+                  High UV index ({weather?.current.uvIndex}) — wear sunscreen and limit exposure.
                 </p>
               </div>
             )}
             {highWind && (
               <div className="flex items-center gap-3 rounded-lg p-3 bg-amber-50 border border-amber-200 text-amber-800">
-                <AlertTriangle className="w-4 h-4 text-amber-500 flex-shrink-0" aria-hidden="true" />
+                <AlertTriangle
+                  className="w-4 h-4 text-amber-500 flex-shrink-0"
+                  aria-hidden="true"
+                />
                 <p className="text-sm">
-                  High wind speeds ({weather!.current.windSpeed} km/h) — use caution near the water.
+                  High wind speeds ({weather?.current.windSpeed} km/h) — use caution near the water.
                 </p>
               </div>
             )}

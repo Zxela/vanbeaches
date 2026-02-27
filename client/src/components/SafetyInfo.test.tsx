@@ -1,9 +1,9 @@
 import { render, screen } from '@testing-library/react';
-import { describe, expect, it } from 'vitest';
-import { SafetyInfo } from './SafetyInfo';
 import type { Beach } from '@van-beaches/shared';
 import type { WaterQualityStatus } from '@van-beaches/shared';
 import type { WeatherForecast } from '@van-beaches/shared';
+import { describe, expect, it } from 'vitest';
+import { SafetyInfo } from './SafetyInfo';
 
 const mockBeach: Beach = {
   id: 'test-beach',
@@ -29,7 +29,7 @@ const mockBeach: Beach = {
 const mockBeachNoLifeguard: Beach = {
   ...mockBeach,
   amenities: {
-    ...mockBeach.amenities!,
+    ...(mockBeach.amenities ?? {}),
     lifeguard: 'none',
   },
 };
@@ -328,7 +328,7 @@ describe('SafetyInfo', () => {
     it('shows year-round lifeguard when amenities.lifeguard is year-round', () => {
       const beachYearRound: Beach = {
         ...mockBeach,
-        amenities: { ...mockBeach.amenities!, lifeguard: 'year-round' },
+        amenities: { ...(mockBeach.amenities ?? {}), lifeguard: 'year-round' },
       };
       render(
         <SafetyInfo
@@ -400,17 +400,13 @@ describe('SafetyInfo', () => {
   describe('Null state handling', () => {
     it('renders without errors when waterQuality is null', () => {
       expect(() =>
-        render(
-          <SafetyInfo beach={mockBeach} waterQuality={null} weather={mockWeatherNormal} />,
-        ),
+        render(<SafetyInfo beach={mockBeach} waterQuality={null} weather={mockWeatherNormal} />),
       ).not.toThrow();
     });
 
     it('renders without errors when weather is null', () => {
       expect(() =>
-        render(
-          <SafetyInfo beach={mockBeach} waterQuality={mockWaterQualityGood} weather={null} />,
-        ),
+        render(<SafetyInfo beach={mockBeach} waterQuality={mockWaterQualityGood} weather={null} />),
       ).not.toThrow();
     });
 
