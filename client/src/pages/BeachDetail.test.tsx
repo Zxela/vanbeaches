@@ -77,6 +77,15 @@ vi.mock('../components/FullscreenWebcam', () => ({
   ),
 }));
 
+// Mock BeachScore and SafetyInfo for integration tests
+vi.mock('../components/BeachScore', () => ({
+  BeachScore: () => <div data-testid="beach-score" />,
+}));
+
+vi.mock('../components/SafetyInfo', () => ({
+  SafetyInfo: () => <div data-testid="safety-info" />,
+}));
+
 // Mock other components that aren't relevant for webcam tests
 vi.mock('../components/ActivityRecommendations', () => ({
   ActivityRecommendations: () => <div data-testid="activity-recommendations" />,
@@ -316,6 +325,83 @@ describe('BeachDetail', () => {
       expect(screen.getByTestId('plan-your-visit')).toBeInTheDocument();
       expect(screen.getByTestId('favorite-button')).toBeInTheDocument();
       expect(screen.getByTestId('share-button')).toBeInTheDocument();
+    });
+  });
+
+  describe('new components integration (task 010)', () => {
+    it('renders BeachScore in Should you go today section', () => {
+      mockGetBeachById.mockReturnValue(baseBeach);
+
+      render(<BeachDetail />);
+
+      expect(screen.getByTestId('beach-score')).toBeInTheDocument();
+    });
+
+    it('renders Beach Safety section with SafetyInfo component', () => {
+      mockGetBeachById.mockReturnValue(baseBeach);
+
+      render(<BeachDetail />);
+
+      expect(screen.getByText('Beach Safety')).toBeInTheDocument();
+      expect(screen.getByTestId('safety-info')).toBeInTheDocument();
+    });
+
+    it('renders About section with beach name, description, and highlights', () => {
+      mockGetBeachById.mockReturnValue({
+        ...baseBeach,
+        description: 'A beautiful test beach with clear water',
+        highlights: {
+          bestFor: ['swimming', 'picnics'],
+          vibe: 'Relaxed',
+          crowdLevel: 'Low',
+        },
+      });
+
+      render(<BeachDetail />);
+
+      expect(screen.getByText('About Test Beach')).toBeInTheDocument();
+      expect(screen.getByText('A beautiful test beach with clear water')).toBeInTheDocument();
+      expect(screen.getByText('swimming')).toBeInTheDocument();
+      expect(screen.getByText('picnics')).toBeInTheDocument();
+      expect(screen.getByText(/Relaxed/)).toBeInTheDocument();
+      expect(screen.getByText(/Low/)).toBeInTheDocument();
+    });
+
+    it('does not render About section when highlights are absent', () => {
+      mockGetBeachById.mockReturnValue({
+        ...baseBeach,
+        highlights: undefined,
+      });
+
+      render(<BeachDetail />);
+
+      expect(screen.queryByText('About Test Beach')).not.toBeInTheDocument();
+    });
+
+    it('renders photo credit when images.credit is present', () => {
+      mockGetBeachById.mockReturnValue({
+        ...baseBeach,
+        images: {
+          hero: 'https://example.com/hero.jpg',
+          thumb: 'https://example.com/thumb.jpg',
+          credit: { name: 'John Doe', username: 'johndoe' },
+        },
+      });
+
+      render(<BeachDetail />);
+
+      expect(screen.getByText('Photo by John Doe')).toBeInTheDocument();
+    });
+
+    it('does not render photo credit when images is absent', () => {
+      mockGetBeachById.mockReturnValue({
+        ...baseBeach,
+        images: undefined,
+      });
+
+      render(<BeachDetail />);
+
+      expect(screen.queryByText(/Photo by/)).not.toBeInTheDocument();
     });
   });
 });

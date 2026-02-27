@@ -12,11 +12,13 @@ import {
 import { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { ActivityRecommendations } from '../components/ActivityRecommendations';
+import { BeachScore } from '../components/BeachScore';
 import { BestTimeToVisit } from '../components/BestTimeToVisit';
 import { FavoriteButton } from '../components/FavoriteButton';
 import { FullscreenWebcam } from '../components/FullscreenWebcam';
 import { NearbyPlaces } from '../components/NearbyPlaces';
 import { PlanYourVisit } from '../components/PlanYourVisit';
+import { SafetyInfo } from '../components/SafetyInfo';
 import { ShareButton } from '../components/ShareButton';
 import { SunTimesWidget } from '../components/SunTimesWidget';
 import { TideCanvas } from '../components/TideCanvas';
@@ -125,6 +127,13 @@ export function BeachDetail() {
           <div className={`absolute inset-0 bg-gradient-to-br ${fallbackGradients[gradientIdx]}`} />
         )}
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
+
+        {/* Photo credit */}
+        {beach.images?.credit && (
+          <div className="absolute bottom-2 right-2 bg-black/40 text-white text-xs px-2 py-1 rounded">
+            Photo by {beach.images.credit.name}
+          </div>
+        )}
 
         {/* Floating buttons */}
         <div className="absolute top-4 right-4 z-10 flex items-center gap-2">
@@ -248,7 +257,7 @@ export function BeachDetail() {
           <h2 className="text-2xl font-bold text-sand-900 dark:text-sand-100 mb-6">
             Should you go today?
           </h2>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             <BestTimeToVisit
               weather={weather}
               tides={tides}
@@ -256,6 +265,7 @@ export function BeachDetail() {
               longitude={beach.location.longitude}
             />
             <ActivityRecommendations weather={weather} activities={beach.activities} />
+            <BeachScore weather={weather} tides={tides} waterQuality={waterQuality} />
           </div>
         </section>
 
@@ -300,15 +310,45 @@ export function BeachDetail() {
           </section>
         )}
 
-        {/* Section 5: Plan your visit */}
+        {/* Section 5: Beach Safety */}
+        <section>
+          <h2 className="text-2xl font-bold text-sand-900 mb-6">Beach Safety</h2>
+          <SafetyInfo beach={beach} waterQuality={waterQuality} weather={weather} />
+        </section>
+
+        {/* Section 6: Plan your visit */}
         <section>
           <h2 className="text-2xl font-bold text-sand-900 dark:text-sand-100 mb-6">
             Plan your visit
           </h2>
+          {beach.highlights && (
+            <div className="mb-6 p-6 rounded-2xl border border-sand-200 bg-white shadow-sm">
+              <h3 className="text-xl font-semibold text-sand-900 mb-3">About {beach.name}</h3>
+              {beach.description && (
+                <p className="text-sand-700 leading-relaxed mb-4">{beach.description}</p>
+              )}
+              <div className="flex flex-wrap gap-2 mb-3">
+                {beach.highlights.bestFor.map((activity) => (
+                  <span
+                    key={activity}
+                    className="inline-flex items-center px-3 py-1 rounded-full text-sm bg-ocean-50 text-ocean-700 border border-ocean-200"
+                  >
+                    {activity}
+                  </span>
+                ))}
+              </div>
+              <p className="text-sm text-sand-600">
+                <span className="font-medium">Vibe:</span> {beach.highlights.vibe}
+              </p>
+              <p className="text-sm text-sand-600">
+                <span className="font-medium">Crowd:</span> {beach.highlights.crowdLevel}
+              </p>
+            </div>
+          )}
           <PlanYourVisit beach={beach} />
         </section>
 
-        {/* Section 6: Weather forecast */}
+        {/* Section 7: Weather forecast */}
         <section>
           <h2 className="text-2xl font-bold text-sand-900 dark:text-sand-100 mb-6">
             Weather forecast
@@ -316,7 +356,7 @@ export function BeachDetail() {
           <WeatherForecast forecast={weather} loading={weatherLoading} />
         </section>
 
-        {/* Section 7: Nearby places */}
+        {/* Section 8: Nearby places */}
         <NearbyPlaces beachName={beach.name} />
       </div>
     </div>
