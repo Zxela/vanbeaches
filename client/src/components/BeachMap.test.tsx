@@ -65,6 +65,9 @@ vi.mock('react-leaflet', () => ({
   Tooltip: ({ children }: { children: React.ReactNode }) => (
     <div className="leaflet-tooltip">{children}</div>
   ),
+  Popup: ({ children }: { children: React.ReactNode }) => (
+    <div className="leaflet-popup">{children}</div>
+  ),
   useMap: vi.fn(),
 }));
 
@@ -265,13 +268,11 @@ describe('BeachMap', () => {
     expect(css).toContain('.dark .leaflet-tile-pane');
   });
 
-  // 003-AC5: dark mode tooltip styling is present in CSS
-  it('includes dark mode tooltip styles with sand-50 background', () => {
+  // 003-AC5: dark mode popup styling is present in CSS
+  it('includes dark mode popup styles', () => {
     const { container } = renderBeachMap();
     const styleEl = container.querySelector('style');
     const css = styleEl?.textContent ?? '';
-    // sand-50 = #fafafa, sand-900 = #212121
-    expect(css).toContain('#fafafa');
-    expect(css).toContain('.dark .leaflet-tooltip');
+    expect(css).toContain('.dark .leaflet-popup-content-wrapper');
   });
 });

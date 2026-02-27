@@ -32,10 +32,10 @@ describe('SearchFilter', () => {
     expect(container.innerHTML).not.toContain('M6 18L18 6M6 6l12 12');
   });
 
-  it('renders all filter chips', () => {
+  it('renders all intent filter pills', () => {
     render(<SearchFilter onFilter={vi.fn()} />);
-    expect(screen.getByText('Dog Friendly')).toBeInTheDocument();
-    expect(screen.getByText('Webcam')).toBeInTheDocument();
-    expect(screen.getByText('Lifeguard')).toBeInTheDocument();
+    expect(screen.getByText('Go swimming')).toBeInTheDocument();
+    expect(screen.getByText('Walk my dog')).toBeInTheDocument();
+    expect(screen.getByText('Watch sunset')).toBeInTheDocument();
   });
 });

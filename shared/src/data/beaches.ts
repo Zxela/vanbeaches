@@ -10,6 +10,12 @@ export const BEACHES: Beach[] = [
     webcamUrl: null,
     description:
       "One of Vancouver's most popular urban beaches with stunning sunset views and a lively atmosphere.",
+    tagline: "Vancouver's golden sunset amphitheatre",
+    images: {
+      hero: 'https://images.unsplash.com/photo-1559128010-7c1ad6e1b6a5?w=1200&q=80',
+      thumb: 'https://images.unsplash.com/photo-1559128010-7c1ad6e1b6a5?w=600&q=80',
+      credit: { name: 'Frank McKenna', username: 'frankiefoto' },
+    },
     amenities: {
       parking: 'street',
       restrooms: true,
@@ -32,6 +38,12 @@ export const BEACHES: Beach[] = [
     webcamUrl: null,
     description:
       'Family-friendly beach with calm waters, a sailing centre, and grassy areas perfect for picnics.',
+    tagline: 'Where sails meet mountains',
+    images: {
+      hero: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1200&q=80',
+      thumb: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=80',
+      credit: { name: 'Sean Oulashin', username: 'oulashin' },
+    },
     amenities: {
       parking: 'paid',
       restrooms: true,
@@ -54,6 +66,12 @@ export const BEACHES: Beach[] = [
     webcamUrl: null,
     description:
       "Vancouver's largest and most popular beach featuring a heated saltwater pool, tennis courts, and basketball.",
+    tagline: 'The sporty heart of the westside',
+    images: {
+      hero: 'https://images.unsplash.com/photo-1473116763249-2faaef81ccda?w=1200&q=80',
+      thumb: 'https://images.unsplash.com/photo-1473116763249-2faaef81ccda?w=600&q=80',
+      credit: { name: 'Cristina Gottardi', username: 'cristina_gottardi' },
+    },
     amenities: {
       parking: 'paid',
       restrooms: true,
@@ -76,6 +94,12 @@ export const BEACHES: Beach[] = [
     webcamUrl: null,
     description:
       'Quieter beach with shallow waters stretching far at low tide, popular for walking and beachcombing.',
+    tagline: 'Peaceful shores and endless tidal flats',
+    images: {
+      hero: 'https://images.unsplash.com/photo-1520942702018-0862200e6873?w=1200&q=80',
+      thumb: 'https://images.unsplash.com/photo-1520942702018-0862200e6873?w=600&q=80',
+      credit: { name: 'Khachik Simonian', username: 'khachiksimonian' },
+    },
     amenities: {
       parking: 'free',
       restrooms: true,
@@ -98,6 +122,12 @@ export const BEACHES: Beach[] = [
     webcamUrl: null,
     description:
       'Stanley Park beach with a heated outdoor pool, playground, and beautiful forest backdrop.',
+    tagline: 'Stanley Park pool days and forest trails',
+    images: {
+      hero: 'https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?w=1200&q=80',
+      thumb: 'https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?w=600&q=80',
+      credit: { name: 'Shifaaz Shamoon', username: 'sotti' },
+    },
     amenities: {
       parking: 'paid',
       restrooms: true,
@@ -120,6 +150,12 @@ export const BEACHES: Beach[] = [
     webcamUrl: null,
     description:
       'Expansive beach known for spectacular low tides, kiteboarding, and mountain views.',
+    tagline: 'Vast sands, big kites, bigger mountains',
+    images: {
+      hero: 'https://images.unsplash.com/photo-1471922694854-ff1b63b20054?w=1200&q=80',
+      thumb: 'https://images.unsplash.com/photo-1471922694854-ff1b63b20054?w=600&q=80',
+      credit: { name: 'Elizeu Dias', username: 'elishavision' },
+    },
     amenities: {
       parking: 'free',
       restrooms: true,
@@ -142,6 +178,12 @@ export const BEACHES: Beach[] = [
     webcamUrl: null,
     description:
       'Downtown beach along False Creek with ferry access and views of the city skyline.',
+    tagline: 'City skyline meets ocean breeze',
+    images: {
+      hero: 'https://images.unsplash.com/photo-1505142468610-359e7d316be0?w=1200&q=80',
+      thumb: 'https://images.unsplash.com/photo-1505142468610-359e7d316be0?w=600&q=80',
+      credit: { name: 'Linus Nylund', username: 'dreamsoftheoceans' },
+    },
     amenities: {
       parking: 'street',
       restrooms: true,
@@ -164,6 +206,12 @@ export const BEACHES: Beach[] = [
     webcamUrl: null,
     description:
       'Secluded Stanley Park gem with stunning sunsets, rainforest trails, and a relaxed vibe.',
+    tagline: 'Hidden rainforest cove with bonfire sunsets',
+    images: {
+      hero: 'https://images.unsplash.com/photo-1519046904884-53103b34b206?w=1200&q=80',
+      thumb: 'https://images.unsplash.com/photo-1519046904884-53103b34b206?w=600&q=80',
+      credit: { name: 'Claudel Rheault', username: 'claudelrheault' },
+    },
     amenities: {
       parking: 'paid',
       restrooms: true,
@@ -186,6 +234,12 @@ export const BEACHES: Beach[] = [
     webcamUrl: null,
     description:
       'East Vancouver freshwater lake with a sandy beach, farmers market, and community vibe.',
+    tagline: 'East Van freshwater escape and community hub',
+    images: {
+      hero: 'https://images.unsplash.com/photo-1506953823976-52e1fdc0149a?w=1200&q=80',
+      thumb: 'https://images.unsplash.com/photo-1506953823976-52e1fdc0149a?w=600&q=80',
+      credit: { name: 'Michael Block', username: 'michael_block' },
+    },
     amenities: {
       parking: 'street',
       restrooms: true,

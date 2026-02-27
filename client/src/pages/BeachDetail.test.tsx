@@ -12,6 +12,7 @@ vi.mock('react-router-dom', () => ({
 const mockGetBeachById = vi.fn();
 vi.mock('@van-beaches/shared', () => ({
   getBeachById: (slug: string) => mockGetBeachById(slug),
+  BEACHES: [],
 }));
 
 // Mock all hooks
@@ -119,6 +120,14 @@ vi.mock('../components/WeatherForecast', () => ({
 
 vi.mock('../components/WeatherWidget', () => ({
   WeatherWidget: () => <div data-testid="weather-widget" />,
+}));
+
+vi.mock('../components/PlanYourVisit', () => ({
+  PlanYourVisit: () => <div data-testid="plan-your-visit" />,
+}));
+
+vi.mock('../components/NearbyPlaces', () => ({
+  NearbyPlaces: () => <div data-testid="nearby-places" />,
 }));
 
 describe('BeachDetail', () => {
@@ -287,13 +296,12 @@ describe('BeachDetail', () => {
   });
 
   describe('beach details rendering', () => {
-    it('renders beach name and description', () => {
+    it('renders beach name in hero', () => {
       mockGetBeachById.mockReturnValue(baseBeach);
 
       render(<BeachDetail />);
 
       expect(screen.getByText('Test Beach')).toBeInTheDocument();
-      expect(screen.getByText('A beautiful test beach')).toBeInTheDocument();
     });
 
     it('renders all expected widgets', () => {
@@ -305,7 +313,7 @@ describe('BeachDetail', () => {
       expect(screen.getByTestId('tide-canvas')).toBeInTheDocument();
       expect(screen.getByTestId('tide-forecast')).toBeInTheDocument();
       expect(screen.getByTestId('water-quality')).toBeInTheDocument();
-      expect(screen.getByTestId('beach-amenities')).toBeInTheDocument();
+      expect(screen.getByTestId('plan-your-visit')).toBeInTheDocument();
       expect(screen.getByTestId('favorite-button')).toBeInTheDocument();
       expect(screen.getByTestId('share-button')).toBeInTheDocument();
     });

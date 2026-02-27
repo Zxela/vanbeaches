@@ -107,6 +107,34 @@ export function mapRange(
 }
 
 /**
+ * Get the current time of day period
+ */
+export function getTimeOfDay(): 'morning' | 'afternoon' | 'evening' | 'night' {
+  const hour = new Date().getHours();
+  if (hour >= 5 && hour < 12) return 'morning';
+  if (hour >= 12 && hour < 17) return 'afternoon';
+  if (hour >= 17 && hour < 21) return 'evening';
+  return 'night';
+}
+
+/**
+ * Get a greeting based on time of day
+ */
+export function getBeachGreeting(): { greeting: string; suggestion: string } {
+  const period = getTimeOfDay();
+  switch (period) {
+    case 'morning':
+      return { greeting: 'Good morning', suggestion: 'Perfect time for a beach walk' };
+    case 'afternoon':
+      return { greeting: 'Good afternoon', suggestion: 'Soak up some rays while you can' };
+    case 'evening':
+      return { greeting: 'Good evening', suggestion: "Catch tonight's sunset at the shore" };
+    case 'night':
+      return { greeting: 'Good evening', suggestion: "Plan tomorrow's beach adventure" };
+  }
+}
+
+/**
  * Debounce a function
  */
 export function debounce<T extends (...args: unknown[]) => unknown>(

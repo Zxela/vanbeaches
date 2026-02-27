@@ -22,66 +22,68 @@ export function Compare() {
   const selectedBeaches = BEACHES.filter((b) => selected.includes(b.id));
 
   return (
-    <div className="space-y-6">
-      <div className="flex items-center gap-3">
-        <Icon icon={BarChart3} size="xl" color="ocean" />
-        <div>
-          <h2 className="text-2xl font-bold text-sand-900 dark:text-sand-50">Compare Beaches</h2>
-          <p className="text-sand-500 dark:text-sand-400 mt-1">
-            Select up to {MAX_COMPARE} beaches to compare
-          </p>
-        </div>
-      </div>
-
-      {/* Beach selector */}
-      <Card>
-        <CardContent className="p-4">
-          <div className="flex flex-wrap gap-2">
-            {BEACHES.map((beach) => (
-              <button
-                type="button"
-                key={beach.id}
-                onClick={() => toggleBeach(beach.id)}
-                disabled={!selected.includes(beach.id) && selected.length >= MAX_COMPARE}
-                className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-                  selected.includes(beach.id)
-                    ? 'bg-ocean-500 text-white'
-                    : selected.length >= MAX_COMPARE
-                      ? 'bg-sand-100 dark:bg-sand-700 text-sand-400 cursor-not-allowed'
-                      : 'bg-sand-100 dark:bg-sand-700 text-sand-700 dark:text-sand-300 hover:bg-sand-200 dark:hover:bg-sand-600'
-                }`}
-              >
-                {beach.name}
-              </button>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
-
-      {/* Comparison grid */}
-      {selectedBeaches.length > 0 && (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {selectedBeaches.map((beach) => (
-            <CompareCard
-              key={beach.id}
-              beachId={beach.id}
-              beachName={beach.name}
-              amenities={beach.amenities}
-            />
-          ))}
-        </div>
-      )}
-
-      {selected.length === 0 && (
-        <Card>
-          <CardContent className="p-12 text-center">
-            <Icon icon={Waves} size="xl" color="ocean" className="mx-auto mb-4" />
-            <p className="text-sand-500 dark:text-sand-400">
-              Select beaches above to compare conditions
+    <div className="container mx-auto max-w-7xl px-4 py-6">
+      <div className="bg-white/95 dark:bg-sand-800/95 rounded-2xl shadow-xl p-6 border border-sand-200/50 dark:border-sand-700/50 space-y-6">
+        <div className="flex items-center gap-3">
+          <Icon icon={BarChart3} size="xl" color="ocean" />
+          <div>
+            <h2 className="text-2xl font-bold text-sand-900 dark:text-sand-50">Compare Beaches</h2>
+            <p className="text-sand-500 dark:text-sand-400 mt-1">
+              Select up to {MAX_COMPARE} beaches to compare
             </p>
+          </div>
+        </div>
+
+        {/* Beach selector */}
+        <Card>
+          <CardContent className="p-4">
+            <div className="flex flex-wrap gap-2">
+              {BEACHES.map((beach) => (
+                <button
+                  type="button"
+                  key={beach.id}
+                  onClick={() => toggleBeach(beach.id)}
+                  disabled={!selected.includes(beach.id) && selected.length >= MAX_COMPARE}
+                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                    selected.includes(beach.id)
+                      ? 'bg-ocean-500 text-white'
+                      : selected.length >= MAX_COMPARE
+                        ? 'bg-sand-100 dark:bg-sand-700 text-sand-400 cursor-not-allowed'
+                        : 'bg-sand-100 dark:bg-sand-700 text-sand-700 dark:text-sand-300 hover:bg-sand-200 dark:hover:bg-sand-600'
+                  }`}
+                >
+                  {beach.name}
+                </button>
+              ))}
+            </div>
           </CardContent>
         </Card>
-      )}
+
+        {/* Comparison grid */}
+        {selectedBeaches.length > 0 && (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {selectedBeaches.map((beach) => (
+              <CompareCard
+                key={beach.id}
+                beachId={beach.id}
+                beachName={beach.name}
+                amenities={beach.amenities}
+              />
+            ))}
+          </div>
+        )}
+
+        {selected.length === 0 && (
+          <Card>
+            <CardContent className="p-12 text-center">
+              <Icon icon={Waves} size="xl" color="ocean" className="mx-auto mb-4" />
+              <p className="text-sand-500 dark:text-sand-400">
+                Select beaches above to compare conditions
+              </p>
+            </CardContent>
+          </Card>
+        )}
+      </div>
     </div>
   );
 }

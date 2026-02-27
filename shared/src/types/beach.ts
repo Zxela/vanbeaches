@@ -13,6 +13,12 @@ export interface BeachAmenities {
   firepits: boolean;
 }
 
+export interface BeachImage {
+  hero: string;
+  thumb: string;
+  credit: { name: string; username: string };
+}
+
 export interface Beach {
   id: string;
   name: string;
@@ -22,6 +28,8 @@ export interface Beach {
   webcamUrl: string | null;
   showWebcam?: boolean;
   description?: string;
+  tagline?: string;
+  images?: BeachImage;
   amenities?: BeachAmenities;
   activities?: string[];
 }

@@ -1,7 +1,7 @@
 import 'leaflet/dist/leaflet.css';
 import { BEACHES } from '@van-beaches/shared';
 import L from 'leaflet';
-import { MapContainer, Marker, TileLayer, Tooltip } from 'react-leaflet';
+import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
 import { useNavigate } from 'react-router-dom';
 import { useFavorites } from '../hooks/useFavorites';
 
@@ -110,21 +110,47 @@ export function BeachMap({ selectedBeachId, onSelectBeach }: BeachMapProps) {
         .dark .leaflet-tile-pane {
           filter: brightness(0.7) invert(1) contrast(1.1) hue-rotate(200deg) saturate(0.3);
         }
-        .leaflet-tooltip {
-          background: #212121;
-          color: white;
-          border: none;
-          border-radius: 4px;
+        .leaflet-popup-content-wrapper {
+          border-radius: 12px;
+          padding: 0;
+          overflow: hidden;
+        }
+        .leaflet-popup-content {
+          margin: 0;
+          min-width: 180px;
+        }
+        .leaflet-popup-tip {
+          background: white;
+        }
+        .dark .leaflet-popup-content-wrapper {
+          background: #2a2a2a;
+        }
+        .dark .leaflet-popup-tip {
+          background: #2a2a2a;
+        }
+        .beach-popup-img {
+          width: 100%;
+          height: 100px;
+          object-fit: cover;
+        }
+        .beach-popup-info {
+          padding: 8px 12px;
+        }
+        .beach-popup-name {
+          font-weight: 600;
+          font-size: 14px;
+          color: #1a1a1a;
+        }
+        .dark .beach-popup-name {
+          color: #f5f5f5;
+        }
+        .beach-popup-tagline {
           font-size: 12px;
-          padding: 2px 8px;
-          box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+          color: #777;
+          margin-top: 2px;
         }
-        .dark .leaflet-tooltip {
-          background: #fafafa;
-          color: #212121;
-        }
-        .leaflet-tooltip::before {
-          display: none;
+        .dark .beach-popup-tagline {
+          color: #aaa;
         }
       `}</style>
       <div className="aspect-[4/3] md:aspect-[16/9]">
@@ -157,7 +183,6 @@ export function BeachMap({ selectedBeachId, onSelectBeach }: BeachMapProps) {
                   click: () => handleClick(beach.id),
                 }}
                 // Extra data attributes passed to the mock for testability
-                // (these are ignored by real Leaflet Marker but accessible in jsdom mock)
                 {...{
                   'data-beach-id': beach.id,
                   'data-bg-color': cfg.bgColor,
@@ -165,9 +190,22 @@ export function BeachMap({ selectedBeachId, onSelectBeach }: BeachMapProps) {
                   'data-transform': cfg.transform,
                 }}
               >
-                <Tooltip direction="top" offset={[0, -10]} permanent={false}>
-                  {beach.name}
-                </Tooltip>
+                <Popup>
+                  <div>
+                    {beach.images && (
+                      <img
+                        src={beach.images.thumb}
+                        alt={beach.name}
+                        className="beach-popup-img"
+                        loading="lazy"
+                      />
+                    )}
+                    <div className="beach-popup-info">
+                      <div className="beach-popup-name">{beach.name}</div>
+                      {beach.tagline && <div className="beach-popup-tagline">{beach.tagline}</div>}
+                    </div>
+                  </div>
+                </Popup>
               </Marker>
             );
           })}

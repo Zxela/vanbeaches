@@ -53,22 +53,10 @@ export function Layout({ children }: LayoutProps) {
   const otherBeaches = BEACHES.filter((b) => !favorites.includes(b.id));
 
   return (
-    <div className="min-h-screen relative bg-sand-100 dark:bg-sand-900">
-      {/* Vancouver background image */}
-      <div
-        className="fixed inset-0 bg-cover bg-center bg-no-repeat"
-        style={{
-          backgroundImage:
-            'url(https://images.unsplash.com/photo-1609825488888-3a766db05542?w=1920&q=80)',
-        }}
-      >
-        {/* Overlay for readability - cool tones */}
-        <div className="absolute inset-0 bg-gradient-to-b from-ocean-900/30 via-ocean-800/20 to-shore-900/50 dark:from-ocean-900/60 dark:via-sand-900/40 dark:to-sand-900/80" />
-      </div>
-
+    <div className="min-h-screen bg-sand-50 dark:bg-sand-900">
       {/* App container */}
-      <div className="relative z-10 min-h-screen flex flex-col">
-        <header className="relative z-50 bg-white/90 dark:bg-sand-900/95 backdrop-blur-md text-sand-900 dark:text-sand-100 shadow-xl border-b border-ocean-200/30 dark:border-ocean-800/30">
+      <div className="min-h-screen flex flex-col">
+        <header className="sticky top-0 z-50 bg-white/90 dark:bg-sand-900/95 backdrop-blur-md text-sand-900 dark:text-sand-100 shadow-xl border-b border-ocean-200/30 dark:border-ocean-800/30">
           <div className="container mx-auto max-w-7xl px-4 py-4">
             <div className="flex items-center justify-between">
               <Link to="/" className="flex items-center gap-3 group">
@@ -218,12 +206,8 @@ export function Layout({ children }: LayoutProps) {
           </div>
         </header>
 
-        {/* Main content with frosted glass effect */}
-        <main className="flex-1 container mx-auto max-w-7xl px-4 py-6 pb-24 sm:pb-6">
-          <div className="bg-white/95 dark:bg-sand-900/95 backdrop-blur-sm rounded-2xl shadow-2xl p-6 border border-ocean-100/50 dark:border-ocean-900/30">
-            {children}
-          </div>
-        </main>
+        {/* Main content - pages control their own containers */}
+        <main className="flex-1 pb-24 sm:pb-6">{children}</main>
 
         <MobileBottomNav />
       </div>

@@ -34,6 +34,7 @@ vi.mock('@van-beaches/shared', () => ({
     },
     activities: ['swimming'],
   }),
+  BEACHES: [],
 }));
 
 vi.mock('../hooks/useTides', () => ({
@@ -113,9 +114,9 @@ describe('BeachDetail - refresh controls', () => {
     });
   });
 
-  it('displays Last updated timestamp derived from weather.fetchedAt', () => {
+  it('displays temperature from weather data in summary bar', () => {
     render(<BeachDetail />);
-    expect(screen.getByText(/Last updated:/i)).toBeInTheDocument();
-    expect(screen.getByText(/min ago/i)).toBeInTheDocument();
+    const temps = screen.getAllByText('18°C');
+    expect(temps.length).toBeGreaterThanOrEqual(1);
   });
 });
