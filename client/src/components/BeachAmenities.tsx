@@ -1,5 +1,17 @@
 import type { BeachAmenities as AmenitiesType } from '@van-beaches/shared';
-import { MapPin } from 'lucide-react';
+import {
+  Accessibility,
+  Bath,
+  Circle,
+  Dog,
+  Flame,
+  MapPin,
+  ParkingCircle,
+  ShieldCheck,
+  ShowerHead,
+  UtensilsCrossed,
+  type LucideIcon,
+} from 'lucide-react';
 import { Card, CardContent, CardTitle, Icon } from './ui';
 
 interface BeachAmenitiesProps {
@@ -32,28 +44,28 @@ export function BeachAmenities({ amenities, activities }: BeachAmenitiesProps) {
         {amenities && (
           <div className="grid grid-cols-2 gap-2 mb-4">
             <AmenityBadge
-              icon="🅿️"
+              icon={ParkingCircle}
               label={parkingLabels[amenities.parking]}
               active={amenities.parking !== 'none'}
             />
-            <AmenityBadge icon="🚻" label="Restrooms" active={amenities.restrooms} />
-            <AmenityBadge icon="🚿" label="Showers" active={amenities.showers} />
+            <AmenityBadge icon={Bath} label="Restrooms" active={amenities.restrooms} />
+            <AmenityBadge icon={ShowerHead} label="Showers" active={amenities.showers} />
             <AmenityBadge
-              icon="🛟"
+              icon={ShieldCheck}
               label={lifeguardLabels[amenities.lifeguard]}
               active={amenities.lifeguard !== 'none'}
             />
-            <AmenityBadge icon="🍔" label="Food Nearby" active={amenities.foodNearby} />
-            <AmenityBadge icon="🐕" label="Dog Friendly" active={amenities.dogFriendly} />
-            <AmenityBadge icon="♿" label="Accessible" active={amenities.wheelchairAccessible} />
+            <AmenityBadge icon={UtensilsCrossed} label="Food Nearby" active={amenities.foodNearby} />
+            <AmenityBadge icon={Dog} label="Dog Friendly" active={amenities.dogFriendly} />
+            <AmenityBadge icon={Accessibility} label="Accessible" active={amenities.wheelchairAccessible} />
             {amenities.volleyballCourts > 0 && (
               <AmenityBadge
-                icon="🏐"
+                icon={Circle}
                 label={`${amenities.volleyballCourts} Volleyball Courts`}
                 active
               />
             )}
-            {amenities.firepits && <AmenityBadge icon="🔥" label="Fire Pits" active />}
+            {amenities.firepits && <AmenityBadge icon={Flame} label="Fire Pits" active />}
           </div>
         )}
 
@@ -79,16 +91,28 @@ export function BeachAmenities({ amenities, activities }: BeachAmenitiesProps) {
   );
 }
 
-function AmenityBadge({ icon, label, active }: { icon: string; label: string; active: boolean }) {
+function AmenityBadge({
+  icon: IconComponent,
+  label,
+  active,
+}: {
+  icon: LucideIcon;
+  label: string;
+  active: boolean;
+}) {
   return (
     <div
       className={`flex items-center gap-2 px-2 py-1.5 rounded-lg text-sm ${
         active
-          ? 'bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-300'
-          : 'bg-sand-50 dark:bg-sand-700 text-sand-400 dark:text-sand-500'
+          ? 'bg-emerald-50 text-emerald-700'
+          : 'bg-sand-50 text-sand-400'
       }`}
     >
-      <span>{icon}</span>
+      <IconComponent
+        size={16}
+        className={active ? 'text-emerald-600' : 'text-sand-400'}
+        aria-hidden="true"
+      />
       <span className={active ? '' : 'line-through'}>{label}</span>
     </div>
   );
