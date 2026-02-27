@@ -21,13 +21,13 @@ interface TooltipData {
 
 // Canvas configuration
 const CANVAS_CONFIG = {
-  padding: { top: 30, right: 20, bottom: 40, left: 50 },
+  padding: { top: 20, right: 16, bottom: 36, left: 44 },
   gridLines: { horizontal: 5, vertical: 5 },
   colors: {
     light: {
-      curve: '#00acc1',
-      curveGlow: 'rgba(0, 172, 193, 0.3)',
-      gradientTop: 'rgba(0, 188, 212, 0.4)',
+      curve: '#0097a7',
+      curveGlow: 'rgba(0, 151, 167, 0.3)',
+      gradientTop: 'rgba(0, 151, 167, 0.3)',
       gradientBottom: 'rgba(0, 150, 136, 0.05)',
       grid: 'rgba(0, 0, 0, 0.06)',
       text: '#616161',
@@ -430,7 +430,7 @@ export function TideCanvas({ predictions, loading, className }: TideCanvasProps)
           Today's Tides
         </CardTitle>
         <CardContent className="mt-4">
-          <div className="h-[180px] shimmer rounded-lg" />
+          <div className="h-[220px] shimmer rounded-lg" />
         </CardContent>
       </Card>
     );
@@ -444,7 +444,7 @@ export function TideCanvas({ predictions, loading, className }: TideCanvasProps)
           Today's Tides
         </CardTitle>
         <CardContent className="mt-4">
-          <p className="text-sand-500 dark:text-sand-400 text-center py-8">
+          <p className="text-sand-500 text-center py-8">
             No tide data available for today
           </p>
         </CardContent>
@@ -455,43 +455,15 @@ export function TideCanvas({ predictions, loading, className }: TideCanvasProps)
   return (
     <Card variant="ocean" padding="none" className={cn('overflow-hidden', className)}>
       <div className="p-4 pb-0">
-        <CardTitle className="flex items-center justify-between">
-          <span className="flex items-center gap-2">
-            <Icon icon={Waves} size="lg" color="ocean" />
-            Today's Tides
-          </span>
-          <div className="flex items-center gap-3 text-sm">
-            {todayTides
-              .filter((t) => t.type === 'high')
-              .slice(0, 1)
-              .map((t) => (
-                <span key={t.time} className="flex items-center gap-1 text-tide-high">
-                  <Icon icon={TrendingUp} size="sm" />
-                  <span className="font-medium">{formatNumber(t.height)}m</span>
-                  <span className="text-sand-500 dark:text-sand-400 text-xs">
-                    {formatTideTime(t.time)}
-                  </span>
-                </span>
-              ))}
-            {todayTides
-              .filter((t) => t.type === 'low')
-              .slice(0, 1)
-              .map((t) => (
-                <span key={t.time} className="flex items-center gap-1 text-tide-low">
-                  <Icon icon={TrendingDown} size="sm" />
-                  <span className="font-medium">{formatNumber(t.height)}m</span>
-                  <span className="text-sand-500 dark:text-sand-400 text-xs">
-                    {formatTideTime(t.time)}
-                  </span>
-                </span>
-              ))}
-          </div>
+        <CardTitle className="flex items-center gap-2">
+          <Icon icon={Waves} size="lg" color="ocean" />
+          Today's Tides
         </CardTitle>
       </div>
 
       <div
         ref={containerRef}
-        className="relative h-[200px] touch-none"
+        className="relative h-[220px] touch-none"
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
         onTouchMove={handleTouchMove}
@@ -513,8 +485,8 @@ export function TideCanvas({ predictions, loading, className }: TideCanvasProps)
               transition={{ duration: 0.15 }}
               className={cn(
                 'absolute pointer-events-none z-10',
-                'bg-white dark:bg-sand-800 rounded-lg shadow-lg',
-                'border border-sand-200 dark:border-sand-700',
+                'bg-white rounded-lg shadow-lg',
+                'border border-sand-200',
                 'px-3 py-2 text-sm',
               )}
               style={{
@@ -522,7 +494,7 @@ export function TideCanvas({ predictions, loading, className }: TideCanvasProps)
                 top: Math.max(tooltip.y - 60, 10),
               }}
             >
-              <div className="font-medium text-sand-900 dark:text-sand-100">
+              <div className="font-medium text-sand-900">
                 {tooltip.time.toLocaleTimeString('en-US', {
                   hour: 'numeric',
                   minute: '2-digit',
@@ -534,7 +506,7 @@ export function TideCanvas({ predictions, loading, className }: TideCanvasProps)
                   'text-lg font-bold',
                   tooltip.type === 'high' && 'text-tide-high',
                   tooltip.type === 'low' && 'text-tide-low',
-                  !tooltip.type && 'text-ocean-600 dark:text-ocean-400',
+                  !tooltip.type && 'text-ocean-600',
                 )}
               >
                 {formatNumber(tooltip.height)}m
@@ -551,7 +523,7 @@ export function TideCanvas({ predictions, loading, className }: TideCanvasProps)
         {/* Crosshair */}
         {tooltip && (
           <div
-            className="absolute w-px bg-ocean-400/50 dark:bg-ocean-500/50 pointer-events-none"
+            className="absolute w-px bg-ocean-400/50 pointer-events-none"
             style={{
               left: tooltip.x,
               top: CANVAS_CONFIG.padding.top,
@@ -559,6 +531,31 @@ export function TideCanvas({ predictions, loading, className }: TideCanvasProps)
             }}
           />
         )}
+      </div>
+
+      {/* Key Tides summary grid */}
+      <div className="px-4 pb-4 pt-2">
+        <p className="text-xs font-medium uppercase tracking-wide text-sand-500 mb-2">Key Tides</p>
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          {todayTides.map((tide) => (
+            <div
+              key={tide.time}
+              className="flex items-center gap-2 p-2 rounded-lg bg-ocean-50/50"
+            >
+              {tide.type === 'high' ? (
+                <TrendingUp className="w-4 h-4 text-tide-high shrink-0" />
+              ) : (
+                <TrendingDown className="w-4 h-4 text-tide-low shrink-0" />
+              )}
+              <div className="flex flex-col min-w-0">
+                <span className="font-bold text-base text-sand-900 leading-none">
+                  {formatNumber(tide.height)}m
+                </span>
+                <span className="text-sm text-sand-500">{formatTideTime(tide.time)}</span>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </Card>
   );
