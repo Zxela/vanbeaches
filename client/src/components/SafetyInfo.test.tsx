@@ -1,9 +1,21 @@
 import { render, screen } from '@testing-library/react';
-import type { Beach } from '@van-beaches/shared';
+import type { Beach, BeachAmenities } from '@van-beaches/shared';
 import type { WaterQualityStatus } from '@van-beaches/shared';
 import type { WeatherForecast } from '@van-beaches/shared';
 import { describe, expect, it } from 'vitest';
 import { SafetyInfo } from './SafetyInfo';
+
+const mockAmenities: BeachAmenities = {
+  parking: 'free',
+  restrooms: true,
+  showers: true,
+  lifeguard: 'seasonal',
+  foodNearby: true,
+  dogFriendly: false,
+  wheelchairAccessible: true,
+  volleyballCourts: 0,
+  firepits: false,
+};
 
 const mockBeach: Beach = {
   id: 'test-beach',
@@ -12,24 +24,14 @@ const mockBeach: Beach = {
   location: { latitude: 49.28, longitude: -123.12 },
   tideStationId: null,
   webcamUrl: null,
-  amenities: {
-    parking: 'free',
-    restrooms: true,
-    showers: true,
-    lifeguard: 'seasonal',
-    foodNearby: true,
-    dogFriendly: false,
-    wheelchairAccessible: true,
-    volleyballCourts: 0,
-    firepits: false,
-  },
+  amenities: mockAmenities,
   safetyNotes: ['Always swim near a lifeguard', 'Check tide charts before visiting'],
 };
 
 const mockBeachNoLifeguard: Beach = {
   ...mockBeach,
   amenities: {
-    ...(mockBeach.amenities ?? {}),
+    ...mockAmenities,
     lifeguard: 'none',
   },
 };
@@ -328,7 +330,7 @@ describe('SafetyInfo', () => {
     it('shows year-round lifeguard when amenities.lifeguard is year-round', () => {
       const beachYearRound: Beach = {
         ...mockBeach,
-        amenities: { ...(mockBeach.amenities ?? {}), lifeguard: 'year-round' },
+        amenities: { ...mockAmenities, lifeguard: 'year-round' },
       };
       render(
         <SafetyInfo
