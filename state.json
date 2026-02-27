@@ -1,177 +1,142 @@
 {
-  "session_id": "cloudflare-migration-92d4850b",
-  "branch": "create/cloudflare-migration-92d4850b",
-  "worktree": "/home/zxela/beach-app-create-cloudflare-migration-92d4850b",
-  "feature": "cloudflare-migration",
-  "created_at": "2026-02-24T22:00:00Z",
-  "phase": "implementing",
-  "homerun_docs_dir": "/home/zxela/.claude/homerun/48b1e21a/cloudflare-migration-92d4850b",
+  "session_id": "interactive-beach-map-5a6dc66f",
+  "branch": "create/interactive-beach-map-5a6dc66f",
+  "worktree": "../vanbeaches-create-interactive-beach-map-5a6dc66f",
+  "feature": "interactive-beach-map",
+  "created_at": "2026-02-27T00:00:00Z",
+  "phase": "spec_review",
+  "homerun_docs_dir": "/home/alex/.claude/homerun/bbe3d3a9/interactive-beach-map-5a6dc66f",
   "spec_paths": {
-    "prd": "/home/zxela/.claude/homerun/48b1e21a/cloudflare-migration-92d4850b/PRD.md",
-    "adr": "/home/zxela/.claude/homerun/48b1e21a/cloudflare-migration-92d4850b/ADR.md",
-    "technical_design": "/home/zxela/.claude/homerun/48b1e21a/cloudflare-migration-92d4850b/TECHNICAL_DESIGN.md"
+    "prd": "/home/alex/.claude/homerun/bbe3d3a9/interactive-beach-map-5a6dc66f/PRD.md",
+    "adr": "/home/alex/.claude/homerun/bbe3d3a9/interactive-beach-map-5a6dc66f/ADR.md",
+    "technical_design": "/home/alex/.claude/homerun/bbe3d3a9/interactive-beach-map-5a6dc66f/TECHNICAL_DESIGN.md",
+    "wireframes": "/home/alex/.claude/homerun/bbe3d3a9/interactive-beach-map-5a6dc66f/WIREFRAMES.md"
   },
   "tasks_file": "docs/tasks.json",
   "traceability": {
     "user_stories": {
       "US-001": {
-        "title": "Developer deploys changes via pull request",
-        "acceptance_criteria": ["AC-001", "AC-002", "AC-003", "AC-004"],
+        "title": "View beaches on a real map",
+        "acceptance_criteria": ["AC-001", "AC-002", "AC-003"],
         "tasks": []
       },
       "US-002": {
-        "title": "Developer deploys to production",
-        "acceptance_criteria": ["AC-005", "AC-006", "AC-007", "AC-008"],
+        "title": "Interact with the map using pan and zoom",
+        "acceptance_criteria": ["AC-004", "AC-005", "AC-006", "AC-007", "AC-008"],
         "tasks": []
       },
       "US-003": {
-        "title": "End user views beach conditions with low latency",
-        "acceptance_criteria": ["AC-009", "AC-010", "AC-011"],
+        "title": "Select a beach via map marker",
+        "acceptance_criteria": ["AC-009", "AC-010", "AC-011", "AC-012"],
         "tasks": []
       },
       "US-004": {
-        "title": "System maintains fresh data via scheduled refresh",
-        "acceptance_criteria": ["AC-012", "AC-013", "AC-014", "AC-015", "AC-016"],
-        "tasks": []
-      },
-      "US-005": {
-        "title": "Developer runs the application locally",
-        "acceptance_criteria": ["AC-017", "AC-018", "AC-019"],
+        "title": "View the map in dark mode",
+        "acceptance_criteria": ["AC-013", "AC-014"],
         "tasks": []
       }
     },
     "acceptance_criteria": {
       "AC-001": {
-        "description": "When a pull request is opened or updated, the CI pipeline shall run lint, type-check, and test steps",
+        "description": "When the Discover page loads, the map shall render showing Vancouver's real coastline with all 9 beach markers visible at the default zoom level",
         "story": "US-001",
         "pattern": "When",
         "tasks": []
       },
       "AC-002": {
-        "description": "If all CI checks pass, then the pipeline shall deploy a preview to a unique Cloudflare Pages URL",
+        "description": "The map shall display recognizable geographic features (Stanley Park, English Bay, False Creek) that match real-world geography",
         "story": "US-001",
-        "pattern": "If-Then",
+        "pattern": "None",
         "tasks": []
       },
       "AC-003": {
-        "description": "If any CI check fails, then the pipeline shall block the preview deployment and report the failure",
+        "description": "While the map is displayed, the map tiles shall load from OpenStreetMap without requiring any API key or user authentication",
         "story": "US-001",
-        "pattern": "If-Then",
+        "pattern": "While",
         "tasks": []
       },
       "AC-004": {
-        "description": "When a pull request preview is deployed, the preview URL shall be posted as a comment or status check on the PR",
-        "story": "US-001",
+        "description": "When the user scrolls the mouse wheel over the map, the map shall zoom in or out centered on the cursor position",
+        "story": "US-002",
         "pattern": "When",
         "tasks": []
       },
       "AC-005": {
-        "description": "When a commit is pushed to the master branch, the CI pipeline shall run lint, type-check, and test steps",
+        "description": "When the user clicks and drags the map on desktop, the map shall pan in the direction of the drag",
         "story": "US-002",
         "pattern": "When",
         "tasks": []
       },
       "AC-006": {
-        "description": "If all CI checks pass on master, then the pipeline shall deploy to the production Cloudflare Pages environment",
+        "description": "When the user pinches on a touch device, the map shall zoom in or out accordingly",
         "story": "US-002",
-        "pattern": "If-Then",
+        "pattern": "When",
         "tasks": []
       },
       "AC-007": {
-        "description": "If any CI check fails on master, then the pipeline shall not deploy and shall notify the team of the failure",
+        "description": "When the user touch-drags on mobile, the map shall pan in the direction of the drag",
         "story": "US-002",
-        "pattern": "If-Then",
+        "pattern": "When",
         "tasks": []
       },
       "AC-008": {
-        "description": "The production deployment shall be accessible at vanbeaches.com within 5 minutes of a successful pipeline run",
+        "description": "The map shall constrain zoom and pan to keep the Vancouver coastal area within reasonable bounds",
         "story": "US-002",
         "pattern": "None",
         "tasks": []
       },
       "AC-009": {
-        "description": "While cached data exists in KV, the API shall return responses in < 200ms at the 95th percentile",
+        "description": "When the user clicks a beach marker, the system shall invoke the onSelectBeach callback if provided, or navigate to /beach/{beachId}",
         "story": "US-003",
-        "pattern": "While",
+        "pattern": "When",
         "tasks": []
       },
       "AC-010": {
-        "description": "When the dashboard loads, the system shall serve the SPA from edge locations via Cloudflare Pages",
+        "description": "When a beach is selected (via selectedBeachId prop), the corresponding marker shall display in a visually distinct selected state",
         "story": "US-003",
         "pattern": "When",
         "tasks": []
       },
       "AC-011": {
-        "description": "If cached data is missing for a beach, then the API shall fetch from the upstream source and return the result within < 3 seconds",
+        "description": "When the user hovers over a beach marker on desktop, a tooltip shall appear showing the beach name",
         "story": "US-003",
-        "pattern": "If-Then",
-        "tasks": []
-      },
-      "AC-012": {
-        "description": "The system shall refresh weather data for all 9 beaches every 30 minutes via a cron trigger",
-        "story": "US-004",
-        "pattern": "None",
-        "tasks": []
-      },
-      "AC-013": {
-        "description": "The system shall refresh tide data for all unique tide stations every 60 minutes via a cron trigger",
-        "story": "US-004",
-        "pattern": "None",
-        "tasks": []
-      },
-      "AC-014": {
-        "description": "The system shall refresh water quality data for all 9 beaches every 6 hours via a cron trigger",
-        "story": "US-004",
-        "pattern": "None",
-        "tasks": []
-      },
-      "AC-015": {
-        "description": "While operating on the free tier, the system shall consume fewer than 1,000 KV writes per day (Target: < 700 writes/day)",
-        "story": "US-004",
-        "pattern": "While",
-        "tasks": []
-      },
-      "AC-016": {
-        "description": "If an upstream API call fails during a scheduled refresh, then the system shall log the error and continue refreshing remaining beaches",
-        "story": "US-004",
-        "pattern": "If-Then",
-        "tasks": []
-      },
-      "AC-017": {
-        "description": "When the developer runs the local dev command, the system shall serve both the SPA and API functions locally",
-        "story": "US-005",
         "pattern": "When",
         "tasks": []
       },
-      "AC-018": {
-        "description": "While developing locally, the developer shall be able to make changes to functions and see them reflected without restarting",
-        "story": "US-005",
-        "pattern": "While",
+      "AC-012": {
+        "description": "When a beach is marked as a favorite, its marker shall display a distinct favorite visual indicator",
+        "story": "US-003",
+        "pattern": "When",
         "tasks": []
       },
-      "AC-019": {
-        "description": "The local development experience shall not require a Cloudflare account or network access to Cloudflare services for basic development",
-        "story": "US-005",
+      "AC-013": {
+        "description": "When the application is in dark mode, the map container and surrounding UI shall match the dark theme",
+        "story": "US-004",
+        "pattern": "When",
+        "tasks": []
+      },
+      "AC-014": {
+        "description": "The map tiles or map container styling shall not create a jarring bright contrast when dark mode is active",
+        "story": "US-004",
         "pattern": "None",
         "tasks": []
       }
     },
     "adr_decisions": {
       "ADR-001": {
-        "title": "Use Cloudflare Pages + Functions + KV + Cron Triggers over Vercel or keeping Express",
-        "rationale": "Eliminates infrastructure management, free tier covers workload, KV maps directly to existing cache pattern, co-located SPA+API in one project",
+        "title": "Use Leaflet with OpenStreetMap for interactive beach map",
+        "rationale": "No API key needed for static Cloudflare Pages deployment, zero cost at any scale, smallest bundle size, sufficient for 9 markers",
         "tasks_affected": []
       }
     },
     "non_goals": [
-      "NG-001: Changing the React client UI",
-      "NG-002: Changing the shared TypeScript types package",
-      "NG-003: Changing external API integrations",
-      "NG-004: Changing the API response shape (ApiResponse<T>)",
-      "NG-005: Adding new features or data sources",
-      "NG-006: Implementing user authentication",
-      "NG-007: Migrating to D1 relational database",
-      "NG-008: Guaranteed single-flight request coalescing (best-effort is acceptable)"
+      "NG-001: Adding new beaches or modifying existing beach dataset",
+      "NG-002: Implementing user geolocation or find nearest beach",
+      "NG-003: Adding directions or routing functionality",
+      "NG-004: Adding map layer controls (satellite, terrain)",
+      "NG-005: Modifying Discover page layout beyond map section",
+      "NG-006: Adding marker clustering behavior",
+      "NG-007: Custom error handling for tile load failures"
     ]
   },
   "tasks": {},
@@ -186,17 +151,6 @@
       "fresh_agent": 1
     }
   },
-  "scale": {
-    "estimated": "large",
-    "file_count": 25,
-    "adr_triggers": [
-      "architecture_change",
-      "data_flow_change",
-      "external_dependency_replacement",
-      "complex_async"
-    ],
-    "docs_to_generate": ["prd", "adr", "technical_design"]
-  },
   "token_tracking": {
     "enabled": true,
     "config": {
@@ -207,18 +161,24 @@
     },
     "phases": {
       "discovery": {
-        "started_at": "2026-02-24T22:00:00Z",
-        "dialogue_turns": 9
+        "started_at": "2026-02-27T00:00:00Z",
+        "dialogue_turns": 7
       }
     },
     "refresh_log": []
   },
   "dialogue_state": {
-    "turns_completed": 9,
+    "turns_completed": 7,
     "categories_covered": ["purpose", "users", "scope", "constraints", "edge_cases"],
     "categories_remaining": [],
-    "last_question_category": "scope",
+    "last_question_category": "edge_cases",
     "warnings_shown": false
+  },
+  "scale": {
+    "estimated": "medium",
+    "file_count": 4,
+    "adr_triggers": ["external_dependency_introduction"],
+    "docs_to_generate": ["prd", "adr", "technical_design", "wireframes"]
   },
   "progress": {
     "iteration": 0,
@@ -229,14 +189,15 @@
     {
       "skill": "homerun:discovery",
       "action": "dialogue_complete",
-      "timestamp": "2026-02-24T22:00:00Z",
-      "details": "9 turns, all 5 categories covered"
+      "timestamp": "2026-02-27T00:00:00Z",
+      "turns": 7,
+      "categories": ["purpose", "users", "scope", "constraints", "edge_cases"]
     },
     {
-      "skill": "homerun:planning",
-      "action": "planning_complete",
-      "timestamp": "2026-02-24T22:45:00Z",
-      "details": "16 tasks created, DAG validated, all 19 AC covered, all 5 US covered"
+      "skill": "homerun:discovery",
+      "action": "documents_generated",
+      "timestamp": "2026-02-27T00:00:00Z",
+      "documents": ["PRD.md", "ADR.md", "TECHNICAL_DESIGN.md", "WIREFRAMES.md"]
     }
   ]
 }
