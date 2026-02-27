@@ -196,6 +196,7 @@
       "objective": "Ensure the Discover page still renders correctly with the new Leaflet-based BeachMap. Update the BeachMap mock in Discover.test.tsx if needed to reflect the new component structure. Verify no regressions in existing Discover page tests.",
       "task_type": "add_test",
       "methodology": "tdd",
+      "status": "completed",
       "acceptance_criteria": [
         {
           "id": "004-AC1",
@@ -214,7 +215,6 @@
         }
       ],
       "test_file": "client/src/pages/Discover.test.tsx",
-      "status": "pending",
       "depends_on": ["003"],
       "traces_to": {
         "user_stories": ["US-001", "US-003"],
