@@ -48,7 +48,15 @@
       "depends_on": [],
       "traces_to": {
         "user_stories": [],
-        "acceptance_criteria": ["001-AC1", "001-AC2", "001-AC3", "001-AC4", "001-AC5", "001-AC6", "001-AC7"],
+        "acceptance_criteria": [
+          "001-AC1",
+          "001-AC2",
+          "001-AC3",
+          "001-AC4",
+          "001-AC5",
+          "001-AC6",
+          "001-AC7"
+        ],
         "adr_decisions": []
       },
       "technical_notes": "This is a single-component refactor touching 2 files. In SearchFilter.tsx: (1) Remove 'search' useState, Search/X icon imports from lucide-react, the entire text input JSX block, and text-based filtering in useMemo. (2) Expand IntentKey union to: 'swimming' | 'waterSports' | 'dogFriendly' | 'sunset' | 'sports' | 'bonfire' | 'quiet' | 'family' | 'picnic' | 'cycling'. Rename 'dogWalk' to 'dogFriendly'. (3) Update INTENTS array with 10 entries using new labels (see TECHNICAL_DESIGN.md intent table). (4) Rewrite matchesIntent with expanded logic per TECHNICAL_DESIGN.md intent table -- notably: swimming now also matches 'pool swimming' and 'wading'; waterSports is new; dogFriendly replaces dogWalk; sports no longer matches 'kiteboarding' (moved to waterSports); bonfire now also matches activities 'bonfires'; quiet uses positive activity-based matching instead of negative amenity heuristic; family adds OR with activities 'playground'; picnic and cycling are new. (5) Change pill container class from 'overflow-x-auto pb-1 scrollbar-hide' to 'flex-wrap'. (6) Simplify hasFilters to activeIntents.size > 0. In SearchFilter.test.tsx: Delete the 4 old negative-assertion tests (sand colors, ocean colors, 2 inline SVG checks) and the old 'renders all intent filter pills' test. Write new tests for all 7 acceptance criteria. NON-SCOPE: Do not modify any files listed in TECHNICAL_DESIGN.md Non-Scope Declaration (beaches.ts, beach types, Discover.tsx, AllBeachesSection, RecommendedSection, HeroSection, BeachMap, NewsletterSignup, BeachCard, API endpoints, worker functions).",
@@ -59,9 +67,7 @@
           "client/src/components/SearchFilter.tsx:INTENTS array",
           "/home/alex/.claude/homerun/bbe3d3a9/redesign-intent-pills-4d3d5422/TECHNICAL_DESIGN.md:## Data Models:Expanded Intent Definitions"
         ],
-        "pattern_files": [
-          "client/src/components/SearchFilter.tsx"
-        ],
+        "pattern_files": ["client/src/components/SearchFilter.tsx"],
         "grep_patterns": [
           "type IntentKey",
           "function matchesIntent",

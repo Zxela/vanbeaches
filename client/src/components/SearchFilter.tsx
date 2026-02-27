@@ -40,14 +40,13 @@ function matchesIntent(beach: (typeof BEACHES)[number], intent: IntentKey): bool
   switch (intent) {
     case 'swimming':
       return (
-        (beach.activities?.some((a) => ['swimming', 'pool swimming', 'wading'].includes(a)) ??
-          false)
+        beach.activities?.some((a) => ['swimming', 'pool swimming', 'wading'].includes(a)) ?? false
       );
     case 'waterSports':
       return (
-        (beach.activities?.some((a) =>
+        beach.activities?.some((a) =>
           ['kayaking', 'paddleboarding', 'sailing', 'windsurfing', 'kiteboarding'].includes(a),
-        ) ?? false)
+        ) ?? false
       );
     case 'dogFriendly':
       return beach.amenities?.dogFriendly === true;
@@ -55,18 +54,17 @@ function matchesIntent(beach: (typeof BEACHES)[number], intent: IntentKey): bool
       return beach.activities?.includes('sunset viewing') ?? false;
     case 'sports':
       return (
-        (beach.activities?.some((a) => ['volleyball', 'basketball', 'tennis'].includes(a)) ?? false)
+        beach.activities?.some((a) => ['volleyball', 'basketball', 'tennis'].includes(a)) ?? false
       );
     case 'bonfire':
       return (
-        beach.amenities?.firepits === true ||
-        (beach.activities?.includes('bonfires') ?? false)
+        beach.amenities?.firepits === true || (beach.activities?.includes('bonfires') ?? false)
       );
     case 'quiet':
       return (
-        (beach.activities?.some((a) =>
+        beach.activities?.some((a) =>
           ['beachcombing', 'birdwatching', 'photography'].includes(a),
-        ) ?? false)
+        ) ?? false
       );
     case 'family':
       return (
@@ -79,9 +77,9 @@ function matchesIntent(beach: (typeof BEACHES)[number], intent: IntentKey): bool
       return beach.activities?.includes('picnicking') ?? false;
     case 'cycling':
       return (
-        (beach.activities?.some((a) =>
+        beach.activities?.some((a) =>
           ['cycling', 'walking', 'hiking', 'rollerblading'].includes(a),
-        ) ?? false)
+        ) ?? false
       );
   }
 }
