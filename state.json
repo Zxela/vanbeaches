@@ -4,7 +4,7 @@
   "worktree": "../vanbeaches-create-interactive-beach-map-5a6dc66f",
   "feature": "interactive-beach-map",
   "created_at": "2026-02-27T00:00:00Z",
-  "phase": "spec_review",
+  "phase": "implementing",
   "homerun_docs_dir": "/home/alex/.claude/homerun/bbe3d3a9/interactive-beach-map-5a6dc66f",
   "spec_paths": {
     "prd": "/home/alex/.claude/homerun/bbe3d3a9/interactive-beach-map-5a6dc66f/PRD.md",
@@ -17,23 +17,41 @@
     "user_stories": {
       "US-001": {
         "title": "View beaches on a real map",
-        "acceptance_criteria": ["AC-001", "AC-002", "AC-003"],
-        "tasks": []
+        "acceptance_criteria": [
+          "AC-001",
+          "AC-002",
+          "AC-003"
+        ],
+        "tasks": ["001", "002", "004"]
       },
       "US-002": {
         "title": "Interact with the map using pan and zoom",
-        "acceptance_criteria": ["AC-004", "AC-005", "AC-006", "AC-007", "AC-008"],
-        "tasks": []
+        "acceptance_criteria": [
+          "AC-004",
+          "AC-005",
+          "AC-006",
+          "AC-007",
+          "AC-008"
+        ],
+        "tasks": ["002"]
       },
       "US-003": {
         "title": "Select a beach via map marker",
-        "acceptance_criteria": ["AC-009", "AC-010", "AC-011", "AC-012"],
-        "tasks": []
+        "acceptance_criteria": [
+          "AC-009",
+          "AC-010",
+          "AC-011",
+          "AC-012"
+        ],
+        "tasks": ["002", "003", "004"]
       },
       "US-004": {
         "title": "View the map in dark mode",
-        "acceptance_criteria": ["AC-013", "AC-014"],
-        "tasks": []
+        "acceptance_criteria": [
+          "AC-013",
+          "AC-014"
+        ],
+        "tasks": ["003"]
       }
     },
     "acceptance_criteria": {
@@ -126,7 +144,7 @@
       "ADR-001": {
         "title": "Use Leaflet with OpenStreetMap for interactive beach map",
         "rationale": "No API key needed for static Cloudflare Pages deployment, zero cost at any scale, smallest bundle size, sufficient for 9 markers",
-        "tasks_affected": []
+        "tasks_affected": ["001", "002", "003"]
       }
     },
     "non_goals": [
@@ -169,7 +187,13 @@
   },
   "dialogue_state": {
     "turns_completed": 7,
-    "categories_covered": ["purpose", "users", "scope", "constraints", "edge_cases"],
+    "categories_covered": [
+      "purpose",
+      "users",
+      "scope",
+      "constraints",
+      "edge_cases"
+    ],
     "categories_remaining": [],
     "last_question_category": "edge_cases",
     "warnings_shown": false
@@ -177,8 +201,15 @@
   "scale": {
     "estimated": "medium",
     "file_count": 4,
-    "adr_triggers": ["external_dependency_introduction"],
-    "docs_to_generate": ["prd", "adr", "technical_design", "wireframes"]
+    "adr_triggers": [
+      "external_dependency_introduction"
+    ],
+    "docs_to_generate": [
+      "prd",
+      "adr",
+      "technical_design",
+      "wireframes"
+    ]
   },
   "progress": {
     "iteration": 0,
@@ -191,13 +222,36 @@
       "action": "dialogue_complete",
       "timestamp": "2026-02-27T00:00:00Z",
       "turns": 7,
-      "categories": ["purpose", "users", "scope", "constraints", "edge_cases"]
+      "categories": [
+        "purpose",
+        "users",
+        "scope",
+        "constraints",
+        "edge_cases"
+      ]
     },
     {
       "skill": "homerun:discovery",
       "action": "documents_generated",
       "timestamp": "2026-02-27T00:00:00Z",
-      "documents": ["PRD.md", "ADR.md", "TECHNICAL_DESIGN.md", "WIREFRAMES.md"]
+      "documents": [
+        "PRD.md",
+        "ADR.md",
+        "TECHNICAL_DESIGN.md",
+        "WIREFRAMES.md"
+      ]
+    },
+    {
+      "skill": "homerun:planning",
+      "action": "tasks_created",
+      "timestamp": "2026-02-27T00:00:00Z",
+      "tasks_count": 4,
+      "tasks_file": "docs/tasks.json",
+      "dag_valid": true,
+      "coverage": {
+        "user_stories": 4,
+        "acceptance_criteria": 14
+      }
     }
   ]
 }
