@@ -1,10 +1,9 @@
 import { BEACHES } from '@van-beaches/shared';
 import { AnimatePresence, motion } from 'framer-motion';
-import { ChevronDown, Moon, Star, Sun, Waves } from 'lucide-react';
+import { ChevronDown, Star, Waves } from 'lucide-react';
 import type { ReactNode } from 'react';
 import { useEffect, useRef, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { useTheme } from '../contexts/ThemeContext';
 import { useFavorites } from '../hooks/useFavorites';
 import { cn } from '../lib/utils';
 import { MobileBottomNav } from './MobileBottomNav';
@@ -19,7 +18,6 @@ export function Layout({ children }: LayoutProps) {
   const dropdownRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
   const location = useLocation();
-  const { theme, toggleTheme } = useTheme();
   const { favorites } = useFavorites();
 
   useEffect(() => {
@@ -36,13 +34,12 @@ export function Layout({ children }: LayoutProps) {
   useEffect(() => {
     function handleKeydown(e: KeyboardEvent) {
       if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) return;
-      if (e.key === 'd') toggleTheme();
       if (e.key === 'h') navigate('/');
       if (e.key === 'c') navigate('/compare');
     }
     document.addEventListener('keydown', handleKeydown);
     return () => document.removeEventListener('keydown', handleKeydown);
-  }, [toggleTheme, navigate]);
+  }, [navigate]);
 
   const currentBeachId = location.pathname.startsWith('/beach/')
     ? location.pathname.split('/')[2]
@@ -169,38 +166,6 @@ export function Layout({ children }: LayoutProps) {
                     )}
                   </AnimatePresence>
                 </div>
-                <motion.button
-                  type="button"
-                  onClick={toggleTheme}
-                  className="p-2.5 bg-ocean-50 dark:bg-ocean-900/30 hover:bg-ocean-100 dark:hover:bg-ocean-800/40 rounded-lg transition-colors"
-                  title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <AnimatePresence mode="wait">
-                    {theme === 'dark' ? (
-                      <motion.span
-                        key="sun"
-                        initial={{ rotate: -90, opacity: 0 }}
-                        animate={{ rotate: 0, opacity: 1 }}
-                        exit={{ rotate: 90, opacity: 0 }}
-                        transition={{ duration: 0.2 }}
-                      >
-                        <Icon icon={Sun} size="md" color="warning" />
-                      </motion.span>
-                    ) : (
-                      <motion.span
-                        key="moon"
-                        initial={{ rotate: 90, opacity: 0 }}
-                        animate={{ rotate: 0, opacity: 1 }}
-                        exit={{ rotate: -90, opacity: 0 }}
-                        transition={{ duration: 0.2 }}
-                      >
-                        <Icon icon={Moon} size="md" color="ocean" />
-                      </motion.span>
-                    )}
-                  </AnimatePresence>
-                </motion.button>
               </nav>
             </div>
           </div>
