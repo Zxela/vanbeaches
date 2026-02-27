@@ -52,7 +52,14 @@ function HeroSection({ beaches }: { beaches: BeachSummary[] }) {
       {/* Animated wave decoration */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute -bottom-4 left-0 right-0 h-24 opacity-[0.08]">
-          <svg viewBox="0 0 1200 120" preserveAspectRatio="none" className="w-full h-full">
+          <svg
+            viewBox="0 0 1200 120"
+            preserveAspectRatio="none"
+            className="w-full h-full"
+            aria-hidden="true"
+            role="img"
+          >
+            <title>Wave decoration</title>
             <path
               d="M0,40 C150,90 350,0 500,50 C650,100 800,10 1000,60 C1100,80 1150,40 1200,50 L1200,120 L0,120 Z"
               fill="currentColor"
@@ -74,9 +81,7 @@ function HeroSection({ beaches }: { beaches: BeachSummary[] }) {
             <Icon icon={Waves} size="xl" className="text-white" />
           </div>
           <div>
-            <h1 className="text-3xl md:text-4xl font-bold tracking-tight">
-              Vancouver Beaches
-            </h1>
+            <h1 className="text-3xl md:text-4xl font-bold tracking-tight">Vancouver Beaches</h1>
             <div className="flex items-center gap-3 text-white/70 text-sm mt-0.5">
               <span className="flex items-center gap-1">
                 <Icon icon={Calendar} size="xs" />
@@ -188,12 +193,8 @@ function RecommendedSection({
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {beaches.map((beach, idx) => {
-          const WeatherIcon = beach.weather
-            ? getWeatherIcon(beach.weather.condition)
-            : null;
-          const weatherColor = beach.weather
-            ? getWeatherColor(beach.weather.condition)
-            : '';
+          const WeatherIcon = beach.weather ? getWeatherIcon(beach.weather.condition) : null;
+          const weatherColor = beach.weather ? getWeatherColor(beach.weather.condition) : '';
 
           return (
             <motion.div

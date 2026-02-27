@@ -110,7 +110,11 @@ export function BeachCard({ beach }: BeachCardProps) {
         >
           <span className="flex items-center gap-1 group-hover:text-ocean-600 dark:group-hover:text-ocean-400 transition-colors">
             View details
-            <Icon icon={ArrowRight} size="xs" className="translate-x-0 group-hover:translate-x-1 transition-transform" />
+            <Icon
+              icon={ArrowRight}
+              size="xs"
+              className="translate-x-0 group-hover:translate-x-1 transition-transform"
+            />
           </span>
         </motion.div>
       </Link>

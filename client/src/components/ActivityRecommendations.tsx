@@ -43,7 +43,10 @@ const ACTIVITY_RULES: ActivityRule[] = [
     activity: 'Swimming',
     icon: '\u{1F3CA}',
     evaluate: ({ temperature, condition }) => {
-      if (temperature >= TEMP.SWIMMING_MIN && GOOD_WEATHER.includes(condition as typeof GOOD_WEATHER[number])) {
+      if (
+        temperature >= TEMP.SWIMMING_MIN &&
+        GOOD_WEATHER.includes(condition as (typeof GOOD_WEATHER)[number])
+      ) {
         return {
           rating: temperature >= TEMP.SWIMMING_EXCELLENT ? 'excellent' : 'good',
           reason: 'Great water conditions',
@@ -62,7 +65,7 @@ const ACTIVITY_RULES: ActivityRule[] = [
       if (
         temperature < TEMP.SUNBATHING_MIN ||
         windSpeed >= WIND.MODERATE ||
-        !GOOD_WEATHER.includes(condition as typeof GOOD_WEATHER[number])
+        !GOOD_WEATHER.includes(condition as (typeof GOOD_WEATHER)[number])
       ) {
         return null;
       }
@@ -82,7 +85,7 @@ const ACTIVITY_RULES: ActivityRule[] = [
     activity: 'Beach Walking',
     icon: '\u{1F6B6}',
     evaluate: ({ windSpeed, condition }) => {
-      if (BAD_WEATHER.includes(condition as typeof BAD_WEATHER[number])) {
+      if (BAD_WEATHER.includes(condition as (typeof BAD_WEATHER)[number])) {
         return { rating: 'poor', reason: 'Poor weather for walking' };
       }
       return {
@@ -97,7 +100,7 @@ const ACTIVITY_RULES: ActivityRule[] = [
     requires: 'volleyball',
     evaluate: ({ windSpeed, condition }) => {
       if (
-        !FAIR_WEATHER.includes(condition as typeof FAIR_WEATHER[number]) ||
+        !FAIR_WEATHER.includes(condition as (typeof FAIR_WEATHER)[number]) ||
         windSpeed >= WIND.BREEZY
       ) {
         return null;
@@ -115,7 +118,7 @@ const ACTIVITY_RULES: ActivityRule[] = [
       if (
         windSpeed < WIND.CALM ||
         windSpeed > WIND.STRONG ||
-        BAD_WEATHER.includes(condition as typeof BAD_WEATHER[number])
+        BAD_WEATHER.includes(condition as (typeof BAD_WEATHER)[number])
       ) {
         return null;
       }
@@ -129,7 +132,7 @@ const ACTIVITY_RULES: ActivityRule[] = [
     activity: 'Photography',
     icon: '\u{1F4F8}',
     evaluate: ({ condition }) => {
-      if (!GOOD_WEATHER.includes(condition as typeof GOOD_WEATHER[number])) return null;
+      if (!GOOD_WEATHER.includes(condition as (typeof GOOD_WEATHER)[number])) return null;
       return { rating: 'excellent', reason: 'Great lighting conditions' };
     },
   },
@@ -140,7 +143,7 @@ const ACTIVITY_RULES: ActivityRule[] = [
       if (
         temperature < TEMP.OUTDOOR_MIN ||
         windSpeed >= WIND.MODERATE ||
-        BAD_WEATHER.includes(condition as typeof BAD_WEATHER[number])
+        BAD_WEATHER.includes(condition as (typeof BAD_WEATHER)[number])
       ) {
         return null;
       }
@@ -152,7 +155,10 @@ const ACTIVITY_RULES: ActivityRule[] = [
   },
 ];
 
-function evaluateActivities(conditions: Conditions, availableActivities?: string[]): Recommendation[] {
+function evaluateActivities(
+  conditions: Conditions,
+  availableActivities?: string[],
+): Recommendation[] {
   const results: Recommendation[] = [];
 
   for (const rule of ACTIVITY_RULES) {
