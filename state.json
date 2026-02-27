@@ -4,7 +4,7 @@
   "worktree": "/home/alex/vanbeaches/.claude/worktrees/create/beach-pages-improvement",
   "feature": "beach-pages-improvement",
   "created_at": "2026-02-27T12:48:00Z",
-  "phase": "spec_review",
+  "phase": "implementing",
   "homerun_docs_dir": "/home/alex/.claude/homerun/bbe3d3a9/beach-pages-improvement-bd9c5df9",
   "spec_paths": {
     "prd": "/home/alex/.claude/homerun/bbe3d3a9/beach-pages-improvement-bd9c5df9/PRD.md",
@@ -18,42 +18,42 @@
       "US-001": {
         "title": "Clear Today's Tide View",
         "acceptance_criteria": ["AC-001", "AC-002", "AC-003", "AC-004"],
-        "tasks": []
+        "tasks": ["005"]
       },
       "US-002": {
         "title": "Multi-Day Tide Forecast",
         "acceptance_criteria": ["AC-005", "AC-006", "AC-007"],
-        "tasks": []
+        "tasks": ["006"]
       },
       "US-003": {
         "title": "Light Theme Beach Identity",
         "acceptance_criteria": ["AC-008", "AC-009", "AC-010", "AC-011"],
-        "tasks": []
+        "tasks": ["002", "003"]
       },
       "US-004": {
         "title": "Accurate Beach Photos",
         "acceptance_criteria": ["AC-012", "AC-013", "AC-014"],
-        "tasks": []
+        "tasks": ["004", "010"]
       },
       "US-005": {
         "title": "Enhanced Beach Description Section",
         "acceptance_criteria": ["AC-015", "AC-016"],
-        "tasks": []
+        "tasks": ["001", "004", "010"]
       },
       "US-006": {
         "title": "Consolidated Weather + Conditions Overview (Beach Score)",
         "acceptance_criteria": ["AC-017", "AC-018"],
-        "tasks": []
+        "tasks": ["008", "010"]
       },
       "US-007": {
         "title": "Improved Amenities Visual Design",
         "acceptance_criteria": ["AC-019", "AC-020"],
-        "tasks": []
+        "tasks": ["007"]
       },
       "US-008": {
         "title": "Beach Safety Information",
         "acceptance_criteria": ["AC-021", "AC-022"],
-        "tasks": []
+        "tasks": ["001", "004", "009", "010"]
       }
     },
     "acceptance_criteria": {
@@ -61,150 +61,150 @@
         "description": "When the beach page loads, the Today's Tides card shall display an interactive tide curve chart that fills the available card width with proportional height",
         "story": "US-001",
         "pattern": "When",
-        "tasks": []
+        "tasks": ["005"]
       },
       "AC-002": {
         "description": "While viewing the Today's Tides card, the system shall display all high and low tide times and heights in a legible format (minimum 14px font) with clear color coding",
         "story": "US-001",
         "pattern": "While",
-        "tasks": []
+        "tasks": ["005"]
       },
       "AC-003": {
         "description": "When the user hovers or taps on the tide curve, the system shall show a tooltip with interpolated tide height and time",
         "story": "US-001",
         "pattern": "When",
-        "tasks": []
+        "tasks": ["005"]
       },
       "AC-004": {
         "description": "The system shall display a Now marker on the tide curve indicating current time position",
         "story": "US-001",
         "pattern": "None",
-        "tasks": []
+        "tasks": ["005"]
       },
       "AC-005": {
         "description": "When the Tide Forecast section loads, the system shall display day cards at a minimum width of 160px with adequate spacing",
         "story": "US-002",
         "pattern": "When",
-        "tasks": []
+        "tasks": ["006"]
       },
       "AC-006": {
         "description": "Each day card shall display a mini tide curve that is at least 50px tall and 140px wide with visible high/low markers",
         "story": "US-002",
         "pattern": "None",
-        "tasks": []
+        "tasks": ["006"]
       },
       "AC-007": {
         "description": "When the forecast has more days than fit on screen, the system shall support horizontal scrolling with snap behavior",
         "story": "US-002",
         "pattern": "When",
-        "tasks": []
+        "tasks": ["006"]
       },
       "AC-008": {
         "description": "The system shall render all pages using light theme only, with no dark mode toggle visible in the UI",
         "story": "US-003",
         "pattern": "None",
-        "tasks": []
+        "tasks": ["003"]
       },
       "AC-009": {
         "description": "When viewing the site, background colors shall use warm sandy tones and cards shall use white backgrounds with subtle ocean-tinted shadows",
         "story": "US-003",
         "pattern": "When",
-        "tasks": []
+        "tasks": ["002"]
       },
       "AC-010": {
         "description": "The system shall use ocean, shore, sky, and sand color palettes with addition of warm sandy beige tones for backgrounds",
         "story": "US-003",
         "pattern": "None",
-        "tasks": []
+        "tasks": ["002"]
       },
       "AC-011": {
         "description": "While the dark mode toggle is removed from UI, ThemeProvider and dark: CSS classes shall be retained in code for future re-enablement",
         "story": "US-003",
         "pattern": "While",
-        "tasks": []
+        "tasks": ["003"]
       },
       "AC-012": {
         "description": "Each beach shall display a hero image that is an actual photograph of that specific Vancouver beach",
         "story": "US-004",
         "pattern": "None",
-        "tasks": []
+        "tasks": ["004"]
       },
       "AC-013": {
         "description": "The system shall display photo credit attribution below or overlaid on the hero image",
         "story": "US-004",
         "pattern": "None",
-        "tasks": []
+        "tasks": ["010"]
       },
       "AC-014": {
         "description": "If a beach has no verified photo available, the system shall display a gradient fallback rather than an incorrect stock photo",
         "story": "US-004",
         "pattern": "If-Then",
-        "tasks": []
+        "tasks": ["004"]
       },
       "AC-015": {
         "description": "Each beach page shall display an About This Beach section with multi-paragraph description covering unique features, best activities, and practical tips",
         "story": "US-005",
         "pattern": "None",
-        "tasks": []
+        "tasks": ["004", "010"]
       },
       "AC-016": {
         "description": "The description section shall include structured highlights (best for, vibe, crowd level)",
         "story": "US-005",
         "pattern": "None",
-        "tasks": []
+        "tasks": ["001", "004", "010"]
       },
       "AC-017": {
         "description": "When the beach page loads, the Should you go today section shall display a Beach Score (0-100) synthesizing temperature, weather, UV, wind, and tide conditions",
         "story": "US-006",
         "pattern": "When",
-        "tasks": []
+        "tasks": ["008", "010"]
       },
       "AC-018": {
         "description": "The Beach Score shall be accompanied by a short natural-language recommendation",
         "story": "US-006",
         "pattern": "None",
-        "tasks": []
+        "tasks": ["008"]
       },
       "AC-019": {
         "description": "When viewing Plan Your Visit, amenities shall be displayed with Lucide icons in a visually consistent grid layout",
         "story": "US-007",
         "pattern": "When",
-        "tasks": []
+        "tasks": ["007"]
       },
       "AC-020": {
         "description": "The system shall visually distinguish available amenities (solid colored icons) from unavailable ones (grayed out with strikethrough)",
         "story": "US-007",
         "pattern": "None",
-        "tasks": []
+        "tasks": ["007"]
       },
       "AC-021": {
         "description": "Each beach page shall display a Safety section with relevant warnings when applicable",
         "story": "US-008",
         "pattern": "None",
-        "tasks": []
+        "tasks": ["009", "010"]
       },
       "AC-022": {
         "description": "If the water quality status is advisory or closed, then the system shall display a prominent warning banner at the top of the page",
         "story": "US-008",
         "pattern": "If-Then",
-        "tasks": []
+        "tasks": ["009"]
       }
     },
     "adr_decisions": {
       "ADR-001": {
         "title": "De-prioritize dark mode (light-only default, keep code)",
         "rationale": "Lowest risk approach - achieves visual goal without removing dark: classes from 36 files, preserves re-enablement path",
-        "tasks_affected": []
+        "tasks_affected": ["002", "003", "010"]
       },
       "ADR-002": {
         "title": "Hybrid photo sourcing (Unsplash curation first, self-hosted later)",
         "rationale": "Zero architecture changes needed, delivers correct photos immediately with existing BeachImage type",
-        "tasks_affected": []
+        "tasks_affected": ["004"]
       },
       "ADR-003": {
         "title": "Two coordinated tide components (TideCanvas + TideForecast redesign)",
         "rationale": "Maps to user mental models (today vs. forecast), allows independent testing and iteration",
-        "tasks_affected": []
+        "tasks_affected": ["005", "006", "011"]
       }
     },
     "non_goals": [
@@ -291,6 +291,18 @@
       "action": "phase_transition",
       "timestamp": "2026-02-27T12:55:00Z",
       "details": "Transitioning to spec_review phase"
+    },
+    {
+      "skill": "homerun:planning",
+      "action": "task_decomposition",
+      "timestamp": "2026-02-27T13:05:00Z",
+      "details": "Decomposed specs into 11 tasks covering 8 user stories and 22 acceptance criteria. DAG validated (no cycles). Model distribution: 3 haiku, 8 sonnet. 8 tasks with tests, 3 exempted (type defs, config, dead code removal)."
+    },
+    {
+      "skill": "homerun:planning",
+      "action": "phase_transition",
+      "timestamp": "2026-02-27T13:06:00Z",
+      "details": "Transitioning to implementing phase"
     }
   ]
 }
