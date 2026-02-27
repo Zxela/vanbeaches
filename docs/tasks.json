@@ -128,6 +128,7 @@
       "objective": "Implement the four marker visual states (default, favorite, selected, hover/tooltip) using design token colors, and add dark mode support with CSS filter on the tile layer and inverted tooltip styling. Address spec review notes M-1 (dark mode tooltip) and M-2 (testable dark mode assertion).",
       "task_type": "add_validation",
       "methodology": "tdd",
+      "status": "completed",
       "acceptance_criteria": [
         {
           "id": "003-AC1",
@@ -161,7 +162,6 @@
         }
       ],
       "test_file": "client/src/components/BeachMap.test.tsx",
-      "status": "pending",
       "depends_on": ["002"],
       "traces_to": {
         "user_stories": ["US-003", "US-004"],

@@ -246,4 +246,25 @@ describe('BeachMap', () => {
     }
     expect(foundDefault).toBe(true);
   });
+
+  // 003-AC4: dark mode tile filter CSS is present in the component output
+  it('includes dark mode CSS filter for .leaflet-tile-pane', () => {
+    const { container } = renderBeachMap();
+    // Check that the <style> tag contains the dark mode filter rule
+    const styleEl = container.querySelector('style');
+    expect(styleEl).toBeTruthy();
+    const css = styleEl?.textContent ?? '';
+    expect(css).toContain('invert(1)');
+    expect(css).toContain('.dark .leaflet-tile-pane');
+  });
+
+  // 003-AC5: dark mode tooltip styling is present in CSS
+  it('includes dark mode tooltip styles with sand-50 background', () => {
+    const { container } = renderBeachMap();
+    const styleEl = container.querySelector('style');
+    const css = styleEl?.textContent ?? '';
+    // sand-50 = #fafafa, sand-900 = #212121
+    expect(css).toContain('#fafafa');
+    expect(css).toContain('.dark .leaflet-tooltip');
+  });
 });
