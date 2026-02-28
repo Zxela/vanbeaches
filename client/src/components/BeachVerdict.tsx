@@ -81,17 +81,19 @@ export function BeachVerdict({ weather, tides, waterQuality, sunsetTime }: Beach
       </h2>
 
       {/* Recommendation badge */}
-      <span className={`inline-block text-xs font-semibold px-2 py-0.5 rounded-full mb-3 ${colors.badge}`}>
+      <span
+        className={`inline-block text-xs font-semibold px-2 py-0.5 rounded-full mb-3 ${colors.badge}`}
+      >
         {label}
       </span>
 
       {/* Summary prose */}
-      <p className="text-sand-800 text-base leading-relaxed mb-4">
-        {verdict.summary}
-      </p>
+      <p className="text-sand-800 text-base leading-relaxed mb-4">{verdict.summary}</p>
 
       {/* Best time window */}
-      <div className={`inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 mb-4 ${colors.bestTime}`}>
+      <div
+        className={`inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 mb-4 ${colors.bestTime}`}
+      >
         <span className="text-xs font-semibold uppercase tracking-wide">Best time</span>
         <span className="text-sm font-medium">{verdict.bestTimeWindow}</span>
       </div>

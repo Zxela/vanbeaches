@@ -125,9 +125,7 @@ describe('AboutTab', () => {
       // kitsilano-beach differentiators include "6 volleyball courts" (may appear in multiple places)
       const volleyballItems = screen.getAllByText(/6 volleyball courts/i);
       expect(volleyballItems.length).toBeGreaterThan(0);
-      expect(
-        screen.getByText(/Kitsilano Pool/i),
-      ).toBeInTheDocument();
+      expect(screen.getByText(/Kitsilano Pool/i)).toBeInTheDocument();
     });
 
     it('does not render differentiators section when no personality', () => {

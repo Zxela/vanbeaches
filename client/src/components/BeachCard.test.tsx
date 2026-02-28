@@ -32,7 +32,7 @@ vi.mock('../data/beach-personalities', () => ({
         slug: 'kitsilano-beach',
         archetype: 'The Sporty Heart',
         tagline: 'Where the west side comes to play',
-        editorial: 'Kits Beach is Vancouver\'s most popular beach.',
+        editorial: "Kits Beach is Vancouver's most popular beach.",
         differentiators: [
           '6 volleyball courts',
           'Kitsilano Pool — longest outdoor pool in Canada at 137m',

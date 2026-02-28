@@ -33,17 +33,13 @@ export function InstagramEmbed({
   loading = false,
 }: InstagramEmbedProps) {
   const hasPosts = Array.isArray(postUrls) && postUrls.length > 0;
-  const hasFallbacks =
-    Array.isArray(fallbackImages) && fallbackImages.length > 0;
+  const hasFallbacks = Array.isArray(fallbackImages) && fallbackImages.length > 0;
 
   if (loading) {
     return (
       <div className="grid grid-cols-2 gap-3">
         {[0, 1, 2, 3].map((i) => (
-          <div
-            key={i}
-            className="animate-pulse bg-sand-100 rounded-xl aspect-square"
-          />
+          <div key={i} className="animate-pulse bg-sand-100 rounded-xl aspect-square" />
         ))}
       </div>
     );
@@ -62,9 +58,7 @@ export function InstagramEmbed({
             aria-label="View on Instagram"
           >
             <InstagramIcon />
-            <span className="text-xs font-medium text-sand-700">
-              View on Instagram
-            </span>
+            <span className="text-xs font-medium text-sand-700">View on Instagram</span>
           </a>
         ))}
       </div>
@@ -74,7 +68,7 @@ export function InstagramEmbed({
   if (hasFallbacks) {
     return (
       <div className="grid grid-cols-2 gap-3">
-        {fallbackImages!.map((src, i) => (
+        {fallbackImages?.map((src, i) => (
           <img
             key={src}
             src={src}

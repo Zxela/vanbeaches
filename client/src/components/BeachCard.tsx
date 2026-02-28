@@ -48,7 +48,9 @@ export function BeachCard({ beach }: BeachCardProps) {
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
               />
             ) : (
-              <div className={`w-full h-full bg-gradient-to-br ${fallbackGradients[gradientIdx]}`} />
+              <div
+                className={`w-full h-full bg-gradient-to-br ${fallbackGradients[gradientIdx]}`}
+              />
             )}
             {/* Light overlay for warmth — much lighter than old design */}
             <div className="absolute inset-0 bg-gradient-to-r from-black/20 to-transparent md:bg-gradient-to-t md:from-black/30 md:to-transparent" />

@@ -234,10 +234,10 @@ describe('computeVerdict - reasons array', () => {
 
     expect(result.reasons.length).toBeGreaterThanOrEqual(2);
     expect(result.reasons.length).toBeLessThanOrEqual(4);
-    result.reasons.forEach((r) => {
+    for (const r of result.reasons) {
       expect(typeof r).toBe('string');
       expect(r.length).toBeGreaterThan(0);
-    });
+    }
   });
 
   it('includes calm winds as a reason when wind is low', () => {
@@ -263,9 +263,7 @@ describe('computeVerdict - reasons array', () => {
 
     const result = computeVerdict(makeWeather(), null, null, sunset);
 
-    const hasGoldenHourReason = result.reasons.some((r) =>
-      /golden|sunset|hour/i.test(r),
-    );
+    const hasGoldenHourReason = result.reasons.some((r) => /golden|sunset|hour/i.test(r));
     expect(hasGoldenHourReason).toBe(true);
   });
 });

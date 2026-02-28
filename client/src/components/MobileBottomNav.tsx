@@ -1,4 +1,4 @@
-import { Home, Map } from 'lucide-react';
+import { Home, Map as MapIcon } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import { cn } from '../lib/utils';
 import { Icon } from './ui';
@@ -29,7 +29,7 @@ export function MobileBottomNav() {
             'text-sand-500',
           )}
         >
-          <Icon icon={Map} size="lg" />
+          <Icon icon={MapIcon} size="lg" />
           <span className="text-xs mt-1 font-medium">Explore</span>
         </Link>
       </div>

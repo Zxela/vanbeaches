@@ -6,7 +6,7 @@ import { AboutTab } from '../components/AboutTab';
 import { FavoriteButton } from '../components/FavoriteButton';
 import { PhotosTab } from '../components/PhotosTab';
 import { ShareButton } from '../components/ShareButton';
-import { TabBar, type BeachDetailTab } from '../components/TabBar';
+import { type BeachDetailTab, TabBar } from '../components/TabBar';
 import { TodayTab } from '../components/TodayTab';
 import { useRecentBeaches } from '../hooks/useRecentBeaches';
 import { formatSunTime, useSunTimes } from '../hooks/useSunTimes';
@@ -45,9 +45,7 @@ function HeroQuickConditions({
   if (windSpeed !== null) parts.push(`${windSpeed} km/h wind`);
   if (parts.length === 0) return null;
 
-  return (
-    <p className="text-sm text-white/80 mt-1 capitalize">{parts.join(' · ')}</p>
-  );
+  return <p className="text-sm text-white/80 mt-1 capitalize">{parts.join(' · ')}</p>;
 }
 
 export function BeachDetail() {

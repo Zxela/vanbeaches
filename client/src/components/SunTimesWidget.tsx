@@ -32,8 +32,7 @@ export function SunTimesWidget({ latitude, longitude }: SunTimesWidgetProps) {
     <Card
       variant={isGoldenHour ? 'default' : 'default'}
       className={cn(
-        isGoldenHour &&
-          'bg-gradient-to-br from-amber-50 to-orange-50 border-amber-200',
+        isGoldenHour && 'bg-gradient-to-br from-amber-50 to-orange-50 border-amber-200',
       )}
       animated
     >
@@ -54,9 +53,7 @@ export function SunTimesWidget({ latitude, longitude }: SunTimesWidgetProps) {
               <Icon icon={Sunrise} size="lg" className="text-amber-500" />
             </div>
             <div>
-              <p className="text-xs text-sand-500 uppercase font-medium">
-                Sunrise
-              </p>
+              <p className="text-xs text-sand-500 uppercase font-medium">Sunrise</p>
               <p className="text-lg font-semibold text-sand-900">
                 {formatSunTime(sunTimes.sunrise)}
               </p>
@@ -73,9 +70,7 @@ export function SunTimesWidget({ latitude, longitude }: SunTimesWidgetProps) {
               <Icon icon={Sunset} size="lg" className="text-orange-500" />
             </div>
             <div>
-              <p className="text-xs text-sand-500 uppercase font-medium">
-                Sunset
-              </p>
+              <p className="text-xs text-sand-500 uppercase font-medium">Sunset</p>
               <p className="text-lg font-semibold text-sand-900">
                 {formatSunTime(sunTimes.sunset)}
               </p>
@@ -108,13 +103,9 @@ export function SunTimesWidget({ latitude, longitude }: SunTimesWidgetProps) {
               <Icon icon={Clock} size="sm" color="ocean" />
               <span className="font-medium">Golden hour in </span>
               {sunsetCountdown.hours > 0 && (
-                <span className="font-bold text-ocean-600">
-                  {sunsetCountdown.hours}h{' '}
-                </span>
+                <span className="font-bold text-ocean-600">{sunsetCountdown.hours}h </span>
               )}
-              <span className="font-bold text-ocean-600">
-                {sunsetCountdown.mins}m
-              </span>
+              <span className="font-bold text-ocean-600">{sunsetCountdown.mins}m</span>
             </p>
           </motion.div>
         )}

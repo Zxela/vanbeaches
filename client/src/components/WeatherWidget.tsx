@@ -162,9 +162,7 @@ export function WeatherWidget({ weather, loading, error }: WeatherWidgetProps) {
           >
             <div className="flex items-center gap-2 mb-2">
               <Icon icon={Wind} size="sm" color="ocean" />
-              <span className="text-xs font-medium text-sand-500 uppercase">
-                Wind
-              </span>
+              <span className="text-xs font-medium text-sand-500 uppercase">Wind</span>
             </div>
             <WindCompass
               direction={weather.current.windDirection}
@@ -179,9 +177,7 @@ export function WeatherWidget({ weather, loading, error }: WeatherWidgetProps) {
           >
             <div className="flex items-center gap-2 mb-2">
               <Icon icon={Sun} size="sm" color="warning" />
-              <span className="text-xs font-medium text-sand-500 uppercase">
-                UV
-              </span>
+              <span className="text-xs font-medium text-sand-500 uppercase">UV</span>
             </div>
             <UVIndicator index={weather.current.uvIndex} />
           </motion.div>
@@ -197,9 +193,7 @@ export function WeatherWidget({ weather, loading, error }: WeatherWidgetProps) {
                 <Icon icon={Droplets} size="lg" color="ocean" />
               </div>
               <div>
-                <p className="font-semibold text-sand-900">
-                  {weather.current.humidity}%
-                </p>
+                <p className="font-semibold text-sand-900">{weather.current.humidity}%</p>
                 <p className="text-xs text-sand-500">Humidity</p>
               </div>
             </div>

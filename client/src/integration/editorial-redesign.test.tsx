@@ -7,7 +7,7 @@
  * 3. Tab navigation on /beach/:slug works with URL hash sync
  * 4. /compare redirects to /discover
  */
-import { render, screen, fireEvent } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
@@ -27,9 +27,29 @@ vi.mock('react-router-dom', async (importOriginal) => {
 // Mock framer-motion to avoid animation complexity
 // Strip out framer-motion-specific props to prevent React warnings
 // ============================================================
-function stripMotionProps<T extends object>(props: T): Omit<T, 'initial' | 'animate' | 'exit' | 'transition' | 'whileHover' | 'whileTap' | 'variants' | 'style'> & { style?: React.CSSProperties } {
-  const { initial: _i, animate: _a, exit: _e, transition: _t, whileHover: _wh, whileTap: _wt, variants: _v, ...rest } = props as Record<string, unknown>;
-  void _i; void _a; void _e; void _t; void _wh; void _wt; void _v;
+function stripMotionProps<T extends object>(
+  props: T,
+): Omit<
+  T,
+  'initial' | 'animate' | 'exit' | 'transition' | 'whileHover' | 'whileTap' | 'variants' | 'style'
+> & { style?: React.CSSProperties } {
+  const {
+    initial: _i,
+    animate: _a,
+    exit: _e,
+    transition: _t,
+    whileHover: _wh,
+    whileTap: _wt,
+    variants: _v,
+    ...rest
+  } = props as Record<string, unknown>;
+  void _i;
+  void _a;
+  void _e;
+  void _t;
+  void _wh;
+  void _wt;
+  void _v;
   return rest as never;
 }
 
@@ -40,7 +60,9 @@ vi.mock('framer-motion', () => ({
       <div {...stripMotionProps(props)}>{children}</div>
     ),
     button: ({ children, ...props }: Record<string, unknown> & { children?: React.ReactNode }) => (
-      <button type="button" {...stripMotionProps(props)}>{children}</button>
+      <button type="button" {...stripMotionProps(props)}>
+        {children}
+      </button>
     ),
     span: ({ children, ...props }: Record<string, unknown> & { children?: React.ReactNode }) => (
       <span {...stripMotionProps(props)}>{children}</span>

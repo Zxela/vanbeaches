@@ -142,17 +142,20 @@ vi.mock('@van-beaches/shared', () => ({
 
 vi.mock('../data/beach-personalities', () => ({
   getPersonality: vi.fn((slug: string) => {
-    const personalities: Record<string, {
-      slug: string;
-      archetype: string;
-      tagline: string;
-      editorial: string;
-      differentiators: string[];
-      vibes: string[];
-      instagramHashtag?: string;
-      instagramPostUrls: string[];
-      accentColor: string;
-    }> = {
+    const personalities: Record<
+      string,
+      {
+        slug: string;
+        archetype: string;
+        tagline: string;
+        editorial: string;
+        differentiators: string[];
+        vibes: string[];
+        instagramHashtag?: string;
+        instagramPostUrls: string[];
+        accentColor: string;
+      }
+    > = {
       'english-bay': {
         slug: 'english-bay',
         archetype: 'The Sunset Stage',
@@ -168,7 +171,7 @@ vi.mock('../data/beach-personalities', () => ({
         slug: 'kitsilano-beach',
         archetype: 'The Sporty Heart',
         tagline: 'Where the west side comes to play',
-        editorial: 'Kits Beach is Vancouver\'s most popular beach.',
+        editorial: "Kits Beach is Vancouver's most popular beach.",
         differentiators: ['6 volleyball courts'],
         vibes: ['active', 'social', 'family'],
         instagramHashtag: 'kitsbeach',
@@ -179,7 +182,7 @@ vi.mock('../data/beach-personalities', () => ({
         slug: 'locarno-beach',
         archetype: 'The Quiet Expanse',
         tagline: 'Peaceful shores and endless tidal flats',
-        editorial: 'Locarno is Vancouver\'s best-kept secret.',
+        editorial: "Locarno is Vancouver's best-kept secret.",
         differentiators: ['Dramatic low-tide flats'],
         vibes: ['quiet', 'nature', 'dog-friendly'],
         instagramHashtag: 'locarnobeach',
@@ -257,24 +260,18 @@ const mockBeachConditions: Record<string, BeachSummary> = {
   },
 };
 
-function renderDiscoveryView(props: {
-  beaches?: Beach[];
-  beachConditions?: Record<string, BeachSummary>;
-  loading?: boolean;
-} = {}) {
-  const {
-    beaches = mockBeaches,
-    beachConditions = mockBeachConditions,
-    loading = false,
-  } = props;
+function renderDiscoveryView(
+  props: {
+    beaches?: Beach[];
+    beachConditions?: Record<string, BeachSummary>;
+    loading?: boolean;
+  } = {},
+) {
+  const { beaches = mockBeaches, beachConditions = mockBeachConditions, loading = false } = props;
 
   return render(
     <MemoryRouter>
-      <DiscoveryView
-        beaches={beaches}
-        beachConditions={beachConditions}
-        loading={loading}
-      />
+      <DiscoveryView beaches={beaches} beachConditions={beachConditions} loading={loading} />
     </MemoryRouter>,
   );
 }
@@ -303,7 +300,9 @@ describe('DiscoveryView', () => {
       // Hero should have inline style or class that sets ~35vh height
       const style = (hero as HTMLElement)?.style?.minHeight ?? '';
       const className = (hero as HTMLElement)?.className ?? '';
-      expect(style.includes('35vh') || className.includes('h-') || className.includes('min-h-')).toBe(true);
+      expect(
+        style.includes('35vh') || className.includes('h-') || className.includes('min-h-'),
+      ).toBe(true);
     });
 
     it('renders a condition summary in the hero', () => {

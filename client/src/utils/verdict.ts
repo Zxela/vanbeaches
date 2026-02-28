@@ -41,7 +41,14 @@ export function computeVerdict(
   const bestTimeWindow = computeBestTimeWindow(tides, sunsetTime);
 
   // --- Build editorial summary ---
-  const summary = buildSummary(recommendation, condition, temperature, windSpeed, tides, sunsetTime);
+  const summary = buildSummary(
+    recommendation,
+    condition,
+    temperature,
+    windSpeed,
+    tides,
+    sunsetTime,
+  );
 
   // --- Build actionable suggestion ---
   const suggestion = buildSuggestion(recommendation, bestTimeWindow, tides, sunsetTime);
@@ -74,7 +81,8 @@ function determineRecommendation(
   }
 
   // Fair: rainy (with low winds), cloudy + cold, advisory water quality, strong winds
-  const waterAdverse = waterQuality && (waterQuality.level === 'advisory' || waterQuality.level === 'closed');
+  const waterAdverse =
+    waterQuality && (waterQuality.level === 'advisory' || waterQuality.level === 'closed');
   if (
     condition === 'rainy' ||
     (condition === 'cloudy' && temperature < 16) ||
@@ -200,13 +208,14 @@ function computeBestTimeWindow(tides: TideData | null, sunsetTime: string | null
 function buildSummary(
   recommendation: BeachVerdict['recommendation'],
   condition: WeatherForecast['current']['condition'],
-  temperature: number,
+  _temperature: number,
   windSpeed: number,
   tides: TideData | null,
   sunsetTime: string | null,
 ): string {
   const nextHighTide = getNextHighTide(tides);
-  const hasSunset = sunsetTime && (new Date(sunsetTime).getTime() - Date.now()) / (60 * 60 * 1000) > 0;
+  const hasSunset =
+    sunsetTime && (new Date(sunsetTime).getTime() - Date.now()) / (60 * 60 * 1000) > 0;
 
   if (recommendation === 'perfect') {
     if (nextHighTide && hasSunset) {
@@ -214,33 +223,33 @@ function buildSummary(
       return `Perfect afternoon ahead. High tide meets golden hour around ${tideHour}.`;
     }
     if (nextHighTide) {
-      return `Perfect beach day. Sunny skies, calm winds, and high tide on its way.`;
+      return 'Perfect beach day. Sunny skies, calm winds, and high tide on its way.';
     }
-    return `Perfect conditions. Warm, sunny, and calm — an ideal beach day.`;
+    return 'Perfect conditions. Warm, sunny, and calm — an ideal beach day.';
   }
 
   if (recommendation === 'good') {
     if (condition === 'sunny') {
-      return `Good day for the beach. Sunny with comfortable temperatures.`;
+      return 'Good day for the beach. Sunny with comfortable temperatures.';
     }
-    return `Decent beach conditions today. Worth the trip.`;
+    return 'Decent beach conditions today. Worth the trip.';
   }
 
   if (recommendation === 'fair') {
     if (condition === 'rainy') {
-      return `Rain expected today. May want to wait for a clearer window.`;
+      return 'Rain expected today. May want to wait for a clearer window.';
     }
     if (windSpeed >= 25) {
-      return `Windy conditions today. Great for flying a kite, less ideal for sunbathing.`;
+      return 'Windy conditions today. Great for flying a kite, less ideal for sunbathing.';
     }
-    return `Fair conditions. Check the forecast before heading out.`;
+    return 'Fair conditions. Check the forecast before heading out.';
   }
 
   // skip
   if (condition === 'stormy') {
-    return `Storm conditions — stay home today. Check back tomorrow.`;
+    return 'Storm conditions — stay home today. Check back tomorrow.';
   }
-  return `Not a beach day. Rain and strong winds make for rough conditions.`;
+  return 'Not a beach day. Rain and strong winds make for rough conditions.';
 }
 
 function buildSuggestion(
@@ -268,11 +277,11 @@ function buildSuggestion(
       const sunsetHour = formatHour(new Date(sunsetTime));
       return `If you go, try to catch golden hour around ${sunsetHour}.`;
     }
-    return `Consider waiting for better conditions, or dress for the weather.`;
+    return 'Consider waiting for better conditions, or dress for the weather.';
   }
 
   // skip
-  return `Skip it today and check back for a better window.`;
+  return 'Skip it today and check back for a better window.';
 }
 
 // --- Utility helpers ---

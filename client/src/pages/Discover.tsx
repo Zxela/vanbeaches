@@ -11,8 +11,7 @@ export function Discover() {
 
   // Build a record of BeachSummary conditions keyed by beach ID
   const beachConditions = useMemo(
-    () =>
-      Object.fromEntries(beachSummaries.map((summary) => [summary.id, summary])),
+    () => Object.fromEntries(beachSummaries.map((summary) => [summary.id, summary])),
     [beachSummaries],
   );
 
@@ -26,20 +25,8 @@ export function Discover() {
   );
 
   if (favoriteIds.length > 0) {
-    return (
-      <FavoritesView
-        favorites={favoriteBeaches}
-        beachData={{}}
-        loading={loading}
-      />
-    );
+    return <FavoritesView favorites={favoriteBeaches} beachData={{}} loading={loading} />;
   }
 
-  return (
-    <DiscoveryView
-      beaches={allBeaches}
-      beachConditions={beachConditions}
-      loading={loading}
-    />
-  );
+  return <DiscoveryView beaches={allBeaches} beachConditions={beachConditions} loading={loading} />;
 }

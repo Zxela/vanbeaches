@@ -90,7 +90,7 @@ export const beachPersonalities: BeachPersonality[] = [
     archetype: 'The Family Classic',
     tagline: 'Stanley Park pool days and forest trails',
     editorial:
-      "Second Beach delivers the full family beach experience with the towering old-growth forest of Stanley Park as backdrop. The large heated pool, well-equipped playground, and accessible seawall make it the go-to for families with young children. Arriving by seawall bike or on foot is half the adventure.",
+      'Second Beach delivers the full family beach experience with the towering old-growth forest of Stanley Park as backdrop. The large heated pool, well-equipped playground, and accessible seawall make it the go-to for families with young children. Arriving by seawall bike or on foot is half the adventure.',
     differentiators: [
       'Heated outdoor pool (seasonal)',
       'Playground within Stanley Park',
@@ -122,7 +122,7 @@ export const beachPersonalities: BeachPersonality[] = [
     archetype: 'The Urban Connector',
     tagline: 'City skyline meets ocean breeze',
     editorial:
-      "Sunset Beach sits at the intersection of urban life and waterfront — lining False Creek with views of the Burrard Bridge and city skyline reflected in the water. It is less a destination beach and more a living part of the city, connecting the West End to Granville Island via seawall and Aquabus. The vibe is active and transient, always interesting.",
+      'Sunset Beach sits at the intersection of urban life and waterfront — lining False Creek with views of the Burrard Bridge and city skyline reflected in the water. It is less a destination beach and more a living part of the city, connecting the West End to Granville Island via seawall and Aquabus. The vibe is active and transient, always interesting.',
     differentiators: [
       'Aquabus and False Creek Ferry stop nearby',
       'Burrard Bridge and city skyline views',

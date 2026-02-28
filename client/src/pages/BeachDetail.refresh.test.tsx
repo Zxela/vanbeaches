@@ -92,13 +92,25 @@ vi.mock('../components/TabBar', () => ({
     onTabChange: (tab: string) => void;
   }) => (
     <nav data-testid="tab-bar">
-      <button type="button" data-active={activeTab === 'today'} onClick={() => onTabChange('today')}>
+      <button
+        type="button"
+        data-active={activeTab === 'today'}
+        onClick={() => onTabChange('today')}
+      >
         Today
       </button>
-      <button type="button" data-active={activeTab === 'about'} onClick={() => onTabChange('about')}>
+      <button
+        type="button"
+        data-active={activeTab === 'about'}
+        onClick={() => onTabChange('about')}
+      >
         About
       </button>
-      <button type="button" data-active={activeTab === 'photos'} onClick={() => onTabChange('photos')}>
+      <button
+        type="button"
+        data-active={activeTab === 'photos'}
+        onClick={() => onTabChange('photos')}
+      >
         Photos
       </button>
     </nav>

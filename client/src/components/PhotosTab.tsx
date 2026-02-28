@@ -1,4 +1,4 @@
-import { type Beach } from '@van-beaches/shared';
+import type { Beach } from '@van-beaches/shared';
 import { getPersonality } from '../data/beach-personalities';
 import { InstagramEmbed } from './InstagramEmbed';
 
@@ -21,16 +21,12 @@ export function PhotosTab({ beach }: PhotosTabProps) {
         </p>
       </div>
 
-      <InstagramEmbed
-        postUrls={personality?.instagramPostUrls ?? []}
-        hashtag={hashtag}
-      />
+      <InstagramEmbed postUrls={personality?.instagramPostUrls ?? []} hashtag={hashtag} />
 
       <div className="pt-4">
         <p className="text-sm text-sand-700">
-          Share your visit! Tag{' '}
-          <span className="font-semibold text-coral-600">#{hashtag}</span> on Instagram to
-          appear here
+          Share your visit! Tag <span className="font-semibold text-coral-600">#{hashtag}</span> on
+          Instagram to appear here
         </p>
       </div>
     </section>

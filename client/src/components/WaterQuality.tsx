@@ -122,14 +122,10 @@ export function WaterQuality({ status, loading, error }: WaterQualityProps) {
               {config.label}
             </span>
             {status.level === 'good' && (
-              <p className="mt-1 text-emerald-600 text-sm">
-                Safe for swimming
-              </p>
+              <p className="mt-1 text-emerald-600 text-sm">Safe for swimming</p>
             )}
             {status.level === 'off-season' && (
-              <p className="mt-1 text-sand-500 text-sm">
-                Monitoring resumes in May
-              </p>
+              <p className="mt-1 text-sand-500 text-sm">Monitoring resumes in May</p>
             )}
           </div>
         </motion.div>

@@ -73,8 +73,7 @@ function PrimaryBeachCard({
   const WeatherIcon = weather ? getWeatherIcon(weather.current.condition) : null;
   const weatherColor = weather ? getWeatherColor(weather.current.condition) : '';
 
-  const verdict =
-    weather ? computeVerdict(weather, tides, waterQuality, sunsetTime) : null;
+  const verdict = weather ? computeVerdict(weather, tides, waterQuality, sunsetTime) : null;
 
   return (
     <motion.div
@@ -87,11 +86,7 @@ function PrimaryBeachCard({
         {/* Hero photo */}
         <div className="aspect-[16/9] relative overflow-hidden">
           {beach.images ? (
-            <img
-              src={beach.images.hero}
-              alt={beach.name}
-              className="w-full h-full object-cover"
-            />
+            <img src={beach.images.hero} alt={beach.name} className="w-full h-full object-cover" />
           ) : (
             <div className="w-full h-full bg-gradient-to-br from-ocean-400 to-sky-500" />
           )}
@@ -102,9 +97,7 @@ function PrimaryBeachCard({
             <h2 className="font-display text-xl font-bold text-white leading-tight">
               {beach.name}
             </h2>
-            {personality && (
-              <p className="text-sm text-white/80 mt-0.5">{personality.archetype}</p>
-            )}
+            {personality && <p className="text-sm text-white/80 mt-0.5">{personality.archetype}</p>}
           </div>
         </div>
 
@@ -112,9 +105,7 @@ function PrimaryBeachCard({
         {weather && (
           <div className="px-4 py-3 flex items-center gap-3 border-b border-sand-100">
             <div className="flex items-center gap-1.5">
-              {WeatherIcon && (
-                <WeatherIcon className={`w-4 h-4 ${weatherColor}`} strokeWidth={2} />
-              )}
+              {WeatherIcon && <WeatherIcon className={`w-4 h-4 ${weatherColor}`} strokeWidth={2} />}
               <span className="text-sm font-semibold text-ocean-700">
                 {weather.current.temperature}°C
               </span>
@@ -150,8 +141,7 @@ function CompactBeachCard({
   const WeatherIcon = weather ? getWeatherIcon(weather.current.condition) : null;
   const weatherColor = weather ? getWeatherColor(weather.current.condition) : '';
 
-  const verdict =
-    weather ? computeVerdict(weather, tides, waterQuality, sunsetTime) : null;
+  const verdict = weather ? computeVerdict(weather, tides, waterQuality, sunsetTime) : null;
 
   return (
     <motion.div
@@ -164,11 +154,7 @@ function CompactBeachCard({
         {/* Photo */}
         <div className="aspect-[4/3] relative overflow-hidden">
           {beach.images ? (
-            <img
-              src={beach.images.thumb}
-              alt={beach.name}
-              className="w-full h-full object-cover"
-            />
+            <img src={beach.images.thumb} alt={beach.name} className="w-full h-full object-cover" />
           ) : (
             <div className="w-full h-full bg-gradient-to-br from-sky-400 to-ocean-500" />
           )}
@@ -232,12 +218,14 @@ export function FavoritesView({ favorites, beachData, loading = false }: Favorit
         <section aria-label={`Primary favorite: ${primaryBeach.name}`}>
           <PrimaryBeachCard
             beach={primaryBeach}
-            conditions={beachData[primaryBeach.id] ?? {
-              weather: null,
-              tides: null,
-              waterQuality: null,
-              sunsetTime: null,
-            }}
+            conditions={
+              beachData[primaryBeach.id] ?? {
+                weather: null,
+                tides: null,
+                waterQuality: null,
+                sunsetTime: null,
+              }
+            }
           />
         </section>
       )}
@@ -250,12 +238,14 @@ export function FavoritesView({ favorites, beachData, loading = false }: Favorit
               <CompactBeachCard
                 key={beach.id}
                 beach={beach}
-                conditions={beachData[beach.id] ?? {
-                  weather: null,
-                  tides: null,
-                  waterQuality: null,
-                  sunsetTime: null,
-                }}
+                conditions={
+                  beachData[beach.id] ?? {
+                    weather: null,
+                    tides: null,
+                    waterQuality: null,
+                    sunsetTime: null,
+                  }
+                }
               />
             ))}
           </div>

@@ -121,16 +121,12 @@ export function BestTimeToVisit({ weather, tides, latitude, longitude }: BestTim
             <div
               key={slot.time}
               className={`flex items-center gap-3 p-3 rounded-lg ${
-                idx === 0
-                  ? 'bg-white/70 shadow-sm'
-                  : 'bg-white/40'
+                idx === 0 ? 'bg-white/70 shadow-sm' : 'bg-white/40'
               }`}
             >
               <div className="text-center min-w-[60px]">
                 <p className="text-lg font-bold text-sand-900">{slot.time}</p>
-                {idx === 0 && (
-                  <span className="text-xs text-ocean-600">Best</span>
-                )}
+                {idx === 0 && <span className="text-xs text-ocean-600">Best</span>}
               </div>
               <div className="flex-1">
                 <div className="flex items-center gap-2">
@@ -144,9 +140,7 @@ export function BestTimeToVisit({ weather, tides, latitude, longitude }: BestTim
                     {getScoreLabel(slot.score)}
                   </span>
                 </div>
-                <p className="text-xs text-sand-500 mt-1">
-                  {slot.reasons.slice(0, 2).join(' • ')}
-                </p>
+                <p className="text-xs text-sand-500 mt-1">{slot.reasons.slice(0, 2).join(' • ')}</p>
               </div>
             </div>
           ))}

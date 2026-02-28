@@ -1,10 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import {
-  type BeachPersonality,
-  type BeachVibe,
-  beachPersonalities,
-  getPersonality,
-} from './beach-personalities';
+import { type BeachVibe, beachPersonalities, getPersonality } from './beach-personalities';
 
 // All 9 beach slugs from shared/src/data/beaches.ts
 const EXPECTED_SLUGS = [

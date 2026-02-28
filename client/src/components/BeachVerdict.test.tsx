@@ -61,29 +61,18 @@ describe('BeachVerdict', () => {
   // AC-001: renders the verdict summary text from computeVerdict
   it('renders the verdict summary text', () => {
     render(
-      <BeachVerdict
-        weather={makeWeather()}
-        tides={null}
-        waterQuality={null}
-        sunsetTime={null}
-      />,
+      <BeachVerdict weather={makeWeather()} tides={null} waterQuality={null} sunsetTime={null} />,
     );
     // The summary from computeVerdict should appear in the document
     // For perfect conditions: "Perfect conditions..." or similar
     const html = document.body.textContent || '';
-    const hasSummary =
-      /perfect|good|decent|fair|storm|rain|conditions|beach|day|trip/i.test(html);
+    const hasSummary = /perfect|good|decent|fair|storm|rain|conditions|beach|day|trip/i.test(html);
     expect(hasSummary).toBe(true);
   });
 
   it('renders the "Today\'s Verdict" heading', () => {
     render(
-      <BeachVerdict
-        weather={makeWeather()}
-        tides={null}
-        waterQuality={null}
-        sunsetTime={null}
-      />,
+      <BeachVerdict weather={makeWeather()} tides={null} waterQuality={null} sunsetTime={null} />,
     );
     expect(screen.getByText(/today's verdict/i)).toBeInTheDocument();
   });
@@ -91,12 +80,7 @@ describe('BeachVerdict', () => {
   // AC-002: displays the bestTimeWindow
   it('displays the bestTimeWindow from computeVerdict', () => {
     render(
-      <BeachVerdict
-        weather={makeWeather()}
-        tides={null}
-        waterQuality={null}
-        sunsetTime={null}
-      />,
+      <BeachVerdict weather={makeWeather()} tides={null} waterQuality={null} sunsetTime={null} />,
     );
     // bestTimeWindow should appear somewhere — "This afternoon" or a time range
     const html = document.body.textContent || '';
@@ -106,12 +90,7 @@ describe('BeachVerdict', () => {
 
   it('labels the bestTimeWindow with "Best time"', () => {
     render(
-      <BeachVerdict
-        weather={makeWeather()}
-        tides={null}
-        waterQuality={null}
-        sunsetTime={null}
-      />,
+      <BeachVerdict weather={makeWeather()} tides={null} waterQuality={null} sunsetTime={null} />,
     );
     expect(screen.getByText(/best time/i)).toBeInTheDocument();
   });
@@ -142,12 +121,7 @@ describe('BeachVerdict', () => {
     // Fair: rainy with low winds
     const fairWeather = makeWeather({ condition: 'rainy', windSpeed: 5 });
     const { container } = render(
-      <BeachVerdict
-        weather={fairWeather}
-        tides={null}
-        waterQuality={null}
-        sunsetTime={null}
-      />,
+      <BeachVerdict weather={fairWeather} tides={null} waterQuality={null} sunsetTime={null} />,
     );
     const html = container.innerHTML;
     const hasAmberColor = /amber|yellow/i.test(html);
@@ -157,12 +131,7 @@ describe('BeachVerdict', () => {
   it('uses red color for skip recommendation', () => {
     const skipWeather = makeWeather({ condition: 'stormy', windSpeed: 35 });
     const { container } = render(
-      <BeachVerdict
-        weather={skipWeather}
-        tides={null}
-        waterQuality={null}
-        sunsetTime={null}
-      />,
+      <BeachVerdict weather={skipWeather} tides={null} waterQuality={null} sunsetTime={null} />,
     );
     const html = container.innerHTML;
     const hasRedColor = /\bred[-\w]*(?:bg|text|border|ring)|\b(?:bg|text|border|ring)-red/i.test(
@@ -180,12 +149,7 @@ describe('BeachVerdict', () => {
       uvIndex: 5,
     });
     const { container } = render(
-      <BeachVerdict
-        weather={goodWeather}
-        tides={null}
-        waterQuality={null}
-        sunsetTime={null}
-      />,
+      <BeachVerdict weather={goodWeather} tides={null} waterQuality={null} sunsetTime={null} />,
     );
     const html = container.innerHTML;
     const hasBlueColor = /ocean|blue/i.test(html);
@@ -211,12 +175,7 @@ describe('BeachVerdict', () => {
   // Uses Fraunces font for the heading
   it('uses font-display (Fraunces) class on the heading', () => {
     render(
-      <BeachVerdict
-        weather={makeWeather()}
-        tides={null}
-        waterQuality={null}
-        sunsetTime={null}
-      />,
+      <BeachVerdict weather={makeWeather()} tides={null} waterQuality={null} sunsetTime={null} />,
     );
     const heading = screen.getByText(/today's verdict/i);
     expect(heading.className).toMatch(/font-display/);
@@ -225,12 +184,7 @@ describe('BeachVerdict', () => {
   // No dark: classes (light-mode only)
   it('does not use any dark: classes in the component', () => {
     const { container } = render(
-      <BeachVerdict
-        weather={makeWeather()}
-        tides={null}
-        waterQuality={null}
-        sunsetTime={null}
-      />,
+      <BeachVerdict weather={makeWeather()} tides={null} waterQuality={null} sunsetTime={null} />,
     );
     expect(container.innerHTML).not.toContain('dark:');
   });

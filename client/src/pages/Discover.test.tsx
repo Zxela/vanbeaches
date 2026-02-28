@@ -35,18 +35,14 @@ vi.mock('../components/BeachMap', () => ({
 // Mock FavoritesView to easily detect when it renders
 vi.mock('../components/FavoritesView', () => ({
   FavoritesView: ({ favorites }: { favorites: unknown[] }) => (
-    <div data-testid="favorites-view">
-      FavoritesView ({favorites.length} favorites)
-    </div>
+    <div data-testid="favorites-view">FavoritesView ({favorites.length} favorites)</div>
   ),
 }));
 
 // Mock DiscoveryView to easily detect when it renders
 vi.mock('../components/DiscoveryView', () => ({
   DiscoveryView: ({ beaches }: { beaches: unknown[] }) => (
-    <div data-testid="discovery-view">
-      DiscoveryView ({beaches.length} beaches)
-    </div>
+    <div data-testid="discovery-view">DiscoveryView ({beaches.length} beaches)</div>
   ),
 }));
 

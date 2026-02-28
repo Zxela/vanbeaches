@@ -19,6 +19,7 @@ export function TabBar({ activeTab, onTabChange }: TabBarProps) {
           const isActive = activeTab === key;
           return (
             <button
+              type="button"
               key={key}
               onClick={() => onTabChange(key)}
               className={

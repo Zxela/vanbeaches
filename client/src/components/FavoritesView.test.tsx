@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
-import type { Beach, TideData, WeatherForecast, WaterQualityStatus } from '@van-beaches/shared';
+import type { Beach, TideData, WaterQualityStatus, WeatherForecast } from '@van-beaches/shared';
 import { MemoryRouter } from 'react-router-dom';
-import { describe, expect, it, vi, beforeEach } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { FavoritesView } from './FavoritesView';
 
 // Mock framer-motion to avoid animation issues in tests
@@ -26,7 +26,7 @@ vi.mock('../data/beach-personalities', () => ({
       return {
         slug: 'kitsilano-beach',
         archetype: 'The Sporty Heart',
-        tagline: "Where the west side comes to play",
+        tagline: 'Where the west side comes to play',
         editorial: 'Kits Beach is the most popular beach.',
         differentiators: ['6 volleyball courts', 'Olympic Pool'],
         vibes: ['active', 'social', 'family'],
@@ -252,9 +252,7 @@ describe('FavoritesView', () => {
     it('renders a link to the primary beach detail page', () => {
       renderFavorites();
       const links = screen.getAllByRole('link');
-      const beachLink = links.find(
-        (l) => l.getAttribute('href') === '/beach/kitsilano-beach',
-      );
+      const beachLink = links.find((l) => l.getAttribute('href') === '/beach/kitsilano-beach');
       expect(beachLink).toBeDefined();
     });
   });
@@ -287,9 +285,7 @@ describe('FavoritesView', () => {
     it('renders a link to each secondary beach', () => {
       renderFavorites([kitsBeach, locarnoBeach]);
       const links = screen.getAllByRole('link');
-      const locarnoLink = links.find(
-        (l) => l.getAttribute('href') === '/beach/locarno-beach',
-      );
+      const locarnoLink = links.find((l) => l.getAttribute('href') === '/beach/locarno-beach');
       expect(locarnoLink).toBeDefined();
     });
   });

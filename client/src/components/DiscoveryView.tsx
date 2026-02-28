@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import type { BeachVibe } from '../data/beach-personalities';
 import { getPersonality } from '../data/beach-personalities';
-import { getWeatherColor, getWeatherIcon } from '../lib/weatherIcons';
+import { getWeatherIcon } from '../lib/weatherIcons';
 import { BeachCard } from './BeachCard';
 import { BeachMap } from './BeachMap';
 
@@ -38,7 +38,7 @@ function pickFeaturedBeach(
   if (beaches.length === 0) return null;
 
   let bestBeach = beaches[0];
-  let bestTemp = -Infinity;
+  let bestTemp = Number.NEGATIVE_INFINITY;
 
   for (const beach of beaches) {
     const conditions = beachConditions[beach.id];
@@ -68,7 +68,6 @@ function EditorialHero({
   const beachData = BEACHES.find((b) => b.id === beach.id);
   const weather = conditions?.currentWeather;
   const WeatherIcon = weather ? getWeatherIcon(weather.condition) : null;
-  const weatherColor = weather ? getWeatherColor(weather.condition) : '';
 
   return (
     <div
@@ -96,27 +95,19 @@ function EditorialHero({
         </p>
 
         {/* Beach name */}
-        <h2 className="font-display text-2xl font-bold text-white leading-tight">
-          {beach.name}
-        </h2>
+        <h2 className="font-display text-2xl font-bold text-white leading-tight">{beach.name}</h2>
 
         {/* Personality archetype */}
-        {personality && (
-          <p className="text-sm text-white/80 mt-0.5">{personality.archetype}</p>
-        )}
+        {personality && <p className="text-sm text-white/80 mt-0.5">{personality.archetype}</p>}
 
         {/* Condition summary */}
         {weather && (
           <div className="flex items-center gap-2 mt-3">
             {WeatherIcon && (
-              <WeatherIcon className={`w-4 h-4 text-white shrink-0`} strokeWidth={2} />
+              <WeatherIcon className={'w-4 h-4 text-white shrink-0'} strokeWidth={2} />
             )}
-            <span className="text-sm font-semibold text-white">
-              {weather.temperature}°C
-            </span>
-            <span className="text-sm text-white/80 capitalize">
-              · {weather.condition}
-            </span>
+            <span className="text-sm font-semibold text-white">{weather.temperature}°C</span>
+            <span className="text-sm text-white/80 capitalize">· {weather.condition}</span>
           </div>
         )}
 
@@ -133,11 +124,7 @@ function EditorialHero({
   );
 }
 
-export function DiscoveryView({
-  beaches,
-  beachConditions,
-  loading = false,
-}: DiscoveryViewProps) {
+export function DiscoveryView({ beaches, beachConditions, loading = false }: DiscoveryViewProps) {
   const [selectedVibe, setSelectedVibe] = useState<BeachVibe | null>(null);
 
   // Pick the featured beach
@@ -185,18 +172,13 @@ export function DiscoveryView({
       {/* Editorial hero */}
       {featuredBeach && (
         <section aria-label="Today's featured beach">
-          <EditorialHero
-            beach={featuredBeach}
-            conditions={beachConditions[featuredBeach.id]}
-          />
+          <EditorialHero beach={featuredBeach} conditions={beachConditions[featuredBeach.id]} />
         </section>
       )}
 
       {/* Vibe filter chips */}
       <section aria-label="Filter by vibe">
-        <h2 className="font-display text-lg font-semibold text-sand-900 mb-3">
-          What's your vibe?
-        </h2>
+        <h2 className="font-display text-lg font-semibold text-sand-900 mb-3">What's your vibe?</h2>
         <div className="flex flex-wrap gap-2">
           {ALL_VIBES.map(({ vibe, label }) => {
             const isSelected = selectedVibe === vibe;
@@ -238,18 +220,14 @@ export function DiscoveryView({
               lastUpdated: new Date().toISOString(),
             };
 
-            return (
-              <BeachCard key={beachId} beach={beachSummaryForCard} />
-            );
+            return <BeachCard key={beachId} beach={beachSummaryForCard} />;
           })}
         </div>
       </section>
 
       {/* Compact map section */}
       <section aria-label="Beach map" data-testid="discovery-map">
-        <h2 className="font-display text-lg font-semibold text-sand-900 mb-3">
-          View on map
-        </h2>
+        <h2 className="font-display text-lg font-semibold text-sand-900 mb-3">View on map</h2>
         <BeachMap />
       </section>
     </div>
