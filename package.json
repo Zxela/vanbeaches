@@ -12,7 +12,8 @@
     "format": "biome format --write .",
     "type-check": "pnpm -r type-check",
     "deploy:preview": "wrangler pages deploy client/dist --project-name=vanbeaches",
-    "deploy:production": "wrangler pages deploy client/dist --project-name=vanbeaches --branch=master"
+    "deploy:production": "wrangler pages deploy client/dist --project-name=vanbeaches --branch=master",
+    "prepare": "husky"
   },
   "dependencies": {
     "@van-beaches/shared": "workspace:*"
@@ -20,8 +21,14 @@
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
     "@cloudflare/workers-types": "^4.20260201.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.7",
     "typescript": "^5.7.2",
     "wrangler": "^4.68.1"
+  },
+  "lint-staged": {
+    "*.{ts,tsx,js,jsx}": ["biome check --write"],
+    "*.{json,css,md}": ["biome format --write"]
   },
   "packageManager": "pnpm@9.15.0",
   "engines": {
