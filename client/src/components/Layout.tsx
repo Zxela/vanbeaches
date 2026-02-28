@@ -35,7 +35,6 @@ export function Layout({ children }: LayoutProps) {
     function handleKeydown(e: KeyboardEvent) {
       if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) return;
       if (e.key === 'h') navigate('/');
-      if (e.key === 'c') navigate('/compare');
     }
     document.addEventListener('keydown', handleKeydown);
     return () => document.removeEventListener('keydown', handleKeydown);
@@ -79,12 +78,6 @@ export function Layout({ children }: LayoutProps) {
                   className="px-3 py-2 bg-ocean-50 dark:bg-ocean-900/30 hover:bg-ocean-100 dark:hover:bg-ocean-800/40 rounded-lg transition-colors text-sm text-ocean-700 dark:text-ocean-300"
                 >
                   Discover
-                </Link>
-                <Link
-                  to="/compare"
-                  className="px-3 py-2 bg-ocean-50 dark:bg-ocean-900/30 hover:bg-ocean-100 dark:hover:bg-ocean-800/40 rounded-lg transition-colors text-sm text-ocean-700 dark:text-ocean-300"
-                >
-                  Compare
                 </Link>
                 <div className="relative" ref={dropdownRef}>
                   <motion.button

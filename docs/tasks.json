@@ -379,7 +379,7 @@
         {
           "id": "007-AC2",
           "criterion": "TodayTab renders a compact conditions grid with temperature, wind, UV, water quality",
-          "test_assertion": "expect(screen.getByText(/\u00b0C/)).toBeInTheDocument()"
+          "test_assertion": "expect(screen.getByText(/°C/)).toBeInTheDocument()"
         },
         {
           "id": "007-AC3",
@@ -940,7 +940,7 @@
         }
       ],
       "test_file": "client/src/components/MobileBottomNav.test.tsx",
-      "status": "pending",
+      "status": "completed",
       "depends_on": [
         "001"
       ],
