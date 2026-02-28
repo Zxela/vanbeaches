@@ -197,7 +197,7 @@ export function ActivityRecommendations({ weather, activities }: ActivityRecomme
                 <p className="font-medium">{rec.activity}</p>
                 <p className="text-xs opacity-75 truncate">{rec.reason}</p>
               </div>
-              <span className="text-xs font-medium uppercase px-2 py-1 rounded bg-white/50 dark:bg-black/20">
+              <span className="text-xs font-medium uppercase px-2 py-1 rounded bg-white/50">
                 {rec.rating}
               </span>
             </div>

@@ -40,7 +40,7 @@ export function WeatherForecast({ forecast, loading }: WeatherForecastProps) {
           5-Day Forecast
         </CardTitle>
         <CardContent className="mt-4">
-          <p className="text-sand-500 dark:text-sand-400">Forecast unavailable</p>
+          <p className="text-sand-500">Forecast unavailable</p>
         </CardContent>
       </Card>
     );
@@ -64,14 +64,14 @@ export function WeatherForecast({ forecast, loading }: WeatherForecastProps) {
             return (
               <div
                 key={day.date}
-                className="text-center p-2 rounded-lg bg-sky-50/60 dark:bg-sand-700/50"
+                className="text-center p-2 rounded-lg bg-sky-50/60"
               >
-                <p className="text-xs text-sand-500 dark:text-sand-400 mb-1">{dayName}</p>
+                <p className="text-xs text-sand-500 mb-1">{dayName}</p>
                 <WeatherIcon className={`w-6 h-6 mx-auto mb-1 ${iconColor}`} strokeWidth={1.5} />
-                <p className="text-sm font-semibold text-sand-900 dark:text-sand-100">
+                <p className="text-sm font-semibold text-sand-900">
                   {day.high.toFixed(0)}°
                 </p>
-                <p className="text-xs text-sand-500 dark:text-sand-400">{day.low.toFixed(0)}°</p>
+                <p className="text-xs text-sand-500">{day.low.toFixed(0)}°</p>
               </div>
             );
           })}

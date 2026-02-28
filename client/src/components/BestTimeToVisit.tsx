@@ -96,10 +96,10 @@ export function BestTimeToVisit({ weather, tides, latitude, longitude }: BestTim
   if (bestSlots.length === 0) return null;
 
   const getScoreColor = (score: number) => {
-    if (score >= 80) return 'text-green-600 dark:text-green-400';
-    if (score >= 60) return 'text-ocean-600 dark:text-ocean-400';
-    if (score >= 40) return 'text-yellow-600 dark:text-yellow-400';
-    return 'text-sand-500 dark:text-sand-400';
+    if (score >= 80) return 'text-green-600';
+    if (score >= 60) return 'text-ocean-600';
+    if (score >= 40) return 'text-yellow-600';
+    return 'text-sand-500';
   };
 
   const getScoreLabel = (score: number) => {
@@ -122,19 +122,19 @@ export function BestTimeToVisit({ weather, tides, latitude, longitude }: BestTim
               key={slot.time}
               className={`flex items-center gap-3 p-3 rounded-lg ${
                 idx === 0
-                  ? 'bg-white/70 dark:bg-sand-800/70 shadow-sm'
-                  : 'bg-white/40 dark:bg-sand-800/40'
+                  ? 'bg-white/70 shadow-sm'
+                  : 'bg-white/40'
               }`}
             >
               <div className="text-center min-w-[60px]">
-                <p className="text-lg font-bold text-sand-900 dark:text-sand-100">{slot.time}</p>
+                <p className="text-lg font-bold text-sand-900">{slot.time}</p>
                 {idx === 0 && (
-                  <span className="text-xs text-ocean-600 dark:text-ocean-400">Best</span>
+                  <span className="text-xs text-ocean-600">Best</span>
                 )}
               </div>
               <div className="flex-1">
                 <div className="flex items-center gap-2">
-                  <div className="flex-1 h-2 bg-sand-200 dark:bg-sand-700 rounded-full overflow-hidden">
+                  <div className="flex-1 h-2 bg-sand-200 rounded-full overflow-hidden">
                     <div
                       className="h-full bg-gradient-to-r from-green-400 to-ocean-500 rounded-full transition-all"
                       style={{ width: `${slot.score}%` }}
@@ -144,14 +144,14 @@ export function BestTimeToVisit({ weather, tides, latitude, longitude }: BestTim
                     {getScoreLabel(slot.score)}
                   </span>
                 </div>
-                <p className="text-xs text-sand-500 dark:text-sand-400 mt-1">
+                <p className="text-xs text-sand-500 mt-1">
                   {slot.reasons.slice(0, 2).join(' • ')}
                 </p>
               </div>
             </div>
           ))}
         </div>
-        <p className="text-xs text-sand-500 dark:text-sand-400 mt-3 text-center">
+        <p className="text-xs text-sand-500 mt-3 text-center">
           Sunset at {formatSunTime(sunTimes.sunset)}
         </p>
       </CardContent>

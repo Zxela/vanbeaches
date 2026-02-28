@@ -27,7 +27,7 @@ function WindCompass({ direction, speed }: { direction: string; speed: number })
   return (
     <div className="flex items-center gap-3">
       <motion.div
-        className="relative w-10 h-10 rounded-full bg-ocean-50 dark:bg-ocean-900/30 border-2 border-ocean-200 dark:border-ocean-700 flex items-center justify-center"
+        className="relative w-10 h-10 rounded-full bg-ocean-50 border-2 border-ocean-200 flex items-center justify-center"
         initial={{ rotate: 0 }}
         animate={{ rotate: rotation }}
         transition={{ type: 'spring', stiffness: 100, damping: 15 }}
@@ -35,8 +35,8 @@ function WindCompass({ direction, speed }: { direction: string; speed: number })
         <div className="w-0 h-0 border-l-[5px] border-r-[5px] border-b-[10px] border-l-transparent border-r-transparent border-b-ocean-500" />
       </motion.div>
       <div>
-        <p className="font-semibold text-sand-900 dark:text-sand-100">{speed} km/h</p>
-        <p className="text-xs text-sand-500 dark:text-sand-400">{direction}</p>
+        <p className="font-semibold text-sand-900">{speed} km/h</p>
+        <p className="text-xs text-sand-500">{direction}</p>
       </div>
     </div>
   );
@@ -67,8 +67,8 @@ function UVIndicator({ index }: { index: number }) {
         {index}
       </div>
       <div>
-        <p className="font-semibold text-sand-900 dark:text-sand-100">UV {getLabel(index)}</p>
-        <p className="text-xs text-sand-500 dark:text-sand-400">Index</p>
+        <p className="font-semibold text-sand-900">UV {getLabel(index)}</p>
+        <p className="text-xs text-sand-500">Index</p>
       </div>
     </div>
   );
@@ -90,7 +90,7 @@ export function WeatherWidget({ weather, loading, error }: WeatherWidgetProps) {
               <div className="w-24 h-4 shimmer rounded" />
             </div>
           </div>
-          <div className="grid grid-cols-2 gap-4 pt-4 border-t border-sky-200/50 dark:border-sand-700">
+          <div className="grid grid-cols-2 gap-4 pt-4 border-t border-sky-200/50">
             <div className="w-full h-12 shimmer rounded" />
             <div className="w-full h-12 shimmer rounded" />
           </div>
@@ -107,7 +107,7 @@ export function WeatherWidget({ weather, loading, error }: WeatherWidgetProps) {
           Current Weather
         </CardTitle>
         <CardContent className="mt-4">
-          <p className="text-red-500 dark:text-red-400">{error}</p>
+          <p className="text-red-500">{error}</p>
         </CardContent>
       </Card>
     );
@@ -136,7 +136,7 @@ export function WeatherWidget({ weather, loading, error }: WeatherWidgetProps) {
           </motion.div>
           <div>
             <motion.p
-              className="text-4xl font-bold text-sand-900 dark:text-sand-50"
+              className="text-4xl font-bold text-sand-900"
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.2 }}
@@ -144,7 +144,7 @@ export function WeatherWidget({ weather, loading, error }: WeatherWidgetProps) {
               {weather.current.temperature.toFixed(0)}°C
             </motion.p>
             <motion.p
-              className="text-sand-600 dark:text-sand-400 capitalize"
+              className="text-sand-600 capitalize"
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.3 }}
@@ -154,7 +154,7 @@ export function WeatherWidget({ weather, loading, error }: WeatherWidgetProps) {
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-4 pt-4 border-t border-sky-200/50 dark:border-sand-700">
+        <div className="grid grid-cols-2 gap-4 pt-4 border-t border-sky-200/50">
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
@@ -162,7 +162,7 @@ export function WeatherWidget({ weather, loading, error }: WeatherWidgetProps) {
           >
             <div className="flex items-center gap-2 mb-2">
               <Icon icon={Wind} size="sm" color="ocean" />
-              <span className="text-xs font-medium text-sand-500 dark:text-sand-400 uppercase">
+              <span className="text-xs font-medium text-sand-500 uppercase">
                 Wind
               </span>
             </div>
@@ -179,7 +179,7 @@ export function WeatherWidget({ weather, loading, error }: WeatherWidgetProps) {
           >
             <div className="flex items-center gap-2 mb-2">
               <Icon icon={Sun} size="sm" color="warning" />
-              <span className="text-xs font-medium text-sand-500 dark:text-sand-400 uppercase">
+              <span className="text-xs font-medium text-sand-500 uppercase">
                 UV
               </span>
             </div>
@@ -193,14 +193,14 @@ export function WeatherWidget({ weather, loading, error }: WeatherWidgetProps) {
             transition={{ delay: 0.6 }}
           >
             <div className="flex items-center gap-3 flex-1">
-              <div className="w-10 h-10 rounded-full bg-sky-50 dark:bg-sky-900/30 flex items-center justify-center">
+              <div className="w-10 h-10 rounded-full bg-sky-50 flex items-center justify-center">
                 <Icon icon={Droplets} size="lg" color="ocean" />
               </div>
               <div>
-                <p className="font-semibold text-sand-900 dark:text-sand-100">
+                <p className="font-semibold text-sand-900">
                   {weather.current.humidity}%
                 </p>
-                <p className="text-xs text-sand-500 dark:text-sand-400">Humidity</p>
+                <p className="text-xs text-sand-500">Humidity</p>
               </div>
             </div>
           </motion.div>

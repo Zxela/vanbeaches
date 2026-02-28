@@ -1059,7 +1059,7 @@
       ],
       "test_file": null,
       "no_test_reason": "Purely visual/CSS class changes with no behavioral change; verified by existing tests passing",
-      "status": "pending",
+      "status": "completed",
       "depends_on": [
         "001"
       ],

@@ -33,7 +33,7 @@ export function SunTimesWidget({ latitude, longitude }: SunTimesWidgetProps) {
       variant={isGoldenHour ? 'default' : 'default'}
       className={cn(
         isGoldenHour &&
-          'bg-gradient-to-br from-amber-50 to-orange-50 dark:from-amber-900/20 dark:to-orange-900/20 border-amber-200 dark:border-amber-800/50',
+          'bg-gradient-to-br from-amber-50 to-orange-50 border-amber-200',
       )}
       animated
     >
@@ -50,14 +50,14 @@ export function SunTimesWidget({ latitude, longitude }: SunTimesWidgetProps) {
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.1 }}
           >
-            <div className="w-10 h-10 rounded-full bg-amber-100 dark:bg-amber-900/30 flex items-center justify-center">
+            <div className="w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center">
               <Icon icon={Sunrise} size="lg" className="text-amber-500" />
             </div>
             <div>
-              <p className="text-xs text-sand-500 dark:text-sand-400 uppercase font-medium">
+              <p className="text-xs text-sand-500 uppercase font-medium">
                 Sunrise
               </p>
-              <p className="text-lg font-semibold text-sand-900 dark:text-sand-100">
+              <p className="text-lg font-semibold text-sand-900">
                 {formatSunTime(sunTimes.sunrise)}
               </p>
             </div>
@@ -69,14 +69,14 @@ export function SunTimesWidget({ latitude, longitude }: SunTimesWidgetProps) {
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.2 }}
           >
-            <div className="w-10 h-10 rounded-full bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center">
+            <div className="w-10 h-10 rounded-full bg-orange-100 flex items-center justify-center">
               <Icon icon={Sunset} size="lg" className="text-orange-500" />
             </div>
             <div>
-              <p className="text-xs text-sand-500 dark:text-sand-400 uppercase font-medium">
+              <p className="text-xs text-sand-500 uppercase font-medium">
                 Sunset
               </p>
-              <p className="text-lg font-semibold text-sand-900 dark:text-sand-100">
+              <p className="text-lg font-semibold text-sand-900">
                 {formatSunTime(sunTimes.sunset)}
               </p>
             </div>
@@ -85,12 +85,12 @@ export function SunTimesWidget({ latitude, longitude }: SunTimesWidgetProps) {
 
         {isGoldenHour && (
           <motion.div
-            className="mt-4 bg-gradient-to-r from-amber-200 to-orange-200 dark:from-amber-800/50 dark:to-orange-800/50 rounded-xl px-4 py-3 text-center"
+            className="mt-4 bg-gradient-to-r from-amber-200 to-orange-200 rounded-xl px-4 py-3 text-center"
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.3 }}
           >
-            <span className="text-amber-800 dark:text-amber-200 font-semibold flex items-center justify-center gap-2">
+            <span className="text-amber-800 font-semibold flex items-center justify-center gap-2">
               <Sunset className="w-5 h-5" />
               Golden Hour Now!
             </span>
@@ -99,20 +99,20 @@ export function SunTimesWidget({ latitude, longitude }: SunTimesWidgetProps) {
 
         {!isGoldenHour && sunsetCountdown && isDaytime && (
           <motion.div
-            className="mt-4 bg-ocean-50 dark:bg-ocean-900/30 rounded-xl px-4 py-3"
+            className="mt-4 bg-ocean-50 rounded-xl px-4 py-3"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
           >
-            <p className="text-sm text-sand-600 dark:text-sand-300 text-center flex items-center justify-center gap-2">
+            <p className="text-sm text-sand-600 text-center flex items-center justify-center gap-2">
               <Icon icon={Clock} size="sm" color="ocean" />
               <span className="font-medium">Golden hour in </span>
               {sunsetCountdown.hours > 0 && (
-                <span className="font-bold text-ocean-600 dark:text-ocean-400">
+                <span className="font-bold text-ocean-600">
                   {sunsetCountdown.hours}h{' '}
                 </span>
               )}
-              <span className="font-bold text-ocean-600 dark:text-ocean-400">
+              <span className="font-bold text-ocean-600">
                 {sunsetCountdown.mins}m
               </span>
             </p>
@@ -121,12 +121,12 @@ export function SunTimesWidget({ latitude, longitude }: SunTimesWidgetProps) {
 
         {!isDaytime && (
           <motion.div
-            className="mt-4 bg-indigo-50 dark:bg-indigo-900/30 rounded-xl px-4 py-3 text-center"
+            className="mt-4 bg-sand-100 rounded-xl px-4 py-3 text-center"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
           >
-            <span className="text-indigo-700 dark:text-indigo-300 font-medium flex items-center justify-center gap-2">
+            <span className="text-sand-600 font-medium flex items-center justify-center gap-2">
               <Icon icon={Moon} size="sm" />
               Night time
             </span>

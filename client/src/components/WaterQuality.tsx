@@ -21,37 +21,37 @@ interface StatusConfig {
 const statusConfig: Record<string, StatusConfig> = {
   good: {
     icon: CheckCircle,
-    bgColor: 'bg-emerald-100 dark:bg-emerald-900/30',
-    textColor: 'text-emerald-800 dark:text-emerald-300',
+    bgColor: 'bg-emerald-100',
+    textColor: 'text-emerald-800',
     iconColor: 'text-emerald-500',
     label: 'Good',
   },
   advisory: {
     icon: AlertTriangle,
-    bgColor: 'bg-amber-100 dark:bg-amber-900/30',
-    textColor: 'text-amber-800 dark:text-amber-300',
+    bgColor: 'bg-amber-100',
+    textColor: 'text-amber-800',
     iconColor: 'text-amber-500',
     label: 'Advisory',
   },
   closed: {
     icon: XCircle,
-    bgColor: 'bg-red-100 dark:bg-red-900/30',
-    textColor: 'text-red-800 dark:text-red-300',
+    bgColor: 'bg-red-100',
+    textColor: 'text-red-800',
     iconColor: 'text-red-500',
     label: 'Closed',
   },
   unknown: {
     icon: HelpCircle,
-    bgColor: 'bg-sand-100 dark:bg-sand-700',
-    textColor: 'text-sand-800 dark:text-sand-300',
+    bgColor: 'bg-sand-100',
+    textColor: 'text-sand-800',
     iconColor: 'text-sand-500',
     label: 'Unknown',
   },
   'off-season': {
     icon: Snowflake,
-    bgColor: 'bg-sky-100 dark:bg-sky-900/30',
-    textColor: 'text-sky-800 dark:text-sky-300',
-    iconColor: 'text-sky-500',
+    bgColor: 'bg-ocean-50',
+    textColor: 'text-ocean-700',
+    iconColor: 'text-ocean-500',
     label: 'Off-Season',
   },
 };
@@ -85,7 +85,7 @@ export function WaterQuality({ status, loading, error }: WaterQualityProps) {
           Water Quality
         </CardTitle>
         <CardContent className="mt-4">
-          <p className="text-red-500 dark:text-red-400">{error}</p>
+          <p className="text-red-500">{error}</p>
         </CardContent>
       </Card>
     );
@@ -122,12 +122,12 @@ export function WaterQuality({ status, loading, error }: WaterQualityProps) {
               {config.label}
             </span>
             {status.level === 'good' && (
-              <p className="mt-1 text-emerald-600 dark:text-emerald-400 text-sm">
+              <p className="mt-1 text-emerald-600 text-sm">
                 Safe for swimming
               </p>
             )}
             {status.level === 'off-season' && (
-              <p className="mt-1 text-sand-500 dark:text-sand-400 text-sm">
+              <p className="mt-1 text-sand-500 text-sm">
                 Monitoring resumes in May
               </p>
             )}
@@ -136,21 +136,21 @@ export function WaterQuality({ status, loading, error }: WaterQualityProps) {
 
         {status.advisoryReason && (
           <motion.div
-            className="mt-4 bg-amber-50 dark:bg-amber-900/20 rounded-xl p-3 border border-amber-200/50 dark:border-amber-800/50"
+            className="mt-4 bg-amber-50 rounded-xl p-3 border border-amber-200/50"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
           >
             <div className="flex items-start gap-2">
               <AlertTriangle className="w-4 h-4 text-amber-500 mt-0.5 flex-shrink-0" />
-              <p className="text-amber-800 dark:text-amber-300 text-sm">{status.advisoryReason}</p>
+              <p className="text-amber-800 text-sm">{status.advisoryReason}</p>
             </div>
           </motion.div>
         )}
 
         {status.sampleDate && (
           <motion.p
-            className="mt-3 text-sand-500 dark:text-sand-400 text-xs"
+            className="mt-3 text-sand-500 text-xs"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3 }}
