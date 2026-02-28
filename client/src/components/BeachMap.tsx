@@ -153,7 +153,7 @@ export function BeachMap({ selectedBeachId, onSelectBeach }: BeachMapProps) {
           color: #aaa;
         }
       `}</style>
-      <div className="aspect-[4/3] md:aspect-[16/9]">
+      <div className="aspect-[4/3] md:aspect-[16/9] max-h-[500px]">
         <MapContainer
           center={VANCOUVER_CENTER}
           zoom={12}
