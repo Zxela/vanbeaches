@@ -1,39 +1,18 @@
 import { getBeachById } from '@van-beaches/shared';
-import {
-  Check,
-  Droplets,
-  RefreshCw,
-  Sun,
-  Thermometer,
-  TrendingDown,
-  TrendingUp,
-  Wind,
-} from 'lucide-react';
-import { useCallback, useEffect, useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { ActivityRecommendations } from '../components/ActivityRecommendations';
-import { BeachScore } from '../components/BeachScore';
-import { BestTimeToVisit } from '../components/BestTimeToVisit';
+import { AboutTab } from '../components/AboutTab';
 import { FavoriteButton } from '../components/FavoriteButton';
-import { FullscreenWebcam } from '../components/FullscreenWebcam';
-import { NearbyPlaces } from '../components/NearbyPlaces';
-import { PlanYourVisit } from '../components/PlanYourVisit';
-import { SafetyInfo } from '../components/SafetyInfo';
+import { PhotosTab } from '../components/PhotosTab';
 import { ShareButton } from '../components/ShareButton';
-import { SunTimesWidget } from '../components/SunTimesWidget';
-import { TideCanvas } from '../components/TideCanvas';
-import { TideForecast } from '../components/TideForecast';
-import { WaterQuality } from '../components/WaterQuality';
-import { WeatherForecast } from '../components/WeatherForecast';
-import { WeatherWidget } from '../components/WeatherWidget';
-import { WebcamEmbed } from '../components/WebcamEmbed';
-import { WebcamPlaceholder } from '../components/WebcamPlaceholder';
-import { Card, CardContent, Icon } from '../components/ui';
+import { TabBar, type BeachDetailTab } from '../components/TabBar';
+import { TodayTab } from '../components/TodayTab';
 import { useRecentBeaches } from '../hooks/useRecentBeaches';
+import { formatSunTime, useSunTimes } from '../hooks/useSunTimes';
 import { useTides } from '../hooks/useTides';
 import { useWaterQuality } from '../hooks/useWaterQuality';
 import { useWeather } from '../hooks/useWeather';
-import { useWebcamPreference } from '../hooks/useWebcamPreference';
 
 // Fallback gradients when no image is available
 const fallbackGradients = [
@@ -43,62 +22,58 @@ const fallbackGradients = [
   'from-ocean-500 to-shore-400',
 ];
 
-const waterQualityColors: Record<string, string> = {
-  good: 'text-emerald-500',
-  advisory: 'text-amber-500',
-  closed: 'text-red-500',
-  unknown: 'text-sand-400',
-  'off-season': 'text-sky-400',
-};
+function getInitialTab(): BeachDetailTab {
+  const hash = window.location.hash.replace('#', '');
+  if (hash === 'about' || hash === 'photos' || hash === 'today') {
+    return hash as BeachDetailTab;
+  }
+  return 'today';
+}
 
-const waterQualityLabels: Record<string, string> = {
-  good: 'Good',
-  advisory: 'Advisory',
-  closed: 'Closed',
-  unknown: 'Unknown',
-  'off-season': 'Off-season',
-};
+function HeroQuickConditions({
+  temperature,
+  condition,
+  windSpeed,
+}: {
+  temperature: number | null;
+  condition: string | null;
+  windSpeed: number | null;
+}) {
+  const parts: string[] = [];
+  if (temperature !== null) parts.push(`${temperature}°`);
+  if (condition) parts.push(condition.replace('-', ' '));
+  if (windSpeed !== null) parts.push(`${windSpeed} km/h wind`);
+  if (parts.length === 0) return null;
+
+  return (
+    <p className="text-sm text-white/80 mt-1 capitalize">{parts.join(' · ')}</p>
+  );
+}
 
 export function BeachDetail() {
   const { slug } = useParams<{ slug: string }>();
   const beach = slug ? getBeachById(slug) : undefined;
-  const { tides, loading: tidesLoading, error: tidesError, refetch: refetchTides } = useTides(slug);
-  const {
-    weather,
-    loading: weatherLoading,
-    error: weatherError,
-    refetch: refetchWeather,
-  } = useWeather(slug);
-  const {
-    waterQuality,
-    loading: wqLoading,
-    error: wqError,
-    refetch: refetchWaterQuality,
-  } = useWaterQuality(slug);
+  const { tides } = useTides(slug);
+  const { weather } = useWeather(slug);
+  const { waterQuality } = useWaterQuality(slug);
   const { addRecent } = useRecentBeaches();
-  const { isHidden, hide, show } = useWebcamPreference();
 
-  const [isRefreshing, setIsRefreshing] = useState(false);
-  const [refreshSuccess, setRefreshSuccess] = useState(false);
+  const [activeTab, setActiveTab] = useState<BeachDetailTab>(getInitialTab);
 
-  const handleRefresh = useCallback(async () => {
-    setIsRefreshing(true);
-    setRefreshSuccess(false);
-    await Promise.all([refetchWeather(), refetchTides(), refetchWaterQuality()]);
-    setIsRefreshing(false);
-    setRefreshSuccess(true);
-    setTimeout(() => setRefreshSuccess(false), 1500);
-  }, [refetchWeather, refetchTides, refetchWaterQuality]);
-
-  // Webcam visibility logic
-  const webcamUrl = beach?.webcamUrl;
-  const hasWebcam = webcamUrl !== null && webcamUrl !== undefined && beach?.showWebcam === true;
-  const showWebcamEmbed = hasWebcam && !isHidden;
-  const showPlaceholder = hasWebcam && isHidden;
+  const sunTimes = useSunTimes(
+    beach?.location.latitude ?? 49.27,
+    beach?.location.longitude ?? -123.15,
+  );
+  const sunsetTime = formatSunTime(sunTimes.sunset);
 
   useEffect(() => {
     if (slug) addRecent(slug);
   }, [slug, addRecent]);
+
+  const handleTabChange = (tab: BeachDetailTab) => {
+    setActiveTab(tab);
+    window.location.hash = `#${tab}`;
+  };
 
   if (!beach)
     return (
@@ -111,12 +86,11 @@ export function BeachDetail() {
     );
 
   const gradientIdx = beach.name.length % fallbackGradients.length;
-  const nextTide = tides?.predictions?.[0];
 
   return (
     <div>
-      {/* Full-bleed hero image */}
-      <div className="relative w-full h-[40vh] min-h-[280px] max-h-[440px] overflow-hidden">
+      {/* Compact hero image (~30vh) */}
+      <div className="relative w-full h-[30vh] min-h-[200px] max-h-[320px] overflow-hidden">
         {beach.images ? (
           <img
             src={beach.images.hero}
@@ -126,7 +100,9 @@ export function BeachDetail() {
         ) : (
           <div className={`absolute inset-0 bg-gradient-to-br ${fallbackGradients[gradientIdx]}`} />
         )}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
+
+        {/* Lighter overlay: from-black/40 instead of from-black/70 */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/10 to-transparent" />
 
         {/* Photo credit */}
         {beach.images?.credit && (
@@ -137,231 +113,75 @@ export function BeachDetail() {
 
         {/* Floating buttons */}
         <div className="absolute top-4 right-4 z-10 flex items-center gap-2">
-          <button
-            type="button"
-            onClick={handleRefresh}
-            disabled={isRefreshing}
-            aria-label="Refresh beach data"
-            className="flex items-center gap-2 px-3 py-2 rounded-xl bg-black/30 backdrop-blur-md hover:bg-black/50 transition-colors text-white text-sm border border-white/20"
-          >
-            {refreshSuccess ? (
-              <Check className="w-4 h-4 text-green-400" />
-            ) : (
-              <RefreshCw className={`w-4 h-4 ${isRefreshing ? 'animate-spin' : ''}`} />
-            )}
-            <span className="hidden sm:inline">Refresh</span>
-          </button>
           <FavoriteButton beachId={beach.id} beachName={beach.name} size="lg" />
           <ShareButton beachName={beach.name} beachId={beach.id} />
         </div>
 
-        {/* Beach name + tagline at bottom */}
+        {/* Beach name + personality tagline at bottom */}
         <div className="absolute bottom-0 left-0 right-0">
-          <div className="container mx-auto max-w-7xl px-4 pb-14">
-            <h2 className="text-4xl md:text-5xl font-bold text-white">{beach.name}</h2>
-            {beach.tagline && <p className="text-lg text-white/80 mt-1">{beach.tagline}</p>}
+          <div className="container mx-auto max-w-3xl px-4 pb-4">
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-white leading-tight">
+              {beach.name}
+            </h2>
+            {beach.tagline && (
+              <p className="text-base text-white/90 mt-0.5 font-medium">{beach.tagline}</p>
+            )}
+            {/* Quick conditions strip */}
+            <HeroQuickConditions
+              temperature={weather?.current?.temperature ?? null}
+              condition={weather?.current?.condition ?? null}
+              windSpeed={weather?.current?.windSpeed ?? null}
+            />
           </div>
         </div>
       </div>
 
-      {/* At-a-glance summary bar - overlaps hero */}
-      <div className="container mx-auto max-w-7xl px-4 -mt-8 relative z-10">
-        <Card variant="elevated" padding="none" className="shadow-xl">
-          <CardContent className="px-6 py-4">
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
-              {/* Temperature */}
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-orange-50 dark:bg-orange-900/20 flex items-center justify-center">
-                  <Icon icon={Thermometer} size="md" className="text-orange-500" />
-                </div>
-                <div>
-                  <p className="text-xs text-sand-500 dark:text-sand-400">Temp</p>
-                  <p className="font-semibold text-sand-900 dark:text-sand-100">
-                    {weather?.current?.temperature != null
-                      ? `${weather.current.temperature.toFixed(0)}°C`
-                      : '--'}
-                  </p>
-                </div>
-              </div>
+      {/* Sticky TabBar */}
+      <TabBar activeTab={activeTab} onTabChange={handleTabChange} />
 
-              {/* Water Quality */}
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-900/20 flex items-center justify-center">
-                  <Icon icon={Droplets} size="md" className="text-emerald-500" />
-                </div>
-                <div>
-                  <p className="text-xs text-sand-500 dark:text-sand-400">Water</p>
-                  <p
-                    className={`font-semibold ${waterQualityColors[waterQuality?.level || 'unknown']}`}
-                  >
-                    {waterQualityLabels[waterQuality?.level || 'unknown']}
-                  </p>
-                </div>
-              </div>
-
-              {/* Next Tide (hidden for freshwater locations) */}
-              {beach.tideStationId && (
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-ocean-50 dark:bg-ocean-900/20 flex items-center justify-center">
-                    <Icon
-                      icon={nextTide?.type === 'high' ? TrendingUp : TrendingDown}
-                      size="md"
-                      className="text-ocean-500"
-                    />
-                  </div>
-                  <div>
-                    <p className="text-xs text-sand-500 dark:text-sand-400">Next Tide</p>
-                    <p className="font-semibold text-sand-900 dark:text-sand-100">
-                      {nextTide
-                        ? `${nextTide.type === 'high' ? 'High' : 'Low'} ${new Date(nextTide.time).toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' })}`
-                        : '--'}
-                    </p>
-                  </div>
-                </div>
-              )}
-
-              {/* Wind */}
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-sky-50 dark:bg-sky-900/20 flex items-center justify-center">
-                  <Icon icon={Wind} size="md" className="text-sky-500" />
-                </div>
-                <div>
-                  <p className="text-xs text-sand-500 dark:text-sand-400">Wind</p>
-                  <p className="font-semibold text-sand-900 dark:text-sand-100">
-                    {weather?.current?.windSpeed != null
-                      ? `${weather.current.windSpeed} km/h`
-                      : '--'}
-                  </p>
-                </div>
-              </div>
-
-              {/* UV Index */}
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-amber-50 dark:bg-amber-900/20 flex items-center justify-center">
-                  <Icon icon={Sun} size="md" className="text-amber-500" />
-                </div>
-                <div>
-                  <p className="text-xs text-sand-500 dark:text-sand-400">UV Index</p>
-                  <p className="font-semibold text-sand-900 dark:text-sand-100">
-                    {weather?.current?.uvIndex != null ? weather.current.uvIndex : '--'}
-                  </p>
-                </div>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
-
-      {/* Main content - narrative sections */}
-      <div className="container mx-auto max-w-7xl px-4 py-8 space-y-12">
-        {/* Section 1: Should you go today? */}
-        <section>
-          <h2 className="text-2xl font-bold text-sand-900 dark:text-sand-100 mb-6">
-            Should you go today?
-          </h2>
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            <BestTimeToVisit
-              weather={weather}
-              tides={tides}
-              latitude={beach.location.latitude}
-              longitude={beach.location.longitude}
-            />
-            <ActivityRecommendations weather={weather} activities={beach.activities} />
-            <BeachScore weather={weather} tides={tides} waterQuality={waterQuality} />
-          </div>
-        </section>
-
-        {/* Section 2: Tides (hidden for freshwater locations) */}
-        {beach.tideStationId && (
-          <section>
-            <h2 className="text-2xl font-bold text-sand-900 dark:text-sand-100 mb-6">Tides</h2>
-            <div className="space-y-6">
-              <TideCanvas predictions={tides?.predictions || []} loading={tidesLoading} />
-              <TideForecast
-                predictions={tides?.predictions || []}
-                loading={tidesLoading}
-                error={tidesError}
+      {/* Tab content with animated transitions */}
+      <div className="container mx-auto max-w-3xl px-4 pt-6">
+        <AnimatePresence mode="wait">
+          {activeTab === 'today' && (
+            <motion.div
+              key="today"
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: 20 }}
+              transition={{ duration: 0.2 }}
+            >
+              <TodayTab
+                beach={beach}
+                weather={weather}
+                tides={tides}
+                waterQuality={waterQuality}
+                sunsetTime={sunsetTime}
               />
-            </div>
-          </section>
-        )}
-
-        {/* Section 3: Live conditions */}
-        <section>
-          <h2 className="text-2xl font-bold text-sand-900 dark:text-sand-100 mb-6">
-            Live conditions
-          </h2>
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            <WeatherWidget weather={weather} loading={weatherLoading} error={weatherError} />
-            <SunTimesWidget
-              latitude={beach.location.latitude}
-              longitude={beach.location.longitude}
-            />
-            <WaterQuality status={waterQuality} loading={wqLoading} error={wqError} />
-          </div>
-        </section>
-
-        {/* Section 4: Webcam */}
-        {(showWebcamEmbed || showPlaceholder) && (
-          <section>
-            {showWebcamEmbed && webcamUrl && (
-              <div className="relative">
-                <WebcamEmbed url={webcamUrl} beachName={beach.name} onHide={hide} />
-                <FullscreenWebcam url={webcamUrl} beachName={beach.name} />
-              </div>
-            )}
-            {showPlaceholder && <WebcamPlaceholder onShow={show} />}
-          </section>
-        )}
-
-        {/* Section 5: Beach Safety */}
-        <section>
-          <h2 className="text-2xl font-bold text-sand-900 mb-6">Beach Safety</h2>
-          <SafetyInfo beach={beach} waterQuality={waterQuality} weather={weather} />
-        </section>
-
-        {/* Section 6: Plan your visit */}
-        <section>
-          <h2 className="text-2xl font-bold text-sand-900 dark:text-sand-100 mb-6">
-            Plan your visit
-          </h2>
-          {beach.highlights && (
-            <div className="mb-6 p-6 rounded-2xl border border-sand-200 bg-white shadow-sm">
-              <h3 className="text-xl font-semibold text-sand-900 mb-3">About {beach.name}</h3>
-              {beach.description && (
-                <p className="text-sand-700 leading-relaxed mb-4">{beach.description}</p>
-              )}
-              <div className="flex flex-wrap gap-2 mb-3">
-                {beach.highlights.bestFor.map((activity) => (
-                  <span
-                    key={activity}
-                    className="inline-flex items-center px-3 py-1 rounded-full text-sm bg-ocean-50 text-ocean-700 border border-ocean-200"
-                  >
-                    {activity}
-                  </span>
-                ))}
-              </div>
-              <p className="text-sm text-sand-600">
-                <span className="font-medium">Vibe:</span> {beach.highlights.vibe}
-              </p>
-              <p className="text-sm text-sand-600">
-                <span className="font-medium">Crowd:</span> {beach.highlights.crowdLevel}
-              </p>
-            </div>
+            </motion.div>
           )}
-          <PlanYourVisit beach={beach} />
-        </section>
-
-        {/* Section 7: Weather forecast */}
-        <section>
-          <h2 className="text-2xl font-bold text-sand-900 dark:text-sand-100 mb-6">
-            Weather forecast
-          </h2>
-          <WeatherForecast forecast={weather} loading={weatherLoading} />
-        </section>
-
-        {/* Section 8: Nearby places */}
-        <NearbyPlaces beachName={beach.name} />
+          {activeTab === 'about' && (
+            <motion.div
+              key="about"
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
+              transition={{ duration: 0.2 }}
+            >
+              <AboutTab beach={beach} waterQuality={waterQuality} weather={weather} />
+            </motion.div>
+          )}
+          {activeTab === 'photos' && (
+            <motion.div
+              key="photos"
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
+              transition={{ duration: 0.2 }}
+            >
+              <PhotosTab beach={beach} />
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </div>
   );

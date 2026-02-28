@@ -17,86 +17,88 @@ vi.mock('@van-beaches/shared', () => ({
 
 // Mock all hooks
 vi.mock('../hooks/useTides', () => ({
-  useTides: () => ({ tides: null, loading: false, error: null }),
+  useTides: () => ({ tides: null, loading: false, error: null, refetch: vi.fn() }),
 }));
 
 vi.mock('../hooks/useWeather', () => ({
-  useWeather: () => ({ weather: null, loading: false, error: null }),
+  useWeather: () => ({ weather: null, loading: false, error: null, refetch: vi.fn() }),
 }));
 
 vi.mock('../hooks/useWaterQuality', () => ({
-  useWaterQuality: () => ({ waterQuality: null, loading: false, error: null }),
+  useWaterQuality: () => ({ waterQuality: null, loading: false, error: null, refetch: vi.fn() }),
 }));
 
 vi.mock('../hooks/useRecentBeaches', () => ({
   useRecentBeaches: () => ({ addRecent: vi.fn() }),
 }));
 
-// Mock useWebcamPreference with controllable state
-const mockHide = vi.fn();
-const mockShow = vi.fn();
-let mockIsHidden = false;
 vi.mock('../hooks/useWebcamPreference', () => ({
   useWebcamPreference: () => ({
-    isHidden: mockIsHidden,
-    hide: mockHide,
-    show: mockShow,
+    isHidden: false,
+    hide: vi.fn(),
+    show: vi.fn(),
     toggle: vi.fn(),
   }),
 }));
 
-// Mock components to simplify testing
-vi.mock('../components/WebcamEmbed', () => ({
-  WebcamEmbed: ({
-    url,
-    beachName,
-    onHide,
-  }: { url: string; beachName: string; onHide: () => void }) => (
-    <div data-testid="webcam-embed" data-url={url} data-beach-name={beachName}>
-      WebcamEmbed
-      <button type="button" onClick={onHide} data-testid="webcam-hide-button">
-        Hide
+// Mock framer-motion to avoid animation issues in tests
+vi.mock('framer-motion', () => ({
+  AnimatePresence: ({ children }: { children: React.ReactNode }) => <>{children}</>,
+  motion: {
+    div: ({ children, ...props }: React.HTMLAttributes<HTMLDivElement> & { children?: React.ReactNode }) => (
+      <div {...props}>{children}</div>
+    ),
+  },
+}));
+
+// Mock tab components
+vi.mock('../components/TodayTab', () => ({
+  TodayTab: () => <div data-testid="today-tab-content">TodayTab Content</div>,
+}));
+
+vi.mock('../components/AboutTab', () => ({
+  AboutTab: () => <div data-testid="about-tab-content">AboutTab Content</div>,
+}));
+
+vi.mock('../components/PhotosTab', () => ({
+  PhotosTab: () => <div data-testid="photos-tab-content">PhotosTab Content</div>,
+}));
+
+vi.mock('../components/TabBar', () => ({
+  TabBar: ({
+    activeTab,
+    onTabChange,
+  }: {
+    activeTab: string;
+    onTabChange: (tab: string) => void;
+  }) => (
+    <nav data-testid="tab-bar">
+      <button
+        type="button"
+        data-testid="tab-today"
+        data-active={activeTab === 'today'}
+        onClick={() => onTabChange('today')}
+      >
+        Today
       </button>
-    </div>
+      <button
+        type="button"
+        data-testid="tab-about"
+        data-active={activeTab === 'about'}
+        onClick={() => onTabChange('about')}
+      >
+        About
+      </button>
+      <button
+        type="button"
+        data-testid="tab-photos"
+        data-active={activeTab === 'photos'}
+        onClick={() => onTabChange('photos')}
+      >
+        Photos
+      </button>
+    </nav>
   ),
-}));
-
-vi.mock('../components/WebcamPlaceholder', () => ({
-  WebcamPlaceholder: ({ onShow }: { onShow: () => void }) => (
-    <button type="button" data-testid="webcam-placeholder" onClick={onShow}>
-      Show webcam
-    </button>
-  ),
-}));
-
-vi.mock('../components/FullscreenWebcam', () => ({
-  FullscreenWebcam: ({ url, beachName }: { url: string; beachName: string }) => (
-    <div data-testid="fullscreen-webcam" data-url={url} data-beach-name={beachName}>
-      FullscreenWebcam
-    </div>
-  ),
-}));
-
-// Mock BeachScore and SafetyInfo for integration tests
-vi.mock('../components/BeachScore', () => ({
-  BeachScore: () => <div data-testid="beach-score" />,
-}));
-
-vi.mock('../components/SafetyInfo', () => ({
-  SafetyInfo: () => <div data-testid="safety-info" />,
-}));
-
-// Mock other components that aren't relevant for webcam tests
-vi.mock('../components/ActivityRecommendations', () => ({
-  ActivityRecommendations: () => <div data-testid="activity-recommendations" />,
-}));
-
-vi.mock('../components/BeachAmenities', () => ({
-  BeachAmenities: () => <div data-testid="beach-amenities" />,
-}));
-
-vi.mock('../components/BestTimeToVisit', () => ({
-  BestTimeToVisit: () => <div data-testid="best-time-to-visit" />,
 }));
 
 vi.mock('../components/FavoriteButton', () => ({
@@ -107,38 +109,6 @@ vi.mock('../components/ShareButton', () => ({
   ShareButton: () => <button type="button" data-testid="share-button" />,
 }));
 
-vi.mock('../components/SunTimesWidget', () => ({
-  SunTimesWidget: () => <div data-testid="sun-times-widget" />,
-}));
-
-vi.mock('../components/TideCanvas', () => ({
-  TideCanvas: () => <div data-testid="tide-canvas" />,
-}));
-
-vi.mock('../components/TideForecast', () => ({
-  TideForecast: () => <div data-testid="tide-forecast" />,
-}));
-
-vi.mock('../components/WaterQuality', () => ({
-  WaterQuality: () => <div data-testid="water-quality" />,
-}));
-
-vi.mock('../components/WeatherForecast', () => ({
-  WeatherForecast: () => <div data-testid="weather-forecast" />,
-}));
-
-vi.mock('../components/WeatherWidget', () => ({
-  WeatherWidget: () => <div data-testid="weather-widget" />,
-}));
-
-vi.mock('../components/PlanYourVisit', () => ({
-  PlanYourVisit: () => <div data-testid="plan-your-visit" />,
-}));
-
-vi.mock('../components/NearbyPlaces', () => ({
-  NearbyPlaces: () => <div data-testid="nearby-places" />,
-}));
-
 describe('BeachDetail', () => {
   const baseBeach = {
     id: 'test-beach',
@@ -146,6 +116,7 @@ describe('BeachDetail', () => {
     slug: 'test-beach',
     location: { latitude: 49.27, longitude: -123.15 },
     tideStationId: 'station-123',
+    tagline: 'The Sporty Heart',
     webcamUrl: null,
     showWebcam: undefined,
     description: 'A beautiful test beach',
@@ -153,143 +124,9 @@ describe('BeachDetail', () => {
 
   beforeEach(() => {
     vi.clearAllMocks();
-    mockIsHidden = false;
     mockUseParams.mockReturnValue({ slug: 'test-beach' });
-  });
-
-  describe('webcam visibility logic', () => {
-    it('renders nothing when beach has no webcamUrl', () => {
-      mockGetBeachById.mockReturnValue({
-        ...baseBeach,
-        webcamUrl: null,
-        showWebcam: undefined,
-      });
-
-      render(<BeachDetail />);
-
-      expect(screen.queryByTestId('webcam-embed')).not.toBeInTheDocument();
-      expect(screen.queryByTestId('webcam-placeholder')).not.toBeInTheDocument();
-      expect(screen.queryByTestId('fullscreen-webcam')).not.toBeInTheDocument();
-    });
-
-    it('renders nothing when beach has showWebcam: false', () => {
-      mockGetBeachById.mockReturnValue({
-        ...baseBeach,
-        webcamUrl: 'https://example.com/webcam.jpg',
-        showWebcam: false,
-      });
-
-      render(<BeachDetail />);
-
-      expect(screen.queryByTestId('webcam-embed')).not.toBeInTheDocument();
-      expect(screen.queryByTestId('webcam-placeholder')).not.toBeInTheDocument();
-      expect(screen.queryByTestId('fullscreen-webcam')).not.toBeInTheDocument();
-    });
-
-    it('renders nothing when beach has showWebcam: undefined', () => {
-      mockGetBeachById.mockReturnValue({
-        ...baseBeach,
-        webcamUrl: 'https://example.com/webcam.jpg',
-        showWebcam: undefined,
-      });
-
-      render(<BeachDetail />);
-
-      expect(screen.queryByTestId('webcam-embed')).not.toBeInTheDocument();
-      expect(screen.queryByTestId('webcam-placeholder')).not.toBeInTheDocument();
-      expect(screen.queryByTestId('fullscreen-webcam')).not.toBeInTheDocument();
-    });
-
-    it('renders WebcamEmbed when webcam available and user has not hidden', () => {
-      mockGetBeachById.mockReturnValue({
-        ...baseBeach,
-        webcamUrl: 'https://example.com/webcam.jpg',
-        showWebcam: true,
-      });
-      mockIsHidden = false;
-
-      render(<BeachDetail />);
-
-      expect(screen.getByTestId('webcam-embed')).toBeInTheDocument();
-      expect(screen.getByTestId('webcam-embed')).toHaveAttribute(
-        'data-url',
-        'https://example.com/webcam.jpg',
-      );
-      expect(screen.getByTestId('fullscreen-webcam')).toBeInTheDocument();
-      expect(screen.queryByTestId('webcam-placeholder')).not.toBeInTheDocument();
-    });
-
-    it('renders WebcamPlaceholder when user has hidden webcams', () => {
-      mockGetBeachById.mockReturnValue({
-        ...baseBeach,
-        webcamUrl: 'https://example.com/webcam.jpg',
-        showWebcam: true,
-      });
-      mockIsHidden = true;
-
-      render(<BeachDetail />);
-
-      expect(screen.getByTestId('webcam-placeholder')).toBeInTheDocument();
-      expect(screen.queryByTestId('webcam-embed')).not.toBeInTheDocument();
-      expect(screen.queryByTestId('fullscreen-webcam')).not.toBeInTheDocument();
-    });
-
-    it('FullscreenWebcam only renders alongside WebcamEmbed', () => {
-      // When webcam embed is shown
-      mockGetBeachById.mockReturnValue({
-        ...baseBeach,
-        webcamUrl: 'https://example.com/webcam.jpg',
-        showWebcam: true,
-      });
-      mockIsHidden = false;
-
-      const { rerender } = render(<BeachDetail />);
-
-      expect(screen.getByTestId('webcam-embed')).toBeInTheDocument();
-      expect(screen.getByTestId('fullscreen-webcam')).toBeInTheDocument();
-
-      // When placeholder is shown (user hidden)
-      mockIsHidden = true;
-      rerender(<BeachDetail />);
-
-      expect(screen.queryByTestId('webcam-embed')).not.toBeInTheDocument();
-      expect(screen.queryByTestId('fullscreen-webcam')).not.toBeInTheDocument();
-      expect(screen.getByTestId('webcam-placeholder')).toBeInTheDocument();
-    });
-  });
-
-  describe('hide/show callbacks', () => {
-    it('passes hide callback to WebcamEmbed', () => {
-      mockGetBeachById.mockReturnValue({
-        ...baseBeach,
-        webcamUrl: 'https://example.com/webcam.jpg',
-        showWebcam: true,
-      });
-      mockIsHidden = false;
-
-      render(<BeachDetail />);
-
-      const hideButton = screen.getByTestId('webcam-hide-button');
-      fireEvent.click(hideButton);
-
-      expect(mockHide).toHaveBeenCalledTimes(1);
-    });
-
-    it('passes show callback to WebcamPlaceholder', () => {
-      mockGetBeachById.mockReturnValue({
-        ...baseBeach,
-        webcamUrl: 'https://example.com/webcam.jpg',
-        showWebcam: true,
-      });
-      mockIsHidden = true;
-
-      render(<BeachDetail />);
-
-      const placeholder = screen.getByTestId('webcam-placeholder');
-      fireEvent.click(placeholder);
-
-      expect(mockShow).toHaveBeenCalledTimes(1);
-    });
+    // Reset hash to empty
+    window.location.hash = '';
   });
 
   describe('beach not found', () => {
@@ -299,109 +136,153 @@ describe('BeachDetail', () => {
       render(<BeachDetail />);
 
       expect(screen.getByText('Beach not found')).toBeInTheDocument();
-      expect(screen.queryByTestId('webcam-embed')).not.toBeInTheDocument();
-      expect(screen.queryByTestId('webcam-placeholder')).not.toBeInTheDocument();
     });
   });
 
-  describe('beach details rendering', () => {
+  // AC-001: Compact hero with beach name, personality tagline, quick conditions strip
+  describe('AC-001: compact hero', () => {
     it('renders beach name in hero', () => {
       mockGetBeachById.mockReturnValue(baseBeach);
 
       render(<BeachDetail />);
 
-      expect(screen.getByText('Test Beach')).toBeInTheDocument();
+      expect(screen.getByText(baseBeach.name)).toBeInTheDocument();
     });
 
-    it('renders all expected widgets', () => {
+    it('hero has compact (~30vh) height class', () => {
+      mockGetBeachById.mockReturnValue(baseBeach);
+
+      const { container } = render(<BeachDetail />);
+
+      // Hero should have h-[30vh] class (compact, not 40vh)
+      const heroEl = container.querySelector('[class*="h-[30vh]"]');
+      expect(heroEl).toBeInTheDocument();
+    });
+
+    it('renders personality tagline in hero', () => {
       mockGetBeachById.mockReturnValue(baseBeach);
 
       render(<BeachDetail />);
 
-      expect(screen.getByTestId('weather-widget')).toBeInTheDocument();
-      expect(screen.getByTestId('tide-canvas')).toBeInTheDocument();
-      expect(screen.getByTestId('tide-forecast')).toBeInTheDocument();
-      expect(screen.getByTestId('water-quality')).toBeInTheDocument();
-      expect(screen.getByTestId('plan-your-visit')).toBeInTheDocument();
+      expect(screen.getByText('The Sporty Heart')).toBeInTheDocument();
+    });
+
+    it('renders FavoriteButton and ShareButton in hero area', () => {
+      mockGetBeachById.mockReturnValue(baseBeach);
+
+      render(<BeachDetail />);
+
       expect(screen.getByTestId('favorite-button')).toBeInTheDocument();
       expect(screen.getByTestId('share-button')).toBeInTheDocument();
     });
+
+    // AC-005: Hero overlay uses from-black/40 (lighter than current from-black/70)
+    it('hero gradient overlay uses from-black/40 (lighter overlay)', () => {
+      mockGetBeachById.mockReturnValue(baseBeach);
+
+      const { container } = render(<BeachDetail />);
+
+      // The gradient overlay div should use from-black/40, not from-black/70
+      const overlayEl = container.querySelector('[class*="from-black/40"]');
+      expect(overlayEl).toBeInTheDocument();
+    });
   });
 
-  describe('new components integration (task 010)', () => {
-    it('renders BeachScore in Should you go today section', () => {
+  // AC-002: TabBar with Today/About/Photos; Today is default active
+  describe('AC-002: TabBar with Today default active', () => {
+    it('renders TabBar with Today, About, Photos tabs', () => {
       mockGetBeachById.mockReturnValue(baseBeach);
 
       render(<BeachDetail />);
 
-      expect(screen.getByTestId('beach-score')).toBeInTheDocument();
+      expect(screen.getByText('Today')).toBeInTheDocument();
+      expect(screen.getByText('About')).toBeInTheDocument();
+      expect(screen.getByText('Photos')).toBeInTheDocument();
     });
 
-    it('renders Beach Safety section with SafetyInfo component', () => {
+    it('Today tab is active by default', () => {
       mockGetBeachById.mockReturnValue(baseBeach);
 
       render(<BeachDetail />);
 
-      expect(screen.getByText('Beach Safety')).toBeInTheDocument();
-      expect(screen.getByTestId('safety-info')).toBeInTheDocument();
+      const todayTab = screen.getByTestId('tab-today');
+      expect(todayTab).toHaveAttribute('data-active', 'true');
     });
 
-    it('renders About section with beach name, description, and highlights', () => {
-      mockGetBeachById.mockReturnValue({
-        ...baseBeach,
-        description: 'A beautiful test beach with clear water',
-        highlights: {
-          bestFor: ['swimming', 'picnics'],
-          vibe: 'Relaxed',
-          crowdLevel: 'Low',
-        },
-      });
+    it('renders TodayTab content by default', () => {
+      mockGetBeachById.mockReturnValue(baseBeach);
 
       render(<BeachDetail />);
 
-      expect(screen.getByText('About Test Beach')).toBeInTheDocument();
-      expect(screen.getByText('A beautiful test beach with clear water')).toBeInTheDocument();
-      expect(screen.getByText('swimming')).toBeInTheDocument();
-      expect(screen.getByText('picnics')).toBeInTheDocument();
-      expect(screen.getByText(/Relaxed/)).toBeInTheDocument();
-      expect(screen.getByText(/Low/)).toBeInTheDocument();
+      expect(screen.getByTestId('today-tab-content')).toBeInTheDocument();
     });
+  });
 
-    it('does not render About section when highlights are absent', () => {
-      mockGetBeachById.mockReturnValue({
-        ...baseBeach,
-        highlights: undefined,
-      });
+  // AC-003: Clicking About tab renders AboutTab and updates URL hash to #about
+  describe('AC-003: clicking About tab switches to AboutTab and updates hash', () => {
+    it('clicking About tab renders AboutTab content', () => {
+      mockGetBeachById.mockReturnValue(baseBeach);
 
       render(<BeachDetail />);
 
-      expect(screen.queryByText('About Test Beach')).not.toBeInTheDocument();
+      fireEvent.click(screen.getByTestId('tab-about'));
+
+      expect(screen.getByTestId('about-tab-content')).toBeInTheDocument();
     });
 
-    it('renders photo credit when images.credit is present', () => {
-      mockGetBeachById.mockReturnValue({
-        ...baseBeach,
-        images: {
-          hero: 'https://example.com/hero.jpg',
-          thumb: 'https://example.com/thumb.jpg',
-          credit: { name: 'John Doe', username: 'johndoe' },
-        },
-      });
+    it('clicking About tab updates URL hash to #about', () => {
+      mockGetBeachById.mockReturnValue(baseBeach);
 
       render(<BeachDetail />);
 
-      expect(screen.getByText('Photo by John Doe')).toBeInTheDocument();
+      fireEvent.click(screen.getByTestId('tab-about'));
+
+      expect(window.location.hash).toBe('#about');
     });
 
-    it('does not render photo credit when images is absent', () => {
-      mockGetBeachById.mockReturnValue({
-        ...baseBeach,
-        images: undefined,
-      });
+    it('clicking Today tab updates URL hash to #today', () => {
+      mockGetBeachById.mockReturnValue(baseBeach);
 
       render(<BeachDetail />);
 
-      expect(screen.queryByText(/Photo by/)).not.toBeInTheDocument();
+      // First go to about
+      fireEvent.click(screen.getByTestId('tab-about'));
+      // Then back to today
+      fireEvent.click(screen.getByTestId('tab-today'));
+
+      expect(window.location.hash).toBe('#today');
+    });
+  });
+
+  // AC-004: When URL has #photos hash on load, Photos tab is initially active
+  describe('AC-004: URL hash determines initial active tab', () => {
+    it('When URL has #photos hash on load, Photos tab is initially active', () => {
+      window.location.hash = '#photos';
+      mockGetBeachById.mockReturnValue(baseBeach);
+
+      render(<BeachDetail />);
+
+      const photosTab = screen.getByTestId('tab-photos');
+      expect(photosTab).toHaveAttribute('data-active', 'true');
+    });
+
+    it('When URL has #about hash on load, About tab is initially active', () => {
+      window.location.hash = '#about';
+      mockGetBeachById.mockReturnValue(baseBeach);
+
+      render(<BeachDetail />);
+
+      const aboutTab = screen.getByTestId('tab-about');
+      expect(aboutTab).toHaveAttribute('data-active', 'true');
+    });
+
+    it('When URL has #photos hash on load, PhotosTab content is visible', () => {
+      window.location.hash = '#photos';
+      mockGetBeachById.mockReturnValue(baseBeach);
+
+      render(<BeachDetail />);
+
+      expect(screen.getByTestId('photos-tab-content')).toBeInTheDocument();
     });
   });
 });
