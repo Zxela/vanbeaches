@@ -199,24 +199,26 @@ export function BeachDetail() {
                 </div>
               </div>
 
-              {/* Next Tide */}
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-ocean-50 dark:bg-ocean-900/20 flex items-center justify-center">
-                  <Icon
-                    icon={nextTide?.type === 'high' ? TrendingUp : TrendingDown}
-                    size="md"
-                    className="text-ocean-500"
-                  />
+              {/* Next Tide (hidden for freshwater locations) */}
+              {beach.tideStationId && (
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-ocean-50 dark:bg-ocean-900/20 flex items-center justify-center">
+                    <Icon
+                      icon={nextTide?.type === 'high' ? TrendingUp : TrendingDown}
+                      size="md"
+                      className="text-ocean-500"
+                    />
+                  </div>
+                  <div>
+                    <p className="text-xs text-sand-500 dark:text-sand-400">Next Tide</p>
+                    <p className="font-semibold text-sand-900 dark:text-sand-100">
+                      {nextTide
+                        ? `${nextTide.type === 'high' ? 'High' : 'Low'} ${new Date(nextTide.time).toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' })}`
+                        : '--'}
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <p className="text-xs text-sand-500 dark:text-sand-400">Next Tide</p>
-                  <p className="font-semibold text-sand-900 dark:text-sand-100">
-                    {nextTide
-                      ? `${nextTide.type === 'high' ? 'High' : 'Low'} ${new Date(nextTide.time).toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' })}`
-                      : '--'}
-                  </p>
-                </div>
-              </div>
+              )}
 
               {/* Wind */}
               <div className="flex items-center gap-3">
@@ -269,18 +271,20 @@ export function BeachDetail() {
           </div>
         </section>
 
-        {/* Section 2: Tides */}
-        <section>
-          <h2 className="text-2xl font-bold text-sand-900 dark:text-sand-100 mb-6">Tides</h2>
-          <div className="space-y-6">
-            <TideCanvas predictions={tides?.predictions || []} loading={tidesLoading} />
-            <TideForecast
-              predictions={tides?.predictions || []}
-              loading={tidesLoading}
-              error={tidesError}
-            />
-          </div>
-        </section>
+        {/* Section 2: Tides (hidden for freshwater locations) */}
+        {beach.tideStationId && (
+          <section>
+            <h2 className="text-2xl font-bold text-sand-900 dark:text-sand-100 mb-6">Tides</h2>
+            <div className="space-y-6">
+              <TideCanvas predictions={tides?.predictions || []} loading={tidesLoading} />
+              <TideForecast
+                predictions={tides?.predictions || []}
+                loading={tidesLoading}
+                error={tidesError}
+              />
+            </div>
+          </section>
+        )}
 
         {/* Section 3: Live conditions */}
         <section>
