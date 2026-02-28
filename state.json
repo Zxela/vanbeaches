@@ -15,45 +15,185 @@
   "tasks_file": "docs/tasks.json",
   "traceability": {
     "user_stories": {
-      "US-001": { "title": "Returning user quick check", "acceptance_criteria": ["AC-001","AC-002","AC-003"], "tasks": [] },
-      "US-002": { "title": "New user discovery", "acceptance_criteria": ["AC-004","AC-005","AC-006"], "tasks": [] },
-      "US-003": { "title": "Beach detail tabbed Today view", "acceptance_criteria": ["AC-007","AC-008","AC-009"], "tasks": [] },
-      "US-004": { "title": "Beach detail About tab", "acceptance_criteria": ["AC-010","AC-011"], "tasks": [] },
-      "US-005": { "title": "Community photos via Instagram", "acceptance_criteria": ["AC-012","AC-013","AC-014"], "tasks": [] },
-      "US-006": { "title": "Beach personality profiles", "acceptance_criteria": ["AC-015","AC-016"], "tasks": [] },
-      "US-007": { "title": "Simplified mobile navigation", "acceptance_criteria": ["AC-017","AC-018","AC-019"], "tasks": [] },
-      "US-008": { "title": "Eliminate Compare page", "acceptance_criteria": ["AC-020","AC-021","AC-022"], "tasks": [] }
+      "US-001": {
+        "title": "Returning user quick check",
+        "acceptance_criteria": ["AC-001", "AC-002", "AC-003"],
+        "tasks": []
+      },
+      "US-002": {
+        "title": "New user discovery",
+        "acceptance_criteria": ["AC-004", "AC-005", "AC-006"],
+        "tasks": []
+      },
+      "US-003": {
+        "title": "Beach detail tabbed Today view",
+        "acceptance_criteria": ["AC-007", "AC-008", "AC-009"],
+        "tasks": []
+      },
+      "US-004": {
+        "title": "Beach detail About tab",
+        "acceptance_criteria": ["AC-010", "AC-011"],
+        "tasks": []
+      },
+      "US-005": {
+        "title": "Community photos via Instagram",
+        "acceptance_criteria": ["AC-012", "AC-013", "AC-014"],
+        "tasks": []
+      },
+      "US-006": {
+        "title": "Beach personality profiles",
+        "acceptance_criteria": ["AC-015", "AC-016"],
+        "tasks": []
+      },
+      "US-007": {
+        "title": "Simplified mobile navigation",
+        "acceptance_criteria": ["AC-017", "AC-018", "AC-019"],
+        "tasks": []
+      },
+      "US-008": {
+        "title": "Eliminate Compare page",
+        "acceptance_criteria": ["AC-020", "AC-021", "AC-022"],
+        "tasks": []
+      }
     },
     "acceptance_criteria": {
-      "AC-001": { "description": "When returning user with favorites opens homepage, system displays favorited beaches with conditions above the fold", "story": "US-001", "pattern": "When" },
-      "AC-002": { "description": "When conditions data is loading, system shows skeleton placeholders", "story": "US-001", "pattern": "When" },
-      "AC-003": { "description": "If user has no favorites, then system displays editorial discovery experience", "story": "US-001", "pattern": "If-Then" },
-      "AC-004": { "description": "When new user opens homepage, system displays editorial hero with featured recommendation", "story": "US-002", "pattern": "When" },
-      "AC-005": { "description": "When user selects a vibe filter, system shows matching beaches", "story": "US-002", "pattern": "When" },
-      "AC-006": { "description": "System displays distinct personality for each beach", "story": "US-002", "pattern": "None" },
-      "AC-007": { "description": "When user navigates to beach detail, system displays compact hero with verdict above fold", "story": "US-003", "pattern": "When" },
-      "AC-008": { "description": "While on detail page, system organizes content into Today/About/Photos tabs", "story": "US-003", "pattern": "While" },
-      "AC-009": { "description": "When user switches tabs, system preserves scroll and animates", "story": "US-003", "pattern": "When" },
-      "AC-010": { "description": "When user selects About tab, system displays personality, amenities, directions, safety", "story": "US-004", "pattern": "When" },
-      "AC-011": { "description": "System displays amenities with icons grouped by relevance", "story": "US-004", "pattern": "None" },
-      "AC-012": { "description": "When user selects Photos tab, system displays Instagram posts", "story": "US-005", "pattern": "When" },
-      "AC-013": { "description": "If Instagram unavailable, system shows curated fallback", "story": "US-005", "pattern": "If-Then" },
-      "AC-014": { "description": "While photos loading, system shows skeleton placeholders", "story": "US-005", "pattern": "While" },
-      "AC-015": { "description": "System displays personality profile per beach", "story": "US-006", "pattern": "None" },
-      "AC-016": { "description": "When browsing Discover, system shows personality on cards", "story": "US-006", "pattern": "When" },
-      "AC-017": { "description": "While on mobile, system displays 2-item bottom nav", "story": "US-007", "pattern": "While" },
-      "AC-018": { "description": "When user taps Home, system navigates to smart landing", "story": "US-007", "pattern": "When" },
-      "AC-019": { "description": "When user taps Explore, system shows map/list", "story": "US-007", "pattern": "When" },
-      "AC-020": { "description": "When /compare accessed, system redirects to /discover", "story": "US-008", "pattern": "When" },
-      "AC-021": { "description": "System provides intent-based filtering on Discover", "story": "US-008", "pattern": "None" },
-      "AC-022": { "description": "System removes Compare from navigation", "story": "US-008", "pattern": "None" }
+      "AC-001": {
+        "description": "When returning user with favorites opens homepage, system displays favorited beaches with conditions above the fold",
+        "story": "US-001",
+        "pattern": "When"
+      },
+      "AC-002": {
+        "description": "When conditions data is loading, system shows skeleton placeholders",
+        "story": "US-001",
+        "pattern": "When"
+      },
+      "AC-003": {
+        "description": "If user has no favorites, then system displays editorial discovery experience",
+        "story": "US-001",
+        "pattern": "If-Then"
+      },
+      "AC-004": {
+        "description": "When new user opens homepage, system displays editorial hero with featured recommendation",
+        "story": "US-002",
+        "pattern": "When"
+      },
+      "AC-005": {
+        "description": "When user selects a vibe filter, system shows matching beaches",
+        "story": "US-002",
+        "pattern": "When"
+      },
+      "AC-006": {
+        "description": "System displays distinct personality for each beach",
+        "story": "US-002",
+        "pattern": "None"
+      },
+      "AC-007": {
+        "description": "When user navigates to beach detail, system displays compact hero with verdict above fold",
+        "story": "US-003",
+        "pattern": "When"
+      },
+      "AC-008": {
+        "description": "While on detail page, system organizes content into Today/About/Photos tabs",
+        "story": "US-003",
+        "pattern": "While"
+      },
+      "AC-009": {
+        "description": "When user switches tabs, system preserves scroll and animates",
+        "story": "US-003",
+        "pattern": "When"
+      },
+      "AC-010": {
+        "description": "When user selects About tab, system displays personality, amenities, directions, safety",
+        "story": "US-004",
+        "pattern": "When"
+      },
+      "AC-011": {
+        "description": "System displays amenities with icons grouped by relevance",
+        "story": "US-004",
+        "pattern": "None"
+      },
+      "AC-012": {
+        "description": "When user selects Photos tab, system displays Instagram posts",
+        "story": "US-005",
+        "pattern": "When"
+      },
+      "AC-013": {
+        "description": "If Instagram unavailable, system shows curated fallback",
+        "story": "US-005",
+        "pattern": "If-Then"
+      },
+      "AC-014": {
+        "description": "While photos loading, system shows skeleton placeholders",
+        "story": "US-005",
+        "pattern": "While"
+      },
+      "AC-015": {
+        "description": "System displays personality profile per beach",
+        "story": "US-006",
+        "pattern": "None"
+      },
+      "AC-016": {
+        "description": "When browsing Discover, system shows personality on cards",
+        "story": "US-006",
+        "pattern": "When"
+      },
+      "AC-017": {
+        "description": "While on mobile, system displays 2-item bottom nav",
+        "story": "US-007",
+        "pattern": "While"
+      },
+      "AC-018": {
+        "description": "When user taps Home, system navigates to smart landing",
+        "story": "US-007",
+        "pattern": "When"
+      },
+      "AC-019": {
+        "description": "When user taps Explore, system shows map/list",
+        "story": "US-007",
+        "pattern": "When"
+      },
+      "AC-020": {
+        "description": "When /compare accessed, system redirects to /discover",
+        "story": "US-008",
+        "pattern": "When"
+      },
+      "AC-021": {
+        "description": "System provides intent-based filtering on Discover",
+        "story": "US-008",
+        "pattern": "None"
+      },
+      "AC-022": {
+        "description": "System removes Compare from navigation",
+        "story": "US-008",
+        "pattern": "None"
+      }
     },
     "adr_decisions": {
-      "ADR-001": { "title": "Smart Landing pattern", "rationale": "Serves repeat visitors without penalizing new visitors", "tasks_affected": [] },
-      "ADR-002": { "title": "Tabbed detail page", "rationale": "Native mobile pattern, eliminates long scroll", "tasks_affected": [] },
-      "ADR-003": { "title": "Eliminate Compare page", "rationale": "Simplifies navigation, enables 2-item mobile nav", "tasks_affected": [] },
-      "ADR-004": { "title": "Bold visual redesign", "rationale": "Current design is corporate SaaS; needs outdoor/editorial identity", "tasks_affected": [] },
-      "ADR-005": { "title": "Instagram oEmbed for community photos", "rationale": "Zero backend, authentic content, curated fallback", "tasks_affected": [] }
+      "ADR-001": {
+        "title": "Smart Landing pattern",
+        "rationale": "Serves repeat visitors without penalizing new visitors",
+        "tasks_affected": []
+      },
+      "ADR-002": {
+        "title": "Tabbed detail page",
+        "rationale": "Native mobile pattern, eliminates long scroll",
+        "tasks_affected": []
+      },
+      "ADR-003": {
+        "title": "Eliminate Compare page",
+        "rationale": "Simplifies navigation, enables 2-item mobile nav",
+        "tasks_affected": []
+      },
+      "ADR-004": {
+        "title": "Bold visual redesign",
+        "rationale": "Current design is corporate SaaS; needs outdoor/editorial identity",
+        "tasks_affected": []
+      },
+      "ADR-005": {
+        "title": "Instagram oEmbed for community photos",
+        "rationale": "Zero backend, authentic content, curated fallback",
+        "tasks_affected": []
+      }
     },
     "non_goals": [
       "NG-001: No backend/API changes",
