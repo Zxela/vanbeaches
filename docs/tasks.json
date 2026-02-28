@@ -40,7 +40,9 @@
       "traces_to": {
         "user_stories": [],
         "acceptance_criteria": [],
-        "adr_decisions": ["ADR-004"]
+        "adr_decisions": [
+          "ADR-004"
+        ]
       },
       "technical_notes": "See TECHNICAL_DESIGN.md 'Design Tokens' section for exact color hex values. Keep @fontsource/inter for now (remove in a later cleanup) since some components may still reference Inter. Use variable font imports for performance. Keep existing animation keyframes and shadows. The sand palette values must change from cool grays to warm cream tones per the spec. Remove darkMode: 'class' from tailwind config since we are light-only now (per ThemeContext change).",
       "context_refs": {
@@ -48,8 +50,15 @@
           "TECHNICAL_DESIGN.md:## Design Tokens (Tailwind Config Changes)",
           "WIREFRAMES.md:## 9. Visual Design Direction"
         ],
-        "pattern_files": ["client/tailwind.config.js", "client/src/index.css"],
-        "grep_patterns": ["fontFamily", "colors:", "borderRadius"],
+        "pattern_files": [
+          "client/tailwind.config.js",
+          "client/src/index.css"
+        ],
+        "grep_patterns": [
+          "fontFamily",
+          "colors:",
+          "borderRadius"
+        ],
         "constraints_section": "TECHNICAL_DESIGN.md:## Non-Scope Declaration"
       },
       "model": "haiku"
@@ -83,18 +92,28 @@
         }
       ],
       "test_file": "client/src/data/beach-personalities.test.ts",
-      "status": "pending",
+      "status": "completed",
       "depends_on": [],
       "traces_to": {
-        "user_stories": ["US-006"],
-        "acceptance_criteria": ["AC-015"],
+        "user_stories": [
+          "US-006"
+        ],
+        "acceptance_criteria": [
+          "AC-015"
+        ],
         "adr_decisions": []
       },
       "technical_notes": "Slugs must match the beach IDs used in the shared BEACHES array. Use descriptive archetypes that capture each beach's unique personality. Include 2-3 differentiators per beach. Each beach should have 2-4 vibes assigned. instagramPostUrls is an array of curated Instagram post URLs for the oEmbed fallback (start with 4-6 per beach, can use placeholder URLs). The getPersonality helper enables easy lookup from components.",
       "context_refs": {
-        "interface_locations": ["TECHNICAL_DESIGN.md:## Data Models:Beach Personality Profile"],
+        "interface_locations": [
+          "TECHNICAL_DESIGN.md:## Data Models:Beach Personality Profile"
+        ],
         "pattern_files": [],
-        "grep_patterns": ["BEACHES", "slug.*beach", "id:.*beach"],
+        "grep_patterns": [
+          "BEACHES",
+          "slug.*beach",
+          "id:.*beach"
+        ],
         "constraints_section": "TECHNICAL_DESIGN.md:## Non-Scope Declaration"
       },
       "model": "sonnet"
@@ -136,8 +155,12 @@
       "status": "pending",
       "depends_on": [],
       "traces_to": {
-        "user_stories": ["US-003"],
-        "acceptance_criteria": ["AC-007"],
+        "user_stories": [
+          "US-003"
+        ],
+        "acceptance_criteria": [
+          "AC-007"
+        ],
         "adr_decisions": []
       },
       "technical_notes": "This is pure logic with no React dependency. Use existing WeatherForecast, TideData, and Beach types from @van-beaches/shared. The function should synthesize temperature, wind, precipitation, tide timing, sunset time, UV index, and water quality into a cohesive narrative. Look at the existing BeachScore.computeBeachScore for scoring pattern inspiration, but produce narrative text instead of a numeric score. The summary should read like editorial writing, not data labels.",
@@ -147,8 +170,15 @@
           "shared/src/types/weather.ts",
           "shared/src/types/tide.ts"
         ],
-        "pattern_files": ["client/src/components/BeachScore.tsx"],
-        "grep_patterns": ["WeatherForecast", "TideData", "TidePrediction", "computeBeachScore"],
+        "pattern_files": [
+          "client/src/components/BeachScore.tsx"
+        ],
+        "grep_patterns": [
+          "WeatherForecast",
+          "TideData",
+          "TidePrediction",
+          "computeBeachScore"
+        ],
         "constraints_section": "TECHNICAL_DESIGN.md:## Non-Scope Declaration"
       },
       "model": "sonnet"
@@ -183,11 +213,20 @@
       ],
       "test_file": "client/src/components/TabBar.test.tsx",
       "status": "pending",
-      "depends_on": ["001"],
+      "depends_on": [
+        "001"
+      ],
       "traces_to": {
-        "user_stories": ["US-003"],
-        "acceptance_criteria": ["AC-008", "AC-009"],
-        "adr_decisions": ["ADR-002"]
+        "user_stories": [
+          "US-003"
+        ],
+        "acceptance_criteria": [
+          "AC-008",
+          "AC-009"
+        ],
+        "adr_decisions": [
+          "ADR-002"
+        ]
       },
       "technical_notes": "Use Framer Motion for the animated underline indicator. The tab bar should be sticky (position: sticky) below the hero. BeachDetailTab type is 'today' | 'about' | 'photos'. Use the new coral accent color for active state. Keep it generic enough to be reusable (accepts tabs config and activeTab as props).",
       "context_refs": {
@@ -196,7 +235,10 @@
           "WIREFRAMES.md:## 3. Beach Detail Page -- Today Tab"
         ],
         "pattern_files": [],
-        "grep_patterns": ["BeachDetailTab", "framer-motion"],
+        "grep_patterns": [
+          "BeachDetailTab",
+          "framer-motion"
+        ],
         "constraints_section": "TECHNICAL_DESIGN.md:## Non-Scope Declaration"
       },
       "model": "sonnet"
@@ -231,10 +273,16 @@
       ],
       "test_file": "client/src/components/BeachVerdict.test.tsx",
       "status": "pending",
-      "depends_on": ["003"],
+      "depends_on": [
+        "003"
+      ],
       "traces_to": {
-        "user_stories": ["US-003"],
-        "acceptance_criteria": ["AC-007"],
+        "user_stories": [
+          "US-003"
+        ],
+        "acceptance_criteria": [
+          "AC-007"
+        ],
         "adr_decisions": []
       },
       "technical_notes": "This component calls computeVerdict internally with the weather, tides, sunTimes, and beach props. Style it as a prominent editorial card that stands out on the page. Use Fraunces (font-display) for the heading. The summary should feel like editorial prose, not a data readout. See WIREFRAMES.md section 3 for the visual layout.",
@@ -243,8 +291,13 @@
           "WIREFRAMES.md:## 3. Beach Detail Page -- Today Tab:TODAY'S VERDICT",
           "client/src/utils/verdict.ts"
         ],
-        "pattern_files": ["client/src/components/BeachScore.tsx"],
-        "grep_patterns": ["computeVerdict", "BeachVerdict"],
+        "pattern_files": [
+          "client/src/components/BeachScore.tsx"
+        ],
+        "grep_patterns": [
+          "computeVerdict",
+          "BeachVerdict"
+        ],
         "constraints_section": "TECHNICAL_DESIGN.md:## Non-Scope Declaration"
       },
       "model": "sonnet"
@@ -279,11 +332,21 @@
       ],
       "test_file": "client/src/components/InstagramEmbed.test.tsx",
       "status": "pending",
-      "depends_on": ["001"],
+      "depends_on": [
+        "001"
+      ],
       "traces_to": {
-        "user_stories": ["US-005"],
-        "acceptance_criteria": ["AC-012", "AC-013", "AC-014"],
-        "adr_decisions": ["ADR-005"]
+        "user_stories": [
+          "US-005"
+        ],
+        "acceptance_criteria": [
+          "AC-012",
+          "AC-013",
+          "AC-014"
+        ],
+        "adr_decisions": [
+          "ADR-005"
+        ]
       },
       "technical_notes": "For v1, use curated Instagram post URLs stored in beach-personalities.ts. The oEmbed endpoint is https://graph.facebook.com/v18.0/instagram_oembed?url=... but may require a token. Start with a simpler approach: render links to Instagram posts as styled cards with a 'View on Instagram' CTA, and show curated fallback images in a masonry-style grid. Use IntersectionObserver for lazy loading. CSP considerations: may need to allow instagram.com in meta tags.",
       "context_refs": {
@@ -292,7 +355,11 @@
           "WIREFRAMES.md:## 5. Beach Detail Page -- Photos Tab"
         ],
         "pattern_files": [],
-        "grep_patterns": ["instagramHashtag", "instagramPostUrls", "oEmbed"],
+        "grep_patterns": [
+          "instagramHashtag",
+          "instagramPostUrls",
+          "oEmbed"
+        ],
         "constraints_section": "TECHNICAL_DESIGN.md:## Security Considerations"
       },
       "model": "sonnet"
@@ -312,7 +379,7 @@
         {
           "id": "007-AC2",
           "criterion": "TodayTab renders a compact conditions grid with temperature, wind, UV, water quality",
-          "test_assertion": "expect(screen.getByText(/°C/)).toBeInTheDocument()"
+          "test_assertion": "expect(screen.getByText(/\u00b0C/)).toBeInTheDocument()"
         },
         {
           "id": "007-AC3",
@@ -327,11 +394,20 @@
       ],
       "test_file": "client/src/components/TodayTab.test.tsx",
       "status": "pending",
-      "depends_on": ["005"],
+      "depends_on": [
+        "005"
+      ],
       "traces_to": {
-        "user_stories": ["US-003"],
-        "acceptance_criteria": ["AC-007", "AC-008"],
-        "adr_decisions": ["ADR-002"]
+        "user_stories": [
+          "US-003"
+        ],
+        "acceptance_criteria": [
+          "AC-007",
+          "AC-008"
+        ],
+        "adr_decisions": [
+          "ADR-002"
+        ]
       },
       "technical_notes": "This is a composition component that arranges existing components (TideCanvas, WeatherForecast, ActivityRecommendations, SunTimesWidget) plus new ones (BeachVerdict) into the Today tab layout. It receives all data props (weather, tides, waterQuality, beach) from BeachDetail. The conditions grid is a new compact 3-column layout per WIREFRAMES.md section 3. Reuse existing components; do not rewrite them.",
       "context_refs": {
@@ -344,7 +420,12 @@
           "client/src/components/TideCanvas.tsx",
           "client/src/components/WeatherForecast.tsx"
         ],
-        "grep_patterns": ["ActivityRecommendations", "SunTimesWidget", "TideCanvas", "WeatherForecast"],
+        "grep_patterns": [
+          "ActivityRecommendations",
+          "SunTimesWidget",
+          "TideCanvas",
+          "WeatherForecast"
+        ],
         "constraints_section": "TECHNICAL_DESIGN.md:## Non-Scope Declaration"
       },
       "model": "sonnet"
@@ -384,11 +465,20 @@
       ],
       "test_file": "client/src/components/AboutTab.test.tsx",
       "status": "pending",
-      "depends_on": ["002"],
+      "depends_on": [
+        "002"
+      ],
       "traces_to": {
-        "user_stories": ["US-004"],
-        "acceptance_criteria": ["AC-010", "AC-011"],
-        "adr_decisions": ["ADR-002"]
+        "user_stories": [
+          "US-004"
+        ],
+        "acceptance_criteria": [
+          "AC-010",
+          "AC-011"
+        ],
+        "adr_decisions": [
+          "ADR-002"
+        ]
       },
       "technical_notes": "Amenities should be grouped by use case rather than a flat checklist. Groups: 'For families' (pool, playground, restrooms, concession), 'For dogs' (dog-friendly status, off-leash areas), 'For sports' (volleyball courts, basketball). Getting-there section should include address, transit info, parking from existing PlanYourVisit data. Reuse SafetyInfo and WebcamEmbed components. Pull personality data from getPersonality(beach.slug).",
       "context_refs": {
@@ -401,7 +491,13 @@
           "client/src/components/SafetyInfo.tsx",
           "client/src/components/PlanYourVisit.tsx"
         ],
-        "grep_patterns": ["BeachAmenities", "SafetyInfo", "PlanYourVisit", "WebcamEmbed", "getPersonality"],
+        "grep_patterns": [
+          "BeachAmenities",
+          "SafetyInfo",
+          "PlanYourVisit",
+          "WebcamEmbed",
+          "getPersonality"
+        ],
         "constraints_section": "TECHNICAL_DESIGN.md:## Non-Scope Declaration"
       },
       "model": "sonnet"
@@ -431,11 +527,22 @@
       ],
       "test_file": "client/src/components/PhotosTab.test.tsx",
       "status": "pending",
-      "depends_on": ["006", "002"],
+      "depends_on": [
+        "006",
+        "002"
+      ],
       "traces_to": {
-        "user_stories": ["US-005"],
-        "acceptance_criteria": ["AC-012", "AC-013", "AC-014"],
-        "adr_decisions": ["ADR-005"]
+        "user_stories": [
+          "US-005"
+        ],
+        "acceptance_criteria": [
+          "AC-012",
+          "AC-013",
+          "AC-014"
+        ],
+        "adr_decisions": [
+          "ADR-005"
+        ]
       },
       "technical_notes": "This is a thin wrapper around InstagramEmbed that pulls the correct post URLs and hashtag from beach-personalities.ts for the given beach. Layout should be a 2-column masonry-style grid on mobile per WIREFRAMES.md section 5.",
       "context_refs": {
@@ -443,8 +550,14 @@
           "TECHNICAL_DESIGN.md:## Component Architecture:BeachDetail Page (Tabbed):PhotosTab",
           "WIREFRAMES.md:## 5. Beach Detail Page -- Photos Tab"
         ],
-        "pattern_files": ["client/src/components/InstagramEmbed.tsx"],
-        "grep_patterns": ["instagramHashtag", "instagramPostUrls", "InstagramEmbed"],
+        "pattern_files": [
+          "client/src/components/InstagramEmbed.tsx"
+        ],
+        "grep_patterns": [
+          "instagramHashtag",
+          "instagramPostUrls",
+          "InstagramEmbed"
+        ],
         "constraints_section": "TECHNICAL_DESIGN.md:## Non-Scope Declaration"
       },
       "model": "haiku"
@@ -484,11 +597,27 @@
       ],
       "test_file": "client/src/pages/BeachDetail.test.tsx",
       "status": "pending",
-      "depends_on": ["004", "007", "008", "009"],
+      "depends_on": [
+        "004",
+        "007",
+        "008",
+        "009"
+      ],
       "traces_to": {
-        "user_stories": ["US-003", "US-004", "US-005"],
-        "acceptance_criteria": ["AC-007", "AC-008", "AC-009", "AC-010"],
-        "adr_decisions": ["ADR-002"]
+        "user_stories": [
+          "US-003",
+          "US-004",
+          "US-005"
+        ],
+        "acceptance_criteria": [
+          "AC-007",
+          "AC-008",
+          "AC-009",
+          "AC-010"
+        ],
+        "adr_decisions": [
+          "ADR-002"
+        ]
       },
       "technical_notes": "This is a major rewrite. The current BeachDetail has 8 sections in a long scroll. The new version has a compact hero + tab bar + 3 tab panels. Preserve all existing data hooks (useWeather, useTides, useWaterQuality). Pass data down to tab components as props. Use Framer Motion AnimatePresence for tab transitions (slide left/right per WIREFRAMES.md section 8). The hero should use Fraunces for beach name. Remove NearbyPlaces, BeachGuidePromo from the detail page. Keep FavoriteButton and ShareButton in the hero area.",
       "context_refs": {
@@ -497,8 +626,16 @@
           "WIREFRAMES.md:## 3. Beach Detail Page -- Today Tab",
           "WIREFRAMES.md:## 8. Interactive States:Tab Switching Animation"
         ],
-        "pattern_files": ["client/src/pages/BeachDetail.tsx"],
-        "grep_patterns": ["useWeather", "useTides", "useWaterQuality", "useParams", "TabBar"],
+        "pattern_files": [
+          "client/src/pages/BeachDetail.tsx"
+        ],
+        "grep_patterns": [
+          "useWeather",
+          "useTides",
+          "useWaterQuality",
+          "useParams",
+          "TabBar"
+        ],
         "constraints_section": "TECHNICAL_DESIGN.md:## Non-Scope Declaration"
       },
       "model": "sonnet"
@@ -538,11 +675,21 @@
       ],
       "test_file": "client/src/components/FavoritesView.test.tsx",
       "status": "pending",
-      "depends_on": ["002", "003"],
+      "depends_on": [
+        "002",
+        "003"
+      ],
       "traces_to": {
-        "user_stories": ["US-001"],
-        "acceptance_criteria": ["AC-001", "AC-002"],
-        "adr_decisions": ["ADR-001"]
+        "user_stories": [
+          "US-001"
+        ],
+        "acceptance_criteria": [
+          "AC-001",
+          "AC-002"
+        ],
+        "adr_decisions": [
+          "ADR-001"
+        ]
       },
       "technical_notes": "The primary favorite is the first item in the favorites array. It gets a large card (~60% viewport width on mobile, full-bleed) with hero photo, personality tagline, conditions strip, and today's verdict summary. Other favorites get compact cards in a 2-column grid showing name, conditions, and short verdict. Use computeVerdict for the verdict text. Use existing useFavorites hook to get favorite IDs. Load weather/tide data using existing hooks for each favorite beach.",
       "context_refs": {
@@ -550,8 +697,14 @@
           "TECHNICAL_DESIGN.md:## Component Architecture:Discover Page (Smart Landing):FavoritesView",
           "WIREFRAMES.md:## 1. Discover Page -- Returning User (Favorites View)"
         ],
-        "pattern_files": ["client/src/pages/Discover.tsx"],
-        "grep_patterns": ["useFavorites", "useBeaches", "getBeachGreeting"],
+        "pattern_files": [
+          "client/src/pages/Discover.tsx"
+        ],
+        "grep_patterns": [
+          "useFavorites",
+          "useBeaches",
+          "getBeachGreeting"
+        ],
         "constraints_section": "TECHNICAL_DESIGN.md:## Non-Scope Declaration"
       },
       "model": "sonnet"
@@ -586,11 +739,23 @@
       ],
       "test_file": "client/src/components/DiscoveryView.test.tsx",
       "status": "pending",
-      "depends_on": ["002", "012"],
+      "depends_on": [
+        "002",
+        "012"
+      ],
       "traces_to": {
-        "user_stories": ["US-002"],
-        "acceptance_criteria": ["AC-004", "AC-005", "AC-006", "AC-021"],
-        "adr_decisions": ["ADR-001"]
+        "user_stories": [
+          "US-002"
+        ],
+        "acceptance_criteria": [
+          "AC-004",
+          "AC-005",
+          "AC-006",
+          "AC-021"
+        ],
+        "adr_decisions": [
+          "ADR-001"
+        ]
       },
       "technical_notes": "The featured beach in the hero should be computed from current conditions (best weather + water quality, similar to existing RecommendedSection logic). Vibe chips use the BeachVibe type from beach-personalities.ts to filter beaches. Beach cards should use the new personality-forward BeachCard. BeachMap is reused as-is. The hero should have a lighter overlay than current (from-black/40 via-transparent).",
       "context_refs": {
@@ -598,8 +763,15 @@
           "TECHNICAL_DESIGN.md:## Component Architecture:Discover Page (Smart Landing):DiscoveryView",
           "WIREFRAMES.md:## 2. Discover Page -- New User (Discovery View)"
         ],
-        "pattern_files": ["client/src/pages/Discover.tsx"],
-        "grep_patterns": ["BeachMap", "SearchFilter", "BeachVibe", "getPersonality"],
+        "pattern_files": [
+          "client/src/pages/Discover.tsx"
+        ],
+        "grep_patterns": [
+          "BeachMap",
+          "SearchFilter",
+          "BeachVibe",
+          "getPersonality"
+        ],
         "constraints_section": "TECHNICAL_DESIGN.md:## Non-Scope Declaration"
       },
       "model": "sonnet"
@@ -634,11 +806,21 @@
       ],
       "test_file": "client/src/components/BeachCard.test.tsx",
       "status": "pending",
-      "depends_on": ["002", "001"],
+      "depends_on": [
+        "002",
+        "001"
+      ],
       "traces_to": {
-        "user_stories": ["US-006"],
-        "acceptance_criteria": ["AC-006", "AC-016"],
-        "adr_decisions": ["ADR-004"]
+        "user_stories": [
+          "US-006"
+        ],
+        "acceptance_criteria": [
+          "AC-006",
+          "AC-016"
+        ],
+        "adr_decisions": [
+          "ADR-004"
+        ]
       },
       "technical_notes": "The card should show: landscape thumbnail (left on mobile, top on desktop), beach name in Fraunces, personality archetype, one key differentiator, and current temp + weather. Remove the current water quality dot and tide info from the card (those are detail-page concerns). Keep FavoriteButton. Use getPersonality(beach.id) to look up personality data.",
       "context_refs": {
@@ -646,8 +828,14 @@
           "WIREFRAMES.md:## 6. Beach Card (Personality-Forward)",
           "TECHNICAL_DESIGN.md:## Change Impact Map:Direct Impact:BeachCard.tsx"
         ],
-        "pattern_files": ["client/src/components/BeachCard.tsx"],
-        "grep_patterns": ["BeachCard", "getPersonality", "BeachSummary"],
+        "pattern_files": [
+          "client/src/components/BeachCard.tsx"
+        ],
+        "grep_patterns": [
+          "BeachCard",
+          "getPersonality",
+          "BeachSummary"
+        ],
         "constraints_section": "TECHNICAL_DESIGN.md:## Non-Scope Declaration"
       },
       "model": "sonnet"
@@ -682,19 +870,38 @@
       ],
       "test_file": "client/src/pages/Discover.test.tsx",
       "status": "pending",
-      "depends_on": ["011", "012"],
+      "depends_on": [
+        "011",
+        "012"
+      ],
       "traces_to": {
-        "user_stories": ["US-001", "US-002"],
-        "acceptance_criteria": ["AC-001", "AC-003", "AC-004"],
-        "adr_decisions": ["ADR-001"]
+        "user_stories": [
+          "US-001",
+          "US-002"
+        ],
+        "acceptance_criteria": [
+          "AC-001",
+          "AC-003",
+          "AC-004"
+        ],
+        "adr_decisions": [
+          "ADR-001"
+        ]
       },
       "technical_notes": "The smart landing logic is simple: const { favorites } = useFavorites(); return favorites.length > 0 ? <FavoritesView /> : <DiscoveryView />. The old inline components (HeroSection, RecommendedSection, AllBeachesSection) should be removed from this file. Keep useBeaches hook for data fetching. Pass beaches data down to FavoritesView and DiscoveryView.",
       "context_refs": {
         "interface_locations": [
           "TECHNICAL_DESIGN.md:## Component Architecture:Discover Page (Smart Landing)"
         ],
-        "pattern_files": ["client/src/pages/Discover.tsx"],
-        "grep_patterns": ["useFavorites", "useBeaches", "FavoritesView", "DiscoveryView"],
+        "pattern_files": [
+          "client/src/pages/Discover.tsx"
+        ],
+        "grep_patterns": [
+          "useFavorites",
+          "useBeaches",
+          "FavoritesView",
+          "DiscoveryView"
+        ],
         "constraints_section": "TECHNICAL_DESIGN.md:## Non-Scope Declaration"
       },
       "model": "sonnet"
@@ -734,11 +941,23 @@
       ],
       "test_file": "client/src/components/MobileBottomNav.test.tsx",
       "status": "pending",
-      "depends_on": ["001"],
+      "depends_on": [
+        "001"
+      ],
       "traces_to": {
-        "user_stories": ["US-007", "US-008"],
-        "acceptance_criteria": ["AC-017", "AC-018", "AC-019", "AC-022"],
-        "adr_decisions": ["ADR-003"]
+        "user_stories": [
+          "US-007",
+          "US-008"
+        ],
+        "acceptance_criteria": [
+          "AC-017",
+          "AC-018",
+          "AC-019",
+          "AC-022"
+        ],
+        "adr_decisions": [
+          "ADR-003"
+        ]
       },
       "technical_notes": "The 2-item nav should be: Home (house icon -> /discover) and Explore (map icon -> map view). Remove the 3-item bottom nav (Discover, Beaches selector, Compare). The Beaches selector sheet can be removed since the Explore tab will serve that purpose. In Layout.tsx: remove the Compare link from desktop nav, remove the 'c' keyboard shortcut, update branding text to use font-display for 'Van Beaches' heading.",
       "context_refs": {
@@ -750,7 +969,11 @@
           "client/src/components/MobileBottomNav.tsx",
           "client/src/components/Layout.tsx"
         ],
-        "grep_patterns": ["MobileBottomNav", "Compare", "keyboard.*handleKeydown"],
+        "grep_patterns": [
+          "MobileBottomNav",
+          "Compare",
+          "keyboard.*handleKeydown"
+        ],
         "constraints_section": "TECHNICAL_DESIGN.md:## Non-Scope Declaration"
       },
       "model": "sonnet"
@@ -780,17 +1003,33 @@
       ],
       "test_file": "client/src/App.test.tsx",
       "status": "pending",
-      "depends_on": ["014"],
+      "depends_on": [
+        "014"
+      ],
       "traces_to": {
-        "user_stories": ["US-008"],
-        "acceptance_criteria": ["AC-020"],
-        "adr_decisions": ["ADR-003"]
+        "user_stories": [
+          "US-008"
+        ],
+        "acceptance_criteria": [
+          "AC-020"
+        ],
+        "adr_decisions": [
+          "ADR-003"
+        ]
       },
       "technical_notes": "Use <Navigate to='/discover' replace /> for both /compare and /* routes. The existing SmartRedirect for / can stay. Do not delete Compare.tsx yet (can be done in cleanup), just remove its import and route. Routing changes per TECHNICAL_DESIGN.md Routing Changes section.",
       "context_refs": {
-        "interface_locations": ["TECHNICAL_DESIGN.md:## Routing Changes"],
-        "pattern_files": ["client/src/App.tsx"],
-        "grep_patterns": ["Route.*compare", "Navigate", "SmartRedirect"],
+        "interface_locations": [
+          "TECHNICAL_DESIGN.md:## Routing Changes"
+        ],
+        "pattern_files": [
+          "client/src/App.tsx"
+        ],
+        "grep_patterns": [
+          "Route.*compare",
+          "Navigate",
+          "SmartRedirect"
+        ],
         "constraints_section": "TECHNICAL_DESIGN.md:## Non-Scope Declaration"
       },
       "model": "haiku"
@@ -821,20 +1060,31 @@
       "test_file": null,
       "no_test_reason": "Purely visual/CSS class changes with no behavioral change; verified by existing tests passing",
       "status": "pending",
-      "depends_on": ["001"],
+      "depends_on": [
+        "001"
+      ],
       "traces_to": {
         "user_stories": [],
         "acceptance_criteria": [],
-        "adr_decisions": ["ADR-004"]
+        "adr_decisions": [
+          "ADR-004"
+        ]
       },
       "technical_notes": "This is a sweep through existing components to align them with the new design tokens. Focus on color class names: replace ocean-* cool tones with warmed versions, use sand warm tones for backgrounds, coral for CTAs. Remove all dark:* Tailwind classes since the app is light-only. Do not change component behavior or props. The Card component (ui/Card.tsx) may also need variant updates.",
       "context_refs": {
-        "interface_locations": ["WIREFRAMES.md:## 9. Visual Design Direction"],
+        "interface_locations": [
+          "WIREFRAMES.md:## 9. Visual Design Direction"
+        ],
         "pattern_files": [
           "client/src/components/WeatherWidget.tsx",
           "client/src/components/SunTimesWidget.tsx"
         ],
-        "grep_patterns": ["dark:", "ocean-", "shore-", "sky-"],
+        "grep_patterns": [
+          "dark:",
+          "ocean-",
+          "shore-",
+          "sky-"
+        ],
         "constraints_section": "TECHNICAL_DESIGN.md:## Non-Scope Declaration"
       },
       "model": "haiku"
@@ -869,20 +1119,46 @@
       ],
       "test_file": "client/src/integration/editorial-redesign.test.tsx",
       "status": "pending",
-      "depends_on": ["014", "010", "016"],
+      "depends_on": [
+        "014",
+        "010",
+        "016"
+      ],
       "traces_to": {
-        "user_stories": ["US-001", "US-002", "US-003", "US-008"],
-        "acceptance_criteria": ["AC-001", "AC-003", "AC-004", "AC-008", "AC-020"],
-        "adr_decisions": ["ADR-001", "ADR-002", "ADR-003"]
+        "user_stories": [
+          "US-001",
+          "US-002",
+          "US-003",
+          "US-008"
+        ],
+        "acceptance_criteria": [
+          "AC-001",
+          "AC-003",
+          "AC-004",
+          "AC-008",
+          "AC-020"
+        ],
+        "adr_decisions": [
+          "ADR-001",
+          "ADR-002",
+          "ADR-003"
+        ]
       },
       "technical_notes": "These are React Testing Library integration tests that render the full App component within a MemoryRouter. Mock the API hooks (useWeather, useTides, useWaterQuality, useBeaches) to return stable test data. Test localStorage manipulation for favorites. Verify URL hash changes when switching tabs.",
       "context_refs": {
-        "interface_locations": ["TECHNICAL_DESIGN.md:## Testing Strategy"],
+        "interface_locations": [
+          "TECHNICAL_DESIGN.md:## Testing Strategy"
+        ],
         "pattern_files": [
           "client/src/components/Layout.test.tsx",
           "client/src/components/SearchFilter.test.tsx"
         ],
-        "grep_patterns": ["MemoryRouter", "vitest", "render.*App", "localStorage"],
+        "grep_patterns": [
+          "MemoryRouter",
+          "vitest",
+          "render.*App",
+          "localStorage"
+        ],
         "constraints_section": "TECHNICAL_DESIGN.md:## Non-Scope Declaration"
       },
       "model": "sonnet"
