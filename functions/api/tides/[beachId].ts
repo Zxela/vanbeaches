@@ -47,8 +47,16 @@ export const onRequestGet: PagesFunction<Env> = async (context) => {
   }
 
   // Cache miss - fetch from IWLS API
-  const from = new Date();
-  const to = new Date(from.getTime() + 48 * 60 * 60 * 1000);
+  // Start from beginning of today in Pacific time so all of today's tides are included
+  const now = new Date();
+  const todayStart = new Date(now);
+  todayStart.setUTCHours(8, 0, 0, 0); // Midnight PST (UTC-8) = 08:00 UTC
+  if (now.getTime() < todayStart.getTime()) {
+    todayStart.setUTCDate(todayStart.getUTCDate() - 1);
+  }
+  const from = todayStart;
+  // Fetch 7 days of predictions for the forecast view
+  const to = new Date(from.getTime() + 7 * 24 * 60 * 60 * 1000);
 
   const url = `${IWLS_BASE_URL}/stations/${beach.tideStationId}/data?time-series-code=wlp-hilo&from=${from.toISOString()}&to=${to.toISOString()}`;
 
@@ -59,7 +67,7 @@ export const onRequestGet: PagesFunction<Env> = async (context) => {
 
   const data: IWLSResponse[] = await response.json();
 
-  const predictions: TidePrediction[] = data.slice(0, 6).map((item, index, arr) => {
+  const predictions: TidePrediction[] = data.map((item, index, arr) => {
     const prev = index > 0 ? arr[index - 1].value : item.value;
     const next = index < arr.length - 1 ? arr[index + 1].value : item.value;
     const isHigh = item.value >= prev && item.value >= next;
