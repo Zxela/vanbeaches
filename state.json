@@ -4,7 +4,7 @@
   "worktree": "../vanbeaches-create-editorial-redesign-969cd60b",
   "feature": "editorial-redesign",
   "created_at": "2026-02-28T02:00:00Z",
-  "phase": "discovery",
+  "phase": "spec_review",
   "homerun_docs_dir": "/home/alex/.claude/homerun/bbe3d3a9/editorial-redesign-969cd60b",
   "spec_paths": {
     "prd": "/home/alex/.claude/homerun/bbe3d3a9/editorial-redesign-969cd60b/PRD.md",
