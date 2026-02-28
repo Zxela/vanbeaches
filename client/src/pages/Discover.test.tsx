@@ -1,4 +1,4 @@
-import { fireEvent, render, screen, within } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import type { BeachSummary } from '@van-beaches/shared';
 import { MemoryRouter } from 'react-router-dom';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
@@ -32,35 +32,23 @@ vi.mock('../components/BeachMap', () => ({
   ),
 }));
 
-import { useBeaches } from '../hooks/useBeaches';
-import { Discover } from './Discover';
+// Mock FavoritesView to easily detect when it renders
+vi.mock('../components/FavoritesView', () => ({
+  FavoritesView: ({ favorites }: { favorites: unknown[] }) => (
+    <div data-testid="favorites-view">
+      FavoritesView ({favorites.length} favorites)
+    </div>
+  ),
+}));
 
-const mockBeachSummaries: BeachSummary[] = [
-  {
-    id: 'kitsilano',
-    name: 'Kitsilano Beach',
-    currentWeather: { temperature: 18, condition: 'sunny', icon: 'sunny' },
-    nextTide: { type: 'high', time: '14:30', height: 4.2 },
-    waterQuality: 'good',
-    lastUpdated: new Date().toISOString(),
-  },
-  {
-    id: 'english-bay',
-    name: 'English Bay Beach',
-    currentWeather: null,
-    nextTide: null,
-    waterQuality: 'unknown',
-    lastUpdated: new Date().toISOString(),
-  },
-];
-
-function renderDiscover() {
-  return render(
-    <MemoryRouter>
-      <Discover />
-    </MemoryRouter>,
-  );
-}
+// Mock DiscoveryView to easily detect when it renders
+vi.mock('../components/DiscoveryView', () => ({
+  DiscoveryView: ({ beaches }: { beaches: unknown[] }) => (
+    <div data-testid="discovery-view">
+      DiscoveryView ({beaches.length} beaches)
+    </div>
+  ),
+}));
 
 vi.mock('@van-beaches/shared', () => ({
   BEACHES: [
@@ -111,46 +99,168 @@ vi.mock('@van-beaches/shared', () => ({
   ],
 }));
 
-describe('Discover page - BeachCard data wiring (task-006)', () => {
+import { useBeaches } from '../hooks/useBeaches';
+import { useFavorites } from '../hooks/useFavorites';
+import { Discover } from './Discover';
+
+const mockBeachSummaries: BeachSummary[] = [
+  {
+    id: 'kitsilano',
+    name: 'Kitsilano Beach',
+    currentWeather: { temperature: 18, condition: 'sunny', icon: 'sunny' },
+    nextTide: { type: 'high', time: '14:30', height: 4.2 },
+    waterQuality: 'good',
+    lastUpdated: new Date().toISOString(),
+  },
+  {
+    id: 'english-bay',
+    name: 'English Bay Beach',
+    currentWeather: null,
+    nextTide: null,
+    waterQuality: 'unknown',
+    lastUpdated: new Date().toISOString(),
+  },
+];
+
+function renderDiscover() {
+  return render(
+    <MemoryRouter>
+      <Discover />
+    </MemoryRouter>,
+  );
+}
+
+describe('Discover page - smart landing pattern (task-014)', () => {
   beforeEach(() => {
     vi.clearAllMocks();
-  });
-
-  it('passes actual BeachSummary objects from useBeaches to BeachCard', () => {
     vi.mocked(useBeaches).mockReturnValue({
       beaches: mockBeachSummaries,
       loading: false,
       error: null,
       refetch: vi.fn(),
     });
-
-    renderDiscover();
-
-    // Temperature appears in hero, recommended, and beach card sections
-    const tempElements = screen.getAllByText('18°C');
-    expect(tempElements.length).toBeGreaterThanOrEqual(1);
   });
 
-  it('shows no weather icon when weather data is unavailable for a beach', () => {
-    vi.mocked(useBeaches).mockReturnValue({
-      beaches: mockBeachSummaries,
-      loading: false,
-      error: null,
-      refetch: vi.fn(),
+  // AC-001: When user has favorites in localStorage, Discover renders FavoritesView
+  it('renders FavoritesView when user has favorites', () => {
+    vi.mocked(useFavorites).mockReturnValue({
+      favorites: ['kitsilano'],
+      toggleFavorite: vi.fn(),
+      isFavorite: vi.fn(() => true),
     });
 
     renderDiscover();
 
-    // Temperature displays appear in hero, recommended, and beach cards
-    // but only for Kitsilano (the only beach with weather data)
-    const tempElements = screen.queryAllByText(/°C$/);
-    // Each display of Kitsilano's temp counts as one match
-    expect(tempElements.length).toBeGreaterThanOrEqual(1);
-    // English Bay (no weather) should not contribute any temperature text
-    expect(screen.queryByText('null°C')).not.toBeInTheDocument();
+    expect(screen.getByTestId('favorites-view')).toBeInTheDocument();
+    expect(screen.queryByTestId('discovery-view')).not.toBeInTheDocument();
   });
 
-  it('shows skeleton loading state while beaches are loading', () => {
+  it('passes favorited Beach objects (not just IDs) to FavoritesView', () => {
+    vi.mocked(useFavorites).mockReturnValue({
+      favorites: ['kitsilano'],
+      toggleFavorite: vi.fn(),
+      isFavorite: vi.fn(() => true),
+    });
+
+    renderDiscover();
+
+    // The mock FavoritesView displays the count — 1 favorite
+    expect(screen.getByTestId('favorites-view')).toHaveTextContent('1 favorites');
+  });
+
+  // AC-002: When user has no favorites, Discover renders DiscoveryView
+  it('renders DiscoveryView when user has no favorites', () => {
+    vi.mocked(useFavorites).mockReturnValue({
+      favorites: [],
+      toggleFavorite: vi.fn(),
+      isFavorite: vi.fn(() => false),
+    });
+
+    renderDiscover();
+
+    expect(screen.getByTestId('discovery-view')).toBeInTheDocument();
+    expect(screen.queryByTestId('favorites-view')).not.toBeInTheDocument();
+  });
+
+  it('passes all Beach objects to DiscoveryView', () => {
+    vi.mocked(useFavorites).mockReturnValue({
+      favorites: [],
+      toggleFavorite: vi.fn(),
+      isFavorite: vi.fn(() => false),
+    });
+
+    renderDiscover();
+
+    // The mock DiscoveryView displays the count — BEACHES has 2 items
+    expect(screen.getByTestId('discovery-view')).toHaveTextContent('2 beaches');
+  });
+
+  // AC-003: Old HeroSection, RecommendedSection, AllBeachesSection removed
+  it('does not render a HeroSection with full-bleed hero image', () => {
+    vi.mocked(useFavorites).mockReturnValue({
+      favorites: [],
+      toggleFavorite: vi.fn(),
+      isFavorite: vi.fn(() => false),
+    });
+
+    const { container } = renderDiscover();
+
+    // The old HeroSection used a specific hero image URL
+    const heroImages = container.querySelectorAll(
+      'img[src*="unsplash.com/photo-1559128010-7c1ad6e1b6a5"]',
+    );
+    expect(heroImages.length).toBe(0);
+  });
+
+  it('does not render "Today\'s top picks" heading (old RecommendedSection)', () => {
+    vi.mocked(useFavorites).mockReturnValue({
+      favorites: [],
+      toggleFavorite: vi.fn(),
+      isFavorite: vi.fn(() => false),
+    });
+
+    renderDiscover();
+
+    expect(screen.queryByText("Today's top picks")).not.toBeInTheDocument();
+  });
+
+  it('does not render "All Beaches" heading (old AllBeachesSection)', () => {
+    vi.mocked(useFavorites).mockReturnValue({
+      favorites: [],
+      toggleFavorite: vi.fn(),
+      isFavorite: vi.fn(() => false),
+    });
+
+    renderDiscover();
+
+    expect(screen.queryByText('All Beaches')).not.toBeInTheDocument();
+  });
+
+  // AC-004: SearchFilter preserved within DiscoveryView (not at Discover page level)
+  // SearchFilter is now inside DiscoveryView — the Discover page itself should not
+  // directly render SearchFilter (it's the DiscoveryView's responsibility)
+  it('does not render SearchFilter directly at the Discover page level', () => {
+    vi.mocked(useFavorites).mockReturnValue({
+      favorites: [],
+      toggleFavorite: vi.fn(),
+      isFavorite: vi.fn(() => false),
+    });
+
+    renderDiscover();
+
+    // With DiscoveryView mocked, SearchFilter should NOT appear because
+    // Discover.tsx itself does not render SearchFilter directly
+    expect(screen.queryByText('Swimming')).not.toBeInTheDocument();
+    expect(screen.queryByText('Water sports')).not.toBeInTheDocument();
+  });
+
+  // Loading state: passes loading to the appropriate view
+  it('renders DiscoveryView in loading state when no favorites and beaches are loading', () => {
+    vi.mocked(useFavorites).mockReturnValue({
+      favorites: [],
+      toggleFavorite: vi.fn(),
+      isFavorite: vi.fn(() => false),
+    });
     vi.mocked(useBeaches).mockReturnValue({
       beaches: [],
       loading: true,
@@ -158,58 +268,8 @@ describe('Discover page - BeachCard data wiring (task-006)', () => {
       refetch: vi.fn(),
     });
 
-    const { container } = renderDiscover();
-    // Should show skeleton cards (not actual beach cards)
-    expect(
-      container.querySelectorAll('.shimmer, [data-testid="skeleton-card"]').length,
-    ).toBeGreaterThanOrEqual(0);
-    // Should not show beach names
-    expect(screen.queryByText('Kitsilano Beach')).not.toBeInTheDocument();
-  });
-});
-
-describe('Discover page - SearchFilter and BeachMap wiring (task-019)', () => {
-  beforeEach(() => {
-    vi.clearAllMocks();
-    vi.mocked(useBeaches).mockReturnValue({
-      beaches: mockBeachSummaries,
-      loading: false,
-      error: null,
-      refetch: vi.fn(),
-    });
-  });
-
-  it('renders SearchFilter on the Discover page with intent pills', () => {
-    renderDiscover();
-    // Search bar removed; verify SearchFilter renders via its intent pills
-    expect(screen.queryByPlaceholderText(/search beaches/i)).not.toBeInTheDocument();
-    expect(screen.getByText('Swimming')).toBeInTheDocument();
-    expect(screen.getByText('Water sports')).toBeInTheDocument();
-  });
-
-  it('filters AllBeachesSection when user clicks an intent pill', async () => {
     renderDiscover();
 
-    // Both beaches should be visible initially
-    expect(screen.getAllByText('Kitsilano Beach').length).toBeGreaterThanOrEqual(1);
-    expect(screen.getAllByText('English Bay Beach').length).toBeGreaterThanOrEqual(1);
-
-    // Click Swimming pill — kitsilano has swimming, english-bay has walking (no match)
-    fireEvent.click(screen.getByText('Swimming'));
-
-    // The All Beaches section should filter out English Bay
-    // (Recommended section is independent of the filter)
-    const allBeachesHeading = screen.getByText('All Beaches');
-    const allBeachesSection = allBeachesHeading.closest('section');
-    if (allBeachesSection) {
-      expect(within(allBeachesSection).queryByText('English Bay Beach')).not.toBeInTheDocument();
-    }
-    expect(screen.getAllByText('Kitsilano Beach').length).toBeGreaterThanOrEqual(1);
-  });
-
-  it('renders BeachMap below the All Beaches section', () => {
-    renderDiscover();
-    // BeachMap renders a "Beach Map" heading
-    expect(screen.getByText('Beach Map')).toBeInTheDocument();
+    expect(screen.getByTestId('discovery-view')).toBeInTheDocument();
   });
 });
