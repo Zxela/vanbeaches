@@ -10,6 +10,5 @@ coverage/
 .claude/
 
 # Homerun workflow artifacts
-docs/tasks.json
+docs/
 state.json
-docs/plans/tasks/
