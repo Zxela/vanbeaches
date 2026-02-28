@@ -1,5 +1,4 @@
 import type { Beach, BeachSummary } from '@van-beaches/shared';
-import { BEACHES } from '@van-beaches/shared';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import type { BeachVibe } from '../data/beach-personalities';
@@ -55,9 +54,9 @@ function pickFeaturedBeach(
 }
 
 /**
- * Editorial hero section (~35vh) featuring the recommended beach of the day.
+ * Compact banner (~60px) featuring the recommended beach of the day.
  */
-function EditorialHero({
+function FeaturedBanner({
   beach,
   conditions,
 }: {
@@ -65,62 +64,41 @@ function EditorialHero({
   conditions: BeachSummary | undefined;
 }) {
   const personality = getPersonality(beach.id);
-  const beachData = BEACHES.find((b) => b.id === beach.id);
   const weather = conditions?.currentWeather;
   const WeatherIcon = weather ? getWeatherIcon(weather.condition) : null;
 
   return (
-    <div
+    <Link
+      to={`/beach/${beach.id}`}
       data-testid="discovery-hero"
-      className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-ocean-400 to-sky-500"
-      style={{ minHeight: '35vh' }}
+      className="flex items-center gap-3 rounded-xl bg-sand-50 px-4 py-3 hover:bg-sand-100 transition-colors"
     >
-      {/* Beach photo background */}
-      {beachData?.images ? (
-        <img
-          src={beachData.images.hero}
-          alt={beach.name}
-          className="absolute inset-0 w-full h-full object-cover"
-        />
-      ) : null}
-
-      {/* Warm overlay — lighter than original design to let photo breathe */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
-
-      {/* Content */}
-      <div className="relative z-10 flex flex-col justify-end h-full p-5 pt-12">
-        {/* Today's pick label */}
-        <p className="text-xs font-semibold tracking-widest uppercase text-white/80 mb-1">
+      {/* Label + beach info */}
+      <div className="flex-1 min-w-0">
+        <p className="text-[10px] font-semibold tracking-widest uppercase text-coral-500">
           Today's pick
         </p>
-
-        {/* Beach name */}
-        <h2 className="font-display text-2xl font-bold text-white leading-tight">{beach.name}</h2>
-
-        {/* Personality archetype */}
-        {personality && <p className="text-sm text-white/80 mt-0.5">{personality.archetype}</p>}
-
-        {/* Condition summary */}
-        {weather && (
-          <div className="flex items-center gap-2 mt-3">
-            {WeatherIcon && (
-              <WeatherIcon className={'w-4 h-4 text-white shrink-0'} strokeWidth={2} />
-            )}
-            <span className="text-sm font-semibold text-white">{weather.temperature}°C</span>
-            <span className="text-sm text-white/80 capitalize">· {weather.condition}</span>
-          </div>
-        )}
-
-        {/* CTA link */}
-        <Link
-          to={`/beach/${beach.id}`}
-          className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-white hover:text-sand-100 transition-colors"
-        >
-          Check it out
-          <span className="ml-0.5">→</span>
-        </Link>
+        <p className="font-display text-sm font-bold text-sand-900 leading-tight truncate">
+          {beach.name}
+          {personality && (
+            <span className="font-normal text-sand-500 ml-1.5">— {personality.archetype}</span>
+          )}
+        </p>
       </div>
-    </div>
+
+      {/* Conditions */}
+      {weather && (
+        <div className="flex items-center gap-1.5 shrink-0">
+          {WeatherIcon && (
+            <WeatherIcon className="w-4 h-4 text-ocean-500 shrink-0" strokeWidth={2} />
+          )}
+          <span className="text-sm font-semibold text-ocean-700">{weather.temperature}°C</span>
+        </div>
+      )}
+
+      {/* Arrow */}
+      <span className="text-sand-400 shrink-0">→</span>
+    </Link>
   );
 }
 
@@ -151,17 +129,17 @@ export function DiscoveryView({ beaches, beachConditions, loading = false }: Dis
   if (loading) {
     return (
       <div className="animate-pulse space-y-4 px-4 pb-8">
-        {/* Hero skeleton */}
-        <div className="rounded-2xl bg-sand-200" style={{ minHeight: '35vh' }} />
+        {/* Banner skeleton */}
+        <div className="rounded-xl bg-sand-200 h-14" />
         {/* Chips skeleton */}
         <div className="flex gap-2">
           {[1, 2, 3, 4].map((i) => (
             <div key={i} className="h-8 w-20 rounded-full bg-sand-200" />
           ))}
         </div>
-        {/* Cards skeleton */}
+        {/* Rows skeleton */}
         {[1, 2, 3].map((i) => (
-          <div key={i} className="h-20 rounded-xl bg-sand-200" />
+          <div key={i} className="h-12 bg-sand-200" />
         ))}
       </div>
     );
@@ -169,10 +147,10 @@ export function DiscoveryView({ beaches, beachConditions, loading = false }: Dis
 
   return (
     <div className="space-y-6 px-4 pb-8">
-      {/* Editorial hero */}
+      {/* Featured banner */}
       {featuredBeach && (
         <section aria-label="Today's featured beach">
-          <EditorialHero beach={featuredBeach} conditions={beachConditions[featuredBeach.id]} />
+          <FeaturedBanner beach={featuredBeach} conditions={beachConditions[featuredBeach.id]} />
         </section>
       )}
 
@@ -203,14 +181,13 @@ export function DiscoveryView({ beaches, beachConditions, loading = false }: Dis
         </div>
       </section>
 
-      {/* Beach list — personality-forward cards */}
+      {/* Beach list — compact rows with dividers */}
       <section aria-label="Beach list" data-testid="discovery-beach-list">
-        <div className="space-y-3">
+        <div className="divide-y divide-sand-100">
           {beachSummaries.map(([beachId, summary]) => {
             const beach = beaches.find((b) => b.id === beachId);
             if (!beach) return null;
 
-            // Build a BeachSummary for BeachCard (which expects BeachSummary type)
             const beachSummaryForCard: BeachSummary = summary ?? {
               id: beach.id,
               name: beach.name,

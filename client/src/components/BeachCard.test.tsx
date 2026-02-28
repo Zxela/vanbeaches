@@ -86,19 +86,19 @@ function renderCard(beach: BeachSummary) {
 import { BeachCard } from './BeachCard';
 
 describe('BeachCard', () => {
-  // AC-001: BeachCard displays the beach personality archetype
-  it('displays the beach personality archetype', () => {
+  // Compact row displays beach name
+  it('renders the beach name', () => {
     renderCard(mockBeach);
-    expect(screen.getByText('The Sporty Heart')).toBeInTheDocument();
+    expect(screen.getByText('Kitsilano Beach')).toBeInTheDocument();
   });
 
-  // AC-002: BeachCard displays a key differentiator (first item from differentiators array)
-  it('displays the first differentiator as key differentiator', () => {
+  // Displays personality tagline
+  it('displays the beach personality tagline', () => {
     renderCard(mockBeach);
-    expect(screen.getByText('6 volleyball courts')).toBeInTheDocument();
+    expect(screen.getByText('Where the west side comes to play')).toBeInTheDocument();
   });
 
-  // AC-003: BeachCard displays current conditions (temperature, weather condition)
+  // Displays current conditions (temperature, weather condition)
   it('displays current temperature', () => {
     renderCard(mockBeach);
     expect(screen.getByText(/18/)).toBeInTheDocument();
@@ -106,50 +106,42 @@ describe('BeachCard', () => {
 
   it('displays current weather condition', () => {
     renderCard(mockBeach);
-    // The weather condition text or icon should be present
     const html = document.body.textContent || '';
     expect(/18|sunny/i.test(html)).toBe(true);
   });
 
-  // AC-004: BeachCard uses personality-forward layout with landscape thumb + personality info
-  it('renders the beach name prominently', () => {
-    renderCard(mockBeach);
-    expect(screen.getByText('Kitsilano Beach')).toBeInTheDocument();
-  });
-
-  it('renders a thumbnail image for the beach', () => {
-    renderCard(mockBeach);
-    const img = screen.getByAltText('Kitsilano Beach');
-    expect(img).toBeInTheDocument();
-    expect(img).toHaveAttribute('src', '/images/kitsilano-thumb.jpg');
-  });
-
+  // Links to beach detail page
   it('renders a link to the beach detail page', () => {
     renderCard(mockBeach);
     const link = screen.getByRole('link');
     expect(link).toHaveAttribute('href', '/beach/kitsilano-beach');
   });
 
+  // Favorite button present
   it('renders the FavoriteButton', () => {
     renderCard(mockBeach);
     const btn = screen.getByRole('button');
     expect(btn).toBeInTheDocument();
   });
 
-  // Layout: horizontal card structure (landscape thumb left, info right)
-  it('renders photo and info in a flex layout container', () => {
-    const { container } = renderCard(mockBeach);
-    // Card should have a flex container for the horizontal layout
-    const flexContainer = container.querySelector('.flex');
-    expect(flexContainer).toBeInTheDocument();
+  // No images rendered
+  it('does not render any images', () => {
+    renderCard(mockBeach);
+    expect(screen.queryByRole('img')).not.toBeInTheDocument();
+  });
+
+  // Beach name uses display font class (Fraunces)
+  it('applies display font class to beach name', () => {
+    renderCard(mockBeach);
+    const heading = screen.getByText('Kitsilano Beach');
+    expect(heading.className).toMatch(/font-display/);
   });
 
   // Graceful degradation: no personality data available
   it('renders gracefully when personality data is not available', () => {
     renderCard(mockBeachNoPersonality);
     expect(screen.getByText('Unknown Beach')).toBeInTheDocument();
-    // Should not crash, archetype should not be shown
-    expect(screen.queryByText('The Sporty Heart')).not.toBeInTheDocument();
+    expect(screen.queryByText('Where the west side comes to play')).not.toBeInTheDocument();
   });
 
   // Graceful degradation: no weather data
@@ -168,14 +160,6 @@ describe('BeachCard', () => {
   it('does not display water quality dot/label', () => {
     renderCard(mockBeach);
     expect(screen.queryByText(/good water/i)).not.toBeInTheDocument();
-    // The water quality label "Good" should not appear on card
     expect(screen.queryByText(/^Good$/)).not.toBeInTheDocument();
-  });
-
-  // Beach name uses display font class (Fraunces)
-  it('applies display font class to beach name', () => {
-    renderCard(mockBeach);
-    const heading = screen.getByText('Kitsilano Beach');
-    expect(heading.className).toMatch(/font-display/);
   });
 });

@@ -279,36 +279,30 @@ function renderDiscoveryView(
 import { DiscoveryView } from './DiscoveryView';
 
 describe('DiscoveryView', () => {
-  // AC-001: Hero section with "Today's pick"
-  describe('editorial hero', () => {
-    it('renders a "Today\'s pick" label in the hero section', () => {
+  // AC-001: Featured banner with "Today's pick"
+  describe('featured banner', () => {
+    it('renders a "Today\'s pick" label in the banner', () => {
       renderDiscoveryView();
       expect(screen.getByText("Today's pick")).toBeInTheDocument();
     });
 
-    it('renders the featured beach name in the hero', () => {
+    it('renders the featured beach name in the banner', () => {
       renderDiscoveryView();
-      // The featured beach (highest temperature / first beach) should appear as a heading
-      const heroSection = document.querySelector('[data-testid="discovery-hero"]');
-      expect(heroSection).toBeInTheDocument();
+      const banner = document.querySelector('[data-testid="discovery-hero"]');
+      expect(banner).toBeInTheDocument();
     });
 
-    it('hero section has approximately 35vh height styling', () => {
+    it('banner is a compact row (no 35vh hero)', () => {
       renderDiscoveryView();
-      const hero = document.querySelector('[data-testid="discovery-hero"]');
-      expect(hero).toBeInTheDocument();
-      // Hero should have inline style or class that sets ~35vh height
-      const style = (hero as HTMLElement)?.style?.minHeight ?? '';
-      const className = (hero as HTMLElement)?.className ?? '';
-      expect(
-        style.includes('35vh') || className.includes('h-') || className.includes('min-h-'),
-      ).toBe(true);
+      const banner = document.querySelector('[data-testid="discovery-hero"]');
+      expect(banner).toBeInTheDocument();
+      // Should NOT have 35vh height
+      const style = (banner as HTMLElement)?.style?.minHeight ?? '';
+      expect(style).not.toContain('35vh');
     });
 
-    it('renders a condition summary in the hero', () => {
+    it('renders a condition summary in the banner', () => {
       renderDiscoveryView();
-      // Temperature from the featured beach's conditions should appear
-      // The featured beach with best conditions (22°C English Bay) should appear
       const text = document.body.textContent ?? '';
       expect(/22|18|16/.test(text)).toBe(true);
     });
@@ -316,15 +310,20 @@ describe('DiscoveryView', () => {
     it('uses the beach with best conditions (highest temperature) as the featured beach', () => {
       renderDiscoveryView();
       // English Bay has temp 22, which is highest - it should be featured
-      const hero = document.querySelector('[data-testid="discovery-hero"]');
-      expect(hero?.textContent).toContain('English Bay');
+      const banner = document.querySelector('[data-testid="discovery-hero"]');
+      expect(banner?.textContent).toContain('English Bay');
     });
 
     it('falls back to first beach when no conditions are available', () => {
       renderDiscoveryView({ beaches: mockBeaches, beachConditions: {} });
-      // Should fall back to first beach
-      const hero = document.querySelector('[data-testid="discovery-hero"]');
-      expect(hero?.textContent).toContain('English Bay');
+      const banner = document.querySelector('[data-testid="discovery-hero"]');
+      expect(banner?.textContent).toContain('English Bay');
+    });
+
+    it('banner links to the featured beach detail page', () => {
+      renderDiscoveryView();
+      const banner = document.querySelector('[data-testid="discovery-hero"]');
+      expect(banner).toHaveAttribute('href', '/beach/english-bay');
     });
   });
 
@@ -458,13 +457,13 @@ describe('DiscoveryView', () => {
       expect(screen.getByText("What's your vibe?")).toBeInTheDocument();
     });
 
-    it('renders beach cards using BeachCard component (personality-forward layout)', () => {
+    it('renders beach cards with personality taglines in compact rows', () => {
       renderDiscoveryView();
-      // Beach cards should show archetype/personality info
-      // We check that personality names appear in beach list section
       const beachList = document.querySelector('[data-testid="discovery-beach-list"]');
-      // The archetype should appear from the mocked getPersonality
-      expect(beachList?.textContent).toMatch(/Sporty Heart|Sunset Stage|Quiet Expanse/);
+      // Taglines should appear from the mocked getPersonality
+      expect(beachList?.textContent).toMatch(
+        /west side comes to play|golden amphitheatre|Peaceful shores/,
+      );
     });
   });
 });
