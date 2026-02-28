@@ -464,7 +464,7 @@
         }
       ],
       "test_file": "client/src/components/AboutTab.test.tsx",
-      "status": "pending",
+      "status": "completed",
       "depends_on": [
         "002"
       ],
@@ -674,7 +674,7 @@
         }
       ],
       "test_file": "client/src/components/FavoritesView.test.tsx",
-      "status": "pending",
+      "status": "completed",
       "depends_on": [
         "002",
         "003"
