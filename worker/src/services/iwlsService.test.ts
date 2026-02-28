@@ -54,8 +54,7 @@ describe('iwlsService', () => {
     expect(result.stationId).toBe('5cebf1de3d0f4a073c4bb943');
     expect(result.beachId).toBe('english-bay');
     expect(result.stationName).toBe('English Bay (Vancouver)');
-    expect(result.predictions.length).toBeGreaterThan(0);
-    expect(result.predictions.length).toBeLessThanOrEqual(6);
+    expect(result.predictions.length).toBe(MOCK_IWLS_RESPONSE.length);
     expect(result.fetchedAt).toBeDefined();
   });
 
