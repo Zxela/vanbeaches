@@ -109,8 +109,11 @@ export function TideCanvas({ predictions, loading, className }: TideCanvasProps)
     return () => observer.disconnect();
   }, []);
 
-  // Handle resize
+  // Handle resize — re-run when canvas view mounts (loading/empty states
+  // render a different tree where containerRef is not in the DOM)
+  const showChart = !loading && todayTides.length > 0;
   useEffect(() => {
+    if (!showChart) return;
     const container = containerRef.current;
     if (!container) return;
 
@@ -124,7 +127,7 @@ export function TideCanvas({ predictions, loading, className }: TideCanvasProps)
 
     resizeObserver.observe(container);
     return () => resizeObserver.disconnect();
-  }, []);
+  }, [showChart]);
 
   // Animate curve on mount
   useEffect(() => {

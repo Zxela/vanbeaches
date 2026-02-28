@@ -155,36 +155,24 @@ function DayCard({ day, isToday }: DayCardProps) {
       {/* Mini tide curve visualization */}
       <MiniTideCurve tides={day.tides} />
 
-      {/* High/Low summary */}
+      {/* High/Low summary (chronological order) */}
       <div className="mt-3 space-y-1.5">
-        {day.tides
-          .filter((t) => t.type === 'high')
-          .slice(0, 2)
-          .map((tide) => (
-            <div key={tide.time} className="flex items-center justify-between text-sm">
-              <span className="flex items-center gap-1 text-tide-high">
-                <Icon icon={TrendingUp} size="xs" />
-                <span className="font-medium">{formatNumber(tide.height)}m</span>
-              </span>
-              <span className="text-sand-500 dark:text-sand-400">
-                {formatTideTime(tide.time).replace(' ', '')}
-              </span>
-            </div>
-          ))}
-        {day.tides
-          .filter((t) => t.type === 'low')
-          .slice(0, 2)
-          .map((tide) => (
-            <div key={tide.time} className="flex items-center justify-between text-sm">
-              <span className="flex items-center gap-1 text-tide-low">
-                <Icon icon={TrendingDown} size="xs" />
-                <span className="font-medium">{formatNumber(tide.height)}m</span>
-              </span>
-              <span className="text-sand-500 dark:text-sand-400">
-                {formatTideTime(tide.time).replace(' ', '')}
-              </span>
-            </div>
-          ))}
+        {day.tides.map((tide) => (
+          <div key={tide.time} className="flex items-center justify-between text-sm">
+            <span
+              className={cn(
+                'flex items-center gap-1',
+                tide.type === 'high' ? 'text-tide-high' : 'text-tide-low',
+              )}
+            >
+              <Icon icon={tide.type === 'high' ? TrendingUp : TrendingDown} size="xs" />
+              <span className="font-medium">{formatNumber(tide.height)}m</span>
+            </span>
+            <span className="text-sand-500 dark:text-sand-400">
+              {formatTideTime(tide.time).replace(' ', '')}
+            </span>
+          </div>
+        ))}
       </div>
     </div>
   );
