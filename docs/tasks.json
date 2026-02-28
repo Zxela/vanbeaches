@@ -212,7 +212,7 @@
         }
       ],
       "test_file": "client/src/components/TabBar.test.tsx",
-      "status": "pending",
+      "status": "completed",
       "depends_on": [
         "001"
       ],
