@@ -1118,7 +1118,7 @@
         }
       ],
       "test_file": "client/src/integration/editorial-redesign.test.tsx",
-      "status": "pending",
+      "status": "completed",
       "depends_on": [
         "014",
         "010",
