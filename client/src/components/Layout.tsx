@@ -7,6 +7,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useFavorites } from '../hooks/useFavorites';
 import { cn } from '../lib/utils';
 import { MobileBottomNav } from './MobileBottomNav';
+import { OfflineBanner } from './OfflineBanner';
 import { Icon } from './ui';
 
 interface LayoutProps {
@@ -50,6 +51,7 @@ export function Layout({ children }: LayoutProps) {
 
   return (
     <div className="min-h-screen bg-sand-50 dark:bg-sand-900">
+      <OfflineBanner />
       {/* App container */}
       <div className="min-h-screen flex flex-col">
         <header className="sticky top-0 z-50 bg-white/90 dark:bg-sand-900/95 backdrop-blur-md text-sand-900 dark:text-sand-100 shadow-xl border-b border-ocean-200/30 dark:border-ocean-800/30">
