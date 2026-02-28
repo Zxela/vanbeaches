@@ -1,30 +1,14 @@
 import { BEACHES, type BeachSummary } from '@van-beaches/shared';
 import { motion } from 'framer-motion';
-import { ArrowRight, TrendingDown, TrendingUp } from 'lucide-react';
 import { useMemo } from 'react';
 import { Link } from 'react-router-dom';
+import { getPersonality } from '../data/beach-personalities';
 import { getWeatherColor, getWeatherIcon } from '../lib/weatherIcons';
 import { FavoriteButton } from './FavoriteButton';
-import { Icon } from './ui';
 
 interface BeachCardProps {
   beach: BeachSummary;
 }
-
-const waterQualityDot: Record<string, string> = {
-  good: 'bg-emerald-500',
-  advisory: 'bg-amber-500',
-  closed: 'bg-red-500',
-  unknown: 'bg-sand-400',
-  'off-season': 'bg-sky-400',
-};
-
-const waterQualityLabel: Record<string, string> = {
-  good: 'Good',
-  advisory: 'Advisory',
-  closed: 'Closed',
-  'off-season': 'Off-season',
-};
 
 // Fallback gradients when no image is available
 const fallbackGradients = [
@@ -36,91 +20,81 @@ const fallbackGradients = [
 
 export function BeachCard({ beach }: BeachCardProps) {
   const beachData = useMemo(() => BEACHES.find((b) => b.id === beach.id), [beach.id]);
+  const personality = useMemo(() => getPersonality(beach.id), [beach.id]);
   const WeatherIcon = beach.currentWeather ? getWeatherIcon(beach.currentWeather.condition) : null;
   const weatherColor = beach.currentWeather ? getWeatherColor(beach.currentWeather.condition) : '';
   const gradientIdx = beach.name.length % fallbackGradients.length;
 
+  const keyDifferentiator = personality?.differentiators?.[0] ?? null;
+
   return (
     <motion.div
-      className="group relative overflow-hidden rounded-2xl bg-white dark:bg-sand-800 shadow-card dark:shadow-card-dark hover:shadow-card-hover dark:hover:shadow-ocean-md transition-all duration-300 hover:-translate-y-0.5"
-      initial={{ opacity: 0, y: 20 }}
+      className="group relative overflow-hidden rounded-2xl bg-white shadow-sm border border-sand-100 hover:shadow-md transition-all duration-300 hover:-translate-y-0.5"
+      initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.3 }}
+      transition={{ duration: 0.25 }}
     >
       <Link to={`/beach/${beach.id}`} className="block">
-        {/* Photo section - top 60% */}
-        <div className="relative aspect-[3/2] overflow-hidden">
-          {beachData?.images ? (
-            <img
-              src={beachData.images.thumb}
-              alt={beach.name}
-              loading="lazy"
-              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-            />
-          ) : (
-            <div className={`w-full h-full bg-gradient-to-br ${fallbackGradients[gradientIdx]}`} />
-          )}
-
-          {/* Gradient overlay at bottom of photo */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-
-          {/* Weather badge - top right */}
-          {beach.currentWeather && (
-            <div className="absolute top-3 left-3 flex items-center gap-1.5 bg-black/40 backdrop-blur-sm rounded-full px-2.5 py-1">
-              {WeatherIcon && (
-                <WeatherIcon className={`w-4 h-4 ${weatherColor}`} strokeWidth={1.5} />
-              )}
-              <span className="text-sm font-semibold text-white">
-                {beach.currentWeather.temperature}°C
-              </span>
-            </div>
-          )}
-
-          {/* Beach name + tagline at bottom of photo */}
-          <div className="absolute bottom-0 left-0 right-0 p-4">
-            <h3 className="text-lg font-bold text-white leading-tight">{beach.name}</h3>
-            {beachData?.tagline && (
-              <p className="text-sm text-white/80 mt-0.5 line-clamp-1">{beachData.tagline}</p>
+        {/* Mobile: horizontal layout — photo left, info right */}
+        {/* Desktop (md+): vertical layout — photo top, info below */}
+        <div className="flex md:flex-col">
+          {/* Thumbnail — landscape, fixed width on mobile, full-width on desktop */}
+          <div className="relative w-28 shrink-0 md:w-auto md:aspect-[16/10] overflow-hidden rounded-l-2xl md:rounded-l-none md:rounded-t-2xl">
+            {beachData?.images ? (
+              <img
+                src={beachData.images.thumb}
+                alt={beach.name}
+                loading="lazy"
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+            ) : (
+              <div className={`w-full h-full bg-gradient-to-br ${fallbackGradients[gradientIdx]}`} />
             )}
+            {/* Light overlay for warmth — much lighter than old design */}
+            <div className="absolute inset-0 bg-gradient-to-r from-black/20 to-transparent md:bg-gradient-to-t md:from-black/30 md:to-transparent" />
           </div>
-        </div>
 
-        {/* Bottom strip - info bar */}
-        <div className="px-4 py-3 flex items-center justify-between">
-          <div className="flex items-center gap-3 text-sm">
-            {beach.nextTide && (
-              <div className="flex items-center gap-1.5 text-sand-600 dark:text-sand-400">
-                <Icon
-                  icon={beach.nextTide.type === 'high' ? TrendingUp : TrendingDown}
-                  size="sm"
-                  color={beach.nextTide.type === 'high' ? 'tide-high' : 'tide-low'}
-                />
-                <span className="capitalize">
-                  {beach.nextTide.type} {beach.nextTide.time}
+          {/* Info panel */}
+          <div className="flex-1 min-w-0 p-3 md:p-4 flex flex-col justify-between">
+            {/* Beach name + archetype */}
+            <div>
+              <h3 className="font-display text-sm font-semibold text-sand-900 leading-tight line-clamp-1 md:text-base">
+                {beach.name}
+              </h3>
+              {personality && (
+                <p className="text-xs text-coral-600 font-medium mt-0.5 line-clamp-1">
+                  {personality.archetype}
+                </p>
+              )}
+            </div>
+
+            {/* Key differentiator */}
+            {keyDifferentiator && (
+              <p className="text-xs text-sand-600 mt-1.5 line-clamp-2 leading-snug">
+                {keyDifferentiator}
+              </p>
+            )}
+
+            {/* Current conditions */}
+            {beach.currentWeather && (
+              <div className="flex items-center gap-1.5 mt-2">
+                {WeatherIcon && (
+                  <WeatherIcon className={`w-3.5 h-3.5 ${weatherColor} shrink-0`} strokeWidth={2} />
+                )}
+                <span className="text-xs font-semibold text-ocean-700">
+                  {beach.currentWeather.temperature}°C
+                </span>
+                <span className="text-xs text-sand-500 capitalize">
+                  · {beach.currentWeather.condition}
                 </span>
               </div>
             )}
-            {beach.waterQuality && beach.waterQuality !== 'unknown' && (
-              <div className="flex items-center gap-1.5 text-sand-500 dark:text-sand-400">
-                <span className={`w-2 h-2 rounded-full ${waterQualityDot[beach.waterQuality]}`} />
-                <span className="text-xs">{waterQualityLabel[beach.waterQuality]}</span>
-              </div>
-            )}
           </div>
-
-          <span className="flex items-center gap-1 text-xs text-ocean-600 dark:text-ocean-400 font-medium opacity-0 group-hover:opacity-100 transition-opacity">
-            Explore
-            <Icon
-              icon={ArrowRight}
-              size="xs"
-              className="translate-x-0 group-hover:translate-x-1 transition-transform"
-            />
-          </span>
         </div>
       </Link>
 
-      {/* Favorite button floating over photo */}
-      <div className="absolute top-3 right-3 z-10">
+      {/* Favorite button — floating over thumbnail */}
+      <div className="absolute top-2 right-2 z-10">
         <FavoriteButton beachId={beach.id} beachName={beach.name} size="sm" />
       </div>
     </motion.div>
