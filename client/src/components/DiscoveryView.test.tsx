@@ -195,6 +195,25 @@ vi.mock('../data/beach-personalities', () => ({
   beachPersonalities: [],
 }));
 
+// Mock vibeIcons — return simple spans instead of lucide components
+vi.mock('../lib/vibeIcons', () => {
+  const MockIcon = ({ className, ...props }: Record<string, unknown>) => (
+    <svg className={className as string} {...props} data-testid="vibe-icon" />
+  );
+  return {
+    VIBE_ICONS: {
+      active: MockIcon,
+      quiet: MockIcon,
+      family: MockIcon,
+      'dog-friendly': MockIcon,
+      sunset: MockIcon,
+      social: MockIcon,
+      nature: MockIcon,
+      urban: MockIcon,
+    },
+  };
+});
+
 // Test data
 const mockBeaches: Beach[] = [
   {
@@ -353,6 +372,14 @@ describe('DiscoveryView', () => {
       const activeBtn = screen.getByRole('button', { name: /active/i });
       expect(activeBtn).not.toHaveAttribute('data-selected', 'true');
     });
+
+    it('vibe chips have icons', () => {
+      renderDiscoveryView();
+      // Each vibe chip should contain an icon
+      const vibeIcons = screen.getAllByTestId('vibe-icon');
+      // 8 chips in the filter section + icons in beach card vibe badges
+      expect(vibeIcons.length).toBeGreaterThanOrEqual(8);
+    });
   });
 
   // AC-003: Vibe filtering
@@ -415,6 +442,36 @@ describe('DiscoveryView', () => {
       // English Bay and Kitsilano do not have dog-friendly vibe
       expect(beachList?.textContent).not.toContain('English Bay');
       expect(beachList?.textContent).not.toContain('Kitsilano Beach');
+    });
+
+    it('shows Clear button when a vibe is selected', () => {
+      renderDiscoveryView();
+      // Clear should not be visible initially
+      expect(screen.queryByRole('button', { name: /clear/i })).not.toBeInTheDocument();
+
+      // Select a vibe
+      fireEvent.click(screen.getByRole('button', { name: /sunset/i }));
+
+      // Clear button should appear
+      expect(screen.getByRole('button', { name: /clear/i })).toBeInTheDocument();
+    });
+
+    it('Clear button resets the filter', () => {
+      renderDiscoveryView();
+      // Select a vibe
+      fireEvent.click(screen.getByRole('button', { name: /sunset/i }));
+
+      // Click Clear
+      fireEvent.click(screen.getByRole('button', { name: /clear/i }));
+
+      // All beaches should be shown again
+      const beachList = document.querySelector('[data-testid="discovery-beach-list"]');
+      expect(beachList?.textContent).toContain('English Bay');
+      expect(beachList?.textContent).toContain('Kitsilano Beach');
+      expect(beachList?.textContent).toContain('Locarno Beach');
+
+      // Clear button should be gone
+      expect(screen.queryByRole('button', { name: /clear/i })).not.toBeInTheDocument();
     });
   });
 

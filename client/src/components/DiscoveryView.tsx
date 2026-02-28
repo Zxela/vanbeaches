@@ -1,8 +1,12 @@
 import type { Beach, BeachSummary } from '@van-beaches/shared';
-import { useState } from 'react';
+import { ChevronRight } from 'lucide-react';
+import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import type { BeachVibe } from '../data/beach-personalities';
 import { getPersonality } from '../data/beach-personalities';
+import { useFavorites } from '../hooks/useFavorites';
+import { cn } from '../lib/utils';
+import { VIBE_ICONS } from '../lib/vibeIcons';
 import { getWeatherIcon } from '../lib/weatherIcons';
 import { BeachCard } from './BeachCard';
 import { BeachMap } from './BeachMap';
@@ -54,7 +58,7 @@ function pickFeaturedBeach(
 }
 
 /**
- * Compact banner (~60px) featuring the recommended beach of the day.
+ * Featured banner with hero image background.
  */
 function FeaturedBanner({
   beach,
@@ -71,42 +75,61 @@ function FeaturedBanner({
     <Link
       to={`/beach/${beach.id}`}
       data-testid="discovery-hero"
-      className="flex items-center gap-3 rounded-xl bg-sand-50 px-4 py-3 hover:bg-sand-100 transition-colors"
+      className="relative flex items-end rounded-xl overflow-hidden h-[100px] hover:opacity-95 transition-opacity"
     >
-      {/* Label + beach info */}
-      <div className="flex-1 min-w-0">
-        <p className="text-[10px] font-semibold tracking-widest uppercase text-coral-500">
-          Today's pick
-        </p>
-        <p className="font-display text-sm font-bold text-sand-900 leading-tight truncate">
-          {beach.name}
-          {personality && (
-            <span className="font-normal text-sand-500 ml-1.5">— {personality.archetype}</span>
-          )}
-        </p>
-      </div>
-
-      {/* Conditions */}
-      {weather && (
-        <div className="flex items-center gap-1.5 shrink-0">
-          {WeatherIcon && (
-            <WeatherIcon className="w-4 h-4 text-ocean-500 shrink-0" strokeWidth={2} />
-          )}
-          <span className="text-sm font-semibold text-ocean-700">{weather.temperature}°C</span>
-        </div>
+      {/* Background image or gradient */}
+      {beach.images?.hero ? (
+        <img
+          src={beach.images.hero}
+          alt=""
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+      ) : (
+        <div className="absolute inset-0 bg-gradient-to-br from-ocean-400 to-sky-500" />
       )}
 
-      {/* Arrow */}
-      <span className="text-sand-400 shrink-0">→</span>
+      {/* Gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-transparent" />
+
+      {/* Content */}
+      <div className="relative flex items-end justify-between w-full p-4">
+        <div className="min-w-0 flex-1">
+          <p className="text-[10px] font-semibold tracking-widest uppercase text-coral-300">
+            Today's pick
+          </p>
+          <p className="font-display text-lg font-bold text-white leading-tight truncate">
+            {beach.name}
+          </p>
+          {personality && <p className="text-xs text-white/70 truncate">{personality.archetype}</p>}
+        </div>
+
+        <div className="flex items-center gap-2 shrink-0">
+          {weather && (
+            <div className="flex items-center gap-1.5">
+              {WeatherIcon && (
+                <WeatherIcon className="w-5 h-5 text-white shrink-0" strokeWidth={2} />
+              )}
+              <span className="text-base font-semibold text-white">
+                {weather.temperature}&deg;C
+              </span>
+            </div>
+          )}
+          <ChevronRight className="w-5 h-5 text-white/60 shrink-0" />
+        </div>
+      </div>
     </Link>
   );
 }
 
 export function DiscoveryView({ beaches, beachConditions, loading = false }: DiscoveryViewProps) {
   const [selectedVibe, setSelectedVibe] = useState<BeachVibe | null>(null);
+  const { favorites } = useFavorites();
 
   // Pick the featured beach
   const featuredBeach = pickFeaturedBeach(beaches, beachConditions);
+
+  // Favorites set for highlighting
+  const favSet = useMemo(() => new Set(favorites), [favorites]);
 
   // Filter beaches by selected vibe
   const filteredBeaches = selectedVibe
@@ -116,21 +139,28 @@ export function DiscoveryView({ beaches, beachConditions, loading = false }: Dis
       })
     : beaches;
 
-  // Build BeachSummary records for BeachCard
-  const beachSummaries = filteredBeaches.map((beach): [string, BeachSummary | undefined] => [
-    beach.id,
-    beachConditions[beach.id],
-  ]);
+  // Sort favorites to the top, preserving relative order within each group
+  const sortedBeaches = useMemo(() => {
+    return [...filteredBeaches].sort((a, b) => {
+      const aFav = favSet.has(a.id) ? 0 : 1;
+      const bFav = favSet.has(b.id) ? 0 : 1;
+      return aFav - bFav;
+    });
+  }, [filteredBeaches, favSet]);
 
   const handleVibeClick = (vibe: BeachVibe) => {
     setSelectedVibe((current) => (current === vibe ? null : vibe));
+  };
+
+  const clearFilter = () => {
+    setSelectedVibe(null);
   };
 
   if (loading) {
     return (
       <div className="animate-pulse space-y-4 px-4 pb-8">
         {/* Banner skeleton */}
-        <div className="rounded-xl bg-sand-200 h-14" />
+        <div className="rounded-xl bg-sand-200 h-[100px]" />
         {/* Chips skeleton */}
         <div className="flex gap-2">
           {[1, 2, 3, 4].map((i) => (
@@ -139,7 +169,13 @@ export function DiscoveryView({ beaches, beachConditions, loading = false }: Dis
         </div>
         {/* Rows skeleton */}
         {[1, 2, 3].map((i) => (
-          <div key={i} className="h-12 bg-sand-200" />
+          <div key={i} className="flex items-center gap-3 py-3">
+            <div className="w-[60px] h-[60px] rounded-lg bg-sand-200 shrink-0" />
+            <div className="flex-1 space-y-2">
+              <div className="h-4 bg-sand-200 rounded w-2/3" />
+              <div className="h-3 bg-sand-200 rounded w-1/2" />
+            </div>
+          </div>
         ))}
       </div>
     );
@@ -156,24 +192,40 @@ export function DiscoveryView({ beaches, beachConditions, loading = false }: Dis
 
       {/* Vibe filter chips */}
       <section aria-label="Filter by vibe">
-        <h2 className="font-display text-lg font-semibold text-sand-900 mb-3">What's your vibe?</h2>
+        <div className="flex items-center justify-between mb-3">
+          <h2 className="font-display text-lg font-semibold text-sand-900">What's your vibe?</h2>
+          {selectedVibe && (
+            <button
+              type="button"
+              onClick={clearFilter}
+              className="text-sm text-coral-500 hover:text-coral-600 font-medium"
+            >
+              Clear
+            </button>
+          )}
+        </div>
         <div className="flex flex-wrap gap-2">
           {ALL_VIBES.map(({ vibe, label }) => {
             const isSelected = selectedVibe === vibe;
+            const VibeIcon = VIBE_ICONS[vibe];
             return (
               <button
                 key={vibe}
                 type="button"
                 onClick={() => handleVibeClick(vibe)}
                 data-selected={String(isSelected)}
-                className={[
-                  'px-3 py-1.5 rounded-full text-sm font-medium transition-all duration-200',
+                className={cn(
+                  'inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium transition-all duration-200',
                   isSelected
                     ? 'bg-coral-500 text-white shadow-sm'
                     : 'bg-white text-sand-700 border border-sand-200 hover:border-coral-300 hover:text-coral-600',
-                ].join(' ')}
+                )}
                 aria-pressed={isSelected}
               >
+                <VibeIcon
+                  className={cn('w-3.5 h-3.5', isSelected ? 'text-white' : 'text-sand-500')}
+                  strokeWidth={2}
+                />
                 {label}
               </button>
             );
@@ -184,21 +236,14 @@ export function DiscoveryView({ beaches, beachConditions, loading = false }: Dis
       {/* Beach list — compact rows with dividers */}
       <section aria-label="Beach list" data-testid="discovery-beach-list">
         <div className="divide-y divide-sand-100">
-          {beachSummaries.map(([beachId, summary]) => {
-            const beach = beaches.find((b) => b.id === beachId);
-            if (!beach) return null;
-
-            const beachSummaryForCard: BeachSummary = summary ?? {
-              id: beach.id,
-              name: beach.name,
-              currentWeather: null,
-              nextTide: null,
-              waterQuality: 'unknown',
-              lastUpdated: new Date().toISOString(),
-            };
-
-            return <BeachCard key={beachId} beach={beachSummaryForCard} />;
-          })}
+          {sortedBeaches.map((beach) => (
+            <BeachCard
+              key={beach.id}
+              beach={beach}
+              conditions={beachConditions[beach.id]}
+              isFavorite={favSet.has(beach.id)}
+            />
+          ))}
         </div>
       </section>
 

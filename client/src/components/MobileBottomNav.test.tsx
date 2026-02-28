@@ -11,14 +11,12 @@ function renderNav(initialPath = '/') {
   );
 }
 
-describe('MobileBottomNav - 2-item layout', () => {
-  // AC-001: MobileBottomNav renders exactly 2 items: Home and Explore
-  it('renders exactly 2 navigation items', () => {
+describe('MobileBottomNav - single Home button', () => {
+  it('renders exactly 1 navigation item', () => {
     renderNav();
     const nav = screen.getByRole('navigation');
-    // Count direct link children (Home and Explore)
     const links = nav.querySelectorAll('a');
-    expect(links.length).toBe(2);
+    expect(links.length).toBe(1);
   });
 
   it('renders a Home item', () => {
@@ -26,9 +24,9 @@ describe('MobileBottomNav - 2-item layout', () => {
     expect(screen.getByText('Home')).toBeInTheDocument();
   });
 
-  it('renders an Explore item', () => {
+  it('does not render an Explore item', () => {
     renderNav();
-    expect(screen.getByText('Explore')).toBeInTheDocument();
+    expect(screen.queryByText('Explore')).toBeNull();
   });
 
   it('does not render a Beaches item', () => {
@@ -41,17 +39,19 @@ describe('MobileBottomNav - 2-item layout', () => {
     expect(screen.queryByText('Compare')).toBeNull();
   });
 
-  // AC-002: Home navigates to /discover
+  // Home navigates to /discover
   it('Home link points to /discover', () => {
     renderNav();
     const homeLink = screen.getByText('Home').closest('a');
     expect(homeLink).toHaveAttribute('href', '/discover');
   });
 
-  // AC-003: Explore navigates to /discover
-  it('Explore link points to /discover', () => {
+  // Container uses justify-center
+  it('uses justify-center layout', () => {
     renderNav();
-    const exploreLink = screen.getByText('Explore').closest('a');
-    expect(exploreLink).toHaveAttribute('href', '/discover');
+    const nav = screen.getByRole('navigation');
+    const container = nav.querySelector('.flex');
+    expect(container?.className).toContain('justify-center');
+    expect(container?.className).not.toContain('justify-around');
   });
 });

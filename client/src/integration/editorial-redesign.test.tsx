@@ -232,24 +232,23 @@ describe('Integration: editorial redesign user flows', () => {
     window.location.hash = '';
   });
 
-  // AC-001: User with favorites in localStorage sees FavoritesView (beach name visible)
-  describe('018-AC1: returning user with favorites sees FavoritesView', () => {
-    it('shows favorite beach name when user has a favorite in localStorage', () => {
+  // AC-001: User with favorites sees the same DiscoveryView with favorites sorted to top
+  describe('018-AC1: returning user with favorites sees DiscoveryView', () => {
+    it('shows favorite beach name in the discovery list', () => {
       setFavorites(['kitsilano-beach']);
 
       renderApp('/discover');
 
-      // FavoritesView renders the primary beach name in the card heading
-      expect(screen.getByText('Kitsilano Beach')).toBeInTheDocument();
+      // Beach name appears in both the featured banner and the beach list
+      expect(screen.getAllByText('Kitsilano Beach').length).toBeGreaterThanOrEqual(1);
     });
 
-    it('does not show editorial discovery hero when user has favorites', () => {
+    it('still shows editorial discovery hero when user has favorites', () => {
       setFavorites(['kitsilano-beach']);
 
       renderApp('/discover');
 
-      // "Today's pick" label belongs to the DiscoveryView editorial hero
-      expect(screen.queryByText("Today's pick")).not.toBeInTheDocument();
+      expect(screen.getByText("Today's pick")).toBeInTheDocument();
     });
   });
 
@@ -260,7 +259,6 @@ describe('Integration: editorial redesign user flows', () => {
 
       renderApp('/discover');
 
-      // The DiscoveryView editorial hero renders "Today's pick"
       expect(screen.getByText("Today's pick")).toBeInTheDocument();
     });
 

@@ -1,4 +1,4 @@
-import { Home, Map as MapIcon } from 'lucide-react';
+import { Home } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import { cn } from '../lib/utils';
 import { Icon } from './ui';
@@ -10,7 +10,7 @@ export function MobileBottomNav() {
 
   return (
     <nav className="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-xl border-t border-sand-200 sm:hidden z-50 safe-area-inset-bottom">
-      <div className="flex items-center justify-around h-16">
+      <div className="flex items-center justify-center h-16">
         <Link
           to="/discover"
           className={cn(
@@ -20,17 +20,6 @@ export function MobileBottomNav() {
         >
           <Icon icon={Home} size="lg" />
           <span className="text-xs mt-1 font-medium">Home</span>
-        </Link>
-
-        <Link
-          to="/discover"
-          className={cn(
-            'flex flex-col items-center justify-center w-20 h-full transition-colors',
-            'text-sand-500',
-          )}
-        >
-          <Icon icon={MapIcon} size="lg" />
-          <span className="text-xs mt-1 font-medium">Explore</span>
         </Link>
       </div>
     </nav>
