@@ -14,7 +14,6 @@ export function App() {
             <Route path="/" element={<SmartRedirect />} />
             <Route path="/discover" element={<Discover />} />
             <Route path="/beach/:slug" element={<BeachDetail />} />
-            <Route path="/compare" element={<Navigate to="/discover" replace />} />
             <Route path="*" element={<Navigate to="/discover" replace />} />
           </Routes>
         </Layout>

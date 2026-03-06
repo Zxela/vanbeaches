@@ -2,27 +2,23 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { describe, expect, it } from 'vitest';
 
-describe('App Routing (task-016: Update routing and remove Compare)', () => {
+describe('App Routing (task-012: Remove Compare page and route)', () => {
   it('Compare component is not imported in App.tsx', () => {
     const appPath = path.join(process.cwd(), 'src', 'App.tsx');
     const appSource = fs.readFileSync(appPath, 'utf-8');
-    // AC-001: Compare page component is no longer imported in App.tsx
     expect(appSource).not.toMatch(/import.*Compare/i);
   });
 
-  it('routes /compare with Navigate redirect to /discover', () => {
+  it('does not have a /compare route — catch-all handles the redirect (AC-014)', () => {
     const appPath = path.join(process.cwd(), 'src', 'App.tsx');
     const appSource = fs.readFileSync(appPath, 'utf-8');
-    // AC-002: Route for /compare should redirect to /discover
-    expect(appSource).toMatch(
-      /path=["']\/compare["']\s+element=\{<Navigate\s+to=["']\/discover["']\s+replace\s*\/>\}/,
-    );
+    // AC-014: The /compare route must not exist; the catch-all redirects unknown routes to /discover
+    expect(appSource).not.toMatch(/path=["']\/compare["']/);
   });
 
   it('routes /* (catch-all) with Navigate redirect to /discover', () => {
     const appPath = path.join(process.cwd(), 'src', 'App.tsx');
     const appSource = fs.readFileSync(appPath, 'utf-8');
-    // AC-003: Unknown routes should redirect to /discover
     expect(appSource).toMatch(
       /path=["']\*["']\s+element=\{<Navigate\s+to=["']\/discover["']\s+replace\s*\/>\}/,
     );
