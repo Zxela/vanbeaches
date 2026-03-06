@@ -1,0 +1,571 @@
+{
+  "tasks": [
+    {
+      "id": "001",
+      "title": "Create VerdictBadge component and computeSummaryVerdict utility",
+      "objective": "Build the reusable VerdictBadge component that renders color-coded verdict labels (Perfect/Good/Fair/Skip) in sm and md sizes, and add the computeSummaryVerdict function that derives a verdict from BeachSummary data (weather condition + temperature + water quality) without wind/UV.",
+      "task_type": "create_service",
+      "methodology": "tdd",
+      "acceptance_criteria": [
+        {
+          "id": "AC-002",
+          "criterion": "When the Discover page loads with weather data available, each beach list row shall display a color-coded verdict badge showing one of \"Perfect\", \"Good\", \"Fair\", or \"Skip\" derived from the computeVerdict utility.",
+          "risk_level": "must_test",
+          "test_assertion": "expect(screen.getAllByTestId('verdict-badge').length).toBeGreaterThan(0); expect(['Perfect','Good','Fair','Skip']).toContain(badge.textContent)"
+        },
+        {
+          "id": "AC-003",
+          "criterion": "When weather data is loading, each beach list row shall display a skeleton placeholder in place of the verdict badge.",
+          "risk_level": "must_test",
+          "test_assertion": "expect(screen.getAllByTestId('verdict-badge-skeleton').length).toBeGreaterThan(0)"
+        }
+      ],
+      "test_file": "client/src/components/__tests__/VerdictBadge.test.tsx",
+      "status": "pending",
+      "depends_on": [],
+      "traces_to": {
+        "user_stories": ["US-001"],
+        "acceptance_criteria": ["AC-002", "AC-003"],
+        "adr_decisions": ["ADR-003"]
+      },
+      "technical_notes": "Create VerdictBadge.tsx with sm/md size variants. Add computeSummaryVerdict in client/src/utils/verdict.ts that uses only weather condition, temperature, and water quality (not wind/UV). Reuse existing getColorConfig and getRecommendationLabel patterns from BeachVerdict.tsx. Skeleton state renders a pulsing placeholder with data-testid='verdict-badge-skeleton'.",
+      "context_refs": {
+        "interface_locations": [
+          "TECHNICAL_DESIGN.md:### 2. Verdict Badge Component (FR-002, FR-004)",
+          "client/src/components/BeachVerdict.tsx:getColorConfig",
+          "client/src/utils/verdict.ts:determineRecommendation"
+        ],
+        "pattern_files": [
+          "client/src/components/BeachVerdict.tsx",
+          "client/src/utils/verdict.ts"
+        ],
+        "grep_patterns": [
+          "getColorConfig",
+          "bg-emerald-100 text-emerald-800",
+          "RecommendationLevel",
+          "export function computeVerdict",
+          "determineRecommendation"
+        ],
+        "constraints_section": "ADR.md:## ADR-003"
+      },
+      "model": "sonnet"
+    },
+    {
+      "id": "002",
+      "title": "Add water quality text label helpers",
+      "objective": "Extend waterQualityColors.ts with getWaterQualityTextLabel and color variant helpers that return labeled text (Safe/Advisory/Closed/Off-Season/Unknown) with corresponding background colors (green/amber/red/gray/gray).",
+      "task_type": "add_method",
+      "methodology": "direct",
+      "acceptance_criteria": [
+        {
+          "id": "AC-010",
+          "criterion": "When water quality data is available on the beach detail conditions grid, the system shall display the water quality level as a text label (\"Safe\", \"Advisory\", \"Closed\", \"Off-Season\", \"Unknown\") with a colored background matching the severity (green, amber, red, gray, gray respectively).",
+          "risk_level": "must_test",
+          "test_assertion": "expect(getWaterQualityTextLabel('safe')).toBe('Safe'); expect(getWaterQualityBgClass('safe')).toContain('emerald')"
+        }
+      ],
+      "test_file": "client/src/lib/__tests__/waterQualityColors.test.ts",
+      "status": "pending",
+      "depends_on": [],
+      "traces_to": {
+        "user_stories": ["US-001"],
+        "acceptance_criteria": ["AC-010"],
+        "adr_decisions": []
+      },
+      "technical_notes": "Add getWaterQualityTextLabel(level: WaterQualityLevel) and getWaterQualityBgClass(level: WaterQualityLevel) to the existing waterQualityColors.ts. Map: safe->green/emerald, advisory->amber, closed->red, off_season->gray, unknown->gray.",
+      "context_refs": {
+        "interface_locations": [
+          "TECHNICAL_DESIGN.md:### 7. Water Quality Text Label",
+          "client/src/lib/waterQualityColors.ts:getWaterQualityDotColor"
+        ],
+        "pattern_files": [
+          "client/src/lib/waterQualityColors.ts"
+        ],
+        "grep_patterns": [
+          "WaterQualityLevel",
+          "getWaterQualityDotColor",
+          "getWaterQualityLabel"
+        ],
+        "constraints_section": "TECHNICAL_DESIGN.md:### 7. Water Quality Text Label"
+      },
+      "model": "haiku"
+    },
+    {
+      "id": "003",
+      "title": "Create ErrorState reusable component",
+      "objective": "Build a reusable error card component that accepts a configurable message string and an optional retry callback, rendering a styled card with error text and a 'Try again' button.",
+      "task_type": "add_method",
+      "methodology": "direct",
+      "acceptance_criteria": [
+        {
+          "id": "003-AC1",
+          "criterion": "ErrorState renders the provided message string and a 'Try again' button when onRetry is provided.",
+          "risk_level": "must_test",
+          "test_assertion": "expect(screen.getByText(\"Couldn't load conditions\")).toBeInTheDocument(); expect(screen.getByRole('button', { name: 'Try again' })).toBeInTheDocument()"
+        },
+        {
+          "id": "003-AC2",
+          "criterion": "ErrorState does not render a retry button when onRetry is not provided.",
+          "risk_level": "verify_only",
+          "test_assertion": "expect(screen.queryByRole('button', { name: 'Try again' })).not.toBeInTheDocument()"
+        }
+      ],
+      "test_file": "client/src/components/__tests__/ErrorState.test.tsx",
+      "status": "pending",
+      "depends_on": [],
+      "traces_to": {
+        "user_stories": ["US-006"],
+        "acceptance_criteria": ["AC-015", "AC-016", "AC-019"],
+        "adr_decisions": []
+      },
+      "technical_notes": "Create ErrorState.tsx with props: message: string, onRetry?: () => void. Use Card component pattern from ui/Card.tsx. Styled with rounded-2xl border border-sand-200.",
+      "context_refs": {
+        "interface_locations": [
+          "TECHNICAL_DESIGN.md:### 11. Error/Empty States",
+          "WIREFRAMES.md:## Error State"
+        ],
+        "pattern_files": [
+          "client/src/components/ui/Card.tsx"
+        ],
+        "grep_patterns": [
+          "rounded-2xl border border-sand-200",
+          "onRetry"
+        ],
+        "constraints_section": "TECHNICAL_DESIGN.md:### 11. Error/Empty States"
+      },
+      "model": "haiku"
+    },
+    {
+      "id": "004",
+      "title": "Create BeachNavigation component with wrap-around logic",
+      "objective": "Build the previous/next beach navigation component that uses the alphabetically sorted BEACHES list with wrap-around at both ends, displaying adjacent beach names with chevron icons as links.",
+      "task_type": "create_service",
+      "methodology": "tdd",
+      "acceptance_criteria": [
+        {
+          "id": "AC-008",
+          "criterion": "When the user is viewing a beach detail page, the system shall display previous and next navigation controls showing the adjacent beach names (with directional chevron icons) that link to the adjacent beaches in alphabetical order.",
+          "risk_level": "must_test",
+          "test_assertion": "expect(screen.getByTestId('beach-nav-prev')).toBeInTheDocument(); expect(screen.getByTestId('beach-nav-next')).toBeInTheDocument()"
+        },
+        {
+          "id": "AC-009",
+          "criterion": "If the current beach is the first alphabetically, the \"Previous\" button shall wrap to the last beach. If the current beach is the last, the \"Next\" button shall wrap to the first.",
+          "risk_level": "must_test",
+          "test_assertion": "// render first-alpha beach; expect(prevLink.getAttribute('href')).toContain(lastAlphaBeach.id); // render last-alpha beach; expect(nextLink.getAttribute('href')).toContain(firstAlphaBeach.id)"
+        }
+      ],
+      "test_file": "client/src/components/__tests__/BeachNavigation.test.tsx",
+      "status": "pending",
+      "depends_on": [],
+      "traces_to": {
+        "user_stories": ["US-003"],
+        "acceptance_criteria": ["AC-008", "AC-009"],
+        "adr_decisions": []
+      },
+      "technical_notes": "Create BeachNavigation.tsx that takes currentBeachSlug as prop. Sort BEACHES alphabetically by name. Find current index, compute prev/next with modulo wrap-around. Use ChevronLeft/ChevronRight from lucide-react. Render as Link components with data-testid='beach-nav-prev' and 'beach-nav-next'.",
+      "context_refs": {
+        "interface_locations": [
+          "TECHNICAL_DESIGN.md:### 6. Previous/Next Beach Navigation",
+          "client/src/pages/BeachDetail.tsx:TabBar"
+        ],
+        "pattern_files": [
+          "client/src/pages/BeachDetail.tsx",
+          "client/src/components/TabBar.tsx"
+        ],
+        "grep_patterns": [
+          "BEACHES.*sort",
+          "ChevronLeft",
+          "ChevronRight"
+        ],
+        "constraints_section": "TECHNICAL_DESIGN.md:### 6. Previous/Next Beach Navigation"
+      },
+      "model": "sonnet"
+    },
+    {
+      "id": "005",
+      "title": "Rewrite ThemeContext with localStorage persistence and dark class toggle",
+      "objective": "Rewrite ThemeContext to provide a theme toggle that persists to localStorage as 'vanbeaches-theme', defaults to light mode, and applies the 'dark' class to document.documentElement.",
+      "task_type": "create_service",
+      "methodology": "tdd",
+      "acceptance_criteria": [
+        {
+          "id": "AC-012",
+          "criterion": "When the user taps the dark mode toggle in the header, the system shall apply the `dark` class to the document root and persist the preference to localStorage.",
+          "risk_level": "must_test",
+          "test_assertion": "userEvent.click(screen.getByTestId('dark-mode-toggle')); expect(document.documentElement.classList.contains('dark')).toBe(true); expect(localStorage.getItem('vanbeaches-theme')).toBe('dark')"
+        },
+        {
+          "id": "AC-013",
+          "criterion": "When the app loads, the system shall read the stored theme preference from localStorage and apply it. If no preference is stored, the system shall default to light mode.",
+          "risk_level": "must_test",
+          "test_assertion": "localStorage.setItem('vanbeaches-theme','dark'); render(<ThemeProvider>); expect(document.documentElement.classList.contains('dark')).toBe(true)"
+        }
+      ],
+      "test_file": "client/src/contexts/__tests__/ThemeContext.test.tsx",
+      "status": "pending",
+      "depends_on": [],
+      "traces_to": {
+        "user_stories": ["US-005"],
+        "acceptance_criteria": ["AC-012", "AC-013"],
+        "adr_decisions": ["ADR-004"]
+      },
+      "technical_notes": "Rewrite ThemeContext.tsx to export ThemeProvider and useTheme hook. ThemeContextType: { theme: 'light' | 'dark', toggleTheme: () => void }. On mount, read localStorage('vanbeaches-theme'); default to 'light'. On toggle, flip theme, persist to localStorage, toggle 'dark' class on document.documentElement.",
+      "context_refs": {
+        "interface_locations": [
+          "TECHNICAL_DESIGN.md:### 9. Dark Mode Toggle",
+          "client/src/contexts/ThemeContext.tsx:ThemeContextType"
+        ],
+        "pattern_files": [
+          "client/src/contexts/ThemeContext.tsx"
+        ],
+        "grep_patterns": [
+          "export function ThemeProvider",
+          "localStorage.*vanbeaches-theme",
+          "document.documentElement.classList.toggle"
+        ],
+        "constraints_section": "ADR.md:## ADR-004"
+      },
+      "model": "sonnet"
+    },
+    {
+      "id": "006",
+      "title": "Rewrite BeachCard as simplified list row with verdict badge and temperature",
+      "objective": "Rewrite BeachCard to display only: beach name, VerdictBadge, and current temperature. Remove tagline, vibe icons, thumbnail image, and water quality dot.",
+      "task_type": "create_model",
+      "methodology": "tdd",
+      "acceptance_criteria": [
+        {
+          "id": "AC-006",
+          "criterion": "When the Discover page renders beach list rows, each row shall contain exactly: the beach name, a verdict badge, and the current temperature. No tagline, vibe icons, thumbnail image, or water quality dot shall be present in the row.",
+          "risk_level": "must_test",
+          "test_assertion": "expect(row.querySelector('[data-testid=\"water-quality-dot\"]')).toBeNull(); expect(row.querySelector('img')).toBeNull(); expect(row.querySelector('[data-testid=\"vibe-icon\"]')).toBeNull()"
+        }
+      ],
+      "test_file": "client/src/components/__tests__/BeachCard.test.tsx",
+      "status": "pending",
+      "depends_on": ["001"],
+      "traces_to": {
+        "user_stories": ["US-001"],
+        "acceptance_criteria": ["AC-006"],
+        "adr_decisions": ["ADR-003"]
+      },
+      "technical_notes": "Rewrite BeachCard.tsx to render: beach name (as Link), VerdictBadge (sm size), temperature text. Remove all other visual elements. Props should accept beach data and optional weather conditions for verdict computation. Use computeSummaryVerdict from task 001.",
+      "context_refs": {
+        "interface_locations": [
+          "TECHNICAL_DESIGN.md:### 4. Simplified Beach Rows",
+          "client/src/components/BeachCard.tsx:BeachCardProps"
+        ],
+        "pattern_files": [
+          "client/src/components/BeachCard.tsx"
+        ],
+        "grep_patterns": [
+          "export function BeachCard",
+          "data-testid=\"water-quality-dot\"",
+          "BeachCardProps"
+        ],
+        "constraints_section": "ADR.md:## ADR-003"
+      },
+      "model": "sonnet"
+    },
+    {
+      "id": "007",
+      "title": "Rewrite DiscoveryView with tagline, simplified list, and list/map toggle",
+      "objective": "Rewrite the Discover page orchestrator to show: tagline header, list/map toggle, simplified beach list rows using new BeachCard, and remove vibe filters entirely.",
+      "task_type": "create_model",
+      "methodology": "tdd",
+      "acceptance_criteria": [
+        {
+          "id": "AC-001",
+          "criterion": "When the Discover page loads, the system shall render a tagline element with text \"Live conditions for Vancouver's 9 best beaches\" as the first visible content element within the page body.",
+          "risk_level": "must_test",
+          "test_assertion": "expect(screen.getByText(\"Live conditions for Vancouver's 9 best beaches\")).toBeVisible()"
+        },
+        {
+          "id": "AC-004",
+          "criterion": "When the user taps the \"Map\" toggle button, the system shall replace the beach list with the interactive map component, and the toggle shall indicate \"Map\" as the active view.",
+          "risk_level": "must_test",
+          "test_assertion": "userEvent.click(screen.getByRole('button', { name: 'Map' })); expect(screen.getByTestId('beach-map')).toBeInTheDocument(); expect(screen.queryByTestId('discovery-beach-list')).not.toBeInTheDocument()"
+        },
+        {
+          "id": "AC-005",
+          "criterion": "When the user taps the \"List\" toggle button while in map view, the system shall replace the map with the beach list, and the toggle shall indicate \"List\" as the active view.",
+          "risk_level": "must_test",
+          "test_assertion": "userEvent.click(screen.getByRole('button', { name: 'List' })); expect(screen.getByTestId('discovery-beach-list')).toBeInTheDocument(); expect(screen.queryByTestId('beach-map')).not.toBeInTheDocument()"
+        },
+        {
+          "id": "AC-018",
+          "criterion": "The Discover page shall not render vibe filter chip buttons. The \"What's your vibe?\" heading and associated filter UI shall be removed.",
+          "risk_level": "must_test",
+          "test_assertion": "expect(screen.queryByText(\"What's your vibe?\")).not.toBeInTheDocument(); expect(screen.queryByRole('button', { name: 'Active' })).not.toBeInTheDocument()"
+        },
+        {
+          "id": "AC-019",
+          "criterion": "When the beaches API call fails on the Discover page, the system shall display an error card with the message \"Couldn't load beaches\" and a \"Try again\" button that re-triggers the API call.",
+          "risk_level": "must_test",
+          "test_assertion": "mockFetchError('/api/beaches'); expect(await screen.findByText(\"Couldn't load beaches\")).toBeInTheDocument(); expect(screen.getByRole('button', { name: 'Try again' })).toBeInTheDocument()"
+        }
+      ],
+      "test_file": "client/src/components/__tests__/DiscoveryView.test.tsx",
+      "status": "pending",
+      "depends_on": ["003", "006"],
+      "traces_to": {
+        "user_stories": ["US-001", "US-002", "US-006"],
+        "acceptance_criteria": ["AC-001", "AC-004", "AC-005", "AC-018", "AC-019"],
+        "adr_decisions": ["ADR-001", "ADR-002"]
+      },
+      "technical_notes": "Rewrite DiscoveryView.tsx. Add tagline as first element. Implement List/Map toggle state (default: List). Remove ALL_VIBES, selectedVibe, and vibe filter chip UI. Use ErrorState component for error handling. Use data-testid='discovery-beach-list' for list container and 'beach-map' for map. Lazy-load BeachMap only when map view is active.",
+      "context_refs": {
+        "interface_locations": [
+          "TECHNICAL_DESIGN.md:### 1. Discover Page Tagline",
+          "TECHNICAL_DESIGN.md:### 3. List/Map Toggle",
+          "TECHNICAL_DESIGN.md:### 13. Remove Vibe Filters from Discover",
+          "client/src/components/DiscoveryView.tsx:DiscoveryViewProps"
+        ],
+        "pattern_files": [
+          "client/src/components/DiscoveryView.tsx",
+          "client/src/components/BeachMap.tsx"
+        ],
+        "grep_patterns": [
+          "export function DiscoveryView",
+          "ALL_VIBES",
+          "selectedVibe",
+          "data-testid=\"discovery-beach-list\"",
+          "data-testid=\"discovery-map\""
+        ],
+        "constraints_section": "ADR.md:## ADR-002"
+      },
+      "model": "sonnet"
+    },
+    {
+      "id": "008",
+      "title": "Update TodayTab with water quality text label, last-updated timestamp, and error states",
+      "objective": "Modify TodayTab to display water quality as a labeled text badge (replacing the dot indicator), show a last-updated timestamp on the conditions header, and use ErrorState for weather/tide failures with retry.",
+      "task_type": "create_model",
+      "methodology": "tdd",
+      "acceptance_criteria": [
+        {
+          "id": "AC-010-UI",
+          "criterion": "The TodayTab conditions grid displays water quality as a text label with colored background.",
+          "risk_level": "must_test",
+          "test_assertion": "expect(screen.getByTestId('water-quality-label')).toHaveTextContent('Safe'); expect(screen.getByTestId('water-quality-label')).toHaveClass('bg-emerald')"
+        },
+        {
+          "id": "AC-017",
+          "criterion": "When weather data loads successfully, the conditions section shall display a \"Last updated\" timestamp showing the relative time (e.g., \"Updated 5 min ago\") derived from the API response timestamp.",
+          "risk_level": "must_test",
+          "test_assertion": "expect(screen.getByText(/Updated \\d+ min ago/)).toBeInTheDocument()"
+        },
+        {
+          "id": "AC-015",
+          "criterion": "When a weather API call fails, the system shall display an error card with the message \"Couldn't load conditions\" and a \"Try again\" button that re-triggers the API call.",
+          "risk_level": "must_test",
+          "test_assertion": "mockFetchError('/api/weather/english-bay'); expect(await screen.findByText(\"Couldn't load conditions\")).toBeInTheDocument(); expect(screen.getByRole('button', { name: 'Try again' })).toBeInTheDocument()"
+        },
+        {
+          "id": "AC-016",
+          "criterion": "When a tide API call fails, the tide section shall display \"Tide data unavailable\" with a retry button.",
+          "risk_level": "must_test",
+          "test_assertion": "mockFetchError('/api/tides/english-bay'); expect(await screen.findByText('Tide data unavailable')).toBeInTheDocument(); expect(screen.getByRole('button', { name: 'Try again' })).toBeInTheDocument()"
+        }
+      ],
+      "test_file": "client/src/components/__tests__/TodayTab.test.tsx",
+      "status": "pending",
+      "depends_on": ["002", "003"],
+      "traces_to": {
+        "user_stories": ["US-001", "US-004", "US-006"],
+        "acceptance_criteria": ["AC-010", "AC-015", "AC-016", "AC-017"],
+        "adr_decisions": []
+      },
+      "technical_notes": "Modify TodayTab.tsx: (1) Replace water quality dot with text label using getWaterQualityTextLabel and getWaterQualityBgClass from task 002. Add data-testid='water-quality-label'. (2) Add 'Updated X min ago' using weather.fetchedAt, computing relative time. (3) Use ErrorState from task 003 for weather error ('Couldn't load conditions') and tide error ('Tide data unavailable'), each with onRetry wired to refetch.",
+      "context_refs": {
+        "interface_locations": [
+          "TECHNICAL_DESIGN.md:### 7. Water Quality Text Label",
+          "TECHNICAL_DESIGN.md:### 12. Last Updated Timestamp",
+          "TECHNICAL_DESIGN.md:### 11. Error/Empty States",
+          "client/src/components/TodayTab.tsx:TodayTabProps"
+        ],
+        "pattern_files": [
+          "client/src/components/TodayTab.tsx",
+          "client/src/hooks/useApiQuery.ts"
+        ],
+        "grep_patterns": [
+          "export function TodayTab",
+          "getWaterQualityLabel",
+          "weather\\.fetchedAt",
+          "error.*refetch"
+        ],
+        "constraints_section": "TECHNICAL_DESIGN.md:### 11. Error/Empty States"
+      },
+      "model": "sonnet"
+    },
+    {
+      "id": "009",
+      "title": "Add SimilarVibes section to AboutTab",
+      "objective": "Modify AboutTab to display a 'Similar vibes' section after differentiators, showing up to 3 beaches that share at least one vibe with the current beach, each linking to that beach's detail page.",
+      "task_type": "add_method",
+      "methodology": "direct",
+      "acceptance_criteria": [
+        {
+          "id": "AC-011",
+          "criterion": "When a beach detail page loads, the About tab shall display a \"Similar vibes\" section showing up to 3 other beaches that share at least one vibe with the current beach, each linking to that beach's detail page.",
+          "risk_level": "must_test",
+          "test_assertion": "expect(screen.getByText('Similar vibes')).toBeInTheDocument(); expect(screen.getAllByTestId('similar-vibe-link').length).toBeLessThanOrEqual(3)"
+        }
+      ],
+      "test_file": "client/src/components/__tests__/AboutTab.test.tsx",
+      "status": "pending",
+      "depends_on": [],
+      "traces_to": {
+        "user_stories": ["US-001"],
+        "acceptance_criteria": ["AC-011"],
+        "adr_decisions": ["ADR-001"]
+      },
+      "technical_notes": "Modify AboutTab.tsx: after differentiators section, add 'Similar vibes' heading. Query beach-personalities.ts for other beaches sharing >= 1 vibe with the current beach. Render up to 3 as links (data-testid='similar-vibe-link') to /beach/:slug. Use beachPersonalities data to find vibes overlap.",
+      "context_refs": {
+        "interface_locations": [
+          "TECHNICAL_DESIGN.md:### 8. Similar Vibes Section",
+          "client/src/components/AboutTab.tsx:AboutTabProps",
+          "client/src/data/beach-personalities.ts:BeachPersonality"
+        ],
+        "pattern_files": [
+          "client/src/components/AboutTab.tsx",
+          "client/src/data/beach-personalities.ts"
+        ],
+        "grep_patterns": [
+          "export function AboutTab",
+          "getPersonality",
+          "beachPersonalities",
+          "vibes"
+        ],
+        "constraints_section": "ADR.md:## ADR-001"
+      },
+      "model": "sonnet"
+    },
+    {
+      "id": "010",
+      "title": "Update BeachDetail with compact hero and BeachNavigation integration",
+      "objective": "Modify BeachDetail page to constrain the hero section to 150px max height on mobile viewports (< 640px) and integrate the BeachNavigation component for previous/next beach traversal.",
+      "task_type": "create_model",
+      "methodology": "tdd",
+      "acceptance_criteria": [
+        {
+          "id": "AC-007",
+          "criterion": "While the viewport width is less than 640px, the beach detail hero section shall have a maximum height of 150px, ensuring the verdict card is visible without scrolling.",
+          "risk_level": "must_test",
+          "test_assertion": "// set viewport 375px; expect hero container to have max-h-[150px] or sm:max-h-none classes"
+        },
+        {
+          "id": "AC-008-int",
+          "criterion": "BeachNavigation component is rendered on the beach detail page.",
+          "risk_level": "verify_only",
+          "test_assertion": "expect(screen.getByTestId('beach-nav-prev')).toBeInTheDocument(); expect(screen.getByTestId('beach-nav-next')).toBeInTheDocument()"
+        }
+      ],
+      "test_file": "client/src/pages/__tests__/BeachDetail.test.tsx",
+      "status": "pending",
+      "depends_on": ["004"],
+      "traces_to": {
+        "user_stories": ["US-003"],
+        "acceptance_criteria": ["AC-007", "AC-008", "AC-009"],
+        "adr_decisions": ["ADR-005"]
+      },
+      "technical_notes": "Modify BeachDetail.tsx: (1) Change hero height from h-[30vh] min-h-[200px] to max-h-[150px] sm:max-h-none to cap at 150px on mobile. (2) Import and render BeachNavigation below tab content, passing current beach slug. Do NOT modify TodayTab or AboutTab content here (handled in tasks 008/009).",
+      "context_refs": {
+        "interface_locations": [
+          "TECHNICAL_DESIGN.md:### 5. Compact Detail Hero",
+          "client/src/pages/BeachDetail.tsx:h-\\[30vh\\]"
+        ],
+        "pattern_files": [
+          "client/src/pages/BeachDetail.tsx"
+        ],
+        "grep_patterns": [
+          "h-\\[30vh\\]",
+          "min-h-\\[200px\\]",
+          "export function BeachDetail"
+        ],
+        "constraints_section": "ADR.md:## ADR-005"
+      },
+      "model": "sonnet"
+    },
+    {
+      "id": "011",
+      "title": "Add dark mode toggle to Layout header",
+      "objective": "Modify Layout.tsx to add a dark mode toggle button (Moon/Sun icon from lucide-react) in the header, wired to ThemeContext's toggleTheme function.",
+      "task_type": "add_method",
+      "methodology": "direct",
+      "acceptance_criteria": [
+        {
+          "id": "AC-012-UI",
+          "criterion": "The header contains a dark mode toggle button with data-testid='dark-mode-toggle' that calls toggleTheme on click.",
+          "risk_level": "must_test",
+          "test_assertion": "userEvent.click(screen.getByTestId('dark-mode-toggle')); expect(document.documentElement.classList.contains('dark')).toBe(true)"
+        }
+      ],
+      "test_file": "client/src/components/__tests__/Layout.test.tsx",
+      "status": "pending",
+      "depends_on": ["005"],
+      "traces_to": {
+        "user_stories": ["US-005"],
+        "acceptance_criteria": ["AC-012", "AC-013"],
+        "adr_decisions": ["ADR-004"]
+      },
+      "technical_notes": "Modify Layout.tsx header: add a button with data-testid='dark-mode-toggle'. Import Moon and Sun from lucide-react. Import useTheme from ThemeContext. Show Moon when light, Sun when dark. onClick calls toggleTheme.",
+      "context_refs": {
+        "interface_locations": [
+          "TECHNICAL_DESIGN.md:### 9. Dark Mode Toggle",
+          "client/src/components/Layout.tsx:header"
+        ],
+        "pattern_files": [
+          "client/src/components/Layout.tsx"
+        ],
+        "grep_patterns": [
+          "export function Layout",
+          "useTheme",
+          "Moon.*Sun"
+        ],
+        "constraints_section": "ADR.md:## ADR-004"
+      },
+      "model": "haiku"
+    },
+    {
+      "id": "012",
+      "title": "Remove Compare page and route",
+      "objective": "Delete the Compare page component and its test file, remove the /compare route and import from App.tsx, relying on the existing catch-all redirect to /discover.",
+      "task_type": "rename_refactor",
+      "methodology": "direct",
+      "acceptance_criteria": [
+        {
+          "id": "AC-014",
+          "criterion": "The system shall not have a `/compare` route. Navigating to `/compare` shall redirect to `/discover` via the catch-all route.",
+          "risk_level": "must_test",
+          "test_assertion": "navigate('/compare'); expect(screen.getByTestId('discover-page')).toBeInTheDocument()"
+        }
+      ],
+      "test_file": "client/src/App.test.tsx",
+      "status": "pending",
+      "depends_on": [],
+      "traces_to": {
+        "user_stories": ["US-001"],
+        "acceptance_criteria": ["AC-014"],
+        "adr_decisions": []
+      },
+      "technical_notes": "Delete client/src/pages/Compare.tsx and client/src/pages/Compare.test.tsx. In App.tsx, remove the Compare import and any explicit /compare route or redirect. The existing catch-all route should redirect unknown paths to /discover. Verify catch-all exists before deleting.",
+      "context_refs": {
+        "interface_locations": [
+          "TECHNICAL_DESIGN.md:### 10. Remove Compare Page",
+          "client/src/App.tsx:Routes"
+        ],
+        "pattern_files": [
+          "client/src/App.tsx"
+        ],
+        "grep_patterns": [
+          "Compare",
+          "path=\"/compare\""
+        ],
+        "constraints_section": "TECHNICAL_DESIGN.md:### 10. Remove Compare Page"
+      },
+      "model": "haiku"
+    }
+  ]
+}

@@ -1,4 +1,5 @@
 import type { Beach, WaterQualityStatus, WeatherForecast } from '@van-beaches/shared';
+import { BEACHES } from '@van-beaches/shared';
 import {
   Accessibility,
   Dog,
@@ -9,7 +10,7 @@ import {
   Volleyball,
 } from 'lucide-react';
 import { useState } from 'react';
-import { getPersonality } from '../data/beach-personalities';
+import { beachPersonalities, getPersonality } from '../data/beach-personalities';
 import { SafetyInfo } from './SafetyInfo';
 import { WebcamEmbed } from './WebcamEmbed';
 
@@ -63,6 +64,9 @@ export function AboutTab({ beach, waterQuality = null, weather = null }: AboutTa
           </ul>
         </section>
       )}
+
+      {/* Similar vibes */}
+      <SimilarVibes currentBeachId={beach.id} />
 
       {/* Amenities grouped by use case */}
       {amenities && (hasFamilyAmenities || hasDogAmenities || hasSportsAmenities) && (
@@ -168,5 +172,53 @@ function AmenityChip({ icon, label }: { icon: React.ReactNode; label: string }) 
       {icon}
       {label}
     </span>
+  );
+}
+
+function SimilarVibes({ currentBeachId }: { currentBeachId: string }) {
+  const currentPersonality = getPersonality(currentBeachId);
+  if (!currentPersonality) return null;
+
+  const similar = beachPersonalities
+    .filter((p) => p.slug !== currentBeachId)
+    .map((p) => ({
+      ...p,
+      sharedVibes: p.vibes.filter((v) => currentPersonality.vibes.includes(v)),
+    }))
+    .filter((p) => p.sharedVibes.length > 0)
+    .sort((a, b) => b.sharedVibes.length - a.sharedVibes.length)
+    .slice(0, 3);
+
+  if (similar.length === 0) return null;
+
+  return (
+    <section>
+      <h2 className="font-display text-xl font-semibold text-sand-900 mb-3">Similar vibes</h2>
+      <div className="space-y-2">
+        {similar.map((beach) => {
+          const beachData = BEACHES.find((b) => b.id === beach.slug);
+          return (
+            <a
+              key={beach.slug}
+              href={`/beach/${beach.slug}`}
+              data-testid="similar-vibe-link"
+              className="flex items-center justify-between py-2 px-3 rounded-xl bg-sand-50 hover:bg-sand-100 transition-colors"
+            >
+              <span className="font-medium text-sand-800">{beachData?.name ?? beach.slug}</span>
+              <div className="flex gap-1">
+                {beach.sharedVibes.map((v) => (
+                  <span
+                    key={v}
+                    className="text-xs px-2 py-0.5 rounded-full bg-ocean-50 text-ocean-700"
+                  >
+                    {v}
+                  </span>
+                ))}
+              </div>
+            </a>
+          );
+        })}
+      </div>
+    </section>
   );
 }

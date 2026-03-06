@@ -23,3 +23,25 @@ export function getWaterQualityDotColor(level: WaterQualityLevel): string {
 export function getWaterQualityLabel(level: WaterQualityLevel): string {
   return labelMap[level] ?? 'Water quality: Unknown';
 }
+
+export function getWaterQualityTextLabel(level: WaterQualityLevel): string {
+  const map: Record<WaterQualityLevel, string> = {
+    good: 'Safe',
+    advisory: 'Advisory',
+    closed: 'Closed',
+    unknown: 'Unknown',
+    'off-season': 'Off-Season',
+  };
+  return map[level] ?? 'Unknown';
+}
+
+export function getWaterQualityBgColor(level: WaterQualityLevel): string {
+  const map: Record<WaterQualityLevel, string> = {
+    good: 'bg-emerald-100 text-emerald-800',
+    advisory: 'bg-amber-100 text-amber-800',
+    closed: 'bg-red-100 text-red-800',
+    unknown: 'bg-sand-100 text-sand-600',
+    'off-season': 'bg-sand-100 text-sand-600',
+  };
+  return map[level] ?? 'bg-sand-100 text-sand-600';
+}

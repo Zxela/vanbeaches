@@ -1,7 +1,9 @@
 import type { Beach, TideData, WaterQualityStatus, WeatherForecast } from '@van-beaches/shared';
 import { formatSunTime, useSunTimes } from '../hooks/useSunTimes';
+import { getWaterQualityBgColor, getWaterQualityTextLabel } from '../lib/waterQualityColors';
 import { ActivityRecommendations } from './ActivityRecommendations';
 import { BeachVerdict } from './BeachVerdict';
+import { ErrorState } from './ErrorState';
 import { SunTimesWidget } from './SunTimesWidget';
 import { TideCanvas } from './TideCanvas';
 import { WeatherForecast as WeatherForecastWidget } from './WeatherForecast';
@@ -12,6 +14,10 @@ interface TodayTabProps {
   tides: TideData | null;
   waterQuality: WaterQualityStatus | null;
   sunsetTime: string | null;
+  weatherError?: string | null;
+  onRetryWeather?: () => void;
+  tideError?: string | null;
+  onRetryTide?: () => void;
 }
 
 function getUvLabel(uvIndex: number): string {
@@ -22,23 +28,25 @@ function getUvLabel(uvIndex: number): string {
   return 'Extreme';
 }
 
-function getWaterQualityLabel(level: WaterQualityStatus['level']): string {
-  switch (level) {
-    case 'good':
-      return 'Good';
-    case 'advisory':
-      return 'Advisory';
-    case 'closed':
-      return 'Closed';
-    case 'off-season':
-      return 'Off-Season';
-    default:
-      return 'Unknown';
-  }
+function getUpdatedMinutesAgo(fetchedAt: string): number {
+  const fetched = new Date(fetchedAt).getTime();
+  const now = Date.now();
+  return Math.floor((now - fetched) / 60000);
 }
 
-export function TodayTab({ beach, weather, tides, waterQuality, sunsetTime }: TodayTabProps) {
+export function TodayTab({
+  beach,
+  weather,
+  tides,
+  waterQuality,
+  sunsetTime,
+  weatherError,
+  onRetryWeather,
+  tideError,
+  onRetryTide,
+}: TodayTabProps) {
   const showTides = beach.tideStationId !== null && tides !== null;
+  const showTideError = beach.tideStationId !== null && tideError && !tides;
   const sunTimes = useSunTimes(beach.location.latitude, beach.location.longitude);
 
   return (
@@ -53,10 +61,20 @@ export function TodayTab({ beach, weather, tides, waterQuality, sunsetTime }: To
         />
       )}
 
+      {/* Weather error state */}
+      {weatherError && !weather && (
+        <ErrorState message="Couldn't load conditions" onRetry={onRetryWeather} />
+      )}
+
       {/* Compact conditions grid */}
       {weather && (
         <section>
-          <h2 className="font-display text-lg font-semibold text-sand-800 mb-3">Conditions</h2>
+          <div className="flex items-baseline justify-between mb-3">
+            <h2 className="font-display text-lg font-semibold text-sand-800">Conditions</h2>
+            <span className="text-xs text-sand-400">
+              Updated {getUpdatedMinutesAgo(weather.fetchedAt)} min ago
+            </span>
+          </div>
           <div className="grid grid-cols-3 gap-3">
             {/* Temperature */}
             <div className="rounded-xl bg-sand-50 border border-sand-200 p-3 text-center">
@@ -82,9 +100,12 @@ export function TodayTab({ beach, weather, tides, waterQuality, sunsetTime }: To
             {waterQuality && (
               <div className="rounded-xl bg-sand-50 border border-sand-200 p-3 text-center">
                 <p className="text-sm font-semibold text-sand-900">Water</p>
-                <p className="text-xs text-sand-500 mt-0.5">
-                  {getWaterQualityLabel(waterQuality.level)}
-                </p>
+                <span
+                  data-testid="water-quality-label"
+                  className={`inline-block mt-1 px-2 py-0.5 rounded-full text-xs font-medium ${getWaterQualityBgColor(waterQuality.level)}`}
+                >
+                  {getWaterQualityTextLabel(waterQuality.level)}
+                </span>
               </div>
             )}
 
@@ -106,6 +127,11 @@ export function TodayTab({ beach, weather, tides, waterQuality, sunsetTime }: To
           <h2 className="font-display text-lg font-semibold text-sand-800 mb-3">Tides</h2>
           <TideCanvas predictions={tides.predictions} />
         </section>
+      )}
+
+      {/* Tide error state */}
+      {showTideError && (
+        <ErrorState message="Tide data unavailable" onRetry={onRetryTide} />
       )}
 
       {/* Activity recommendations */}

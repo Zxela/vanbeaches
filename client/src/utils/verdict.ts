@@ -1,4 +1,4 @@
-import type { TideData, WaterQualityStatus, WeatherForecast } from '@van-beaches/shared';
+import type { TideData, WaterQualityLevel, WaterQualityStatus, WeatherCondition, WeatherForecast } from '@van-beaches/shared';
 
 export interface BeachVerdict {
   recommendation: 'perfect' | 'good' | 'fair' | 'skip';
@@ -282,6 +282,24 @@ function buildSuggestion(
 
   // skip
   return 'Skip it today and check back for a better window.';
+}
+
+/**
+ * Derives a verdict recommendation from BeachSummary data.
+ * Uses only weather condition + temperature + water quality (no wind/UV).
+ */
+export function computeSummaryVerdict(
+  weather: { temperature: number; condition: WeatherCondition } | null,
+  waterQuality: WaterQualityLevel,
+): BeachVerdict['recommendation'] {
+  if (!weather) return 'good';
+  const { condition, temperature } = weather;
+  if (condition === 'stormy') return 'skip';
+  if (condition === 'rainy') return 'fair';
+  const waterGood = waterQuality === 'good' || waterQuality === 'unknown' || waterQuality === 'off-season';
+  if (condition === 'sunny' && temperature >= 20 && waterGood) return 'perfect';
+  if ((condition === 'cloudy' && temperature < 16) || waterQuality === 'closed' || waterQuality === 'advisory') return 'fair';
+  return 'good';
 }
 
 // --- Utility helpers ---

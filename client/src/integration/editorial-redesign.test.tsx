@@ -154,9 +154,10 @@ vi.mock('../components/SunTimesWidget', () => ({
   SunTimesWidget: () => <div data-testid="sun-times-widget" />,
 }));
 
-// Mock ThemeProvider as a passthrough
+// Mock ThemeProvider as a passthrough and useTheme with a no-op
 vi.mock('../contexts/ThemeContext', () => ({
   ThemeProvider: ({ children }: { children: React.ReactNode }) => <>{children}</>,
+  useTheme: () => ({ theme: 'light', toggleTheme: vi.fn() }),
 }));
 
 // ============================================================
@@ -243,31 +244,31 @@ describe('Integration: editorial redesign user flows', () => {
       expect(screen.getAllByText('Kitsilano Beach').length).toBeGreaterThanOrEqual(1);
     });
 
-    it('still shows editorial discovery hero when user has favorites', () => {
+    it('still shows discovery tagline when user has favorites', () => {
       setFavorites(['kitsilano-beach']);
 
       renderApp('/discover');
 
-      expect(screen.getByText("Today's pick")).toBeInTheDocument();
+      expect(screen.getByText("Live conditions for Vancouver's 9 best beaches")).toBeInTheDocument();
     });
   });
 
-  // AC-002: New user (no favorites) sees DiscoveryView with editorial discovery hero
-  describe('018-AC2: new user without favorites sees editorial discovery hero', () => {
-    it("shows 'Today's pick' label in editorial hero when user has no favorites", () => {
+  // AC-002: New user (no favorites) sees DiscoveryView with tagline
+  describe('018-AC2: new user without favorites sees discovery tagline', () => {
+    it('shows discovery tagline when user has no favorites', () => {
       clearFavorites();
 
       renderApp('/discover');
 
-      expect(screen.getByText("Today's pick")).toBeInTheDocument();
+      expect(screen.getByText("Live conditions for Vancouver's 9 best beaches")).toBeInTheDocument();
     });
 
-    it('shows the discovery hero element when user has no favorites', () => {
+    it('shows beach list when user has no favorites', () => {
       clearFavorites();
 
       renderApp('/discover');
 
-      expect(screen.getByTestId('discovery-hero')).toBeInTheDocument();
+      expect(screen.getByTestId('discovery-beach-list')).toBeInTheDocument();
     });
   });
 
@@ -317,8 +318,8 @@ describe('Integration: editorial redesign user flows', () => {
 
       renderApp('/compare');
 
-      // After redirect, the DiscoveryView editorial hero should be visible
-      expect(screen.getByText("Today's pick")).toBeInTheDocument();
+      // After redirect, the DiscoveryView tagline should be visible
+      expect(screen.getByText("Live conditions for Vancouver's 9 best beaches")).toBeInTheDocument();
     });
 
     it('navigating to /compare does not render Compare-specific content', () => {
