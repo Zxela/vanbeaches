@@ -1,9 +1,10 @@
 import { BEACHES } from '@van-beaches/shared';
 import { AnimatePresence, motion } from 'framer-motion';
-import { ChevronDown, Star, Waves } from 'lucide-react';
+import { ChevronDown, Moon, Star, Sun, Waves } from 'lucide-react';
 import type { ReactNode } from 'react';
 import { useEffect, useRef, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useTheme } from '../contexts/ThemeContext';
 import { useFavorites } from '../hooks/useFavorites';
 import { cn } from '../lib/utils';
 import { MobileBottomNav } from './MobileBottomNav';
@@ -20,6 +21,7 @@ export function Layout({ children }: LayoutProps) {
   const navigate = useNavigate();
   const location = useLocation();
   const { favorites } = useFavorites();
+  const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -74,7 +76,16 @@ export function Layout({ children }: LayoutProps) {
                   </p>
                 </div>
               </Link>
-              <nav className="hidden sm:flex items-center gap-3">
+              <nav className="flex items-center gap-3">
+                <button
+                  type="button"
+                  data-testid="dark-mode-toggle"
+                  onClick={toggleTheme}
+                  className="p-2 rounded-lg bg-sand-100 dark:bg-sand-800 hover:bg-sand-200 dark:hover:bg-sand-700 transition-colors text-sand-700 dark:text-sand-300"
+                  aria-label={theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}
+                >
+                  <Icon icon={theme === 'light' ? Moon : Sun} size="sm" />
+                </button>
                 <Link
                   to="/discover"
                   className="px-3 py-2 bg-ocean-50 dark:bg-ocean-900/30 hover:bg-ocean-100 dark:hover:bg-ocean-800/40 rounded-lg transition-colors text-sm text-ocean-700 dark:text-ocean-300"

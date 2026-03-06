@@ -154,9 +154,10 @@ vi.mock('../components/SunTimesWidget', () => ({
   SunTimesWidget: () => <div data-testid="sun-times-widget" />,
 }));
 
-// Mock ThemeProvider as a passthrough
+// Mock ThemeProvider as a passthrough and useTheme with a no-op
 vi.mock('../contexts/ThemeContext', () => ({
   ThemeProvider: ({ children }: { children: React.ReactNode }) => <>{children}</>,
+  useTheme: () => ({ theme: 'light', toggleTheme: vi.fn() }),
 }));
 
 // ============================================================
