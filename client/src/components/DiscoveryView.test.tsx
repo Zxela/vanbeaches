@@ -1,4 +1,13 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+/**
+ * NOTE: This test file was for the original DiscoveryView.
+ * Task 007 rewrote DiscoveryView with a tagline, list/map toggle, and removed vibe filters.
+ * The authoritative tests are now at: src/components/__tests__/DiscoveryView.test.tsx
+ *
+ * This file is intentionally empty — previous tests covered behavior that was
+ * intentionally removed (vibe filter chips, featured banner, compact map section).
+ */
+
+import { render, screen } from '@testing-library/react';
 import type { Beach, BeachSummary } from '@van-beaches/shared';
 import type React from 'react';
 import { MemoryRouter } from 'react-router-dom';
@@ -8,21 +17,9 @@ import { describe, expect, it, vi } from 'vitest';
 vi.mock('react-leaflet', () => ({
   MapContainer: ({
     children,
-    center,
-    zoom,
   }: {
     children: React.ReactNode;
-    center: [number, number];
-    zoom: number;
-  }) => (
-    <div
-      className="leaflet-container"
-      data-center={JSON.stringify(center)}
-      data-zoom={String(zoom)}
-    >
-      {children}
-    </div>
-  ),
+  }) => <div className="leaflet-container" data-testid="beach-map">{children}</div>,
   TileLayer: ({ url }: { url: string; attribution: string }) => (
     <div className="leaflet-tile-pane" data-url={url} />
   ),
@@ -30,27 +27,13 @@ vi.mock('react-leaflet', () => ({
     children,
     eventHandlers,
     'data-beach-id': beachId,
-    'data-bg-color': bgColor,
-    'data-has-heart': hasHeart,
-    'data-transform': transform,
   }: {
     children?: React.ReactNode;
     eventHandlers?: { click?: () => void };
     'data-beach-id'?: string;
-    'data-bg-color'?: string;
-    'data-has-heart'?: string;
-    'data-transform'?: string;
   }) => (
     // biome-ignore lint/a11y/useKeyWithClickEvents: test mock for Leaflet Marker component
     <div className="leaflet-marker" onClick={eventHandlers?.click} data-beach-id={beachId}>
-      <div
-        className="beach-marker"
-        data-bg-color={bgColor}
-        data-has-heart={hasHeart}
-        data-transform={transform}
-      >
-        {hasHeart === 'true' && <span>&#x2665;</span>}
-      </div>
       {children}
     </div>
   ),
@@ -63,7 +46,6 @@ vi.mock('react-leaflet', () => ({
   useMap: vi.fn(),
 }));
 
-// Mock leaflet L.divIcon
 vi.mock('leaflet', () => ({
   default: {
     divIcon: (opts: {
@@ -71,18 +53,14 @@ vi.mock('leaflet', () => ({
       className: string;
       iconSize: number[];
       iconAnchor: number[];
-    }) => ({
-      options: opts,
-    }),
+    }) => ({ options: opts }),
   },
   divIcon: (opts: {
     html: string;
     className: string;
     iconSize: number[];
     iconAnchor: number[];
-  }) => ({
-    options: opts,
-  }),
+  }) => ({ options: opts }),
 }));
 
 vi.mock('../hooks/useFavorites', () => ({
@@ -110,111 +88,10 @@ vi.mock('@van-beaches/shared', () => ({
       location: { latitude: 49.2863, longitude: -123.1452 },
       tideStationId: null,
       webcamUrl: null,
-      images: {
-        thumb: '/images/english-bay-thumb.jpg',
-        hero: '/images/english-bay-hero.jpg',
-        credit: { name: 'Test', username: 'test' },
-      },
-    },
-    {
-      id: 'kitsilano-beach',
-      name: 'Kitsilano Beach',
-      slug: 'kitsilano-beach',
-      location: { latitude: 49.2736, longitude: -123.1534 },
-      tideStationId: null,
-      webcamUrl: null,
-      images: {
-        thumb: '/images/kitsilano-thumb.jpg',
-        hero: '/images/kitsilano-hero.jpg',
-        credit: { name: 'Test', username: 'test' },
-      },
-    },
-    {
-      id: 'locarno-beach',
-      name: 'Locarno Beach',
-      slug: 'locarno-beach',
-      location: { latitude: 49.273, longitude: -123.204 },
-      tideStationId: null,
-      webcamUrl: null,
     },
   ],
 }));
 
-vi.mock('../data/beach-personalities', () => ({
-  getPersonality: vi.fn((slug: string) => {
-    const personalities: Record<
-      string,
-      {
-        slug: string;
-        archetype: string;
-        tagline: string;
-        editorial: string;
-        differentiators: string[];
-        vibes: string[];
-        instagramHashtag?: string;
-        instagramPostUrls: string[];
-        accentColor: string;
-      }
-    > = {
-      'english-bay': {
-        slug: 'english-bay',
-        archetype: 'The Sunset Stage',
-        tagline: "Vancouver's golden amphitheatre",
-        editorial: 'English Bay is the most iconic beach.',
-        differentiators: ['Best sunset viewpoint'],
-        vibes: ['sunset', 'social', 'urban'],
-        instagramHashtag: 'englishbay',
-        instagramPostUrls: [],
-        accentColor: 'amber',
-      },
-      'kitsilano-beach': {
-        slug: 'kitsilano-beach',
-        archetype: 'The Sporty Heart',
-        tagline: 'Where the west side comes to play',
-        editorial: "Kits Beach is Vancouver's most popular beach.",
-        differentiators: ['6 volleyball courts'],
-        vibes: ['active', 'social', 'family'],
-        instagramHashtag: 'kitsbeach',
-        instagramPostUrls: [],
-        accentColor: 'coral',
-      },
-      'locarno-beach': {
-        slug: 'locarno-beach',
-        archetype: 'The Quiet Expanse',
-        tagline: 'Peaceful shores and endless tidal flats',
-        editorial: "Locarno is Vancouver's best-kept secret.",
-        differentiators: ['Dramatic low-tide flats'],
-        vibes: ['quiet', 'nature', 'dog-friendly'],
-        instagramHashtag: 'locarnobeach',
-        instagramPostUrls: [],
-        accentColor: 'forest',
-      },
-    };
-    return personalities[slug];
-  }),
-  beachPersonalities: [],
-}));
-
-// Mock vibeIcons — return simple spans instead of lucide components
-vi.mock('../lib/vibeIcons', () => {
-  const MockIcon = ({ className, ...props }: Record<string, unknown>) => (
-    <svg className={className as string} {...props} data-testid="vibe-icon" />
-  );
-  return {
-    VIBE_ICONS: {
-      active: MockIcon,
-      quiet: MockIcon,
-      family: MockIcon,
-      'dog-friendly': MockIcon,
-      sunset: MockIcon,
-      social: MockIcon,
-      nature: MockIcon,
-      urban: MockIcon,
-    },
-  };
-});
-
-// Test data
 const mockBeaches: Beach[] = [
   {
     id: 'english-bay',
@@ -223,30 +100,12 @@ const mockBeaches: Beach[] = [
     location: { latitude: 49.2863, longitude: -123.1452 },
     tideStationId: null,
     webcamUrl: null,
-    images: {
-      thumb: '/images/english-bay-thumb.jpg',
-      hero: '/images/english-bay-hero.jpg',
-      credit: { name: 'Test', username: 'test' },
-    },
   },
   {
     id: 'kitsilano-beach',
     name: 'Kitsilano Beach',
     slug: 'kitsilano-beach',
     location: { latitude: 49.2736, longitude: -123.1534 },
-    tideStationId: null,
-    webcamUrl: null,
-    images: {
-      thumb: '/images/kitsilano-thumb.jpg',
-      hero: '/images/kitsilano-hero.jpg',
-      credit: { name: 'Test', username: 'test' },
-    },
-  },
-  {
-    id: 'locarno-beach',
-    name: 'Locarno Beach',
-    slug: 'locarno-beach',
-    location: { latitude: 49.273, longitude: -123.204 },
     tideStationId: null,
     webcamUrl: null,
   },
@@ -257,27 +116,13 @@ const mockBeachConditions: Record<string, BeachSummary> = {
     id: 'english-bay',
     name: 'English Bay',
     currentWeather: { temperature: 22, condition: 'sunny', icon: 'sunny' },
-    nextTide: { type: 'high', time: '19:45', height: 4.2 },
-    waterQuality: 'good',
-    lastUpdated: new Date().toISOString(),
-  },
-  'kitsilano-beach': {
-    id: 'kitsilano-beach',
-    name: 'Kitsilano Beach',
-    currentWeather: { temperature: 18, condition: 'sunny', icon: 'sunny' },
-    nextTide: { type: 'high', time: '14:30', height: 3.8 },
-    waterQuality: 'good',
-    lastUpdated: new Date().toISOString(),
-  },
-  'locarno-beach': {
-    id: 'locarno-beach',
-    name: 'Locarno Beach',
-    currentWeather: { temperature: 16, condition: 'cloudy', icon: 'cloudy' },
-    nextTide: { type: 'low', time: '10:00', height: 0.8 },
+    nextTide: null,
     waterQuality: 'good',
     lastUpdated: new Date().toISOString(),
   },
 };
+
+import { DiscoveryView } from './DiscoveryView';
 
 function renderDiscoveryView(
   props: {
@@ -295,234 +140,30 @@ function renderDiscoveryView(
   );
 }
 
-import { DiscoveryView } from './DiscoveryView';
-
 describe('DiscoveryView', () => {
-  // AC-001: Featured banner with "Today's pick"
-  describe('featured banner', () => {
-    it('renders a "Today\'s pick" label in the banner', () => {
-      renderDiscoveryView();
-      expect(screen.getByText("Today's pick")).toBeInTheDocument();
-    });
-
-    it('renders the featured beach name in the banner', () => {
-      renderDiscoveryView();
-      const banner = document.querySelector('[data-testid="discovery-hero"]');
-      expect(banner).toBeInTheDocument();
-    });
-
-    it('banner is a compact row (no 35vh hero)', () => {
-      renderDiscoveryView();
-      const banner = document.querySelector('[data-testid="discovery-hero"]');
-      expect(banner).toBeInTheDocument();
-      // Should NOT have 35vh height
-      const style = (banner as HTMLElement)?.style?.minHeight ?? '';
-      expect(style).not.toContain('35vh');
-    });
-
-    it('renders a condition summary in the banner', () => {
-      renderDiscoveryView();
-      const text = document.body.textContent ?? '';
-      expect(/22|18|16/.test(text)).toBe(true);
-    });
-
-    it('uses the beach with best conditions (highest temperature) as the featured beach', () => {
-      renderDiscoveryView();
-      // English Bay has temp 22, which is highest - it should be featured
-      const banner = document.querySelector('[data-testid="discovery-hero"]');
-      expect(banner?.textContent).toContain('English Bay');
-    });
-
-    it('falls back to first beach when no conditions are available', () => {
-      renderDiscoveryView({ beaches: mockBeaches, beachConditions: {} });
-      const banner = document.querySelector('[data-testid="discovery-hero"]');
-      expect(banner?.textContent).toContain('English Bay');
-    });
-
-    it('banner links to the featured beach detail page', () => {
-      renderDiscoveryView();
-      const banner = document.querySelector('[data-testid="discovery-hero"]');
-      expect(banner).toHaveAttribute('href', '/beach/english-bay');
-    });
-  });
-
-  // AC-002: Vibe filter chips
-  describe('vibe filter chips', () => {
-    it('renders a "What\'s your vibe?" section heading', () => {
-      renderDiscoveryView();
-      expect(screen.getByText("What's your vibe?")).toBeInTheDocument();
-    });
-
-    it('renders vibe chips for all BeachVibe values', () => {
-      renderDiscoveryView();
-      // All 8 BeachVibe values should be rendered as chips
-      expect(screen.getByRole('button', { name: /active/i })).toBeInTheDocument();
-      expect(screen.getByRole('button', { name: /quiet/i })).toBeInTheDocument();
-      expect(screen.getByRole('button', { name: /family/i })).toBeInTheDocument();
-      expect(screen.getByRole('button', { name: /dog/i })).toBeInTheDocument();
-      expect(screen.getByRole('button', { name: /sunset/i })).toBeInTheDocument();
-      expect(screen.getByRole('button', { name: /social/i })).toBeInTheDocument();
-      expect(screen.getByRole('button', { name: /nature/i })).toBeInTheDocument();
-      expect(screen.getByRole('button', { name: /urban/i })).toBeInTheDocument();
-    });
-
-    it('renders chips as unselected by default', () => {
-      renderDiscoveryView();
-      // Chips should not have selected/active styling initially
-      const activeBtn = screen.getByRole('button', { name: /active/i });
-      expect(activeBtn).not.toHaveAttribute('data-selected', 'true');
-    });
-
-    it('vibe chips have icons', () => {
-      renderDiscoveryView();
-      // Each vibe chip should contain an icon
-      const vibeIcons = screen.getAllByTestId('vibe-icon');
-      // 8 chips in the filter section + icons in beach card vibe badges
-      expect(vibeIcons.length).toBeGreaterThanOrEqual(8);
-    });
-  });
-
-  // AC-003: Vibe filtering
-  describe('vibe filtering', () => {
-    it('shows all beaches when no vibe is selected', () => {
-      renderDiscoveryView();
-      // All 3 mock beaches should appear in the beach list
-      const beachList = document.querySelector('[data-testid="discovery-beach-list"]');
-      expect(beachList?.textContent).toContain('English Bay');
-      expect(beachList?.textContent).toContain('Kitsilano Beach');
-      expect(beachList?.textContent).toContain('Locarno Beach');
-    });
-
-    it('filters beaches when a vibe chip is selected', () => {
-      renderDiscoveryView();
-      // Click the "sunset" vibe chip — only english-bay has sunset vibe in mock
-      fireEvent.click(screen.getByRole('button', { name: /sunset/i }));
-
-      const beachList = document.querySelector('[data-testid="discovery-beach-list"]');
-      // English Bay has sunset vibe, should be shown
-      expect(beachList?.textContent).toContain('English Bay');
-      // Kitsilano has active/social/family vibes, not sunset — should be hidden
-      expect(beachList?.textContent).not.toContain('Kitsilano Beach');
-    });
-
-    it('shows the selected vibe chip as active', () => {
-      renderDiscoveryView();
-      const sunsetBtn = screen.getByRole('button', { name: /sunset/i });
-      fireEvent.click(sunsetBtn);
-      expect(sunsetBtn).toHaveAttribute('data-selected', 'true');
-    });
-
-    it('deselects a vibe chip when clicked again', () => {
-      renderDiscoveryView();
-      const sunsetBtn = screen.getByRole('button', { name: /sunset/i });
-      fireEvent.click(sunsetBtn);
-      fireEvent.click(sunsetBtn);
-      expect(sunsetBtn).toHaveAttribute('data-selected', 'false');
-    });
-
-    it('shows all beaches again after deselecting a vibe', () => {
-      renderDiscoveryView();
-      const sunsetBtn = screen.getByRole('button', { name: /sunset/i });
-      fireEvent.click(sunsetBtn);
-      fireEvent.click(sunsetBtn);
-
-      const beachList = document.querySelector('[data-testid="discovery-beach-list"]');
-      expect(beachList?.textContent).toContain('English Bay');
-      expect(beachList?.textContent).toContain('Kitsilano Beach');
-      expect(beachList?.textContent).toContain('Locarno Beach');
-    });
-
-    it('filters by dog-friendly vibe correctly', () => {
-      renderDiscoveryView();
-      fireEvent.click(screen.getByRole('button', { name: /dog/i }));
-
-      const beachList = document.querySelector('[data-testid="discovery-beach-list"]');
-      // Locarno has dog-friendly vibe
-      expect(beachList?.textContent).toContain('Locarno Beach');
-      // English Bay and Kitsilano do not have dog-friendly vibe
-      expect(beachList?.textContent).not.toContain('English Bay');
-      expect(beachList?.textContent).not.toContain('Kitsilano Beach');
-    });
-
-    it('shows Clear button when a vibe is selected', () => {
-      renderDiscoveryView();
-      // Clear should not be visible initially
-      expect(screen.queryByRole('button', { name: /clear/i })).not.toBeInTheDocument();
-
-      // Select a vibe
-      fireEvent.click(screen.getByRole('button', { name: /sunset/i }));
-
-      // Clear button should appear
-      expect(screen.getByRole('button', { name: /clear/i })).toBeInTheDocument();
-    });
-
-    it('Clear button resets the filter', () => {
-      renderDiscoveryView();
-      // Select a vibe
-      fireEvent.click(screen.getByRole('button', { name: /sunset/i }));
-
-      // Click Clear
-      fireEvent.click(screen.getByRole('button', { name: /clear/i }));
-
-      // All beaches should be shown again
-      const beachList = document.querySelector('[data-testid="discovery-beach-list"]');
-      expect(beachList?.textContent).toContain('English Bay');
-      expect(beachList?.textContent).toContain('Kitsilano Beach');
-      expect(beachList?.textContent).toContain('Locarno Beach');
-
-      // Clear button should be gone
-      expect(screen.queryByRole('button', { name: /clear/i })).not.toBeInTheDocument();
-    });
-  });
-
-  // AC-004: BeachMap compact section
-  describe('map section', () => {
-    it('renders a BeachMap in a compact map section', () => {
-      renderDiscoveryView();
-      // The map section should exist
-      const mapSection = document.querySelector('[data-testid="discovery-map"]');
-      expect(mapSection).toBeInTheDocument();
-    });
-
-    it('renders the Leaflet map container within the map section', () => {
-      renderDiscoveryView();
-      // The leaflet-container should be present (from mocked MapContainer)
-      expect(document.querySelector('.leaflet-container')).toBeInTheDocument();
-    });
-
-    it('renders a "View on map" label or similar text near the map', () => {
-      renderDiscoveryView();
-      const mapSection = document.querySelector('[data-testid="discovery-map"]');
-      // The map section should provide some label/heading
-      expect(mapSection).toBeInTheDocument();
-    });
+  // Smoke test - component renders
+  it('renders without crashing', () => {
+    renderDiscoveryView();
+    expect(document.body).toBeInTheDocument();
   });
 
   // Loading state
-  describe('loading state', () => {
-    it('renders without crashing when loading is true', () => {
-      renderDiscoveryView({ loading: true });
-      // Should render something (skeleton or reduced content)
-      expect(document.body).toBeInTheDocument();
-    });
+  it('renders without crashing when loading is true', () => {
+    renderDiscoveryView({ loading: true });
+    expect(document.body).toBeInTheDocument();
   });
 
-  // Edge cases
-  describe('edge cases', () => {
-    it('renders without crashing when beaches array is empty', () => {
-      renderDiscoveryView({ beaches: [], beachConditions: {} });
-      expect(screen.getByText("What's your vibe?")).toBeInTheDocument();
-    });
+  // Beach list visible
+  it('shows beach list by default', () => {
+    renderDiscoveryView();
+    expect(screen.getByTestId('discovery-beach-list')).toBeInTheDocument();
+  });
 
-    it('renders beach cards as compact rows with verdict badges (no taglines)', () => {
-      renderDiscoveryView();
-      const beachList = document.querySelector('[data-testid="discovery-beach-list"]');
-      // Beach names appear in rows
-      expect(beachList?.textContent).toMatch(/English Bay|Kitsilano Beach|Locarno Beach/);
-      // Taglines are NOT shown in compact rows (simplified list row design)
-      expect(beachList?.textContent).not.toMatch(
-        /west side comes to play|golden amphitheatre|Peaceful shores/,
-      );
-    });
+  // Tagline visible
+  it('renders tagline', () => {
+    renderDiscoveryView();
+    expect(
+      screen.getByText("Live conditions for Vancouver's 9 best beaches"),
+    ).toBeInTheDocument();
   });
 });
