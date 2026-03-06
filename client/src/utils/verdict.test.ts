@@ -1,6 +1,6 @@
-import type { TideData, WaterQualityStatus, WeatherForecast } from '@van-beaches/shared';
+import type { TideData, WaterQualityStatus, WaterQualityLevel, WeatherCondition, WeatherForecast } from '@van-beaches/shared';
 import { describe, expect, it } from 'vitest';
-import { type BeachVerdict, computeVerdict } from './verdict';
+import { type BeachVerdict, computeVerdict, computeSummaryVerdict } from './verdict';
 
 // Helpers for building mock data
 function makeWeather(overrides: Partial<WeatherForecast['current']> = {}): WeatherForecast {
@@ -296,5 +296,74 @@ describe('computeVerdict - suggestion', () => {
     );
 
     expect(perfectResult.suggestion).not.toBe(skipResult.suggestion);
+  });
+});
+
+// --- computeSummaryVerdict tests ---
+
+describe('computeSummaryVerdict', () => {
+  it('returns "good" when weather is null', () => {
+    const result = computeSummaryVerdict(null, 'good');
+    expect(result).toBe('good');
+  });
+
+  it('returns "skip" when condition is stormy', () => {
+    const result = computeSummaryVerdict({ temperature: 20, condition: 'stormy' }, 'good');
+    expect(result).toBe('skip');
+  });
+
+  it('returns "fair" when condition is rainy', () => {
+    const result = computeSummaryVerdict({ temperature: 20, condition: 'rainy' }, 'good');
+    expect(result).toBe('fair');
+  });
+
+  it('returns "perfect" when sunny, temp >= 20, water quality good', () => {
+    const result = computeSummaryVerdict({ temperature: 22, condition: 'sunny' }, 'good');
+    expect(result).toBe('perfect');
+  });
+
+  it('returns "perfect" when sunny, temp >= 20, water quality unknown', () => {
+    const result = computeSummaryVerdict({ temperature: 20, condition: 'sunny' }, 'unknown');
+    expect(result).toBe('perfect');
+  });
+
+  it('returns "perfect" when sunny, temp >= 20, water quality off-season', () => {
+    const result = computeSummaryVerdict({ temperature: 25, condition: 'sunny' }, 'off-season');
+    expect(result).toBe('perfect');
+  });
+
+  it('does not return "perfect" when sunny but temp < 20', () => {
+    const result = computeSummaryVerdict({ temperature: 19, condition: 'sunny' }, 'good');
+    expect(result).not.toBe('perfect');
+  });
+
+  it('does not return "perfect" when sunny, temp >= 20, but water quality is advisory', () => {
+    const result = computeSummaryVerdict({ temperature: 22, condition: 'sunny' }, 'advisory');
+    expect(result).not.toBe('perfect');
+  });
+
+  it('returns "fair" when cloudy and temp < 16', () => {
+    const result = computeSummaryVerdict({ temperature: 14, condition: 'cloudy' }, 'good');
+    expect(result).toBe('fair');
+  });
+
+  it('returns "fair" when water quality is closed', () => {
+    const result = computeSummaryVerdict({ temperature: 22, condition: 'sunny' }, 'closed');
+    expect(result).toBe('fair');
+  });
+
+  it('returns "fair" when water quality is advisory', () => {
+    const result = computeSummaryVerdict({ temperature: 22, condition: 'partly-cloudy' }, 'advisory');
+    expect(result).toBe('fair');
+  });
+
+  it('returns "good" as default for moderate conditions', () => {
+    const result = computeSummaryVerdict({ temperature: 18, condition: 'partly-cloudy' }, 'good');
+    expect(result).toBe('good');
+  });
+
+  it('returns "good" when sunny but temp < 20 and water is fine', () => {
+    const result = computeSummaryVerdict({ temperature: 19, condition: 'sunny' }, 'good');
+    expect(result).toBe('good');
   });
 });
