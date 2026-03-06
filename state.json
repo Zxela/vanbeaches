@@ -1,6 +1,7 @@
 {
   "session_id": "e1ddfb3b",
-  "phase": "task_decomposition",
+  "phase": "implementing",
+  "tasks_file": "docs/tasks.json",
   "branch": "create/design-overhaul-e1ddfb3b",
   "worktree": "/home/alex/vanbeaches-create-design-overhaul-e1ddfb3b",
   "feature": "design-overhaul",
