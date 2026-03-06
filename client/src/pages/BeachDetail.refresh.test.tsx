@@ -1,11 +1,16 @@
 import { render, screen } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { MemoryRouter } from 'react-router-dom';
 import { BeachDetail } from './BeachDetail';
 
-// Mock react-router-dom
-vi.mock('react-router-dom', () => ({
-  useParams: () => ({ slug: 'kitsilano' }),
-}));
+// Mock react-router-dom useParams only
+vi.mock('react-router-dom', async (importOriginal) => {
+  const actual = await importOriginal();
+  return {
+    ...actual,
+    useParams: () => ({ slug: 'kitsilano' }),
+  };
+});
 
 vi.mock('@van-beaches/shared', () => ({
   getBeachById: () => ({
@@ -30,7 +35,20 @@ vi.mock('@van-beaches/shared', () => ({
     },
     activities: ['swimming'],
   }),
-  BEACHES: [],
+  BEACHES: [
+    {
+      id: 'kitsilano',
+      name: 'Kitsilano Beach',
+      slug: 'kitsilano',
+      location: { latitude: 49.274, longitude: -123.156 },
+      tideStationId: '5cebf1de3d0f4a073c4bb943',
+      webcamUrl: null,
+      showWebcam: false,
+      description: 'Test beach',
+      amenities: {},
+      activities: ['swimming'],
+    },
+  ],
 }));
 
 vi.mock('../hooks/useTides', () => ({
@@ -164,20 +182,20 @@ describe('BeachDetail - tabbed layout rendering', () => {
   });
 
   it('renders beach name in compact hero', () => {
-    render(<BeachDetail />);
-    expect(screen.getByText('Kitsilano Beach')).toBeInTheDocument();
+    render(<MemoryRouter><BeachDetail /></MemoryRouter>);
+    expect(screen.getByRole('heading', { name: 'Kitsilano Beach' })).toBeInTheDocument();
   });
 
   it('displays temperature from weather data via TodayTab', () => {
-    render(<BeachDetail />);
+    render(<MemoryRouter><BeachDetail /></MemoryRouter>);
     // Temperature is passed down to TodayTab
     expect(screen.getByText('18°C')).toBeInTheDocument();
   });
 
   it('renders quick conditions in hero including temperature', () => {
-    render(<BeachDetail />);
+    render(<MemoryRouter><BeachDetail /></MemoryRouter>);
     // Hero quick conditions strip shows temp
-    const heroEl = document.querySelector('[class*="h-[30vh]"]');
+    const heroEl = document.querySelector('[class*="max-h-"]');
     expect(heroEl).toBeInTheDocument();
     // Temperature appears in the quick conditions strip (hero has "18° · ...")
     const conditionEls = screen.getAllByText(/18°/);
