@@ -514,11 +514,13 @@ describe('DiscoveryView', () => {
       expect(screen.getByText("What's your vibe?")).toBeInTheDocument();
     });
 
-    it('renders beach cards with personality taglines in compact rows', () => {
+    it('renders beach cards as compact rows with verdict badges (no taglines)', () => {
       renderDiscoveryView();
       const beachList = document.querySelector('[data-testid="discovery-beach-list"]');
-      // Taglines should appear from the mocked getPersonality
-      expect(beachList?.textContent).toMatch(
+      // Beach names appear in rows
+      expect(beachList?.textContent).toMatch(/English Bay|Kitsilano Beach|Locarno Beach/);
+      // Taglines are NOT shown in compact rows (simplified list row design)
+      expect(beachList?.textContent).not.toMatch(
         /west side comes to play|golden amphitheatre|Peaceful shores/,
       );
     });
