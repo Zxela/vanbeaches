@@ -1,0 +1,35 @@
+{
+  "session_id": "e1ddfb3b",
+  "phase": "spec_review",
+  "branch": "create/design-overhaul-e1ddfb3b",
+  "worktree": "/home/alex/vanbeaches-create-design-overhaul-e1ddfb3b",
+  "feature": "design-overhaul",
+  "homerun_docs_dir": "/home/alex/.claude/homerun/bbe3d3a9/design-overhaul-e1ddfb3b",
+  "spec_paths": {
+    "prd": "/home/alex/.claude/homerun/bbe3d3a9/design-overhaul-e1ddfb3b/PRD.md",
+    "adr": "/home/alex/.claude/homerun/bbe3d3a9/design-overhaul-e1ddfb3b/ADR.md",
+    "technical_design": "/home/alex/.claude/homerun/bbe3d3a9/design-overhaul-e1ddfb3b/TECHNICAL_DESIGN.md",
+    "wireframes": "/home/alex/.claude/homerun/bbe3d3a9/design-overhaul-e1ddfb3b/WIREFRAMES.md"
+  },
+  "scale": "large",
+  "scale_details": {
+    "estimated_files": 15,
+    "triggers": ["UI overhaul across 13 requirements", "architecture change (view toggle)", "dark mode enablement", "component deletion"]
+  },
+  "traceability": {
+    "user_stories": ["US-001", "US-002", "US-003", "US-004", "US-005", "US-006"],
+    "acceptance_criteria": ["AC-001", "AC-002", "AC-003", "AC-004", "AC-005", "AC-006", "AC-007", "AC-008", "AC-009", "AC-010", "AC-011", "AC-012", "AC-013", "AC-014", "AC-015", "AC-016", "AC-017", "AC-018"],
+    "adr_decisions": ["ADR-001", "ADR-002", "ADR-003", "ADR-004", "ADR-005"],
+    "non_goals": ["No brand identity changes", "No backend/API changes", "No new dependencies", "No native app"]
+  },
+  "config": {
+    "auto_mode": true,
+    "max_dialogue_turns": 20,
+    "retries": { "same_agent": 2, "fresh_agent": 1 }
+  },
+  "dialogue_state": {
+    "total_turns": 0,
+    "topics_covered": ["purpose", "scope", "architecture", "ui-patterns", "dark-mode", "error-handling", "navigation"],
+    "auto_completed": true
+  }
+}
