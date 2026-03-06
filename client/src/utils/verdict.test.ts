@@ -1,6 +1,6 @@
-import type { TideData, WaterQualityStatus, WaterQualityLevel, WeatherCondition, WeatherForecast } from '@van-beaches/shared';
+import type { TideData, WaterQualityStatus, WeatherForecast } from '@van-beaches/shared';
 import { describe, expect, it } from 'vitest';
-import { type BeachVerdict, computeVerdict, computeSummaryVerdict } from './verdict';
+import { type BeachVerdict, computeSummaryVerdict, computeVerdict } from './verdict';
 
 // Helpers for building mock data
 function makeWeather(overrides: Partial<WeatherForecast['current']> = {}): WeatherForecast {
@@ -353,7 +353,10 @@ describe('computeSummaryVerdict', () => {
   });
 
   it('returns "fair" when water quality is advisory', () => {
-    const result = computeSummaryVerdict({ temperature: 22, condition: 'partly-cloudy' }, 'advisory');
+    const result = computeSummaryVerdict(
+      { temperature: 22, condition: 'partly-cloudy' },
+      'advisory',
+    );
     expect(result).toBe('fair');
   });
 

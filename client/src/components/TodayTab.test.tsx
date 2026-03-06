@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+
 import type { Beach, TideData, WaterQualityStatus, WeatherForecast } from '@van-beaches/shared';
 import { describe, expect, it, vi } from 'vitest';
 import { TodayTab } from './TodayTab';

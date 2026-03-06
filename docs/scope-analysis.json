@@ -102,26 +102,58 @@
   "data_models": [
     {
       "name": "BeachSummary",
-      "fields": ["currentWeather.temperature", "currentWeather.condition", "waterQuality", "lastUpdated"],
-      "relationships": ["used by BeachCard via DiscoveryView.beachConditions", "returned by /api/beaches"],
+      "fields": [
+        "currentWeather.temperature",
+        "currentWeather.condition",
+        "waterQuality",
+        "lastUpdated"
+      ],
+      "relationships": [
+        "used by BeachCard via DiscoveryView.beachConditions",
+        "returned by /api/beaches"
+      ],
       "notes": "lastUpdated field already exists per TECHNICAL_DESIGN; waterQuality is WaterQualityLevel enum"
     },
     {
       "name": "WeatherForecast",
-      "fields": ["current.temperature", "current.condition", "current.windSpeed", "current.uvIndex", "current.windDirection", "fetchedAt"],
-      "relationships": ["used by TodayTab, BeachVerdict, BeachDetail", "returned by /api/weather/:beachId"],
+      "fields": [
+        "current.temperature",
+        "current.condition",
+        "current.windSpeed",
+        "current.uvIndex",
+        "current.windDirection",
+        "fetchedAt"
+      ],
+      "relationships": [
+        "used by TodayTab, BeachVerdict, BeachDetail",
+        "returned by /api/weather/:beachId"
+      ],
       "notes": "fetchedAt: string (ISO timestamp) used for last-updated display"
     },
     {
       "name": "BeachPersonality",
-      "fields": ["slug", "archetype", "tagline", "editorial", "differentiators", "vibes", "accentColor"],
-      "relationships": ["used by AboutTab SimilarVibes section", "sourced from client/src/data/beach-personalities.ts"],
+      "fields": [
+        "slug",
+        "archetype",
+        "tagline",
+        "editorial",
+        "differentiators",
+        "vibes",
+        "accentColor"
+      ],
+      "relationships": [
+        "used by AboutTab SimilarVibes section",
+        "sourced from client/src/data/beach-personalities.ts"
+      ],
       "notes": "vibes: BeachVibe[] used for cross-linking in SimilarVibes"
     },
     {
       "name": "Theme",
       "fields": ["'light' | 'dark'"],
-      "relationships": ["persisted to localStorage key 'vanbeaches-theme'", "applied as 'dark' class on document.documentElement"],
+      "relationships": [
+        "persisted to localStorage key 'vanbeaches-theme'",
+        "applied as 'dark' class on document.documentElement"
+      ],
       "notes": "ThemeContextType adds toggleTheme: () => void alongside theme field"
     }
   ],
@@ -317,9 +349,7 @@
           "client/src/components/BeachVerdict.tsx:getColorConfig",
           "client/src/components/BeachVerdict.tsx:getRecommendationLabel"
         ],
-        "pattern_files": [
-          "client/src/components/BeachVerdict.tsx"
-        ],
+        "pattern_files": ["client/src/components/BeachVerdict.tsx"],
         "grep_patterns": [
           "getColorConfig",
           "bg-emerald-100 text-emerald-800",
@@ -333,9 +363,7 @@
           "client/src/utils/verdict.ts:determineRecommendation",
           "client/src/utils/verdict.ts:export interface BeachVerdict"
         ],
-        "pattern_files": [
-          "client/src/utils/verdict.ts"
-        ],
+        "pattern_files": ["client/src/utils/verdict.ts"],
         "grep_patterns": [
           "export function computeVerdict",
           "determineRecommendation",
@@ -368,9 +396,7 @@
           "TECHNICAL_DESIGN.md:### 4. Simplified Beach Rows",
           "client/src/components/BeachCard.tsx:BeachCardProps"
         ],
-        "pattern_files": [
-          "client/src/components/BeachCard.tsx"
-        ],
+        "pattern_files": ["client/src/components/BeachCard.tsx"],
         "grep_patterns": [
           "export function BeachCard",
           "data-testid=\"water-quality-dot\"",
@@ -383,14 +409,8 @@
           "TECHNICAL_DESIGN.md:### 5. Compact Detail Hero",
           "client/src/pages/BeachDetail.tsx:h-\\[30vh\\]"
         ],
-        "pattern_files": [
-          "client/src/pages/BeachDetail.tsx"
-        ],
-        "grep_patterns": [
-          "h-\\[30vh\\]",
-          "min-h-\\[200px\\]",
-          "export function BeachDetail"
-        ],
+        "pattern_files": ["client/src/pages/BeachDetail.tsx"],
+        "grep_patterns": ["h-\\[30vh\\]", "min-h-\\[200px\\]", "export function BeachDetail"],
         "constraints_section": "ADR.md:## ADR-005"
       },
       "BeachNavigation": {
@@ -398,15 +418,8 @@
           "TECHNICAL_DESIGN.md:### 6. Previous/Next Beach Navigation",
           "client/src/pages/BeachDetail.tsx:TabBar"
         ],
-        "pattern_files": [
-          "client/src/pages/BeachDetail.tsx",
-          "client/src/components/TabBar.tsx"
-        ],
-        "grep_patterns": [
-          "BEACHES.*sort",
-          "ChevronLeft",
-          "ChevronRight"
-        ],
+        "pattern_files": ["client/src/pages/BeachDetail.tsx", "client/src/components/TabBar.tsx"],
+        "grep_patterns": ["BEACHES.*sort", "ChevronLeft", "ChevronRight"],
         "constraints_section": "TECHNICAL_DESIGN.md:### 6. Previous/Next Beach Navigation"
       },
       "TodayTab": {
@@ -416,10 +429,7 @@
           "TECHNICAL_DESIGN.md:### 11. Error/Empty States",
           "client/src/components/TodayTab.tsx:TodayTabProps"
         ],
-        "pattern_files": [
-          "client/src/components/TodayTab.tsx",
-          "client/src/hooks/useApiQuery.ts"
-        ],
+        "pattern_files": ["client/src/components/TodayTab.tsx", "client/src/hooks/useApiQuery.ts"],
         "grep_patterns": [
           "export function TodayTab",
           "getWaterQualityLabel",
@@ -451,9 +461,7 @@
           "TECHNICAL_DESIGN.md:### 9. Dark Mode Toggle",
           "client/src/contexts/ThemeContext.tsx:ThemeContextType"
         ],
-        "pattern_files": [
-          "client/src/contexts/ThemeContext.tsx"
-        ],
+        "pattern_files": ["client/src/contexts/ThemeContext.tsx"],
         "grep_patterns": [
           "export function ThemeProvider",
           "localStorage.*vanbeaches-theme",
@@ -466,14 +474,8 @@
           "TECHNICAL_DESIGN.md:### 9. Dark Mode Toggle",
           "client/src/components/Layout.tsx:header"
         ],
-        "pattern_files": [
-          "client/src/components/Layout.tsx"
-        ],
-        "grep_patterns": [
-          "export function Layout",
-          "useTheme",
-          "Moon.*Sun"
-        ],
+        "pattern_files": ["client/src/components/Layout.tsx"],
+        "grep_patterns": ["export function Layout", "useTheme", "Moon.*Sun"],
         "constraints_section": "ADR.md:## ADR-004"
       },
       "ErrorState": {
@@ -481,13 +483,8 @@
           "TECHNICAL_DESIGN.md:### 11. Error/Empty States",
           "WIREFRAMES.md:## Error State"
         ],
-        "pattern_files": [
-          "client/src/components/ui/Card.tsx"
-        ],
-        "grep_patterns": [
-          "rounded-2xl border border-sand-200",
-          "onRetry"
-        ],
+        "pattern_files": ["client/src/components/ui/Card.tsx"],
+        "grep_patterns": ["rounded-2xl border border-sand-200", "onRetry"],
         "constraints_section": "TECHNICAL_DESIGN.md:### 11. Error/Empty States"
       },
       "waterQualityColors": {
@@ -495,14 +492,8 @@
           "TECHNICAL_DESIGN.md:### 7. Water Quality Text Label",
           "client/src/lib/waterQualityColors.ts:getWaterQualityDotColor"
         ],
-        "pattern_files": [
-          "client/src/lib/waterQualityColors.ts"
-        ],
-        "grep_patterns": [
-          "WaterQualityLevel",
-          "getWaterQualityDotColor",
-          "getWaterQualityLabel"
-        ],
+        "pattern_files": ["client/src/lib/waterQualityColors.ts"],
+        "grep_patterns": ["WaterQualityLevel", "getWaterQualityDotColor", "getWaterQualityLabel"],
         "constraints_section": "TECHNICAL_DESIGN.md:### 7. Water Quality Text Label"
       },
       "App": {
@@ -510,13 +501,8 @@
           "TECHNICAL_DESIGN.md:### 10. Remove Compare Page",
           "client/src/App.tsx:Routes"
         ],
-        "pattern_files": [
-          "client/src/App.tsx"
-        ],
-        "grep_patterns": [
-          "Compare",
-          "path=\"/compare\""
-        ],
+        "pattern_files": ["client/src/App.tsx"],
+        "grep_patterns": ["Compare", "path=\"/compare\""],
         "constraints_section": "TECHNICAL_DESIGN.md:### 10. Remove Compare Page"
       }
     }

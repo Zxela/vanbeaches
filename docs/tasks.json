@@ -21,12 +21,19 @@
         }
       ],
       "test_file": "client/src/components/__tests__/VerdictBadge.test.tsx",
-      "status": "pending",
+      "status": "done",
       "depends_on": [],
       "traces_to": {
-        "user_stories": ["US-001"],
-        "acceptance_criteria": ["AC-002", "AC-003"],
-        "adr_decisions": ["ADR-003"]
+        "user_stories": [
+          "US-001"
+        ],
+        "acceptance_criteria": [
+          "AC-002",
+          "AC-003"
+        ],
+        "adr_decisions": [
+          "ADR-003"
+        ]
       },
       "technical_notes": "Create VerdictBadge.tsx with sm/md size variants. Add computeSummaryVerdict in client/src/utils/verdict.ts that uses only weather condition, temperature, and water quality (not wind/UV). Reuse existing getColorConfig and getRecommendationLabel patterns from BeachVerdict.tsx. Skeleton state renders a pulsing placeholder with data-testid='verdict-badge-skeleton'.",
       "context_refs": {
@@ -65,11 +72,15 @@
         }
       ],
       "test_file": "client/src/lib/__tests__/waterQualityColors.test.ts",
-      "status": "pending",
+      "status": "done",
       "depends_on": [],
       "traces_to": {
-        "user_stories": ["US-001"],
-        "acceptance_criteria": ["AC-010"],
+        "user_stories": [
+          "US-001"
+        ],
+        "acceptance_criteria": [
+          "AC-010"
+        ],
         "adr_decisions": []
       },
       "technical_notes": "Add getWaterQualityTextLabel(level: WaterQualityLevel) and getWaterQualityBgClass(level: WaterQualityLevel) to the existing waterQualityColors.ts. Map: safe->green/emerald, advisory->amber, closed->red, off_season->gray, unknown->gray.",
@@ -111,11 +122,17 @@
         }
       ],
       "test_file": "client/src/components/__tests__/ErrorState.test.tsx",
-      "status": "pending",
+      "status": "done",
       "depends_on": [],
       "traces_to": {
-        "user_stories": ["US-006"],
-        "acceptance_criteria": ["AC-015", "AC-016", "AC-019"],
+        "user_stories": [
+          "US-006"
+        ],
+        "acceptance_criteria": [
+          "AC-015",
+          "AC-016",
+          "AC-019"
+        ],
         "adr_decisions": []
       },
       "technical_notes": "Create ErrorState.tsx with props: message: string, onRetry?: () => void. Use Card component pattern from ui/Card.tsx. Styled with rounded-2xl border border-sand-200.",
@@ -156,11 +173,16 @@
         }
       ],
       "test_file": "client/src/components/__tests__/BeachNavigation.test.tsx",
-      "status": "pending",
+      "status": "done",
       "depends_on": [],
       "traces_to": {
-        "user_stories": ["US-003"],
-        "acceptance_criteria": ["AC-008", "AC-009"],
+        "user_stories": [
+          "US-003"
+        ],
+        "acceptance_criteria": [
+          "AC-008",
+          "AC-009"
+        ],
         "adr_decisions": []
       },
       "technical_notes": "Create BeachNavigation.tsx that takes currentBeachSlug as prop. Sort BEACHES alphabetically by name. Find current index, compute prev/next with modulo wrap-around. Use ChevronLeft/ChevronRight from lucide-react. Render as Link components with data-testid='beach-nav-prev' and 'beach-nav-next'.",
@@ -203,12 +225,19 @@
         }
       ],
       "test_file": "client/src/contexts/__tests__/ThemeContext.test.tsx",
-      "status": "pending",
+      "status": "done",
       "depends_on": [],
       "traces_to": {
-        "user_stories": ["US-005"],
-        "acceptance_criteria": ["AC-012", "AC-013"],
-        "adr_decisions": ["ADR-004"]
+        "user_stories": [
+          "US-005"
+        ],
+        "acceptance_criteria": [
+          "AC-012",
+          "AC-013"
+        ],
+        "adr_decisions": [
+          "ADR-004"
+        ]
       },
       "technical_notes": "Rewrite ThemeContext.tsx to export ThemeProvider and useTheme hook. ThemeContextType: { theme: 'light' | 'dark', toggleTheme: () => void }. On mount, read localStorage('vanbeaches-theme'); default to 'light'. On toggle, flip theme, persist to localStorage, toggle 'dark' class on document.documentElement.",
       "context_refs": {
@@ -243,12 +272,20 @@
         }
       ],
       "test_file": "client/src/components/__tests__/BeachCard.test.tsx",
-      "status": "pending",
-      "depends_on": ["001"],
+      "status": "done",
+      "depends_on": [
+        "001"
+      ],
       "traces_to": {
-        "user_stories": ["US-001"],
-        "acceptance_criteria": ["AC-006"],
-        "adr_decisions": ["ADR-003"]
+        "user_stories": [
+          "US-001"
+        ],
+        "acceptance_criteria": [
+          "AC-006"
+        ],
+        "adr_decisions": [
+          "ADR-003"
+        ]
       },
       "technical_notes": "Rewrite BeachCard.tsx to render: beach name (as Link), VerdictBadge (sm size), temperature text. Remove all other visual elements. Props should accept beach data and optional weather conditions for verdict computation. Use computeSummaryVerdict from task 001.",
       "context_refs": {
@@ -307,12 +344,28 @@
         }
       ],
       "test_file": "client/src/components/__tests__/DiscoveryView.test.tsx",
-      "status": "pending",
-      "depends_on": ["003", "006"],
+      "status": "done",
+      "depends_on": [
+        "003",
+        "006"
+      ],
       "traces_to": {
-        "user_stories": ["US-001", "US-002", "US-006"],
-        "acceptance_criteria": ["AC-001", "AC-004", "AC-005", "AC-018", "AC-019"],
-        "adr_decisions": ["ADR-001", "ADR-002"]
+        "user_stories": [
+          "US-001",
+          "US-002",
+          "US-006"
+        ],
+        "acceptance_criteria": [
+          "AC-001",
+          "AC-004",
+          "AC-005",
+          "AC-018",
+          "AC-019"
+        ],
+        "adr_decisions": [
+          "ADR-001",
+          "ADR-002"
+        ]
       },
       "technical_notes": "Rewrite DiscoveryView.tsx. Add tagline as first element. Implement List/Map toggle state (default: List). Remove ALL_VIBES, selectedVibe, and vibe filter chip UI. Use ErrorState component for error handling. Use data-testid='discovery-beach-list' for list container and 'beach-map' for map. Lazy-load BeachMap only when map view is active.",
       "context_refs": {
@@ -370,11 +423,23 @@
         }
       ],
       "test_file": "client/src/components/__tests__/TodayTab.test.tsx",
-      "status": "pending",
-      "depends_on": ["002", "003"],
+      "status": "done",
+      "depends_on": [
+        "002",
+        "003"
+      ],
       "traces_to": {
-        "user_stories": ["US-001", "US-004", "US-006"],
-        "acceptance_criteria": ["AC-010", "AC-015", "AC-016", "AC-017"],
+        "user_stories": [
+          "US-001",
+          "US-004",
+          "US-006"
+        ],
+        "acceptance_criteria": [
+          "AC-010",
+          "AC-015",
+          "AC-016",
+          "AC-017"
+        ],
         "adr_decisions": []
       },
       "technical_notes": "Modify TodayTab.tsx: (1) Replace water quality dot with text label using getWaterQualityTextLabel and getWaterQualityBgClass from task 002. Add data-testid='water-quality-label'. (2) Add 'Updated X min ago' using weather.fetchedAt, computing relative time. (3) Use ErrorState from task 003 for weather error ('Couldn't load conditions') and tide error ('Tide data unavailable'), each with onRetry wired to refetch.",
@@ -414,12 +479,18 @@
         }
       ],
       "test_file": "client/src/components/__tests__/AboutTab.test.tsx",
-      "status": "pending",
+      "status": "done",
       "depends_on": [],
       "traces_to": {
-        "user_stories": ["US-001"],
-        "acceptance_criteria": ["AC-011"],
-        "adr_decisions": ["ADR-001"]
+        "user_stories": [
+          "US-001"
+        ],
+        "acceptance_criteria": [
+          "AC-011"
+        ],
+        "adr_decisions": [
+          "ADR-001"
+        ]
       },
       "technical_notes": "Modify AboutTab.tsx: after differentiators section, add 'Similar vibes' heading. Query beach-personalities.ts for other beaches sharing >= 1 vibe with the current beach. Render up to 3 as links (data-testid='similar-vibe-link') to /beach/:slug. Use beachPersonalities data to find vibes overlap.",
       "context_refs": {
@@ -463,12 +534,22 @@
         }
       ],
       "test_file": "client/src/pages/__tests__/BeachDetail.test.tsx",
-      "status": "pending",
-      "depends_on": ["004"],
+      "status": "done",
+      "depends_on": [
+        "004"
+      ],
       "traces_to": {
-        "user_stories": ["US-003"],
-        "acceptance_criteria": ["AC-007", "AC-008", "AC-009"],
-        "adr_decisions": ["ADR-005"]
+        "user_stories": [
+          "US-003"
+        ],
+        "acceptance_criteria": [
+          "AC-007",
+          "AC-008",
+          "AC-009"
+        ],
+        "adr_decisions": [
+          "ADR-005"
+        ]
       },
       "technical_notes": "Modify BeachDetail.tsx: (1) Change hero height from h-[30vh] min-h-[200px] to max-h-[150px] sm:max-h-none to cap at 150px on mobile. (2) Import and render BeachNavigation below tab content, passing current beach slug. Do NOT modify TodayTab or AboutTab content here (handled in tasks 008/009).",
       "context_refs": {
@@ -503,12 +584,21 @@
         }
       ],
       "test_file": "client/src/components/__tests__/Layout.test.tsx",
-      "status": "pending",
-      "depends_on": ["005"],
+      "status": "done",
+      "depends_on": [
+        "005"
+      ],
       "traces_to": {
-        "user_stories": ["US-005"],
-        "acceptance_criteria": ["AC-012", "AC-013"],
-        "adr_decisions": ["ADR-004"]
+        "user_stories": [
+          "US-005"
+        ],
+        "acceptance_criteria": [
+          "AC-012",
+          "AC-013"
+        ],
+        "adr_decisions": [
+          "ADR-004"
+        ]
       },
       "technical_notes": "Modify Layout.tsx header: add a button with data-testid='dark-mode-toggle'. Import Moon and Sun from lucide-react. Import useTheme from ThemeContext. Show Moon when light, Sun when dark. onClick calls toggleTheme.",
       "context_refs": {
@@ -543,11 +633,15 @@
         }
       ],
       "test_file": "client/src/App.test.tsx",
-      "status": "pending",
+      "status": "done",
       "depends_on": [],
       "traces_to": {
-        "user_stories": ["US-001"],
-        "acceptance_criteria": ["AC-014"],
+        "user_stories": [
+          "US-001"
+        ],
+        "acceptance_criteria": [
+          "AC-014"
+        ],
         "adr_decisions": []
       },
       "technical_notes": "Delete client/src/pages/Compare.tsx and client/src/pages/Compare.test.tsx. In App.tsx, remove the Compare import and any explicit /compare route or redirect. The existing catch-all route should redirect unknown paths to /discover. Verify catch-all exists before deleting.",

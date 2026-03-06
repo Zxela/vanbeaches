@@ -59,7 +59,7 @@ export function DiscoveryView({
       </p>
 
       {/* List/Map toggle */}
-      <div className="flex gap-2" role="group" aria-label="View mode">
+      <fieldset className="flex gap-2" aria-label="View mode">
         <button
           type="button"
           onClick={() => setViewMode('list')}
@@ -84,23 +84,19 @@ export function DiscoveryView({
         >
           Map
         </button>
-      </div>
+      </fieldset>
 
       {/* Content: beach list or map */}
       {viewMode === 'list' ? (
         <section aria-label="Beach list" data-testid="discovery-beach-list">
           <div className="divide-y divide-sand-100">
             {beaches.map((beach) => (
-              <BeachCard
-                key={beach.id}
-                beach={beach}
-                conditions={beachConditions[beach.id]}
-              />
+              <BeachCard key={beach.id} beach={beach} conditions={beachConditions[beach.id]} />
             ))}
           </div>
         </section>
       ) : (
-          <BeachMap />
+        <BeachMap />
       )}
     </div>
   );

@@ -16,7 +16,7 @@ function renderComponent(beachId: string) {
   return render(
     <MemoryRouter>
       <BeachNavigation currentBeachId={beachId} />
-    </MemoryRouter>
+    </MemoryRouter>,
   );
 }
 
