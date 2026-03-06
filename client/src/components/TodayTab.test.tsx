@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import type { Beach, TideData, WaterQualityStatus, WeatherForecast } from '@van-beaches/shared';
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { TodayTab } from './TodayTab';
 
 // --- Helper factories ---
@@ -304,5 +305,70 @@ describe('TodayTab', () => {
     );
     // SunTimesWidget shows "Sun Times" heading
     expect(screen.getByText(/sun times/i)).toBeInTheDocument();
+  });
+
+  // AC-010-UI: Water quality displayed as text label badge with colored background
+  it('renders water quality as text label with data-testid and bg-emerald class for good quality', () => {
+    render(
+      <TodayTab
+        beach={makeBeach()}
+        weather={makeWeather()}
+        tides={null}
+        waterQuality={makeWaterQuality('good')}
+        sunsetTime={null}
+      />,
+    );
+    const label = screen.getByTestId('water-quality-label');
+    expect(label).toHaveTextContent('Safe');
+    expect(label.className).toMatch(/bg-emerald/);
+  });
+
+  // AC-017: Conditions section shows "Updated X min ago" timestamp
+  it('shows "Updated X min ago" timestamp in conditions section when weather is loaded', () => {
+    render(
+      <TodayTab
+        beach={makeBeach()}
+        weather={makeWeather()}
+        tides={null}
+        waterQuality={null}
+        sunsetTime={null}
+      />,
+    );
+    expect(screen.getByText(/Updated \d+ min ago/)).toBeInTheDocument();
+  });
+
+  // AC-015: Weather error shows error card with retry button
+  it('shows "Couldn\'t load conditions" error card when weatherError is provided', () => {
+    render(
+      <TodayTab
+        beach={makeBeach()}
+        weather={null}
+        tides={null}
+        waterQuality={null}
+        sunsetTime={null}
+        weatherError="Failed to fetch"
+        onRetryWeather={vi.fn()}
+      />,
+    );
+    expect(screen.getByText("Couldn't load conditions")).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /try again/i })).toBeInTheDocument();
+  });
+
+  // AC-016: Tide error shows "Tide data unavailable" with retry button
+  it('shows "Tide data unavailable" error card when tideError is provided', () => {
+    const onRetryTide = vi.fn();
+    render(
+      <TodayTab
+        beach={makeBeach({ tideStationId: 'station-7795' })}
+        weather={makeWeather()}
+        tides={null}
+        waterQuality={null}
+        sunsetTime={null}
+        tideError="Failed to fetch"
+        onRetryTide={onRetryTide}
+      />,
+    );
+    expect(screen.getByText('Tide data unavailable')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /try again/i })).toBeInTheDocument();
   });
 });
