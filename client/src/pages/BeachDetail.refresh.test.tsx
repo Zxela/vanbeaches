@@ -1,11 +1,11 @@
 import { render, screen } from '@testing-library/react';
-import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { MemoryRouter } from 'react-router-dom';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { BeachDetail } from './BeachDetail';
 
 // Mock react-router-dom useParams only
 vi.mock('react-router-dom', async (importOriginal) => {
-  const actual = await importOriginal();
+  const actual = await importOriginal<typeof import('react-router-dom')>();
   return {
     ...actual,
     useParams: () => ({ slug: 'kitsilano' }),
@@ -182,18 +182,30 @@ describe('BeachDetail - tabbed layout rendering', () => {
   });
 
   it('renders beach name in compact hero', () => {
-    render(<MemoryRouter><BeachDetail /></MemoryRouter>);
+    render(
+      <MemoryRouter>
+        <BeachDetail />
+      </MemoryRouter>,
+    );
     expect(screen.getByRole('heading', { name: 'Kitsilano Beach' })).toBeInTheDocument();
   });
 
   it('displays temperature from weather data via TodayTab', () => {
-    render(<MemoryRouter><BeachDetail /></MemoryRouter>);
+    render(
+      <MemoryRouter>
+        <BeachDetail />
+      </MemoryRouter>,
+    );
     // Temperature is passed down to TodayTab
     expect(screen.getByText('18°C')).toBeInTheDocument();
   });
 
   it('renders quick conditions in hero including temperature', () => {
-    render(<MemoryRouter><BeachDetail /></MemoryRouter>);
+    render(
+      <MemoryRouter>
+        <BeachDetail />
+      </MemoryRouter>,
+    );
     // Hero quick conditions strip shows temp
     const heroEl = document.querySelector('[class*="max-h-"]');
     expect(heroEl).toBeInTheDocument();

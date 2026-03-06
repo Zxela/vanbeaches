@@ -130,9 +130,7 @@ export function TodayTab({
       )}
 
       {/* Tide error state */}
-      {showTideError && (
-        <ErrorState message="Tide data unavailable" onRetry={onRetryTide} />
-      )}
+      {showTideError && <ErrorState message="Tide data unavailable" onRetry={onRetryTide} />}
 
       {/* Activity recommendations */}
       {weather && <ActivityRecommendations weather={weather} activities={beach.activities} />}

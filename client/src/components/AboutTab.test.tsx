@@ -239,19 +239,25 @@ describe('AboutTab', () => {
   // AC-011: Similar vibes section
   describe('AC-011: Similar vibes section', () => {
     it('renders a "Similar vibes" heading for a beach with personality vibes', () => {
-      const { getByText } = render(<AboutTab beach={mockBeachKits} waterQuality={null} weather={null} />);
+      const { getByText } = render(
+        <AboutTab beach={mockBeachKits} waterQuality={null} weather={null} />,
+      );
       expect(getByText('Similar vibes')).toBeInTheDocument();
     });
 
     it('renders up to 3 similar beach links', () => {
-      const { getAllByTestId } = render(<AboutTab beach={mockBeachKits} waterQuality={null} weather={null} />);
+      const { getAllByTestId } = render(
+        <AboutTab beach={mockBeachKits} waterQuality={null} weather={null} />,
+      );
       const links = getAllByTestId('similar-vibe-link');
       expect(links.length).toBeGreaterThan(0);
       expect(links.length).toBeLessThanOrEqual(3);
     });
 
     it('does not include the current beach in similar vibes results', () => {
-      const { getAllByTestId } = render(<AboutTab beach={mockBeachKits} waterQuality={null} weather={null} />);
+      const { getAllByTestId } = render(
+        <AboutTab beach={mockBeachKits} waterQuality={null} weather={null} />,
+      );
       const links = getAllByTestId('similar-vibe-link');
       for (const link of links) {
         expect(link).not.toHaveAttribute('href', '/beach/kitsilano-beach');
@@ -259,7 +265,9 @@ describe('AboutTab', () => {
     });
 
     it('each similar vibe link navigates to the beach detail page', () => {
-      const { getAllByTestId } = render(<AboutTab beach={mockBeachKits} waterQuality={null} weather={null} />);
+      const { getAllByTestId } = render(
+        <AboutTab beach={mockBeachKits} waterQuality={null} weather={null} />,
+      );
       const links = getAllByTestId('similar-vibe-link');
       for (const link of links) {
         expect(link).toHaveAttribute('href', expect.stringMatching(/^\/beach\//));

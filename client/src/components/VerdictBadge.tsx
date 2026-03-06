@@ -42,14 +42,11 @@ export function VerdictBadge({ recommendation, size = 'sm' }: VerdictBadgeProps)
       ? 'text-sm font-semibold px-3 py-1 rounded-full'
       : 'text-xs font-semibold px-2 py-0.5 rounded-full';
 
-  return (
-    <span className={`inline-block ${sizeClasses} ${colors}`}>{label}</span>
-  );
+  return <span className={`inline-block ${sizeClasses} ${colors}`}>{label}</span>;
 }
 
 export function VerdictBadgeSkeleton({ size = 'sm' }: { size?: 'sm' | 'md' }) {
-  const sizeClasses =
-    size === 'md' ? 'h-6 w-14 rounded-full' : 'h-5 w-12 rounded-full';
+  const sizeClasses = size === 'md' ? 'h-6 w-14 rounded-full' : 'h-5 w-12 rounded-full';
 
   return <span className={`inline-block animate-pulse bg-sand-200 ${sizeClasses}`} />;
 }

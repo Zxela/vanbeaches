@@ -115,8 +115,12 @@ vi.mock('../components/ShareButton', () => ({
 vi.mock('../components/BeachNavigation', () => ({
   BeachNavigation: ({ currentBeachId }: { currentBeachId: string }) => (
     <nav data-testid="beach-navigation">
-      <a href={`/beach/prev-${currentBeachId}`} data-testid="beach-nav-prev">Prev Beach</a>
-      <a href={`/beach/next-${currentBeachId}`} data-testid="beach-nav-next">Next Beach</a>
+      <a href={`/beach/prev-${currentBeachId}`} data-testid="beach-nav-prev">
+        Prev Beach
+      </a>
+      <a href={`/beach/next-${currentBeachId}`} data-testid="beach-nav-next">
+        Next Beach
+      </a>
     </nav>
   ),
 }));

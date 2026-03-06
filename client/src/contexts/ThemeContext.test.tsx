@@ -1,5 +1,5 @@
 import { act, renderHook } from '@testing-library/react';
-import { type ReactNode } from 'react';
+import type { ReactNode } from 'react';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { ThemeProvider, useTheme } from './ThemeContext';
 
@@ -120,7 +120,7 @@ describe('ThemeContext', () => {
   describe('useTheme outside provider', () => {
     it('throws an error when used outside ThemeProvider', () => {
       expect(() => renderHook(() => useTheme())).toThrow(
-        'useTheme must be used within ThemeProvider'
+        'useTheme must be used within ThemeProvider',
       );
     });
   });

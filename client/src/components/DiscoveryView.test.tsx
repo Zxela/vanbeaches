@@ -19,7 +19,11 @@ vi.mock('react-leaflet', () => ({
     children,
   }: {
     children: React.ReactNode;
-  }) => <div className="leaflet-container" data-testid="beach-map">{children}</div>,
+  }) => (
+    <div className="leaflet-container" data-testid="beach-map">
+      {children}
+    </div>
+  ),
   TileLayer: ({ url }: { url: string; attribution: string }) => (
     <div className="leaflet-tile-pane" data-url={url} />
   ),
@@ -162,8 +166,6 @@ describe('DiscoveryView', () => {
   // Tagline visible
   it('renders tagline', () => {
     renderDiscoveryView();
-    expect(
-      screen.getByText("Live conditions for Vancouver's 9 best beaches"),
-    ).toBeInTheDocument();
+    expect(screen.getByText("Live conditions for Vancouver's 9 best beaches")).toBeInTheDocument();
   });
 });

@@ -249,7 +249,9 @@ describe('Integration: editorial redesign user flows', () => {
 
       renderApp('/discover');
 
-      expect(screen.getByText("Live conditions for Vancouver's 9 best beaches")).toBeInTheDocument();
+      expect(
+        screen.getByText("Live conditions for Vancouver's 9 best beaches"),
+      ).toBeInTheDocument();
     });
   });
 
@@ -260,7 +262,9 @@ describe('Integration: editorial redesign user flows', () => {
 
       renderApp('/discover');
 
-      expect(screen.getByText("Live conditions for Vancouver's 9 best beaches")).toBeInTheDocument();
+      expect(
+        screen.getByText("Live conditions for Vancouver's 9 best beaches"),
+      ).toBeInTheDocument();
     });
 
     it('shows beach list when user has no favorites', () => {
@@ -319,7 +323,9 @@ describe('Integration: editorial redesign user flows', () => {
       renderApp('/compare');
 
       // After redirect, the DiscoveryView tagline should be visible
-      expect(screen.getByText("Live conditions for Vancouver's 9 best beaches")).toBeInTheDocument();
+      expect(
+        screen.getByText("Live conditions for Vancouver's 9 best beaches"),
+      ).toBeInTheDocument();
     });
 
     it('navigating to /compare does not render Compare-specific content', () => {
