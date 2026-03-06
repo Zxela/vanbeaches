@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { AboutTab } from '../components/AboutTab';
+import { BeachNavigation } from '../components/BeachNavigation';
 import { FavoriteButton } from '../components/FavoriteButton';
 import { PhotosTab } from '../components/PhotosTab';
 import { ShareButton } from '../components/ShareButton';
@@ -87,8 +88,8 @@ export function BeachDetail() {
 
   return (
     <div>
-      {/* Compact hero image (~30vh) */}
-      <div className="relative w-full h-[30vh] min-h-[200px] max-h-[320px] overflow-hidden">
+      {/* Compact hero image (~30vh, capped at 150px on mobile) */}
+      <div className="relative w-full h-[30vh] min-h-[200px] max-h-[150px] sm:max-h-none overflow-hidden">
         {beach.images ? (
           <img
             src={beach.images.hero}
@@ -181,6 +182,9 @@ export function BeachDetail() {
           )}
         </AnimatePresence>
       </div>
+
+      {/* Previous/next beach navigation */}
+      <BeachNavigation currentBeachId={beach.id} />
     </div>
   );
 }

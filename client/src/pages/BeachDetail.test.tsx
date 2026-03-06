@@ -112,6 +112,15 @@ vi.mock('../components/ShareButton', () => ({
   ShareButton: () => <button type="button" data-testid="share-button" />,
 }));
 
+vi.mock('../components/BeachNavigation', () => ({
+  BeachNavigation: ({ currentBeachId }: { currentBeachId: string }) => (
+    <nav data-testid="beach-navigation">
+      <a href={`/beach/prev-${currentBeachId}`} data-testid="beach-nav-prev">Prev Beach</a>
+      <a href={`/beach/next-${currentBeachId}`} data-testid="beach-nav-next">Next Beach</a>
+    </nav>
+  ),
+}));
+
 describe('BeachDetail', () => {
   const baseBeach = {
     id: 'test-beach',
@@ -159,6 +168,25 @@ describe('BeachDetail', () => {
 
       // Hero should have h-[30vh] class (compact, not 40vh)
       const heroEl = container.querySelector('[class*="h-[30vh]"]');
+      expect(heroEl).toBeInTheDocument();
+    });
+
+    // AC-007: mobile hero max height
+    it('hero container has max-h-[150px] class for mobile viewports', () => {
+      mockGetBeachById.mockReturnValue(baseBeach);
+
+      const { container } = render(<BeachDetail />);
+
+      const heroEl = container.querySelector('[class*="max-h-[150px]"]');
+      expect(heroEl).toBeInTheDocument();
+    });
+
+    it('hero container has sm:max-h-none class to remove mobile cap on larger viewports', () => {
+      mockGetBeachById.mockReturnValue(baseBeach);
+
+      const { container } = render(<BeachDetail />);
+
+      const heroEl = container.querySelector('[class*="sm:max-h-none"]');
       expect(heroEl).toBeInTheDocument();
     });
 
@@ -254,6 +282,25 @@ describe('BeachDetail', () => {
       fireEvent.click(screen.getByTestId('tab-today'));
 
       expect(window.location.hash).toBe('#today');
+    });
+  });
+
+  // AC-008-int: BeachNavigation component is rendered on the beach detail page
+  describe('AC-008-int: BeachNavigation integration', () => {
+    it('renders beach-nav-prev link', () => {
+      mockGetBeachById.mockReturnValue(baseBeach);
+
+      render(<BeachDetail />);
+
+      expect(screen.getByTestId('beach-nav-prev')).toBeInTheDocument();
+    });
+
+    it('renders beach-nav-next link', () => {
+      mockGetBeachById.mockReturnValue(baseBeach);
+
+      render(<BeachDetail />);
+
+      expect(screen.getByTestId('beach-nav-next')).toBeInTheDocument();
     });
   });
 
