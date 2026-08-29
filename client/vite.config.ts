@@ -12,8 +12,8 @@ export default defineConfig({
         name: 'Van Beaches',
         short_name: 'Van Beaches',
         description: 'Real-time beach conditions for Vancouver',
-        theme_color: '#1E8FA6',
-        background_color: '#FEFCF8',
+        theme_color: '#0A84FF',
+        background_color: '#F5F7FA',
         display: 'standalone',
         icons: [
           {

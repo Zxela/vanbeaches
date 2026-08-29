@@ -11,12 +11,13 @@ interface BeachCardProps {
 }
 
 const conditionStyles: Record<string, string> = {
-  sunny: 'from-sky-500 via-sky-600 to-blue-800',
-  cloudy: 'from-slate-500 via-slate-600 to-slate-800',
-  rainy: 'from-slate-600 via-blue-800 to-slate-950',
-  stormy: 'from-slate-700 via-indigo-950 to-slate-950',
-  foggy: 'from-slate-400 via-slate-500 to-slate-700',
-  snowy: 'from-sky-300 via-slate-400 to-slate-600',
+  sunny: 'from-[#1677d2] via-[#3999df] to-[#73c8f2]',
+  'partly-cloudy': 'from-[#487faf] via-[#73a2c4] to-[#a8c9df]',
+  cloudy: 'from-[#61778a] via-[#8799a7] to-[#b3c0c8]',
+  rainy: 'from-[#273f59] via-[#49637c] to-[#718aa1]',
+  stormy: 'from-[#17243a] via-[#304058] to-[#4b5e78]',
+  foggy: 'from-[#788995] via-[#9aa9b1] to-[#bcc7cc]',
+  snowy: 'from-[#8bbbd4] via-[#b6d2df] to-[#d9e6ec]',
 };
 
 function formatCondition(condition?: string) {

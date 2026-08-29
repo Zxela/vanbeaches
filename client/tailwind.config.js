@@ -10,20 +10,21 @@ export default {
         mono: ['JetBrains Mono', 'SF Mono', 'monospace'],
       },
       colors: {
-        // Warm sand tones (replacing cool "sand" grays)
+        // Cool cloud/ink neutrals. The legacy `sand` name is retained so the
+        // palette change reaches every existing surface without a risky class migration.
         sand: {
-          25: '#FEFDFB',
-          50: '#FEFCF8',
-          100: '#FDF6E9',
-          200: '#F9E8CC',
-          300: '#F2D5A0',
-          400: '#E5BA6A',
-          500: '#D4A04A',
-          600: '#B8862E',
-          700: '#8C6622',
-          800: '#5C421A',
-          900: '#3A2A12',
-          950: '#1E1509',
+          25: '#FBFCFE',
+          50: '#F5F7FA',
+          100: '#EAF0F6',
+          200: '#D8E1EC',
+          300: '#BBC8D8',
+          400: '#91A3B8',
+          500: '#687B92',
+          600: '#4D6076',
+          700: '#37495E',
+          800: '#233348',
+          900: '#142236',
+          950: '#091321',
         },
         // Accent: Coral/terracotta — warm CTA color
         coral: {
