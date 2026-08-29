@@ -40,10 +40,10 @@ describe('TabBar', () => {
   });
 
   // AC-003: The active tab has a visually distinct style (coral-500 accent)
-  it('applies coral-500 text color to the active tab button', () => {
+  it('applies high-contrast text to the active tab button', () => {
     render(<TabBar activeTab="today" onTabChange={vi.fn()} />);
     const todayBtn = screen.getByRole('button', { name: /today/i });
-    expect(todayBtn.className).toContain('coral');
+    expect(todayBtn.className).toContain('text-white');
   });
 
   it('does not apply coral color to inactive tab buttons', () => {
@@ -56,15 +56,15 @@ describe('TabBar', () => {
   it('renders "about" as selected when activeTab is "about"', () => {
     render(<TabBar activeTab="about" onTabChange={vi.fn()} />);
     const aboutBtn = screen.getByRole('button', { name: /about/i });
-    expect(aboutBtn.className).toContain('coral');
+    expect(aboutBtn.className).toContain('text-white');
     const todayBtn = screen.getByRole('button', { name: /today/i });
-    expect(todayBtn.className).not.toContain('text-coral');
+    expect(todayBtn.className).toContain('text-white/60');
   });
 
   it('renders "photos" as selected when activeTab is "photos"', () => {
     render(<TabBar activeTab="photos" onTabChange={vi.fn()} />);
     const photosBtn = screen.getByRole('button', { name: /photos/i });
-    expect(photosBtn.className).toContain('coral');
+    expect(photosBtn.className).toContain('text-white');
   });
 
   // Type export check: BeachDetailTab type is exported

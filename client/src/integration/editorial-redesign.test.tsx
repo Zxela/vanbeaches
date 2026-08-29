@@ -7,7 +7,7 @@
  * 3. Tab navigation on /beach/:slug works with URL hash sync
  * 4. /compare redirects to /discover
  */
-import { fireEvent, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
@@ -276,42 +276,38 @@ describe('Integration: editorial redesign user flows', () => {
     });
   });
 
-  // AC-003: Navigating to /beach/:slug shows tabbed detail page with Today tab active
-  describe('018-AC3: beach detail page shows Today tab active by default', () => {
-    it('renders the TabBar when navigating to a beach detail page', () => {
+  // AC-003: Navigating to /beach/:slug shows a forecast-first continuous detail page
+  describe('018-AC3: beach detail page uses continuous forecast-first navigation', () => {
+    it('renders accessible section navigation', () => {
       renderApp('/beach/kitsilano-beach');
 
-      // TabBar renders tab buttons; "Today" is one of them
-      expect(screen.getByText('Today')).toBeInTheDocument();
+      const nav = screen.getByRole('navigation', { name: /beach page sections/i });
+      expect(nav).toBeInTheDocument();
+      expect(screen.getByRole('link', { name: /forecast/i })).toHaveAttribute('href', '#today');
     });
 
-    it('Today tab is active by default on /beach/:slug', () => {
+    it('keeps the forecast and beach guide in one document flow', () => {
       renderApp('/beach/kitsilano-beach');
 
-      // Beach name should appear at least once (in the hero heading)
       const beachNameElements = screen.getAllByText('Kitsilano Beach');
       expect(beachNameElements.length).toBeGreaterThan(0);
-      // The Today tab button is visible in the TabBar
-      const todayButton = screen.getByRole('button', { name: /today/i });
-      expect(todayButton).toBeInTheDocument();
+      expect(screen.getByRole('heading', { name: /plan your visit/i })).toBeInTheDocument();
     });
 
-    it('clicking About tab switches tab content and updates URL hash', () => {
+    it('links directly to the continuously visible beach guide', () => {
       renderApp('/beach/kitsilano-beach');
 
-      const aboutButton = screen.getByRole('button', { name: /about/i });
-      fireEvent.click(aboutButton);
-
-      expect(window.location.hash).toBe('#about');
+      expect(screen.getByRole('link', { name: /beach guide/i })).toHaveAttribute('href', '#about');
+      expect(document.querySelector('section#about')).toBeInTheDocument();
     });
 
-    it('clicking Photos tab updates URL hash to #photos', () => {
+    it('keeps community content in a secondary disclosure', () => {
       renderApp('/beach/kitsilano-beach');
 
-      const photosButton = screen.getByRole('button', { name: /photos/i });
-      fireEvent.click(photosButton);
-
-      expect(window.location.hash).toBe('#photos');
+      const disclosure = document.querySelector('details#photos');
+      expect(disclosure).toBeInTheDocument();
+      expect(disclosure).not.toHaveAttribute('open');
+      expect(screen.getByRole('link', { name: /community/i })).toHaveAttribute('href', '#photos');
     });
   });
 

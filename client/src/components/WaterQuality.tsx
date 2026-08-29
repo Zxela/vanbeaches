@@ -59,7 +59,7 @@ const statusConfig: Record<string, StatusConfig> = {
 export function WaterQuality({ status, loading, error }: WaterQualityProps) {
   if (loading) {
     return (
-      <Card>
+      <Card variant="glass">
         <CardTitle className="flex items-center gap-2">
           <Icon icon={Droplets} size="lg" color="ocean" />
           Water Quality
@@ -79,7 +79,7 @@ export function WaterQuality({ status, loading, error }: WaterQualityProps) {
 
   if (error) {
     return (
-      <Card>
+      <Card variant="glass">
         <CardTitle className="flex items-center gap-2">
           <Icon icon={Droplets} size="lg" color="ocean" />
           Water Quality
@@ -97,7 +97,7 @@ export function WaterQuality({ status, loading, error }: WaterQualityProps) {
   const StatusIcon = config.icon;
 
   return (
-    <Card animated>
+    <Card animated variant="glass">
       <CardTitle className="flex items-center gap-2">
         <Icon icon={Droplets} size="lg" color="ocean" />
         Water Quality
@@ -113,7 +113,7 @@ export function WaterQuality({ status, loading, error }: WaterQualityProps) {
           <div
             className={`w-12 h-12 rounded-full ${config.bgColor} flex items-center justify-center`}
           >
-            <StatusIcon className={`w-6 h-6 ${config.iconColor}`} />
+            <StatusIcon className={`w-6 h-6 ${config.iconColor}`} aria-hidden="true" />
           </div>
           <div>
             <span
@@ -122,7 +122,7 @@ export function WaterQuality({ status, loading, error }: WaterQualityProps) {
               {config.label}
             </span>
             {status.level === 'good' && (
-              <p className="mt-1 text-emerald-600 text-sm">Safe for swimming</p>
+              <p className="mt-1 text-emerald-700 text-sm">No advisory reported</p>
             )}
             {status.level === 'off-season' && (
               <p className="mt-1 text-sand-500 text-sm">Monitoring resumes in May</p>
@@ -151,9 +151,15 @@ export function WaterQuality({ status, loading, error }: WaterQualityProps) {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3 }}
           >
-            Last sampled: {new Date(status.sampleDate).toLocaleDateString()}
+            Reported sample date:{' '}
+            <time dateTime={status.sampleDate}>
+              {new Date(status.sampleDate).toLocaleDateString()}
+            </time>
           </motion.p>
         )}
+        <p className="mt-3 border-t border-white/40 pt-3 text-xs text-sand-500">
+          Latest available reported status. Follow posted notices at the beach if they differ.
+        </p>
       </CardContent>
     </Card>
   );

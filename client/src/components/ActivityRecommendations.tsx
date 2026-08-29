@@ -5,7 +5,6 @@ import {
   BAD_WEATHER,
   FAIR_WEATHER,
   GOOD_WEATHER,
-  RATING_COLORS,
   TEMP,
   UV,
   WIND,
@@ -180,8 +179,8 @@ export function ActivityRecommendations({ weather, activities }: ActivityRecomme
   if (recommendations.length === 0) return null;
 
   return (
-    <Card variant="default">
-      <CardTitle className="flex items-center gap-2">
+    <Card variant="default" className="weather-panel">
+      <CardTitle className="flex items-center gap-2 text-white">
         <Icon icon={Star} size="lg" color="warning" />
         Recommended Activities
       </CardTitle>
@@ -190,14 +189,14 @@ export function ActivityRecommendations({ weather, activities }: ActivityRecomme
           {recommendations.map((rec) => (
             <div
               key={rec.activity}
-              className={`flex items-center gap-3 p-3 rounded-lg border ${RATING_COLORS[rec.rating]}`}
+              className="flex items-center gap-3 rounded-lg border border-white/15 bg-white/10 p-3 text-white"
             >
               <span className="text-2xl">{rec.icon}</span>
               <div className="flex-1 min-w-0">
                 <p className="font-medium">{rec.activity}</p>
-                <p className="text-xs opacity-75 truncate">{rec.reason}</p>
+                <p className="truncate text-xs text-white/65">{rec.reason}</p>
               </div>
-              <span className="text-xs font-medium uppercase px-2 py-1 rounded bg-white/50">
+              <span className="rounded bg-white/15 px-2 py-1 text-xs font-medium uppercase">
                 {rec.rating}
               </span>
             </div>

@@ -9,18 +9,30 @@ export interface WeatherForecast {
     windSpeed: number;
     windDirection: string;
     uvIndex: number;
+    apparentTemperature?: number;
+    visibility?: number;
+    pressure?: number;
+    windGusts?: number;
   };
   hourly: Array<{
     time: string;
     temperature: number;
     condition: WeatherCondition;
     precipitationProbability: number;
+    windSpeed?: number;
+    windDirection?: string;
+    uvIndex?: number;
+    humidity?: number;
+    precipitation?: number;
   }>;
   daily?: Array<{
     date: string;
     high: number;
     low: number;
     condition: WeatherCondition;
+    sunrise?: string;
+    sunset?: string;
+    precipitationProbability?: number;
   }>;
   fetchedAt: string;
 }

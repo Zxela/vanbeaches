@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import type { TidePrediction } from '@van-beaches/shared';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
@@ -68,6 +68,24 @@ describe('TideCanvas - stale now marker fix', () => {
 });
 
 describe('TideCanvas - redesigned layout', () => {
+  it('summarizes the estimated current direction and emphasizes the next tide', async () => {
+    vi.useFakeTimers();
+    const today = new Date();
+    today.setHours(10, 0, 0, 0);
+    vi.setSystemTime(today);
+    const { TideCanvas } = await import('./TideCanvas');
+
+    render(<TideCanvas predictions={makeTodayTides()} loading={false} />);
+
+    expect(screen.getByText('Right now · estimated')).toBeInTheDocument();
+    expect(screen.getByText('falling')).toBeInTheDocument();
+    expect(screen.getByText('Next tide')).toBeInTheDocument();
+    expect(
+      screen.getByRole('img', { name: /estimated tide.*falling.*next low tide/i }),
+    ).toBeInTheDocument();
+    vi.useRealTimers();
+  });
+
   it('renders title row with only "Today\'s Tides" and wave icon, no inline high/low values', async () => {
     const { TideCanvas } = await import('./TideCanvas');
     const { container } = render(<TideCanvas predictions={makeTodayTides()} loading={false} />);

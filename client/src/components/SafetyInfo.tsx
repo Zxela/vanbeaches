@@ -20,13 +20,36 @@ export function SafetyInfo({ beach, waterQuality, weather }: SafetyInfoProps) {
   const hasLifeguard = lifeguard === 'seasonal' || lifeguard === 'year-round';
 
   const safetyNotes = beach.safetyNotes ?? [];
+  const conditionWarnings =
+    Number(Boolean(isWarning)) + Number(Boolean(highUV)) + Number(Boolean(highWind));
 
   return (
-    <div className="rounded-2xl border border-sand-200 bg-white shadow-sm p-4">
+    <section className="rounded-2xl border border-white/40 bg-white/80 p-4 shadow-lg backdrop-blur-xl">
       <h3 className="text-lg font-semibold text-sand-900 flex items-center gap-2">
         <ShieldCheck className="w-6 h-6 text-emerald-600" aria-hidden="true" />
         Safety
       </h3>
+
+      <div
+        className={[
+          'mt-4 rounded-xl border p-4',
+          conditionWarnings > 0
+            ? 'border-amber-200/80 bg-amber-50/90'
+            : 'border-emerald-200/70 bg-emerald-50/80',
+        ].join(' ')}
+      >
+        <p className="text-xs font-semibold uppercase tracking-[0.14em] text-sand-600">
+          Beach safety snapshot
+        </p>
+        <p className="mt-1 font-semibold text-sand-900">
+          {conditionWarnings > 0
+            ? `${conditionWarnings} ${conditionWarnings === 1 ? 'item needs' : 'items need'} attention`
+            : 'No current warnings in the available data'}
+        </p>
+        <p className="mt-1 text-xs text-sand-600">
+          Combines the reported water-quality status with guidance derived from current UV and wind.
+        </p>
+      </div>
 
       <div className="mt-4 space-y-4">
         {/* AC-001: Warning banner for advisory (amber) or closed (red) */}
@@ -71,7 +94,9 @@ export function SafetyInfo({ beach, waterQuality, weather }: SafetyInfoProps) {
         {isGood && (
           <div className="flex items-center gap-3">
             <CheckCircle className="w-5 h-5 text-emerald-500 flex-shrink-0" aria-hidden="true" />
-            <p className="text-sm text-emerald-700">Water quality is good — safe for swimming.</p>
+            <p className="text-sm text-emerald-700">
+              Water quality is good — no advisory is reported in the latest available status.
+            </p>
           </div>
         )}
 
@@ -133,10 +158,11 @@ export function SafetyInfo({ beach, waterQuality, weather }: SafetyInfoProps) {
 
         {/* AC-007: Disclaimer */}
         <p className="text-xs text-sand-500 border-t border-sand-200 pt-3">
-          Safety information is for reference only. Always follow posted signs and official
-          advisories.
+          Water-quality labels reflect the latest available reported status. UV and wind guidance is
+          generated from forecast conditions, not an official advisory. This information is for
+          reference only; always follow posted signs and official advisories.
         </p>
       </div>
-    </div>
+    </section>
   );
 }

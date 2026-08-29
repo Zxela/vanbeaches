@@ -13,8 +13,8 @@ const tabs: { key: BeachDetailTab; label: string }[] = [
 
 export function TabBar({ activeTab, onTabChange }: TabBarProps) {
   return (
-    <nav className="sticky top-0 z-10 bg-sand-50 border-b border-sand-200">
-      <div className="flex">
+    <nav className="sticky top-0 z-30 border-y border-white/15 bg-slate-900/20 px-3 backdrop-blur-2xl">
+      <div className="mx-auto flex max-w-3xl">
         {tabs.map(({ key, label }) => {
           const isActive = activeTab === key;
           return (
@@ -24,8 +24,8 @@ export function TabBar({ activeTab, onTabChange }: TabBarProps) {
               onClick={() => onTabChange(key)}
               className={
                 isActive
-                  ? 'flex-1 py-3 text-sm font-semibold text-coral-500 border-b-2 border-coral-500'
-                  : 'flex-1 py-3 text-sm font-medium text-sand-600 border-b-2 border-transparent'
+                  ? 'flex-1 py-3 text-sm font-semibold text-white border-b-2 border-white'
+                  : 'flex-1 py-3 text-sm font-medium text-white/60 border-b-2 border-transparent hover:text-white'
               }
             >
               {label}

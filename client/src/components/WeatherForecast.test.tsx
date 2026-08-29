@@ -24,13 +24,9 @@ const mockForecast = {
 };
 
 describe('WeatherForecast', () => {
-  it('wraps content in a Card component instead of raw div with bg-white/bg-gray-800', () => {
+  it('uses the shared translucent weather panel', () => {
     const { container } = render(<WeatherForecast forecast={mockForecast} />);
-    // Card component renders with data-card attribute or card class patterns
-    // Instead check that there is no raw bg-white or bg-gray-800 class
-    const html = container.innerHTML;
-    expect(html).not.toContain('bg-white');
-    expect(html).not.toContain('bg-gray-800');
+    expect(container.querySelector('.weather-panel')).toBeInTheDocument();
   });
 
   it('uses Lucide icon components instead of emoji strings for weather icons', () => {

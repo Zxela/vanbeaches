@@ -186,6 +186,18 @@ export function TideCanvas({ predictions, loading, className }: TideCanvasProps)
     [todayTides],
   );
 
+  const currentHeight = useMemo(() => getHeightAtTime(now), [getHeightAtTime, now]);
+  const nextTide = useMemo(
+    () => todayTides.find((tide) => new Date(tide.time).getTime() >= now.getTime()) ?? null,
+    [now, todayTides],
+  );
+  const tideDirection = nextTide?.type === 'high' ? 'rising' : nextTide ? 'falling' : 'turning';
+  const tideSummary = useMemo(() => {
+    const current = `The estimated tide is ${formatNumber(currentHeight)} metres and ${tideDirection}.`;
+    if (!nextTide) return `${current} No more tide changes are listed today.`;
+    return `${current} Next ${nextTide.type} tide is ${formatNumber(nextTide.height)} metres at ${formatTideTime(nextTide.time)}.`;
+  }, [currentHeight, nextTide, tideDirection]);
+
   // Draw canvas
   const draw = useCallback(() => {
     const canvas = canvasRef.current;
@@ -460,6 +472,24 @@ export function TideCanvas({ predictions, loading, className }: TideCanvasProps)
           <Icon icon={Waves} size="lg" color="ocean" />
           Today's Tides
         </CardTitle>
+        <div className="mt-4 flex items-end justify-between gap-4 rounded-xl border border-white/40 bg-white/45 p-3 backdrop-blur-md dark:border-white/10 dark:bg-sand-900/35">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-sand-500 dark:text-sand-300">
+              Right now · estimated
+            </p>
+            <p className="mt-1 text-2xl font-semibold text-sand-900 dark:text-white">
+              {formatNumber(currentHeight)}m
+            </p>
+          </div>
+          <div className="flex items-center gap-2 text-sm font-medium capitalize text-ocean-700 dark:text-ocean-200">
+            {tideDirection === 'rising' ? (
+              <TrendingUp className="h-4 w-4" aria-hidden="true" />
+            ) : (
+              <TrendingDown className="h-4 w-4" aria-hidden="true" />
+            )}
+            {tideDirection}
+          </div>
+        </div>
       </div>
 
       <div
@@ -473,6 +503,8 @@ export function TideCanvas({ predictions, loading, className }: TideCanvasProps)
         <canvas
           ref={canvasRef}
           className="w-full h-full"
+          role="img"
+          aria-label={tideSummary}
           style={{ width: dimensions.width, height: dimensions.height }}
         />
 
@@ -538,22 +570,46 @@ export function TideCanvas({ predictions, loading, className }: TideCanvasProps)
       <div className="px-4 pb-4 pt-2">
         <p className="text-xs font-medium uppercase tracking-wide text-sand-500 mb-2">Key Tides</p>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-          {todayTides.map((tide) => (
-            <div key={tide.time} className="flex items-center gap-2 p-2 rounded-lg bg-ocean-50/50">
-              {tide.type === 'high' ? (
-                <TrendingUp className="w-4 h-4 text-tide-high shrink-0" />
-              ) : (
-                <TrendingDown className="w-4 h-4 text-tide-low shrink-0" />
-              )}
-              <div className="flex flex-col min-w-0">
-                <span className="font-bold text-base text-sand-900 leading-none">
-                  {formatNumber(tide.height)}m
-                </span>
-                <span className="text-sm text-sand-500">{formatTideTime(tide.time)}</span>
+          {todayTides.map((tide) => {
+            const isNext = tide.time === nextTide?.time;
+            return (
+              <div
+                key={tide.time}
+                className={cn(
+                  'flex items-center gap-2 rounded-lg border p-2 backdrop-blur-sm',
+                  isNext
+                    ? 'border-ocean-300 bg-white/75 ring-1 ring-ocean-200 dark:border-ocean-400/60 dark:bg-sand-900/55'
+                    : 'border-white/30 bg-white/35 dark:border-white/10 dark:bg-sand-900/25',
+                )}
+              >
+                {tide.type === 'high' ? (
+                  <TrendingUp className="w-4 h-4 text-tide-high shrink-0" />
+                ) : (
+                  <TrendingDown className="w-4 h-4 text-tide-low shrink-0" />
+                )}
+                <div className="flex flex-col min-w-0">
+                  <span className="font-bold text-base text-sand-900 leading-none">
+                    {formatNumber(tide.height)}m
+                  </span>
+                  <span className="text-sm text-sand-500">{formatTideTime(tide.time)}</span>
+                  {isNext && (
+                    <span className="mt-1 text-[10px] font-bold uppercase tracking-wide text-ocean-700 dark:text-ocean-200">
+                      Next tide
+                    </span>
+                  )}
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
+        <p className="sr-only">{tideSummary}</p>
+        <ul className="sr-only">
+          {todayTides.map((tide) => (
+            <li key={`accessible-${tide.time}`}>
+              {tide.type} tide, {formatNumber(tide.height)} metres at {formatTideTime(tide.time)}
+            </li>
+          ))}
+        </ul>
       </div>
     </Card>
   );

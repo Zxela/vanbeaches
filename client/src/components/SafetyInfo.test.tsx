@@ -124,6 +124,22 @@ const mockWeatherHighWind: WeatherForecast = {
 };
 
 describe('SafetyInfo', () => {
+  it('distinguishes reported status from weather-derived guidance', () => {
+    render(
+      <SafetyInfo
+        beach={mockBeach}
+        waterQuality={mockWaterQualityAdvisory}
+        weather={mockWeatherHighUV}
+      />,
+    );
+
+    expect(screen.getByText('2 items need attention')).toBeInTheDocument();
+    expect(
+      screen.getByText(/reported water-quality status.*derived from current uv and wind/i),
+    ).toBeInTheDocument();
+    expect(screen.getByText(/not an official advisory/i)).toBeInTheDocument();
+  });
+
   // AC-001: Prominent warning banner for advisory (amber) or closed (red)
   describe('AC-001: Water quality warning banners', () => {
     it('shows amber warning banner when water quality is advisory', () => {

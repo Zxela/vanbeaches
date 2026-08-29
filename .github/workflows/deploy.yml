@@ -125,9 +125,38 @@ jobs:
       - name: Test
         run: pnpm test
 
+  e2e:
+    name: Browser tests
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Download shared dist
+        uses: actions/download-artifact@v4
+        with:
+          name: shared-dist
+          path: shared/dist
+
+      - name: Install Chromium
+        run: pnpm --filter @van-beaches/client exec playwright install --with-deps chromium
+
+      - name: Run browser tests
+        run: pnpm --filter @van-beaches/client exec playwright test --project=chromium
+
   deploy:
     name: Deploy
-    needs: [lint, typecheck, test]
+    needs: [lint, typecheck, test, e2e]
     runs-on: ubuntu-latest
     if: github.event_name == 'push' || github.event_name == 'pull_request'
     steps:

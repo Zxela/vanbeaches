@@ -54,7 +54,7 @@ vi.mock('framer-motion', () => ({
   },
 }));
 
-// Mock tab components
+// Mock page sections
 vi.mock('../components/TodayTab', () => ({
   TodayTab: () => <div data-testid="today-tab-content">TodayTab Content</div>,
 }));
@@ -65,43 +65,6 @@ vi.mock('../components/AboutTab', () => ({
 
 vi.mock('../components/PhotosTab', () => ({
   PhotosTab: () => <div data-testid="photos-tab-content">PhotosTab Content</div>,
-}));
-
-vi.mock('../components/TabBar', () => ({
-  TabBar: ({
-    activeTab,
-    onTabChange,
-  }: {
-    activeTab: string;
-    onTabChange: (tab: string) => void;
-  }) => (
-    <nav data-testid="tab-bar">
-      <button
-        type="button"
-        data-testid="tab-today"
-        data-active={activeTab === 'today'}
-        onClick={() => onTabChange('today')}
-      >
-        Today
-      </button>
-      <button
-        type="button"
-        data-testid="tab-about"
-        data-active={activeTab === 'about'}
-        onClick={() => onTabChange('about')}
-      >
-        About
-      </button>
-      <button
-        type="button"
-        data-testid="tab-photos"
-        data-active={activeTab === 'photos'}
-        onClick={() => onTabChange('photos')}
-      >
-        Photos
-      </button>
-    </nav>
-  ),
 }));
 
 vi.mock('../components/FavoriteButton', () => ({
@@ -175,22 +138,21 @@ describe('BeachDetail', () => {
       expect(heroEl).toBeInTheDocument();
     });
 
-    // AC-007: mobile hero max height
-    it('hero container has max-h-[150px] class for mobile viewports', () => {
+    it('hero provides an immersive mobile viewport', () => {
       mockGetBeachById.mockReturnValue(baseBeach);
 
       const { container } = render(<BeachDetail />);
 
-      const heroEl = container.querySelector('[class*="max-h-[150px]"]');
+      const heroEl = container.querySelector('[class*="min-h-[31rem]"]');
       expect(heroEl).toBeInTheDocument();
     });
 
-    it('hero container has sm:max-h-none class to remove mobile cap on larger viewports', () => {
+    it('hero grows on larger viewports', () => {
       mockGetBeachById.mockReturnValue(baseBeach);
 
       const { container } = render(<BeachDetail />);
 
-      const heroEl = container.querySelector('[class*="sm:max-h-none"]');
+      const heroEl = container.querySelector('[class*="sm:min-h-[34rem]"]');
       expect(heroEl).toBeInTheDocument();
     });
 
@@ -211,81 +173,61 @@ describe('BeachDetail', () => {
       expect(screen.getByTestId('share-button')).toBeInTheDocument();
     });
 
-    // AC-005: Hero overlay uses from-black/40 (lighter than current from-black/70)
-    it('hero gradient overlay uses from-black/40 (lighter overlay)', () => {
+    it('hero uses a subtle atmospheric overlay', () => {
       mockGetBeachById.mockReturnValue(baseBeach);
 
       const { container } = render(<BeachDetail />);
 
-      // The gradient overlay div should use from-black/40, not from-black/70
-      const overlayEl = container.querySelector('[class*="from-black/40"]');
+      const overlayEl = container.querySelector('[class*="from-black/10"]');
       expect(overlayEl).toBeInTheDocument();
     });
   });
 
-  // AC-002: TabBar with Today/About/Photos; Today is default active
-  describe('AC-002: TabBar with Today default active', () => {
-    it('renders TabBar with Today, About, Photos tabs', () => {
+  describe('continuous forecast experience', () => {
+    it('provides accessible links to each page section', () => {
       mockGetBeachById.mockReturnValue(baseBeach);
 
       render(<BeachDetail />);
 
-      expect(screen.getByText('Today')).toBeInTheDocument();
-      expect(screen.getByText('About')).toBeInTheDocument();
-      expect(screen.getByText('Photos')).toBeInTheDocument();
+      const sectionNav = screen.getByRole('navigation', { name: 'Beach page sections' });
+      expect(sectionNav).toBeInTheDocument();
+      expect(screen.getByRole('link', { name: /forecast/i })).toHaveAttribute('href', '#today');
+      expect(screen.getByRole('link', { name: /beach guide/i })).toHaveAttribute('href', '#about');
+      expect(screen.getByRole('link', { name: /community/i })).toHaveAttribute('href', '#photos');
     });
 
-    it('Today tab is active by default', () => {
+    it('keeps forecast and beach guide content in the continuous document', () => {
       mockGetBeachById.mockReturnValue(baseBeach);
 
-      render(<BeachDetail />);
-
-      const todayTab = screen.getByTestId('tab-today');
-      expect(todayTab).toHaveAttribute('data-active', 'true');
-    });
-
-    it('renders TodayTab content by default', () => {
-      mockGetBeachById.mockReturnValue(baseBeach);
-
-      render(<BeachDetail />);
+      const { container } = render(<BeachDetail />);
 
       expect(screen.getByTestId('today-tab-content')).toBeInTheDocument();
-    });
-  });
-
-  // AC-003: Clicking About tab renders AboutTab and updates URL hash to #about
-  describe('AC-003: clicking About tab switches to AboutTab and updates hash', () => {
-    it('clicking About tab renders AboutTab content', () => {
-      mockGetBeachById.mockReturnValue(baseBeach);
-
-      render(<BeachDetail />);
-
-      fireEvent.click(screen.getByTestId('tab-about'));
-
+      expect(screen.getByRole('heading', { name: 'Plan your visit' })).toBeInTheDocument();
       expect(screen.getByTestId('about-tab-content')).toBeInTheDocument();
+
+      const forecast = container.querySelector('#today');
+      const guide = container.querySelector('#about');
+      expect(forecast).toBeInTheDocument();
+      expect(guide).toBeInTheDocument();
+      if (!forecast || !guide) throw new Error('Expected continuous page sections');
+      expect(
+        forecast.compareDocumentPosition(guide) & Node.DOCUMENT_POSITION_FOLLOWING,
+      ).toBeTruthy();
     });
 
-    it('clicking About tab updates URL hash to #about', () => {
+    it('keeps community photos secondary in a collapsed disclosure', () => {
       mockGetBeachById.mockReturnValue(baseBeach);
 
-      render(<BeachDetail />);
+      const { container } = render(<BeachDetail />);
 
-      fireEvent.click(screen.getByTestId('tab-about'));
+      const disclosure = container.querySelector('details#photos');
+      expect(disclosure).toBeInTheDocument();
+      expect(disclosure).not.toHaveAttribute('open');
+      expect(screen.getByText('Photos and local posts')).toBeInTheDocument();
+      expect(screen.getByTestId('photos-tab-content')).toBeInTheDocument();
 
-      expect(window.location.hash).toBe('#about');
-    });
-
-    it('clicking Today tab updates URL hash to #today', () => {
-      mockGetBeachById.mockReturnValue(baseBeach);
-
-      render(<BeachDetail />);
-
-      // First go to about
-      fireEvent.click(screen.getByTestId('tab-about'));
-      // Then back to today
-      fireEvent.click(screen.getByTestId('tab-today'));
-
-      expect(window.location.hash).toBe('#today');
+      fireEvent.click(screen.getByText('Photos and local posts'));
+      expect(disclosure).toHaveAttribute('open');
     });
   });
 
@@ -305,38 +247,6 @@ describe('BeachDetail', () => {
       render(<BeachDetail />);
 
       expect(screen.getByTestId('beach-nav-next')).toBeInTheDocument();
-    });
-  });
-
-  // AC-004: When URL has #photos hash on load, Photos tab is initially active
-  describe('AC-004: URL hash determines initial active tab', () => {
-    it('When URL has #photos hash on load, Photos tab is initially active', () => {
-      window.location.hash = '#photos';
-      mockGetBeachById.mockReturnValue(baseBeach);
-
-      render(<BeachDetail />);
-
-      const photosTab = screen.getByTestId('tab-photos');
-      expect(photosTab).toHaveAttribute('data-active', 'true');
-    });
-
-    it('When URL has #about hash on load, About tab is initially active', () => {
-      window.location.hash = '#about';
-      mockGetBeachById.mockReturnValue(baseBeach);
-
-      render(<BeachDetail />);
-
-      const aboutTab = screen.getByTestId('tab-about');
-      expect(aboutTab).toHaveAttribute('data-active', 'true');
-    });
-
-    it('When URL has #photos hash on load, PhotosTab content is visible', () => {
-      window.location.hash = '#photos';
-      mockGetBeachById.mockReturnValue(baseBeach);
-
-      render(<BeachDetail />);
-
-      expect(screen.getByTestId('photos-tab-content')).toBeInTheDocument();
     });
   });
 });

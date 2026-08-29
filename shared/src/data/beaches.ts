@@ -11,11 +11,6 @@ export const BEACHES: Beach[] = [
     description:
       "English Bay is Vancouver's most iconic urban beach, stretching along the West End with sweeping views of the North Shore mountains and spectacular Pacific sunsets. The wide sandy beach draws thousands of visitors year-round, hosting everything from casual swims to major events like the Honda Celebration of Light fireworks festival. With the seawall running along its edge and countless restaurants and cafes steps away, English Bay is the beating heart of Vancouver's beach culture.",
     tagline: "Vancouver's golden sunset amphitheatre",
-    images: {
-      hero: 'https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=1200&q=80',
-      thumb: 'https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=600&q=80',
-      credit: { name: 'Vadim Sherbakov', username: 'madebyvadim' },
-    },
     amenities: {
       parking: 'street',
       restrooms: true,
@@ -50,11 +45,6 @@ export const BEACHES: Beach[] = [
     description:
       'Jericho Beach stretches along the western edge of Vancouver with a broad sandy foreshore, calm sheltered waters, and magnificent views across English Bay toward the North Shore mountains. Home to the Jericho Sailing Centre — one of the largest sailing clubs in Canada — the beach is a hub for watersport enthusiasts of all skill levels. Expansive grassy picnic areas and the historic Jericho Arts Centre make it equally popular with families and festival-goers.',
     tagline: 'Where sails meet mountains',
-    images: {
-      hero: 'https://images.unsplash.com/photo-1560969184-10fe8719e047?w=1200&q=80',
-      thumb: 'https://images.unsplash.com/photo-1560969184-10fe8719e047?w=600&q=80',
-      credit: { name: 'Keagan Henman', username: 'henmankk' },
-    },
     amenities: {
       parking: 'paid',
       restrooms: true,
@@ -89,11 +79,6 @@ export const BEACHES: Beach[] = [
     description:
       "Kitsilano Beach — affectionately known as Kits — is Vancouver's largest and most energetic beach, beloved for its endless sports courts, the enormous heated outdoor saltwater pool, and postcard-perfect views of the downtown skyline and North Shore peaks. The beach draws a young, active crowd who come to play volleyball, basketball, and tennis before cooling off in the pool or the ocean. Kits Pool is the longest outdoor pool in Canada at 137 metres, making it a destination in itself.",
     tagline: 'The sporty heart of the westside',
-    images: {
-      hero: 'https://images.unsplash.com/photo-1598902108854-10e335adac99?w=1200&q=80',
-      thumb: 'https://images.unsplash.com/photo-1598902108854-10e335adac99?w=600&q=80',
-      credit: { name: 'James Wheeler', username: 'souvenirpixels' },
-    },
     amenities: {
       parking: 'paid',
       restrooms: true,
@@ -128,11 +113,6 @@ export const BEACHES: Beach[] = [
     description:
       "Locarno Beach is a quiet, unhurried stretch of sand nestled between Jericho and Spanish Banks, offering some of the most dramatic low-tide exposed flats on Vancouver's shoreline. At low tide the ocean retreats hundreds of metres, revealing a vast sandy playground for beachcombers, waders, and birders. The beach's free parking, relaxed atmosphere, and dog-friendly zones make it a favourite neighbourhood escape away from the busier westside beaches.",
     tagline: 'Peaceful shores and endless tidal flats',
-    images: {
-      hero: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1200&q=80',
-      thumb: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=80',
-      credit: { name: 'Sean Oulashin', username: 'oulashin' },
-    },
     amenities: {
       parking: 'free',
       restrooms: true,
@@ -167,11 +147,6 @@ export const BEACHES: Beach[] = [
     description:
       "Second Beach sits in the southern corner of Stanley Park, offering a family-friendly atmosphere with the park's towering Douglas firs as a dramatic backdrop. The beach is anchored by a large heated outdoor pool — open in summer — and a playground that keeps younger visitors entertained for hours. Walking or cycling the Stanley Park seawall to reach Second Beach is half the adventure, with views across English Bay to the Strait of Georgia.",
     tagline: 'Stanley Park pool days and forest trails',
-    images: {
-      hero: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=1200&q=80',
-      thumb: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=600&q=80',
-      credit: { name: 'Anastasia Taioglou', username: 'taisiia_shestopal' },
-    },
     amenities: {
       parking: 'paid',
       restrooms: true,
@@ -206,11 +181,6 @@ export const BEACHES: Beach[] = [
     description:
       "Spanish Banks is Vancouver's widest and most expansive beach, stretching over three kilometres from the UBC endowment lands with views that take in the entire North Shore and Vancouver Island on a clear day. At low tide the beach extends so far seaward that it feels almost limitless — making it a paradise for kiteboarding, kite flying, and long barefoot walks. Firepits in designated areas make it one of the few places in the city where you can legally enjoy an evening bonfire on the sand.",
     tagline: 'Vast sands, big kites, bigger mountains',
-    images: {
-      hero: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1200&q=80',
-      thumb: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=600&q=80',
-      credit: { name: 'Chris Lawton', username: 'chrislawton' },
-    },
     amenities: {
       parking: 'free',
       restrooms: true,
@@ -246,11 +216,6 @@ export const BEACHES: Beach[] = [
     description:
       'Sunset Beach lines the False Creek shoreline in the West End, offering an intimate urban beach experience with stunning views of the Burrard Bridge and the city skyline reflected in the water. The beach is a key stop on the seawall between the West End and Granville Island, drawing cyclists, rollerbladers, kayakers, and paddleboarders alongside sunbathers. Aquabus and False Creek Ferries stop nearby, making it easy to explore Granville Island and beyond without a car.',
     tagline: 'City skyline meets ocean breeze',
-    images: {
-      hero: 'https://images.unsplash.com/photo-1559494007-9f5847c49d94?w=1200&q=80',
-      thumb: 'https://images.unsplash.com/photo-1559494007-9f5847c49d94?w=600&q=80',
-      credit: { name: 'Ralph (Ravi) Kayden', username: 'ralphkayden' },
-    },
     amenities: {
       parking: 'street',
       restrooms: true,
@@ -285,11 +250,6 @@ export const BEACHES: Beach[] = [
     description:
       "Third Beach is Stanley Park's best-kept secret — a crescent of golden sand tucked beneath old-growth cedar and Douglas fir, accessible only by foot or bike along the seawall. The seclusion keeps crowds manageable even on peak summer days, and the west-facing orientation delivers some of the finest sunsets in the city, made even better by a legal bonfire in one of the designated firepits. Locals know to arrive early on warm evenings to claim a firepit spot before they disappear.",
     tagline: 'Hidden rainforest cove with bonfire sunsets',
-    images: {
-      hero: 'https://images.unsplash.com/photo-1519046904884-53103b34b206?w=1200&q=80',
-      thumb: 'https://images.unsplash.com/photo-1519046904884-53103b34b206?w=600&q=80',
-      credit: { name: 'Claudel Rheault', username: 'claudelrheault' },
-    },
     amenities: {
       parking: 'paid',
       restrooms: true,
@@ -325,11 +285,6 @@ export const BEACHES: Beach[] = [
     description:
       "Trout Lake — officially John Hendry Park — is East Vancouver's beloved freshwater swimming hole, offering warm lake water that heats up far more than the ocean ever does in summer. The sandy beach, supervised swim area, and grassy park make it a community staple, especially on hot days when the ocean beaches are too crowded or the water too cold. The famous Trout Lake Farmers Market runs on Saturdays from May through October right in the park, adding a vibrant community atmosphere.",
     tagline: 'East Van freshwater escape and community hub',
-    images: {
-      hero: 'https://images.unsplash.com/photo-1506953823976-52e1fdc0149a?w=1200&q=80',
-      thumb: 'https://images.unsplash.com/photo-1506953823976-52e1fdc0149a?w=600&q=80',
-      credit: { name: 'Hans Isaacson', username: 'mcatelier' },
-    },
     amenities: {
       parking: 'street',
       restrooms: true,

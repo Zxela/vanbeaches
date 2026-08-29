@@ -74,11 +74,9 @@ export function BeachVerdict({ weather, tides, waterQuality, sunsetTime }: Beach
   const label = getRecommendationLabel(verdict.recommendation);
 
   return (
-    <div className={`rounded-2xl border bg-white p-5 shadow-sm ${colors.border}`}>
+    <div className="weather-panel p-5">
       {/* Heading */}
-      <h2 className={`font-display text-xl font-semibold mb-1 ${colors.heading}`}>
-        Today's Verdict
-      </h2>
+      <h2 className="font-display mb-1 text-xl font-semibold text-white">Today's Verdict</h2>
 
       {/* Recommendation badge */}
       <span
@@ -88,7 +86,7 @@ export function BeachVerdict({ weather, tides, waterQuality, sunsetTime }: Beach
       </span>
 
       {/* Summary prose */}
-      <p className="text-sand-800 text-base leading-relaxed mb-4">{verdict.summary}</p>
+      <p className="mb-4 text-base leading-relaxed text-white/85">{verdict.summary}</p>
 
       {/* Best time window */}
       <div
@@ -102,7 +100,7 @@ export function BeachVerdict({ weather, tides, waterQuality, sunsetTime }: Beach
       {verdict.reasons.length > 0 && (
         <ul className="space-y-1.5">
           {verdict.reasons.map((reason) => (
-            <li key={reason} className="flex items-center gap-2 text-sm text-sand-700">
+            <li key={reason} className="flex items-center gap-2 text-sm text-white/70">
               <span className={`w-1.5 h-1.5 rounded-full flex-shrink-0 ${colors.reasonBullet}`} />
               {reason}
             </li>

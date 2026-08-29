@@ -1,19 +1,19 @@
 import { getBeachById } from '@van-beaches/shared';
-import { AnimatePresence, motion } from 'framer-motion';
-import { useEffect, useState } from 'react';
+import { Image, Info, LayoutList } from 'lucide-react';
+import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { AboutTab } from '../components/AboutTab';
 import { BeachNavigation } from '../components/BeachNavigation';
 import { FavoriteButton } from '../components/FavoriteButton';
 import { PhotosTab } from '../components/PhotosTab';
 import { ShareButton } from '../components/ShareButton';
-import { type BeachDetailTab, TabBar } from '../components/TabBar';
 import { TodayTab } from '../components/TodayTab';
 import { useRecentBeaches } from '../hooks/useRecentBeaches';
 import { formatSunTime, useSunTimes } from '../hooks/useSunTimes';
 import { useTides } from '../hooks/useTides';
 import { useWaterQuality } from '../hooks/useWaterQuality';
 import { useWeather } from '../hooks/useWeather';
+import { getWeatherIcon, weatherLabels } from '../lib/weatherIcons';
 
 // Fallback gradients when no image is available
 const fallbackGradients = [
@@ -23,31 +23,14 @@ const fallbackGradients = [
   'from-ocean-500 to-shore-400',
 ];
 
-function getInitialTab(): BeachDetailTab {
-  const hash = window.location.hash.replace('#', '');
-  if (hash === 'about' || hash === 'photos' || hash === 'today') {
-    return hash as BeachDetailTab;
-  }
-  return 'today';
-}
-
-function HeroQuickConditions({
-  temperature,
-  condition,
-  windSpeed,
-}: {
-  temperature: number | null;
-  condition: string | null;
-  windSpeed: number | null;
-}) {
-  const parts: string[] = [];
-  if (temperature !== null) parts.push(`${temperature}°`);
-  if (condition) parts.push(condition.replace('-', ' '));
-  if (windSpeed !== null) parts.push(`${windSpeed} km/h wind`);
-  if (parts.length === 0) return null;
-
-  return <p className="text-sm text-white/80 mt-1 capitalize">{parts.join(' · ')}</p>;
-}
+const conditionThemes: Record<string, string> = {
+  sunny: 'weather-sunny',
+  'partly-cloudy': 'weather-partly-cloudy',
+  cloudy: 'weather-cloudy',
+  rainy: 'weather-rainy',
+  stormy: 'weather-stormy',
+  foggy: 'weather-foggy',
+};
 
 export function BeachDetail() {
   const { slug } = useParams<{ slug: string }>();
@@ -56,8 +39,6 @@ export function BeachDetail() {
   const { weather } = useWeather(slug);
   const { waterQuality } = useWaterQuality(slug);
   const { addRecent } = useRecentBeaches();
-
-  const [activeTab, setActiveTab] = useState<BeachDetailTab>(getInitialTab);
 
   const sunTimes = useSunTimes(
     beach?.location.latitude ?? 49.27,
@@ -68,11 +49,6 @@ export function BeachDetail() {
   useEffect(() => {
     if (slug) addRecent(slug);
   }, [slug, addRecent]);
-
-  const handleTabChange = (tab: BeachDetailTab) => {
-    setActiveTab(tab);
-    window.location.hash = `#${tab}`;
-  };
 
   if (!beach)
     return (
@@ -85,23 +61,25 @@ export function BeachDetail() {
     );
 
   const gradientIdx = beach.name.length % fallbackGradients.length;
+  const condition = weather?.current.condition ?? 'partly-cloudy';
+  const WeatherIcon = getWeatherIcon(condition);
+  const today = weather?.daily?.[0];
 
   return (
-    <div>
-      {/* Compact hero image (~30vh, capped at 150px on mobile) */}
-      <div className="relative w-full h-[30vh] min-h-[200px] max-h-[150px] sm:max-h-none overflow-hidden">
+    <div className={`weather-scene ${conditionThemes[condition] ?? conditionThemes.cloudy}`}>
+      <div className="weather-atmosphere" aria-hidden="true" />
+      <div className="relative w-full h-[30vh] min-h-[31rem] max-h-none overflow-hidden sm:min-h-[34rem]">
         {beach.images ? (
           <img
             src={beach.images.hero}
             alt={beach.name}
-            className="absolute inset-0 w-full h-full object-cover"
+            className="absolute inset-0 h-full w-full object-cover opacity-20 mix-blend-soft-light"
           />
         ) : (
           <div className={`absolute inset-0 bg-gradient-to-br ${fallbackGradients[gradientIdx]}`} />
         )}
 
-        {/* Lighter overlay: from-black/40 instead of from-black/70 */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/10 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-black/20" />
 
         {/* Photo credit */}
         {beach.images?.credit && (
@@ -110,81 +88,113 @@ export function BeachDetail() {
           </div>
         )}
 
-        {/* Floating buttons */}
-        <div className="absolute top-4 right-4 z-10 flex items-center gap-2">
+        <div className="absolute right-4 top-5 z-10 flex items-center gap-2 sm:top-7">
           <FavoriteButton beachId={beach.id} beachName={beach.name} size="lg" />
           <ShareButton beachName={beach.name} beachId={beach.id} />
         </div>
 
-        {/* Beach name + personality tagline at bottom */}
-        <div className="absolute bottom-0 left-0 right-0">
-          <div className="container mx-auto max-w-3xl px-4 pb-4">
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-white leading-tight">
+        <div className="absolute inset-0 flex items-center justify-center pt-14 text-center">
+          <div className="container mx-auto max-w-3xl px-5">
+            <p className="mb-1 text-sm font-medium tracking-wide text-white/75">Vancouver, BC</p>
+            <h1 className="text-3xl font-semibold tracking-tight text-white drop-shadow-sm md:text-4xl">
               {beach.name}
-            </h2>
-            {beach.tagline && (
-              <p className="text-base text-white/90 mt-0.5 font-medium">{beach.tagline}</p>
+            </h1>
+            {weather ? (
+              <>
+                <p className="mt-2 text-[5.75rem] font-extralight leading-none tracking-[-0.08em] text-white drop-shadow-sm sm:text-[7rem]">
+                  {Math.round(weather.current.temperature)}°
+                </p>
+                <div className="mt-3 flex items-center justify-center gap-2 text-white/95">
+                  <WeatherIcon className="h-6 w-6" strokeWidth={1.6} />
+                  <p className="text-xl font-medium">{weatherLabels[condition]}</p>
+                </div>
+                {today && (
+                  <p className="mt-1 text-base font-medium text-white">
+                    H:{Math.round(today.high)}° &nbsp; L:{Math.round(today.low)}°
+                  </p>
+                )}
+              </>
+            ) : (
+              <p className="mt-5 text-lg text-white/80">Loading current conditions…</p>
             )}
-            {/* Quick conditions strip */}
-            <HeroQuickConditions
-              temperature={weather?.current?.temperature ?? null}
-              condition={weather?.current?.condition ?? null}
-              windSpeed={weather?.current?.windSpeed ?? null}
-            />
+            {beach.tagline && (
+              <p className="mt-8 text-sm font-medium text-white/70">{beach.tagline}</p>
+            )}
           </div>
         </div>
       </div>
 
-      {/* Sticky TabBar */}
-      <TabBar activeTab={activeTab} onTabChange={handleTabChange} />
+      <nav
+        className="sticky top-0 z-30 border-y border-white/15 bg-slate-900/20 px-3 backdrop-blur-2xl"
+        aria-label="Beach page sections"
+      >
+        <div className="mx-auto flex max-w-3xl justify-center gap-1 py-2">
+          <SectionLink href="#today" icon={<LayoutList className="h-4 w-4" />} label="Forecast" />
+          <SectionLink href="#about" icon={<Info className="h-4 w-4" />} label="Beach guide" />
+          <SectionLink href="#photos" icon={<Image className="h-4 w-4" />} label="Community" />
+        </div>
+      </nav>
 
-      {/* Tab content with animated transitions */}
-      <div className="container mx-auto max-w-3xl px-4 pt-6">
-        <AnimatePresence mode="wait">
-          {activeTab === 'today' && (
-            <motion.div
-              key="today"
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: 20 }}
-              transition={{ duration: 0.2 }}
+      <div className="container relative z-10 mx-auto max-w-3xl px-3 pb-8 sm:px-4">
+        <section id="today" className="scroll-mt-16">
+          <TodayTab
+            beach={beach}
+            weather={weather}
+            tides={tides}
+            waterQuality={waterQuality}
+            sunsetTime={sunsetTime}
+          />
+        </section>
+
+        <section id="about" className="scroll-mt-16 border-t border-white/15 pt-5">
+          <div className="mb-3 px-2">
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-white/55">
+              Beach guide
+            </p>
+            <h2 className="mt-1 text-2xl font-semibold text-white">Plan your visit</h2>
+          </div>
+          <AboutTab beach={beach} waterQuality={waterQuality} weather={weather} />
+        </section>
+
+        <details id="photos" className="weather-panel scroll-mt-16 group mb-8 overflow-hidden">
+          <summary className="flex cursor-pointer list-none items-center justify-between px-5 py-4 text-white marker:content-none">
+            <span>
+              <span className="block text-xs font-semibold uppercase tracking-[0.16em] text-white/55">
+                Community
+              </span>
+              <span className="mt-1 block text-lg font-semibold">Photos and local posts</span>
+            </span>
+            <span
+              className="text-2xl font-light text-white/60 transition-transform group-open:rotate-45"
+              aria-hidden="true"
             >
-              <TodayTab
-                beach={beach}
-                weather={weather}
-                tides={tides}
-                waterQuality={waterQuality}
-                sunsetTime={sunsetTime}
-              />
-            </motion.div>
-          )}
-          {activeTab === 'about' && (
-            <motion.div
-              key="about"
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -20 }}
-              transition={{ duration: 0.2 }}
-            >
-              <AboutTab beach={beach} waterQuality={waterQuality} weather={weather} />
-            </motion.div>
-          )}
-          {activeTab === 'photos' && (
-            <motion.div
-              key="photos"
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -20 }}
-              transition={{ duration: 0.2 }}
-            >
-              <PhotosTab beach={beach} />
-            </motion.div>
-          )}
-        </AnimatePresence>
+              +
+            </span>
+          </summary>
+          <div className="border-t border-white/15 px-1 pb-1">
+            <PhotosTab beach={beach} />
+          </div>
+        </details>
       </div>
 
       {/* Previous/next beach navigation */}
       <BeachNavigation currentBeachId={beach.id} />
     </div>
+  );
+}
+
+function SectionLink({
+  href,
+  icon,
+  label,
+}: { href: string; icon: React.ReactNode; label: string }) {
+  return (
+    <a
+      href={href}
+      className="flex items-center gap-1.5 rounded-full px-3 py-2 text-sm font-medium text-white/70 transition-colors hover:bg-white/10 hover:text-white focus-visible:text-white"
+    >
+      {icon}
+      {label}
+    </a>
   );
 }
