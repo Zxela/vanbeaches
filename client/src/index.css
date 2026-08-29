@@ -65,28 +65,28 @@
   }
 
   .weather-sunny {
-    --weather-top: #2879ba;
-    --weather-bottom: #73b8df;
+    --weather-top: #1677d2;
+    --weather-bottom: #73c8f2;
   }
   .weather-partly-cloudy {
-    --weather-top: #416f98;
-    --weather-bottom: #91b3cc;
+    --weather-top: #487faf;
+    --weather-bottom: #a8c9df;
   }
   .weather-cloudy {
-    --weather-top: #526a7d;
-    --weather-bottom: #9aaab4;
+    --weather-top: #61778a;
+    --weather-bottom: #b3c0c8;
   }
   .weather-rainy {
-    --weather-top: #344f68;
-    --weather-bottom: #71899c;
+    --weather-top: #273f59;
+    --weather-bottom: #718aa1;
   }
   .weather-stormy {
-    --weather-top: #202d43;
-    --weather-bottom: #56677d;
+    --weather-top: #17243a;
+    --weather-bottom: #4b5e78;
   }
   .weather-foggy {
-    --weather-top: #687c89;
-    --weather-bottom: #aab6bc;
+    --weather-top: #788995;
+    --weather-bottom: #bcc7cc;
   }
 
   .weather-atmosphere {
@@ -120,13 +120,13 @@
   /* Shimmer effect for skeletons */
   .shimmer {
     @apply relative overflow-hidden;
-    background: linear-gradient(90deg, #e7e5e4 0%, #f5f5f4 50%, #e7e5e4 100%);
+    background: linear-gradient(90deg, #d8e1ec 0%, #f5f7fa 50%, #d8e1ec 100%);
     background-size: 200% 100%;
     animation: shimmer 2s linear infinite;
   }
 
   .dark .shimmer {
-    background: linear-gradient(90deg, #292524 0%, #44403c 50%, #292524 100%);
+    background: linear-gradient(90deg, #142236 0%, #233348 50%, #142236 100%);
     background-size: 200% 100%;
   }
 
@@ -151,10 +151,10 @@
   /* Custom scrollbar styling */
   .scrollbar-thin {
     scrollbar-width: thin;
-    scrollbar-color: #d6d3d1 transparent; /* sand-300 */
+    scrollbar-color: #bbc8d8 transparent; /* sand-300 */
   }
   .dark .scrollbar-thin {
-    scrollbar-color: #57534e transparent; /* sand-600 */
+    scrollbar-color: #4d6076 transparent; /* sand-600 */
   }
   .scrollbar-thin::-webkit-scrollbar {
     width: 6px;
