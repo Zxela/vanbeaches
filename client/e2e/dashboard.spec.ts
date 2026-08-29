@@ -1,57 +1,120 @@
-import { test } from '@playwright/test';
+import { type Page, expect, test } from '@playwright/test';
 
-/**
- * E2E Tests for Beach Dashboard Display
- * Design Doc: docs/design/van-beaches-design.md
- * Acceptance Criteria: Beach Dashboard Display section
- */
+const beachSummaries = [
+  ['english-bay', 'English Bay', 22, 'sunny', 'high'],
+  ['jericho-beach', 'Jericho Beach', 18, 'cloudy', 'low'],
+  ['kitsilano-beach', 'Kitsilano Beach', 20, 'sunny', 'high'],
+  ['locarno-beach', 'Locarno Beach', 17, 'cloudy', 'low'],
+  ['second-beach', 'Second Beach', 19, 'sunny', 'high'],
+  ['spanish-banks', 'Spanish Banks', 16, 'rainy', 'low'],
+  ['sunset-beach', 'Sunset Beach', 21, 'sunny', 'high'],
+  ['third-beach', 'Third Beach', 18, 'cloudy', 'low'],
+  ['trout-lake', 'Trout Lake', 23, 'sunny', null],
+].map(([id, name, temperature, condition, tideType]) => ({
+  id,
+  name,
+  currentWeather: { temperature, condition, icon: condition },
+  nextTide: tideType
+    ? {
+        type: tideType,
+        time: '2026-08-29T18:30:00.000Z',
+        height: tideType === 'high' ? 3.2 : 1.1,
+      }
+    : null,
+  waterQuality: 'good',
+  lastUpdated: '2026-08-29T17:00:00.000Z',
+}));
 
-test.describe('Beach Dashboard', () => {
+async function mockBeachSummaries(page: Page) {
+  await page.route('**/api/beaches', (route) =>
+    route.fulfill({
+      status: 200,
+      contentType: 'application/json',
+      body: JSON.stringify({ success: true, data: beachSummaries }),
+    }),
+  );
+}
+
+test.describe('Discover beaches', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('/');
+    await mockBeachSummaries(page);
+    await page.goto('/discover');
   });
 
-  // AC: The system shall display all 9 Vancouver beaches on the main dashboard
-  // Property: beaches.length === 9
-  test('displays all 9 Vancouver beaches', async ({ page: _page }) => {
-    // TODO: Implement - verify 9 beach cards are displayed
-    // Expected beaches: English Bay, Jericho Beach, Kitsilano Beach, Locarno Beach,
-    // Second Beach, Spanish Banks, Sunset Beach, Third Beach, Trout Lake
+  test('shows every beach as a live condition card', async ({ page }) => {
+    const list = page.getByTestId('discovery-beach-list');
+    await expect(list).toBeVisible();
+
+    const cards = list.locator('a[href^="/beach/"]');
+    await expect(cards).toHaveCount(9);
+    await expect(cards.first()).toContainText('English Bay');
+    await expect(cards.first()).toContainText('22°');
+    await expect(cards.first()).toContainText(/sunny/i);
   });
 
-  // AC: When the dashboard loads, the system shall display each beach with name,
-  // current conditions summary, and quick status indicators
-  test('displays beach cards with name, conditions, and status indicators', async ({
-    page: _page,
-  }) => {
-    // TODO: Implement - verify each card has:
-    // - Beach name
-    // - Current weather summary
-    // - Tide indicator
-    // - Water quality status badge
+  test('search narrows the list and clearing restores it', async ({ page }) => {
+    const list = page.getByTestId('discovery-beach-list');
+    const search = page.getByRole('searchbox', { name: 'Search beaches' });
+
+    await search.fill('Kits');
+    await expect(list.locator('a[href^="/beach/"]')).toHaveCount(1);
+    await expect(list.getByRole('link')).toContainText('Kitsilano Beach');
+
+    await page.getByRole('button', { name: 'Clear search' }).click();
+    await expect(list.locator('a[href^="/beach/"]')).toHaveCount(9);
   });
 
-  // AC: If any data source is unavailable, then the system shall display
-  // "Data unavailable" with timestamp of last successful fetch
-  test('shows data unavailable message when API fails', async ({ page: _page }) => {
-    // TODO: Implement with mocked API failure
-    // Verify "Data unavailable" message with timestamp
+  test('search exposes a useful empty state', async ({ page }) => {
+    await page.getByRole('searchbox', { name: 'Search beaches' }).fill('not a beach');
+    await expect(page.getByTestId('discovery-beach-list').getByRole('link')).toHaveCount(0);
+    await expect(page.getByText('No beaches found')).toBeVisible();
   });
 
-  // AC: The system shall support viewport widths from 320px to 2560px
-  // Property: responsive.breakpoints.includes(['mobile', 'tablet', 'desktop'])
-  test('responsive layout on mobile viewport', async ({ page }) => {
-    await page.setViewportSize({ width: 375, height: 667 });
-    // TODO: Verify mobile layout renders correctly
+  test('favorite beaches are placed first', async ({ page }) => {
+    await page.evaluate(() =>
+      localStorage.setItem('favoriteBeaches', JSON.stringify(['kitsilano-beach'])),
+    );
+    await page.reload();
+
+    const cards = page.getByTestId('discovery-beach-list').locator('a[href^="/beach/"]');
+    await expect(cards.first()).toHaveAttribute('href', '/beach/kitsilano-beach');
+    await expect(cards.first().getByLabel('Favorite')).toBeVisible();
   });
 
-  test('responsive layout on tablet viewport', async ({ page }) => {
-    await page.setViewportSize({ width: 768, height: 1024 });
-    // TODO: Verify tablet layout renders correctly
+  test('switches between list and map without losing the discovery page', async ({ page }) => {
+    await page.getByRole('button', { name: 'Map', exact: true }).click();
+    await expect(page.locator('.leaflet-container')).toBeVisible();
+    await expect(page.getByTestId('discovery-beach-list')).toBeHidden();
+
+    await page.getByRole('button', { name: 'List', exact: true }).click();
+    await expect(page.getByTestId('discovery-beach-list')).toBeVisible();
   });
 
-  test('responsive layout on desktop viewport', async ({ page }) => {
-    await page.setViewportSize({ width: 1920, height: 1080 });
-    // TODO: Verify desktop layout renders correctly
+  test('a condition card opens its beach detail page', async ({ page }) => {
+    await page.getByTestId('discovery-beach-list').locator('a[href="/beach/english-bay"]').click();
+    await expect(page).toHaveURL(/\/beach\/english-bay$/);
   });
+
+  test('remains usable at a narrow mobile viewport', async ({ page }) => {
+    await page.setViewportSize({ width: 320, height: 700 });
+    await expect(page.getByRole('searchbox', { name: 'Search beaches' })).toBeVisible();
+    await expect(page.getByTestId('discovery-beach-list')).toBeVisible();
+    const hasHorizontalOverflow = await page.evaluate(
+      () => document.documentElement.scrollWidth > window.innerWidth,
+    );
+    expect(hasHorizontalOverflow).toBe(false);
+  });
+});
+
+test('Discover presents a retry action when summaries fail', async ({ page }) => {
+  await page.route('**/api/beaches', (route) =>
+    route.fulfill({
+      status: 503,
+      contentType: 'application/json',
+      body: JSON.stringify({ success: false, error: 'Service unavailable' }),
+    }),
+  );
+  await page.goto('/discover');
+
+  await expect(page.getByRole('button', { name: /try again/i })).toBeVisible();
 });

@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, within } from '@testing-library/react';
 
 import type { Beach, TideData, WaterQualityStatus, WeatherForecast } from '@van-beaches/shared';
 import { describe, expect, it, vi } from 'vitest';
@@ -133,6 +133,48 @@ describe('TodayTab', () => {
       />,
     );
     expect(screen.getByText(/10\s*km\/h/i)).toBeInTheDocument();
+  });
+
+  it('renders richer apparent temperature, gust, and visibility fields when provided', () => {
+    render(
+      <TodayTab
+        beach={makeBeach()}
+        weather={makeWeather({
+          apparentTemperature: 19.6,
+          windGusts: 27.8,
+          visibility: 16_400,
+        })}
+        tides={null}
+        waterQuality={null}
+        sunsetTime={null}
+      />,
+    );
+
+    const conditions = screen.getByText(/^conditions$/i).closest('section');
+    expect(conditions).not.toBeNull();
+    const conditionsView = within(conditions as HTMLElement);
+    expect(conditionsView.getByText('20°')).toBeInTheDocument();
+    expect(conditionsView.getByText('Actual temperature 22°')).toBeInTheDocument();
+    expect(conditionsView.getByText(/Gusts 28 km\/h/)).toBeInTheDocument();
+    expect(conditionsView.getByText('16 km')).toBeInTheDocument();
+    expect(conditionsView.getByText('55% humidity')).toBeInTheDocument();
+  });
+
+  it('uses temperature and humidity fallbacks for a legacy current-weather payload', () => {
+    render(
+      <TodayTab
+        beach={makeBeach()}
+        weather={makeWeather({ temperature: 17, humidity: 72 })}
+        tides={null}
+        waterQuality={null}
+        sunsetTime={null}
+      />,
+    );
+
+    expect(screen.getByText('17°')).toBeInTheDocument();
+    expect(screen.getByText('Based on current temperature')).toBeInTheDocument();
+    expect(screen.getByText('72%')).toBeInTheDocument();
+    expect(screen.getByText('Current relative humidity')).toBeInTheDocument();
   });
 
   it('renders UV index in the conditions grid', () => {

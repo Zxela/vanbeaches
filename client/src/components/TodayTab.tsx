@@ -1,10 +1,11 @@
 import type { Beach, TideData, WaterQualityStatus, WeatherForecast } from '@van-beaches/shared';
+import { Compass, Droplets, Eye, Sunrise, Sunset, Waves } from 'lucide-react';
 import { formatSunTime, useSunTimes } from '../hooks/useSunTimes';
 import { getWaterQualityBgColor, getWaterQualityTextLabel } from '../lib/waterQualityColors';
 import { ActivityRecommendations } from './ActivityRecommendations';
 import { BeachVerdict } from './BeachVerdict';
 import { ErrorState } from './ErrorState';
-import { SunTimesWidget } from './SunTimesWidget';
+import { HourlyForecast } from './HourlyForecast';
 import { TideCanvas } from './TideCanvas';
 import { WeatherForecast as WeatherForecastWidget } from './WeatherForecast';
 
@@ -50,7 +51,7 @@ export function TodayTab({
   const sunTimes = useSunTimes(beach.location.latitude, beach.location.longitude);
 
   return (
-    <div className="space-y-6 px-4 pb-8">
+    <div className="space-y-3 pb-8 pt-3">
       {/* BeachVerdict — top of the tab */}
       {weather && (
         <BeachVerdict
@@ -67,39 +68,63 @@ export function TodayTab({
       )}
 
       {/* Compact conditions grid */}
+      {weather && <HourlyForecast forecast={weather} />}
+
       {weather && (
-        <section>
-          <div className="flex items-baseline justify-between mb-3">
-            <h2 className="font-display text-lg font-semibold text-sand-800">Conditions</h2>
-            <span className="text-xs text-sand-400">
+        <section className="weather-panel">
+          <div className="weather-panel-title justify-between">
+            <h2 className="font-display">Conditions</h2>
+            <span className="text-[10px] font-medium normal-case tracking-normal text-white/50">
               Updated {getUpdatedMinutesAgo(weather.fetchedAt)} min ago
             </span>
           </div>
-          <div className="grid grid-cols-3 gap-3">
+          <div className="grid grid-cols-2 sm:grid-cols-3">
             {/* Temperature */}
-            <div className="rounded-xl bg-sand-50 border border-sand-200 p-3 text-center">
-              <p className="text-xl font-bold text-sand-900">{weather.current.temperature}°</p>
-              <p className="text-xs text-sand-500 capitalize mt-0.5">
-                {weather.current.condition.replace('-', ' ')}
+            <div className="border-b border-r border-white/15 p-4">
+              <p className="text-xs font-semibold uppercase tracking-wide text-white/55">
+                Feels like
+              </p>
+              <p className="mt-2 text-xl font-bold text-white">
+                {Math.round(weather.current.apparentTemperature ?? weather.current.temperature)}°
+              </p>
+              <p className="mt-1 text-xs capitalize text-white/65">
+                {weather.current.apparentTemperature === undefined
+                  ? 'Based on current temperature'
+                  : `Actual temperature ${Math.round(weather.current.temperature)}°`}
               </p>
             </div>
 
             {/* Wind */}
-            <div className="rounded-xl bg-sand-50 border border-sand-200 p-3 text-center">
-              <p className="text-xl font-bold text-sand-900">{weather.current.windSpeed} km/h</p>
-              <p className="text-xs text-sand-500 mt-0.5">{weather.current.windDirection} wind</p>
+            <div className="border-b border-white/15 p-4 sm:border-r">
+              <p className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide text-white/55">
+                <Compass className="h-3.5 w-3.5" /> Wind
+              </p>
+              <p className="mt-2 text-xl font-bold text-white">{weather.current.windSpeed} km/h</p>
+              <p className="mt-1 text-xs text-white/65">
+                From {weather.current.windDirection}
+                {weather.current.windGusts !== undefined
+                  ? ` · Gusts ${Math.round(weather.current.windGusts)} km/h`
+                  : ''}
+              </p>
             </div>
 
             {/* UV Index */}
-            <div className="rounded-xl bg-sand-50 border border-sand-200 p-3 text-center">
-              <p className="text-xl font-bold text-sand-900">UV {weather.current.uvIndex}</p>
-              <p className="text-xs text-sand-500 mt-0.5">{getUvLabel(weather.current.uvIndex)}</p>
+            <div className="border-b border-r border-white/15 p-4 sm:border-r-0">
+              <p className="text-xs font-semibold uppercase tracking-wide text-white/55">
+                UV Index
+              </p>
+              <p className="mt-2 text-xl font-bold text-white">UV {weather.current.uvIndex}</p>
+              <p className="mt-1 text-xs text-white/65">
+                {getUvLabel(weather.current.uvIndex)} exposure
+              </p>
             </div>
 
             {/* Water Quality */}
             {waterQuality && (
-              <div className="rounded-xl bg-sand-50 border border-sand-200 p-3 text-center">
-                <p className="text-sm font-semibold text-sand-900">Water</p>
+              <div className="border-b border-white/15 p-4 sm:border-b-0 sm:border-r">
+                <p className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide text-white/55">
+                  <Droplets className="h-3.5 w-3.5" /> Water
+                </p>
                 <span
                   data-testid="water-quality-label"
                   className={`inline-block mt-1 px-2 py-0.5 rounded-full text-xs font-medium ${getWaterQualityBgColor(waterQuality.level)}`}
@@ -109,23 +134,56 @@ export function TodayTab({
               </div>
             )}
 
-            {/* Sunrise/Sunset summary */}
-            <div className="rounded-xl bg-sand-50 border border-sand-200 p-3 text-center">
-              <p className="text-sm font-semibold text-sand-900">Sunrise</p>
-              <p className="text-xs text-sand-500 mt-0.5">{formatSunTime(sunTimes.sunrise)}</p>
+            <div className="border-r border-white/15 p-4">
+              <p className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide text-white/55">
+                <Eye className="h-3.5 w-3.5" /> Visibility
+              </p>
+              <p className="mt-2 text-xl font-bold text-white">
+                {weather.current.visibility !== undefined
+                  ? `${Math.round(weather.current.visibility / 1000)} km`
+                  : `${weather.current.humidity}%`}
+              </p>
+              <p className="mt-1 text-xs text-white/65">
+                {weather.current.visibility !== undefined
+                  ? `${weather.current.humidity}% humidity`
+                  : 'Current relative humidity'}
+              </p>
             </div>
           </div>
         </section>
       )}
 
-      {/* Sun Times Widget */}
-      <SunTimesWidget latitude={beach.location.latitude} longitude={beach.location.longitude} />
+      <section className="weather-panel" aria-labelledby="sun-times-heading">
+        <div className="weather-panel-title">
+          <Sunrise className="h-4 w-4" />
+          <h2 id="sun-times-heading">Sun Times</h2>
+        </div>
+        <div className="grid grid-cols-2 divide-x divide-white/15 p-4">
+          <div className="flex items-center gap-3">
+            <Sunrise className="h-7 w-7 text-amber-200" />
+            <div>
+              <p className="text-xs text-white/55">Sunrise</p>
+              <p className="text-lg font-semibold">{formatSunTime(sunTimes.sunrise)}</p>
+            </div>
+          </div>
+          <div className="flex items-center justify-end gap-3">
+            <Sunset className="h-7 w-7 text-orange-200" />
+            <div>
+              <p className="text-xs text-white/55">Sunset</p>
+              <p className="text-lg font-semibold">{formatSunTime(sunTimes.sunset)}</p>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Tides section */}
       {showTides && (
-        <section>
-          <h2 className="font-display text-lg font-semibold text-sand-800 mb-3">Tides</h2>
-          <TideCanvas predictions={tides.predictions} />
+        <section className="weather-panel overflow-hidden">
+          <div className="weather-panel-title">
+            <Waves className="h-4 w-4" />
+            <h2>Tides</h2>
+          </div>
+          <TideCanvas predictions={tides.predictions} className="weather-embedded-card" />
         </section>
       )}
 

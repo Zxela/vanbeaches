@@ -92,6 +92,16 @@ pnpm test             # run Vitest + Playwright
 | [Open-Meteo](https://open-meteo.com/) | Weather, UV index, wind, humidity | 30 min |
 | [DFO IWLS](https://api-iwls.dfo-mpo.gc.ca/) | Tide predictions (Point Atkinson) | 1 h |
 
+## Beach photography
+
+Beach images must show the exact named beach and include verified usage rights. When a verified
+image is unavailable, the client uses its condition-aware atmospheric background rather than a
+generic stock photo.
+
+Production derivatives should be delivered from a Cloudflare R2 custom domain using
+`beaches/{beach-id}/hero-1600.webp`, `hero-960.webp`, and `thumb-640.webp`. Publish only optimized
+derivatives, strip EXIF metadata, and serve versioned objects with a one-year immutable cache.
+
 ## License
 
 MIT

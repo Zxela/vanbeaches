@@ -13,19 +13,19 @@ export function PhotosTab({ beach }: PhotosTabProps) {
   const hashtag = personality?.instagramHashtag ?? beach.name.toLowerCase().replace(/\s+/g, '');
 
   return (
-    <section className="space-y-6">
+    <section className="weather-panel mt-3 space-y-6 p-5">
       <div>
-        <h2 className="text-2xl font-bold text-sand-900">Community photos</h2>
-        <p className="text-sm text-sand-600 mt-1">
-          from <span className="font-semibold text-coral-600">#{hashtag}</span>
+        <h2 className="text-2xl font-bold text-white">Community photos</h2>
+        <p className="mt-1 text-sm text-white/60">
+          from <span className="font-semibold text-white/80">#{hashtag}</span>
         </p>
       </div>
 
       <InstagramEmbed postUrls={personality?.instagramPostUrls ?? []} hashtag={hashtag} />
 
       <div className="pt-4">
-        <p className="text-sm text-sand-700">
-          Share your visit! Tag <span className="font-semibold text-coral-600">#{hashtag}</span> on
+        <p className="text-sm text-white/70">
+          Share your visit! Tag <span className="font-semibold text-white">#{hashtag}</span> on
           Instagram to appear here
         </p>
       </div>

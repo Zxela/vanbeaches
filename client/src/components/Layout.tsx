@@ -46,6 +46,7 @@ export function Layout({ children }: LayoutProps) {
   const currentBeachId = location.pathname.startsWith('/beach/')
     ? location.pathname.split('/')[2]
     : null;
+  const isBeachDetail = currentBeachId !== null;
   const currentBeach = currentBeachId ? BEACHES.find((b) => b.id === currentBeachId) : null;
 
   const favoriteBeaches = BEACHES.filter((b) => favorites.includes(b.id));
@@ -56,8 +57,15 @@ export function Layout({ children }: LayoutProps) {
       <OfflineBanner />
       {/* App container */}
       <div className="min-h-screen flex flex-col">
-        <header className="sticky top-0 z-50 bg-white/90 dark:bg-sand-900/95 backdrop-blur-md text-sand-900 dark:text-sand-100 shadow-xl border-b border-ocean-200/30 dark:border-ocean-800/30">
-          <div className="container mx-auto max-w-7xl px-4 py-4">
+        <header
+          className={cn(
+            'z-50 text-sand-900 dark:text-sand-100',
+            isBeachDetail
+              ? 'absolute inset-x-0 top-0 bg-transparent text-white dark:text-white'
+              : 'sticky top-0 border-b border-ocean-200/30 bg-white/90 shadow-xl backdrop-blur-md dark:border-ocean-800/30 dark:bg-sand-900/95',
+          )}
+        >
+          <div className="container mx-auto max-w-7xl px-4 py-3 sm:py-4">
             <div className="flex items-center justify-between">
               <Link to="/" className="flex items-center gap-3 group">
                 <motion.div
@@ -67,7 +75,12 @@ export function Layout({ children }: LayoutProps) {
                 >
                   <Icon icon={Waves} size="lg" className="text-white" />
                 </motion.div>
-                <div className="hidden sm:block">
+                <div
+                  className={cn(
+                    'hidden sm:block',
+                    isBeachDetail && '[&_h1]:text-white [&_p]:text-white/60',
+                  )}
+                >
                   <h1 className="text-2xl font-bold tracking-tight bg-gradient-to-r from-ocean-600 to-shore-500 bg-clip-text text-transparent group-hover:from-ocean-500 group-hover:to-shore-400 transition-all">
                     Van Beaches
                   </h1>
@@ -81,14 +94,24 @@ export function Layout({ children }: LayoutProps) {
                   type="button"
                   data-testid="dark-mode-toggle"
                   onClick={toggleTheme}
-                  className="p-2 rounded-lg bg-sand-100 dark:bg-sand-800 hover:bg-sand-200 dark:hover:bg-sand-700 transition-colors text-sand-700 dark:text-sand-300"
+                  className={cn(
+                    'p-2 rounded-lg transition-colors',
+                    isBeachDetail
+                      ? 'bg-white/15 text-white backdrop-blur-xl hover:bg-white/25'
+                      : 'bg-sand-100 text-sand-700 hover:bg-sand-200 dark:bg-sand-800 dark:text-sand-300 dark:hover:bg-sand-700',
+                  )}
                   aria-label={theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}
                 >
                   <Icon icon={theme === 'light' ? Moon : Sun} size="sm" />
                 </button>
                 <Link
                   to="/discover"
-                  className="px-3 py-2 bg-ocean-50 dark:bg-ocean-900/30 hover:bg-ocean-100 dark:hover:bg-ocean-800/40 rounded-lg transition-colors text-sm text-ocean-700 dark:text-ocean-300"
+                  className={cn(
+                    'hidden rounded-lg px-3 py-2 text-sm transition-colors sm:block',
+                    isBeachDetail
+                      ? 'bg-white/15 text-white backdrop-blur-xl hover:bg-white/25'
+                      : 'bg-ocean-50 text-ocean-700 hover:bg-ocean-100 dark:bg-ocean-900/30 dark:text-ocean-300 dark:hover:bg-ocean-800/40',
+                  )}
                 >
                   Discover
                 </Link>

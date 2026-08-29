@@ -34,26 +34,24 @@ export function AboutTab({ beach, waterQuality = null, weather = null }: AboutTa
   const hasSportsAmenities = amenities && amenities.volleyballCourts > 0;
 
   return (
-    <div className="space-y-8 pb-10">
+    <div className="space-y-3 pb-10 pt-3 text-white">
       {/* Editorial description */}
       {personality && (
-        <section>
-          <h2 className="font-display text-xl font-semibold text-sand-900 mb-3">
-            About this beach
-          </h2>
-          <p className="text-sand-700 leading-relaxed">{personality.editorial}</p>
+        <section className="weather-panel p-5">
+          <h2 className="font-display mb-3 text-xl font-semibold text-white">About this beach</h2>
+          <p className="leading-relaxed text-white/75">{personality.editorial}</p>
         </section>
       )}
 
       {/* What makes it special */}
       {personality && personality.differentiators.length > 0 && (
-        <section>
-          <h2 className="font-display text-xl font-semibold text-sand-900 mb-3">
+        <section className="weather-panel p-5">
+          <h2 className="font-display mb-3 text-xl font-semibold text-white">
             What makes it special
           </h2>
           <ul className="space-y-2">
             {personality.differentiators.map((item) => (
-              <li key={item} className="flex items-start gap-2 text-sand-700">
+              <li key={item} className="flex items-start gap-2 text-white/75">
                 <span
                   className="mt-1 w-2 h-2 rounded-full bg-ocean-400 shrink-0"
                   aria-hidden="true"
@@ -70,12 +68,10 @@ export function AboutTab({ beach, waterQuality = null, weather = null }: AboutTa
 
       {/* Amenities grouped by use case */}
       {amenities && (hasFamilyAmenities || hasDogAmenities || hasSportsAmenities) && (
-        <section className="space-y-5">
+        <section className="weather-panel space-y-5 p-5">
           {hasFamilyAmenities && (
             <div>
-              <h3 className="font-display text-lg font-semibold text-sand-900 mb-2">
-                For families
-              </h3>
+              <h3 className="font-display mb-2 text-lg font-semibold text-white">For families</h3>
               <div className="flex flex-wrap gap-2">
                 {amenities.restrooms && (
                   <AmenityChip icon={<MapPin className="w-4 h-4" />} label="Restrooms" />
@@ -102,14 +98,14 @@ export function AboutTab({ beach, waterQuality = null, weather = null }: AboutTa
 
           {hasDogAmenities && (
             <div>
-              <h3 className="font-display text-lg font-semibold text-sand-900 mb-2">For dogs</h3>
+              <h3 className="font-display mb-2 text-lg font-semibold text-white">For dogs</h3>
               <AmenityChip icon={<Dog className="w-4 h-4" />} label="Dog friendly" />
             </div>
           )}
 
           {hasSportsAmenities && (
             <div>
-              <h3 className="font-display text-lg font-semibold text-sand-900 mb-2">For sports</h3>
+              <h3 className="font-display mb-2 text-lg font-semibold text-white">For sports</h3>
               <AmenityChip
                 icon={<Volleyball className="w-4 h-4" />}
                 label={`${amenities.volleyballCourts} volleyball court${amenities.volleyballCourts !== 1 ? 's' : ''}`}
@@ -120,15 +116,15 @@ export function AboutTab({ beach, waterQuality = null, weather = null }: AboutTa
       )}
 
       {/* Getting there */}
-      <section>
-        <h2 className="font-display text-xl font-semibold text-sand-900 mb-3">Getting there</h2>
-        <div className="rounded-2xl border border-sand-200 bg-white shadow-sm p-4 space-y-3">
-          <div className="flex items-start gap-2 text-sand-700">
+      <section className="weather-panel p-5">
+        <h2 className="font-display mb-3 text-xl font-semibold text-white">Getting there</h2>
+        <div className="space-y-3">
+          <div className="flex items-start gap-2 text-white/75">
             <Navigation className="w-5 h-5 text-ocean-500 shrink-0 mt-0.5" aria-hidden="true" />
             <span>
               {beach.name}, Vancouver, BC
               {amenities?.parking && amenities.parking !== 'none' && (
-                <span className="block text-sm text-sand-500 mt-0.5">
+                <span className="mt-0.5 block text-sm text-white/55">
                   {amenities.parking === 'free' && 'Free parking available'}
                   {amenities.parking === 'paid' && 'Paid parking available'}
                   {amenities.parking === 'street' && 'Street parking nearby'}
@@ -168,7 +164,7 @@ export function AboutTab({ beach, waterQuality = null, weather = null }: AboutTa
 
 function AmenityChip({ icon, label }: { icon: React.ReactNode; label: string }) {
   return (
-    <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-emerald-50 text-emerald-700 rounded-xl text-sm">
+    <span className="inline-flex items-center gap-1.5 rounded-xl bg-white/10 px-3 py-1.5 text-sm text-white/80">
       {icon}
       {label}
     </span>
@@ -192,8 +188,8 @@ function SimilarVibes({ currentBeachId }: { currentBeachId: string }) {
   if (similar.length === 0) return null;
 
   return (
-    <section>
-      <h2 className="font-display text-xl font-semibold text-sand-900 mb-3">Similar vibes</h2>
+    <section className="weather-panel p-5">
+      <h2 className="font-display mb-3 text-xl font-semibold text-white">Similar vibes</h2>
       <div className="space-y-2">
         {similar.map((beach) => {
           const beachData = BEACHES.find((b) => b.id === beach.slug);
@@ -202,14 +198,14 @@ function SimilarVibes({ currentBeachId }: { currentBeachId: string }) {
               key={beach.slug}
               href={`/beach/${beach.slug}`}
               data-testid="similar-vibe-link"
-              className="flex items-center justify-between py-2 px-3 rounded-xl bg-sand-50 hover:bg-sand-100 transition-colors"
+              className="flex items-center justify-between rounded-xl bg-white/10 px-3 py-2 transition-colors hover:bg-white/15"
             >
-              <span className="font-medium text-sand-800">{beachData?.name ?? beach.slug}</span>
+              <span className="font-medium text-white">{beachData?.name ?? beach.slug}</span>
               <div className="flex gap-1">
                 {beach.sharedVibes.map((v) => (
                   <span
                     key={v}
-                    className="text-xs px-2 py-0.5 rounded-full bg-ocean-50 text-ocean-700"
+                    className="rounded-full bg-white/10 px-2 py-0.5 text-xs text-white/65"
                   >
                     {v}
                   </span>

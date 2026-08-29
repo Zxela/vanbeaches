@@ -101,40 +101,6 @@ vi.mock('../components/ShareButton', () => ({
   ShareButton: () => <button type="button" data-testid="share-button" />,
 }));
 
-vi.mock('../components/TabBar', () => ({
-  TabBar: ({
-    activeTab,
-    onTabChange,
-  }: {
-    activeTab: string;
-    onTabChange: (tab: string) => void;
-  }) => (
-    <nav data-testid="tab-bar">
-      <button
-        type="button"
-        data-active={activeTab === 'today'}
-        onClick={() => onTabChange('today')}
-      >
-        Today
-      </button>
-      <button
-        type="button"
-        data-active={activeTab === 'about'}
-        onClick={() => onTabChange('about')}
-      >
-        About
-      </button>
-      <button
-        type="button"
-        data-active={activeTab === 'photos'}
-        onClick={() => onTabChange('photos')}
-      >
-        Photos
-      </button>
-    </nav>
-  ),
-}));
-
 vi.mock('../hooks/useSunTimes', () => ({
   useSunTimes: () => ({
     sunrise: new Date(),
@@ -175,7 +141,7 @@ vi.mock('../components/PhotosTab', () => ({
   PhotosTab: () => <div data-testid="photos-tab-content">PhotosTab</div>,
 }));
 
-describe('BeachDetail - tabbed layout rendering', () => {
+describe('BeachDetail - continuous layout rendering', () => {
   beforeEach(() => {
     vi.clearAllMocks();
     window.location.hash = '';
@@ -190,14 +156,15 @@ describe('BeachDetail - tabbed layout rendering', () => {
     expect(screen.getByRole('heading', { name: 'Kitsilano Beach' })).toBeInTheDocument();
   });
 
-  it('displays temperature from weather data via TodayTab', () => {
+  it('keeps detailed forecast content primary beneath the hero', () => {
     render(
       <MemoryRouter>
         <BeachDetail />
       </MemoryRouter>,
     );
-    // Temperature is passed down to TodayTab
     expect(screen.getByText('18°C')).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /forecast/i })).toHaveAttribute('href', '#today');
+    expect(screen.getByRole('heading', { name: 'Plan your visit' })).toBeInTheDocument();
   });
 
   it('renders quick conditions in hero including temperature', () => {
@@ -206,10 +173,8 @@ describe('BeachDetail - tabbed layout rendering', () => {
         <BeachDetail />
       </MemoryRouter>,
     );
-    // Hero quick conditions strip shows temp
     const heroEl = document.querySelector('[class*="max-h-"]');
     expect(heroEl).toBeInTheDocument();
-    // Temperature appears in the quick conditions strip (hero has "18° · ...")
     const conditionEls = screen.getAllByText(/18°/);
     expect(conditionEls.length).toBeGreaterThanOrEqual(1);
   });

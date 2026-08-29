@@ -141,6 +141,7 @@ const mockBeachConditions: Record<string, BeachSummary> = {
   },
 };
 
+import { useFavorites } from '../../hooks/useFavorites';
 import { DiscoveryView } from '../DiscoveryView';
 
 function renderDiscoveryView(
@@ -222,6 +223,36 @@ describe('DiscoveryView (task 007)', () => {
     const list = screen.getByTestId('discovery-beach-list');
     expect(list).toHaveTextContent('English Bay');
     expect(list).toHaveTextContent('Kitsilano Beach');
+  });
+
+  it('filters beaches by name and can clear the search', async () => {
+    renderDiscoveryView();
+    const search = screen.getByRole('searchbox', { name: 'Search beaches' });
+
+    await userEvent.type(search, 'Kits');
+    expect(screen.queryByText('English Bay')).not.toBeInTheDocument();
+    expect(screen.getByText('Kitsilano Beach')).toBeInTheDocument();
+
+    await userEvent.click(screen.getByRole('button', { name: 'Clear search' }));
+    expect(screen.getByText('English Bay')).toBeInTheDocument();
+  });
+
+  it('shows a helpful empty state when search has no matches', async () => {
+    renderDiscoveryView();
+    await userEvent.type(screen.getByRole('searchbox', { name: 'Search beaches' }), 'Jericho');
+    expect(screen.getByText('No beaches found')).toBeInTheDocument();
+  });
+
+  it('sorts favorites before other beaches', () => {
+    (useFavorites as ReturnType<typeof vi.fn>).mockReturnValue({
+      favorites: ['kitsilano-beach'],
+      toggleFavorite: vi.fn(),
+      isFavorite: vi.fn((id: string) => id === 'kitsilano-beach'),
+    });
+    renderDiscoveryView();
+    const cards = screen.getAllByRole('link');
+    expect(cards[0]).toHaveTextContent('Kitsilano Beach');
+    expect(screen.getByLabelText('Favorite')).toBeInTheDocument();
   });
 
   // AC-019: Error state
