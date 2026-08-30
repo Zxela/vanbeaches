@@ -225,7 +225,7 @@ describe('FavoritesView', () => {
       vi.useRealTimers();
     });
 
-    it('applies Fraunces display font to greeting', () => {
+    it('applies the shared display typography to the greeting', () => {
       renderFavorites();
       const greeting = screen.getByText(/Good (morning|afternoon|evening)/i);
       expect(greeting.className).toMatch(/font-display/);

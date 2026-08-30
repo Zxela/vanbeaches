@@ -287,8 +287,7 @@ describe('TodayTab', () => {
     expect(screen.queryByText(/5-day forecast/i)).toBeNull();
   });
 
-  // Section headings use Fraunces (font-display)
-  it('uses font-display (Fraunces) class on section headings', () => {
+  it('uses the shared display typography class on section headings', () => {
     render(
       <TodayTab
         beach={makeBeach()}

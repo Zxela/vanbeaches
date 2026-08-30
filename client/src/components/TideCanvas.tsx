@@ -245,7 +245,7 @@ export function TideCanvas({ predictions, loading, className }: TideCanvasProps)
 
     // Y-axis labels
     ctx.fillStyle = theme.text;
-    ctx.font = '11px Inter, system-ui';
+    ctx.font = '11px "DM Sans", system-ui, sans-serif';
     ctx.textAlign = 'right';
     for (let i = 0; i <= 4; i++) {
       const value = maxHeight - ((maxHeight - minHeight) / 4) * i;
