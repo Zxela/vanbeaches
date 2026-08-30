@@ -172,8 +172,7 @@ describe('BeachVerdict', () => {
     expect(hasReason).toBe(true);
   });
 
-  // Uses Fraunces font for the heading
-  it('uses font-display (Fraunces) class on the heading', () => {
+  it('uses the shared display typography class on the heading', () => {
     render(
       <BeachVerdict weather={makeWeather()} tides={null} waterQuality={null} sunsetTime={null} />,
     );
