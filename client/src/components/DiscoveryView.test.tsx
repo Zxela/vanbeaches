@@ -7,7 +7,7 @@
  * intentionally removed (vibe filter chips, featured banner, compact map section).
  */
 
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import type { Beach, BeachSummary } from '@van-beaches/shared';
 import type React from 'react';
 import { MemoryRouter } from 'react-router-dom';
@@ -167,5 +167,15 @@ describe('DiscoveryView', () => {
   it('renders tagline', () => {
     renderDiscoveryView();
     expect(screen.getByText("Live conditions for Vancouver's 9 best beaches")).toBeInTheDocument();
+  });
+
+  it('passes search-filtered beaches to the map', () => {
+    const { container } = renderDiscoveryView();
+    fireEvent.change(screen.getByRole('searchbox'), { target: { value: 'Kitsilano' } });
+    fireEvent.click(screen.getByRole('button', { name: 'Map' }));
+
+    const markers = container.querySelectorAll('.leaflet-marker');
+    expect(markers).toHaveLength(1);
+    expect(markers[0]).toHaveAttribute('data-beach-id', 'kitsilano-beach');
   });
 });

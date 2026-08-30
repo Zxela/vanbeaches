@@ -18,7 +18,7 @@ export function OfflineBanner() {
         >
           <div className="bg-sand-700 text-white px-4 py-2 flex items-center justify-center gap-2 text-sm">
             <Icon icon={WifiOff} size="sm" />
-            <span>You're offline — showing cached data</span>
+            <span>You're offline — some live conditions may be unavailable</span>
           </div>
         </motion.div>
       )}

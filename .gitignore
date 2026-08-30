@@ -5,7 +5,10 @@ dist/
 *.log
 .DS_Store
 coverage/
+playwright-report/
+test-results/
 .vite/
+.wrangler/
 dev-dist/
 *.tsbuildinfo
 .claude/

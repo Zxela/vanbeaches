@@ -24,29 +24,29 @@ export function SafetyInfo({ beach, waterQuality, weather }: SafetyInfoProps) {
     Number(Boolean(isWarning)) + Number(Boolean(highUV)) + Number(Boolean(highWind));
 
   return (
-    <section className="rounded-2xl border border-white/40 bg-white/80 p-4 shadow-lg backdrop-blur-xl">
-      <h3 className="text-lg font-semibold text-sand-900 flex items-center gap-2">
-        <ShieldCheck className="w-6 h-6 text-emerald-600" aria-hidden="true" />
+    <section className="weather-panel p-4">
+      <h3 className="flex items-center gap-2 text-lg font-semibold text-white">
+        <ShieldCheck className="h-6 w-6 text-emerald-300" aria-hidden="true" />
         Safety
       </h3>
 
       <div
         className={[
-          'mt-4 rounded-xl border p-4',
+          'mt-4 rounded-xl border p-4 backdrop-blur-md',
           conditionWarnings > 0
-            ? 'border-amber-200/80 bg-amber-50/90'
-            : 'border-emerald-200/70 bg-emerald-50/80',
+            ? 'border-amber-300/35 bg-amber-400/15'
+            : 'border-emerald-300/30 bg-emerald-400/10',
         ].join(' ')}
       >
-        <p className="text-xs font-semibold uppercase tracking-[0.14em] text-sand-600">
+        <p className="text-xs font-semibold uppercase tracking-[0.14em] text-white/60">
           Beach safety snapshot
         </p>
-        <p className="mt-1 font-semibold text-sand-900">
+        <p className="mt-1 font-semibold text-white">
           {conditionWarnings > 0
             ? `${conditionWarnings} ${conditionWarnings === 1 ? 'item needs' : 'items need'} attention`
             : 'No current warnings in the available data'}
         </p>
-        <p className="mt-1 text-xs text-sand-600">
+        <p className="mt-1 text-xs text-white/65">
           Combines the reported water-quality status with guidance derived from current UV and wind.
         </p>
       </div>
@@ -59,12 +59,12 @@ export function SafetyInfo({ beach, waterQuality, weather }: SafetyInfoProps) {
             className={[
               'flex items-start gap-3 rounded-xl p-4 border',
               wqLevel === 'closed'
-                ? 'bg-red-50 border-red-200 text-red-800'
-                : 'bg-amber-50 border-amber-200 text-amber-800',
+                ? 'border-red-300/40 bg-red-500/15 text-red-50'
+                : 'border-amber-300/40 bg-amber-400/15 text-amber-50',
             ].join(' ')}
           >
             <AlertTriangle
-              className={`w-5 h-5 mt-0.5 flex-shrink-0 ${wqLevel === 'closed' ? 'text-red-500' : 'text-amber-500'}`}
+              className={`w-5 h-5 mt-0.5 flex-shrink-0 ${wqLevel === 'closed' ? 'text-red-300' : 'text-amber-300'}`}
               aria-hidden="true"
             />
             <div>
@@ -80,8 +80,8 @@ export function SafetyInfo({ beach, waterQuality, weather }: SafetyInfoProps) {
 
         {/* AC-002: Informational message for unknown or off-season */}
         {isInfo && (
-          <div className="flex items-start gap-3 rounded-xl p-4 bg-sky-50 border border-sky-200 text-sky-800">
-            <Info className="w-5 h-5 mt-0.5 flex-shrink-0 text-sky-500" aria-hidden="true" />
+          <div className="flex items-start gap-3 rounded-xl border border-sky-200/30 bg-sky-400/10 p-4 text-sky-50">
+            <Info className="w-5 h-5 mt-0.5 flex-shrink-0 text-sky-200" aria-hidden="true" />
             <p className="text-sm">
               {wqLevel === 'off-season'
                 ? 'Off-season: Water quality monitoring is paused until summer.'
@@ -93,8 +93,8 @@ export function SafetyInfo({ beach, waterQuality, weather }: SafetyInfoProps) {
         {/* AC-003: Positive status indicator when no warnings */}
         {isGood && (
           <div className="flex items-center gap-3">
-            <CheckCircle className="w-5 h-5 text-emerald-500 flex-shrink-0" aria-hidden="true" />
-            <p className="text-sm text-emerald-700">
+            <CheckCircle className="w-5 h-5 text-emerald-300 flex-shrink-0" aria-hidden="true" />
+            <p className="text-sm text-white/80">
               Water quality is good — no advisory is reported in the latest available status.
             </p>
           </div>
@@ -104,9 +104,9 @@ export function SafetyInfo({ beach, waterQuality, weather }: SafetyInfoProps) {
         {(highUV || highWind) && (
           <div className="space-y-2">
             {highUV && (
-              <div className="flex items-center gap-3 rounded-lg p-3 bg-orange-50 border border-orange-200 text-orange-800">
+              <div className="flex items-center gap-3 rounded-lg border border-orange-300/35 bg-orange-400/15 p-3 text-orange-50">
                 <AlertTriangle
-                  className="w-4 h-4 text-orange-500 flex-shrink-0"
+                  className="w-4 h-4 text-orange-200 flex-shrink-0"
                   aria-hidden="true"
                 />
                 <p className="text-sm">
@@ -115,9 +115,9 @@ export function SafetyInfo({ beach, waterQuality, weather }: SafetyInfoProps) {
               </div>
             )}
             {highWind && (
-              <div className="flex items-center gap-3 rounded-lg p-3 bg-amber-50 border border-amber-200 text-amber-800">
+              <div className="flex items-center gap-3 rounded-lg border border-amber-300/35 bg-amber-400/15 p-3 text-amber-50">
                 <AlertTriangle
-                  className="w-4 h-4 text-amber-500 flex-shrink-0"
+                  className="w-4 h-4 text-amber-200 flex-shrink-0"
                   aria-hidden="true"
                 />
                 <p className="text-sm">
@@ -134,12 +134,12 @@ export function SafetyInfo({ beach, waterQuality, weather }: SafetyInfoProps) {
             {hasLifeguard ? (
               <>
                 <Users className="w-5 h-5 text-emerald-500 flex-shrink-0" aria-hidden="true" />
-                <p className="text-sm text-emerald-700">Lifeguard on duty ({lifeguard}).</p>
+                <p className="text-sm text-white/80">Lifeguard on duty ({lifeguard}).</p>
               </>
             ) : (
               <>
-                <UserX className="w-5 h-5 text-sand-500 flex-shrink-0" aria-hidden="true" />
-                <p className="text-sm text-sand-600">
+                <UserX className="w-5 h-5 text-white/55 flex-shrink-0" aria-hidden="true" />
+                <p className="text-sm text-white/75">
                   No lifeguard on duty — swim at your own risk.
                 </p>
               </>
@@ -149,7 +149,7 @@ export function SafetyInfo({ beach, waterQuality, weather }: SafetyInfoProps) {
 
         {/* AC-004: Safety notes list */}
         {safetyNotes.length > 0 && (
-          <ul className="space-y-1 list-disc list-inside text-sm text-sand-700">
+          <ul className="space-y-1 list-disc list-inside text-sm text-white/75">
             {safetyNotes.map((note) => (
               <li key={note}>{note}</li>
             ))}
@@ -157,7 +157,7 @@ export function SafetyInfo({ beach, waterQuality, weather }: SafetyInfoProps) {
         )}
 
         {/* AC-007: Disclaimer */}
-        <p className="text-xs text-sand-500 border-t border-sand-200 pt-3">
+        <p className="border-t border-white/15 pt-3 text-xs text-white/55">
           Water-quality labels reflect the latest available reported status. UV and wind guidance is
           generated from forecast conditions, not an official advisory. This information is for
           reference only; always follow posted signs and official advisories.

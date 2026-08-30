@@ -102,11 +102,11 @@ describe('InstagramEmbed', () => {
       expect(skeletons.length).toBeGreaterThan(0);
     });
 
-    it('applies bg-sand-100 to skeleton placeholders', () => {
+    it('uses translucent weather surfaces for skeleton placeholders', () => {
       const { container } = render(
         <InstagramEmbed postUrls={[]} hashtag="kitsbeach" loading={true} />,
       );
-      const skeletons = container.querySelectorAll('.bg-sand-100');
+      const skeletons = container.querySelectorAll('.bg-white\\/10');
       expect(skeletons.length).toBeGreaterThan(0);
     });
 
@@ -169,11 +169,11 @@ describe('InstagramEmbed', () => {
       expect(container.innerHTML).not.toMatch(/dark:/);
     });
 
-    it('uses warm sand/coral color classes', () => {
+    it('uses restrained translucent weather colors', () => {
       const postUrls = ['https://www.instagram.com/p/ABC123/'];
       const { container } = render(<InstagramEmbed postUrls={postUrls} hashtag="kitsbeach" />);
-      // Should use sand or coral colors from design tokens
-      expect(container.innerHTML).toMatch(/sand-|coral-/);
+      expect(container.innerHTML).toContain('bg-white/10');
+      expect(container.innerHTML).not.toMatch(/sand-|coral-/);
     });
   });
 });

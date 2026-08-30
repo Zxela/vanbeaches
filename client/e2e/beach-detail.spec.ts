@@ -2,7 +2,6 @@ import { test } from '@playwright/test';
 
 /**
  * E2E Tests for Beach Detail Page
- * Design Doc: docs/design/van-beaches-design.md
  * Acceptance Criteria: Weather, Tide, Water Quality, Webcam sections
  */
 

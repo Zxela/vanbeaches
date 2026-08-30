@@ -9,7 +9,7 @@ import { PhotosTab } from '../components/PhotosTab';
 import { ShareButton } from '../components/ShareButton';
 import { TodayTab } from '../components/TodayTab';
 import { useRecentBeaches } from '../hooks/useRecentBeaches';
-import { formatSunTime, useSunTimes } from '../hooks/useSunTimes';
+import { useSunTimes } from '../hooks/useSunTimes';
 import { useTides } from '../hooks/useTides';
 import { useWaterQuality } from '../hooks/useWaterQuality';
 import { useWeather } from '../hooks/useWeather';
@@ -35,20 +35,26 @@ const conditionThemes: Record<string, string> = {
 export function BeachDetail() {
   const { slug } = useParams<{ slug: string }>();
   const beach = slug ? getBeachById(slug) : undefined;
-  const { tides } = useTides(slug);
-  const { weather } = useWeather(slug);
-  const { waterQuality } = useWaterQuality(slug);
+  const { tides, error: tideError, refetch: refetchTides } = useTides(slug);
+  const { weather, error: weatherError, refetch: refetchWeather } = useWeather(slug);
+  const {
+    waterQuality,
+    error: waterQualityError,
+    refetch: refetchWaterQuality,
+  } = useWaterQuality(slug);
   const { addRecent } = useRecentBeaches();
 
   const sunTimes = useSunTimes(
     beach?.location.latitude ?? 49.27,
     beach?.location.longitude ?? -123.15,
   );
-  const sunsetTime = formatSunTime(sunTimes.sunset);
+  const today = weather?.daily?.[0];
+  const sunset = today?.sunset ?? sunTimes.sunset;
+  const sunsetTime = typeof sunset === 'string' ? sunset : sunset.toISOString();
 
   useEffect(() => {
-    if (slug) addRecent(slug);
-  }, [slug, addRecent]);
+    if (beach) addRecent(beach.id);
+  }, [beach, addRecent]);
 
   if (!beach)
     return (
@@ -63,7 +69,6 @@ export function BeachDetail() {
   const gradientIdx = beach.name.length % fallbackGradients.length;
   const condition = weather?.current.condition ?? 'partly-cloudy';
   const WeatherIcon = getWeatherIcon(condition);
-  const today = weather?.daily?.[0];
 
   return (
     <div className={`weather-scene ${conditionThemes[condition] ?? conditionThemes.cloudy}`}>
@@ -115,7 +120,9 @@ export function BeachDetail() {
                 )}
               </>
             ) : (
-              <p className="mt-5 text-lg text-white/80">Loading current conditions…</p>
+              <p className="mt-5 text-lg text-white/80">
+                {weatherError ? 'Current conditions unavailable' : 'Loading current conditions…'}
+              </p>
             )}
             {beach.tagline && (
               <p className="mt-8 text-sm font-medium text-white/70">{beach.tagline}</p>
@@ -143,6 +150,12 @@ export function BeachDetail() {
             tides={tides}
             waterQuality={waterQuality}
             sunsetTime={sunsetTime}
+            weatherError={weatherError}
+            onRetryWeather={refetchWeather}
+            tideError={tideError}
+            onRetryTide={refetchTides}
+            waterQualityError={waterQualityError}
+            onRetryWaterQuality={refetchWaterQuality}
           />
         </section>
 

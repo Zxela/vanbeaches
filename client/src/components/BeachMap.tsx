@@ -1,19 +1,20 @@
 import 'leaflet/dist/leaflet.css';
-import { BEACHES } from '@van-beaches/shared';
+import { BEACHES, type Beach } from '@van-beaches/shared';
 import L from 'leaflet';
 import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useFavorites } from '../hooks/useFavorites';
 
 // Design token hex values (used in divIcon inline styles since Tailwind classes
 // are not processed inside Leaflet's divIcon HTML)
 const COLORS = {
-  ocean500: '#00bcd4',
-  ocean600: '#00acc1',
-  shore500: '#009688',
+  ocean500: '#3b82f6',
+  ocean600: '#2563eb',
+  shore500: '#1d4ed8',
 };
 
 export interface BeachMapProps {
+  beaches?: Beach[];
   selectedBeachId?: string;
   onSelectBeach?: (beachId: string) => void;
 }
@@ -92,20 +93,17 @@ const VANCOUVER_BOUNDS: [[number, number], [number, number]] = [
 
 const VANCOUVER_CENTER: [number, number] = [49.277, -123.155];
 
-export function BeachMap({ selectedBeachId, onSelectBeach }: BeachMapProps) {
-  const navigate = useNavigate();
+export function BeachMap({ beaches = BEACHES, selectedBeachId, onSelectBeach }: BeachMapProps) {
   const { isFavorite } = useFavorites();
 
   const handleClick = (beachId: string) => {
     if (onSelectBeach) {
       onSelectBeach(beachId);
-    } else {
-      navigate(`/beach/${beachId}`);
     }
   };
 
   return (
-    <div className="bg-white dark:bg-sand-800 rounded-xl overflow-hidden shadow-lg">
+    <div className="app-surface overflow-hidden rounded-2xl shadow-lg">
       <style>{`
         .dark .leaflet-tile-pane {
           filter: brightness(0.7) invert(1) contrast(1.1) hue-rotate(200deg) saturate(0.3);
@@ -123,10 +121,10 @@ export function BeachMap({ selectedBeachId, onSelectBeach }: BeachMapProps) {
           background: white;
         }
         .dark .leaflet-popup-content-wrapper {
-          background: #2a2a2a;
+          background: #172033;
         }
         .dark .leaflet-popup-tip {
-          background: #2a2a2a;
+          background: #172033;
         }
         .beach-popup-img {
           width: 100%;
@@ -168,7 +166,7 @@ export function BeachMap({ selectedBeachId, onSelectBeach }: BeachMapProps) {
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           />
-          {BEACHES.map((beach) => {
+          {beaches.map((beach) => {
             const isSelected = beach.id === selectedBeachId;
             const isFav = isFavorite(beach.id);
             const icon = createMarkerIcon(isSelected, isFav);
@@ -180,7 +178,7 @@ export function BeachMap({ selectedBeachId, onSelectBeach }: BeachMapProps) {
                 position={[beach.location.latitude, beach.location.longitude]}
                 icon={icon}
                 eventHandlers={{
-                  click: () => handleClick(beach.id),
+                  ...(onSelectBeach ? { click: () => handleClick(beach.id) } : {}),
                 }}
                 // Extra data attributes passed to the mock for testability
                 {...{
@@ -201,7 +199,9 @@ export function BeachMap({ selectedBeachId, onSelectBeach }: BeachMapProps) {
                       />
                     )}
                     <div className="beach-popup-info">
-                      <div className="beach-popup-name">{beach.name}</div>
+                      <Link className="beach-popup-name" to={`/beach/${beach.id}`}>
+                        {beach.name}
+                      </Link>
                       {beach.tagline && <div className="beach-popup-tagline">{beach.tagline}</div>}
                     </div>
                   </div>

@@ -53,23 +53,23 @@ export function Layout({ children }: LayoutProps) {
   const otherBeaches = BEACHES.filter((b) => !favorites.includes(b.id));
 
   return (
-    <div className="min-h-screen bg-sand-50 dark:bg-sand-900">
+    <div className="app-canvas min-h-screen">
       <OfflineBanner />
       {/* App container */}
       <div className="min-h-screen flex flex-col">
         <header
           className={cn(
-            'z-50 text-sand-900 dark:text-sand-100',
+            'z-50 text-slate-900 dark:text-slate-100',
             isBeachDetail
               ? 'absolute inset-x-0 top-0 bg-transparent text-white dark:text-white'
-              : 'sticky top-0 border-b border-ocean-200/30 bg-white/90 shadow-xl backdrop-blur-md dark:border-ocean-800/30 dark:bg-sand-900/95',
+              : 'sticky top-0 border-b border-white/60 bg-slate-50/65 shadow-sm backdrop-blur-2xl dark:border-white/10 dark:bg-slate-950/60',
           )}
         >
           <div className="container mx-auto max-w-7xl px-4 py-3 sm:py-4">
             <div className="flex items-center justify-between">
               <Link to="/" className="flex items-center gap-3 group">
                 <motion.div
-                  className="w-10 h-10 rounded-xl bg-gradient-to-br from-ocean-400 to-shore-500 flex items-center justify-center shadow-lg"
+                  className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-blue-500 to-blue-700 shadow-lg shadow-blue-950/15"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
@@ -81,10 +81,10 @@ export function Layout({ children }: LayoutProps) {
                     isBeachDetail && '[&_h1]:text-white [&_p]:text-white/60',
                   )}
                 >
-                  <h1 className="text-2xl font-bold tracking-tight bg-gradient-to-r from-ocean-600 to-shore-500 bg-clip-text text-transparent group-hover:from-ocean-500 group-hover:to-shore-400 transition-all">
+                  <h1 className="bg-gradient-to-r from-blue-700 to-blue-500 bg-clip-text text-2xl font-bold tracking-tight text-transparent transition-all dark:from-blue-300 dark:to-sky-300">
                     Van Beaches
                   </h1>
-                  <p className="text-sand-500 dark:text-sand-400 text-sm">
+                  <p className="text-sm text-slate-500 dark:text-slate-400">
                     Vancouver Beach Conditions
                   </p>
                 </div>
@@ -98,7 +98,7 @@ export function Layout({ children }: LayoutProps) {
                     'p-2 rounded-lg transition-colors',
                     isBeachDetail
                       ? 'bg-white/15 text-white backdrop-blur-xl hover:bg-white/25'
-                      : 'bg-sand-100 text-sand-700 hover:bg-sand-200 dark:bg-sand-800 dark:text-sand-300 dark:hover:bg-sand-700',
+                      : 'app-surface text-slate-600 hover:bg-white/80 dark:text-slate-300 dark:hover:bg-slate-800/80',
                   )}
                   aria-label={theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}
                 >
@@ -110,7 +110,7 @@ export function Layout({ children }: LayoutProps) {
                     'hidden rounded-lg px-3 py-2 text-sm transition-colors sm:block',
                     isBeachDetail
                       ? 'bg-white/15 text-white backdrop-blur-xl hover:bg-white/25'
-                      : 'bg-ocean-50 text-ocean-700 hover:bg-ocean-100 dark:bg-ocean-900/30 dark:text-ocean-300 dark:hover:bg-ocean-800/40',
+                      : 'app-surface text-blue-700 hover:bg-white/80 dark:text-blue-300 dark:hover:bg-slate-800/80',
                   )}
                 >
                   Discover
@@ -119,7 +119,7 @@ export function Layout({ children }: LayoutProps) {
                   <motion.button
                     type="button"
                     onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                    className="flex items-center gap-2 bg-ocean-500 hover:bg-ocean-600 text-white px-4 py-2 rounded-lg transition-colors text-sm font-medium shadow-md"
+                    className="flex items-center gap-2 rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white shadow-md shadow-blue-950/15 transition-colors hover:bg-blue-700"
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                   >
@@ -134,7 +134,7 @@ export function Layout({ children }: LayoutProps) {
                   <AnimatePresence>
                     {isDropdownOpen && (
                       <motion.div
-                        className="absolute right-0 mt-2 w-56 bg-white dark:bg-sand-800 rounded-xl shadow-2xl overflow-hidden border border-sand-200 dark:border-sand-700 max-h-96 overflow-y-auto"
+                        className="app-surface absolute right-0 mt-2 max-h-96 w-56 overflow-y-auto rounded-xl shadow-2xl"
                         style={{ zIndex: 9999 }}
                         initial={{ opacity: 0, y: -10, scale: 0.95 }}
                         animate={{ opacity: 1, y: 0, scale: 1 }}

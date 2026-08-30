@@ -74,16 +74,16 @@ export function DiscoveryView({
   }
 
   return (
-    <div className="space-y-5 px-4 pb-10">
+    <div className="mx-auto max-w-5xl space-y-5 px-4 pb-10 sm:px-6">
       <header className="space-y-4 pt-1">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-ocean-700">
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-blue-700 dark:text-blue-300">
             Discover
           </p>
-          <h1 className="mt-1 font-display text-3xl font-semibold tracking-tight text-sand-950">
+          <h1 className="mt-1 font-display text-3xl font-semibold tracking-tight text-slate-950 dark:text-white">
             Vancouver beaches
           </h1>
-          <p className="mt-1 text-sm text-sand-600">
+          <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">
             Live conditions for Vancouver's 9 best beaches
           </p>
         </div>
@@ -99,7 +99,7 @@ export function DiscoveryView({
             value={query}
             onChange={(event) => setQuery(event.target.value)}
             placeholder="Search beaches"
-            className="h-12 w-full rounded-2xl border border-sand-200 bg-white/90 pl-11 pr-11 text-base text-sand-950 shadow-sm outline-none transition placeholder:text-sand-500 focus:border-ocean-400 focus:ring-2 focus:ring-ocean-200"
+            className="app-surface h-12 w-full rounded-2xl pl-11 pr-11 text-base text-slate-950 outline-none transition placeholder:text-slate-500 focus:border-blue-400 focus:ring-2 focus:ring-blue-300/40 dark:text-white"
           />
           {query && (
             <button
@@ -114,15 +114,15 @@ export function DiscoveryView({
         </label>
       </header>
 
-      <fieldset className="grid grid-cols-2 rounded-xl bg-sand-200/70 p-1" aria-label="View mode">
+      <fieldset className="app-surface grid grid-cols-2 rounded-xl p-1" aria-label="View mode">
         <button
           type="button"
           onClick={() => setViewMode('list')}
           aria-pressed={viewMode === 'list'}
           className={
             viewMode === 'list'
-              ? 'flex items-center justify-center gap-2 rounded-lg bg-white px-4 py-2 text-sm font-semibold text-sand-950 shadow-sm'
-              : 'flex items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-medium text-sand-600'
+              ? 'flex items-center justify-center gap-2 rounded-lg bg-white/90 px-4 py-2 text-sm font-semibold text-blue-700 shadow-sm dark:bg-slate-700/80 dark:text-blue-200'
+              : 'flex items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-medium text-slate-600 dark:text-slate-300'
           }
         >
           <List className="h-4 w-4" aria-hidden="true" />
@@ -134,8 +134,8 @@ export function DiscoveryView({
           aria-pressed={viewMode === 'map'}
           className={
             viewMode === 'map'
-              ? 'flex items-center justify-center gap-2 rounded-lg bg-white px-4 py-2 text-sm font-semibold text-sand-950 shadow-sm'
-              : 'flex items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-medium text-sand-600'
+              ? 'flex items-center justify-center gap-2 rounded-lg bg-white/90 px-4 py-2 text-sm font-semibold text-blue-700 shadow-sm dark:bg-slate-700/80 dark:text-blue-200'
+              : 'flex items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-medium text-slate-600 dark:text-slate-300'
           }
         >
           <MapIcon className="h-4 w-4" aria-hidden="true" />
@@ -156,15 +156,17 @@ export function DiscoveryView({
               />
             ))}
             {visibleBeaches.length === 0 && (
-              <div className="rounded-2xl border border-sand-200 bg-white px-5 py-10 text-center">
-                <p className="font-semibold text-sand-900">No beaches found</p>
-                <p className="mt-1 text-sm text-sand-500">Try another name or clear your search.</p>
+              <div className="app-surface rounded-2xl px-5 py-10 text-center">
+                <p className="font-semibold text-slate-900 dark:text-white">No beaches found</p>
+                <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
+                  Try another name or clear your search.
+                </p>
               </div>
             )}
           </div>
         </section>
       ) : (
-        <BeachMap />
+        <BeachMap beaches={visibleBeaches} />
       )}
     </div>
   );
