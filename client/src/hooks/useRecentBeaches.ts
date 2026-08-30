@@ -2,11 +2,21 @@ import { useCallback, useEffect, useState } from 'react';
 
 const MAX_RECENT = 5;
 
-export function useRecentBeaches() {
-  const [recent, setRecent] = useState<string[]>(() => {
+function readRecentBeaches(): string[] {
+  try {
     const saved = localStorage.getItem('recentBeaches');
-    return saved ? JSON.parse(saved) : [];
-  });
+    if (!saved) return [];
+    const parsed: unknown = JSON.parse(saved);
+    return Array.isArray(parsed)
+      ? parsed.filter((value): value is string => typeof value === 'string')
+      : [];
+  } catch {
+    return [];
+  }
+}
+
+export function useRecentBeaches() {
+  const [recent, setRecent] = useState<string[]>(readRecentBeaches);
 
   useEffect(() => {
     localStorage.setItem('recentBeaches', JSON.stringify(recent));

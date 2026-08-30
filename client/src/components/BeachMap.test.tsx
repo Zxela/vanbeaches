@@ -110,6 +110,7 @@ vi.mock('react-router-dom', async () => {
   };
 });
 
+import { BEACHES, type Beach } from '@van-beaches/shared';
 import { useFavorites } from '../hooks/useFavorites';
 import { BeachMap } from './BeachMap';
 
@@ -124,7 +125,11 @@ describe('BeachMap', () => {
   });
 
   function renderBeachMap(
-    props: { selectedBeachId?: string; onSelectBeach?: (id: string) => void } = {},
+    props: {
+      beaches?: Beach[];
+      selectedBeachId?: string;
+      onSelectBeach?: (id: string) => void;
+    } = {},
   ) {
     return render(
       <MemoryRouter>
@@ -176,15 +181,19 @@ describe('BeachMap', () => {
     expect(typeof onSelectBeach.mock.calls[0][0]).toBe('string');
   });
 
-  // 002-AC5: clicking without callback navigates
-  it('navigates to /beach/{beachId} when no onSelectBeach provided', () => {
-    const { container } = renderBeachMap();
-    const firstMarker = container.querySelector('.leaflet-marker');
-    if (firstMarker) {
-      fireEvent.click(firstMarker);
-    }
-    expect(mockNavigate).toHaveBeenCalledTimes(1);
-    expect(mockNavigate.mock.calls[0][0]).toMatch(/^\/beach\//);
+  // 002-AC5: clicking without callback leaves navigation to the popup link
+  it('renders beach detail links in popups when no callback is provided', () => {
+    renderBeachMap();
+    expect(screen.getByRole('link', { name: 'English Bay' })).toHaveAttribute(
+      'href',
+      '/beach/english-bay',
+    );
+    expect(mockNavigate).not.toHaveBeenCalled();
+  });
+
+  it('renders only beaches provided by the caller', () => {
+    const { container } = renderBeachMap({ beaches: BEACHES.slice(0, 2) });
+    expect(container.querySelectorAll('.beach-marker')).toHaveLength(2);
   });
 
   // 002-AC6: zoom constraints
@@ -206,7 +215,7 @@ describe('BeachMap', () => {
     for (const marker of markers) {
       const bgColor = (marker as HTMLElement).getAttribute('data-bg-color');
       const transform = (marker as HTMLElement).getAttribute('data-transform');
-      if (bgColor === '#00acc1' && transform === 'scale(1.3)') {
+      if (bgColor === '#2563eb' && transform === 'scale(1.3)') {
         foundSelected = true;
         break;
       }
@@ -227,7 +236,7 @@ describe('BeachMap', () => {
     for (const marker of markers) {
       const bgColor = (marker as HTMLElement).getAttribute('data-bg-color');
       const hasHeart = (marker as HTMLElement).getAttribute('data-has-heart');
-      if (bgColor === '#009688' && hasHeart === 'true') {
+      if (bgColor === '#1d4ed8' && hasHeart === 'true') {
         foundFavorite = true;
         break;
       }
@@ -249,7 +258,7 @@ describe('BeachMap', () => {
     let foundDefault = false;
     for (const marker of markers) {
       const bgColor = (marker as HTMLElement).getAttribute('data-bg-color');
-      if (bgColor === '#00bcd4') {
+      if (bgColor === '#3b82f6') {
         foundDefault = true;
         break;
       }

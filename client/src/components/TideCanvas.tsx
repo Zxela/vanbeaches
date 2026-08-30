@@ -160,6 +160,10 @@ export function TideCanvas({ predictions, loading, className }: TideCanvasProps)
       if (todayTides.length === 1) return todayTides[0].height;
 
       const targetMs = targetTime.getTime();
+      const firstTime = new Date(todayTides[0].time).getTime();
+      const lastTime = new Date(todayTides[todayTides.length - 1].time).getTime();
+      if (targetMs <= firstTime) return todayTides[0].height;
+      if (targetMs >= lastTime) return todayTides[todayTides.length - 1].height;
 
       // Find surrounding points
       let before = todayTides[0];
@@ -472,16 +476,14 @@ export function TideCanvas({ predictions, loading, className }: TideCanvasProps)
           <Icon icon={Waves} size="lg" color="ocean" />
           Today's Tides
         </CardTitle>
-        <div className="mt-4 flex items-end justify-between gap-4 rounded-xl border border-white/40 bg-white/45 p-3 backdrop-blur-md dark:border-white/10 dark:bg-sand-900/35">
+        <div className="weather-panel-muted mt-4 flex items-end justify-between gap-4 p-3">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-sand-500 dark:text-sand-300">
+            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-white/55">
               Right now · estimated
             </p>
-            <p className="mt-1 text-2xl font-semibold text-sand-900 dark:text-white">
-              {formatNumber(currentHeight)}m
-            </p>
+            <p className="mt-1 text-2xl font-semibold text-white">{formatNumber(currentHeight)}m</p>
           </div>
-          <div className="flex items-center gap-2 text-sm font-medium capitalize text-ocean-700 dark:text-ocean-200">
+          <div className="flex items-center gap-2 text-sm font-medium capitalize text-sky-200">
             {tideDirection === 'rising' ? (
               <TrendingUp className="h-4 w-4" aria-hidden="true" />
             ) : (
@@ -518,8 +520,7 @@ export function TideCanvas({ predictions, loading, className }: TideCanvasProps)
               transition={{ duration: 0.15 }}
               className={cn(
                 'absolute pointer-events-none z-10',
-                'bg-white rounded-lg shadow-lg',
-                'border border-sand-200',
+                'rounded-lg border border-white/20 bg-slate-950/80 text-white shadow-lg backdrop-blur-xl',
                 'px-3 py-2 text-sm',
               )}
               style={{
@@ -527,7 +528,7 @@ export function TideCanvas({ predictions, loading, className }: TideCanvasProps)
                 top: Math.max(tooltip.y - 60, 10),
               }}
             >
-              <div className="font-medium text-sand-900">
+              <div className="font-medium text-white">
                 {tooltip.time.toLocaleTimeString('en-US', {
                   hour: 'numeric',
                   minute: '2-digit',
@@ -539,7 +540,7 @@ export function TideCanvas({ predictions, loading, className }: TideCanvasProps)
                   'text-lg font-bold',
                   tooltip.type === 'high' && 'text-tide-high',
                   tooltip.type === 'low' && 'text-tide-low',
-                  !tooltip.type && 'text-ocean-600',
+                  !tooltip.type && 'text-sky-200',
                 )}
               >
                 {formatNumber(tooltip.height)}m
@@ -568,7 +569,7 @@ export function TideCanvas({ predictions, loading, className }: TideCanvasProps)
 
       {/* Key Tides summary grid */}
       <div className="px-4 pb-4 pt-2">
-        <p className="text-xs font-medium uppercase tracking-wide text-sand-500 mb-2">Key Tides</p>
+        <p className="mb-2 text-xs font-medium uppercase tracking-wide text-white/55">Key Tides</p>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
           {todayTides.map((tide) => {
             const isNext = tide.time === nextTide?.time;
@@ -578,8 +579,8 @@ export function TideCanvas({ predictions, loading, className }: TideCanvasProps)
                 className={cn(
                   'flex items-center gap-2 rounded-lg border p-2 backdrop-blur-sm',
                   isNext
-                    ? 'border-ocean-300 bg-white/75 ring-1 ring-ocean-200 dark:border-ocean-400/60 dark:bg-sand-900/55'
-                    : 'border-white/30 bg-white/35 dark:border-white/10 dark:bg-sand-900/25',
+                    ? 'border-sky-200/45 bg-sky-300/15 ring-1 ring-sky-200/25'
+                    : 'border-white/15 bg-white/10',
                 )}
               >
                 {tide.type === 'high' ? (
@@ -588,12 +589,12 @@ export function TideCanvas({ predictions, loading, className }: TideCanvasProps)
                   <TrendingDown className="w-4 h-4 text-tide-low shrink-0" />
                 )}
                 <div className="flex flex-col min-w-0">
-                  <span className="font-bold text-base text-sand-900 leading-none">
+                  <span className="font-bold text-base text-white leading-none">
                     {formatNumber(tide.height)}m
                   </span>
-                  <span className="text-sm text-sand-500">{formatTideTime(tide.time)}</span>
+                  <span className="text-sm text-white/60">{formatTideTime(tide.time)}</span>
                   {isNext && (
-                    <span className="mt-1 text-[10px] font-bold uppercase tracking-wide text-ocean-700 dark:text-ocean-200">
+                    <span className="mt-1 text-[10px] font-bold uppercase tracking-wide text-sky-200">
                       Next tide
                     </span>
                   )}

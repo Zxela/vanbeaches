@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
-import { WeatherForecast } from './WeatherForecast';
+import { WeatherForecast, parseLocalForecastDate } from './WeatherForecast';
 
 const mockForecast = {
   beachId: 'test-beach',
@@ -60,5 +60,10 @@ describe('WeatherForecast', () => {
   it('shows unavailable message when no daily data', () => {
     render(<WeatherForecast forecast={null} />);
     expect(screen.getByText(/unavailable/i)).toBeInTheDocument();
+  });
+
+  it('treats date-only values as local calendar dates', () => {
+    const date = parseLocalForecastDate('2024-01-02');
+    expect([date.getFullYear(), date.getMonth(), date.getDate()]).toEqual([2024, 0, 2]);
   });
 });

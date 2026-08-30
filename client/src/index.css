@@ -14,7 +14,7 @@
   }
 
   body {
-    @apply font-sans antialiased text-sand-900 bg-sand-50;
+    @apply bg-slate-100 font-sans text-slate-950 antialiased dark:bg-slate-950 dark:text-slate-100;
     margin: 0;
     /* Optimize text rendering */
     -webkit-font-smoothing: antialiased;
@@ -59,6 +59,23 @@
 }
 
 @layer utilities {
+  .app-canvas {
+    background: radial-gradient(circle at 12% -8%, rgb(255 255 255 / 92%), transparent 32rem),
+      radial-gradient(circle at 92% 8%, rgb(191 219 254 / 45%), transparent 34rem),
+      linear-gradient(180deg, #e8eef6 0%, #f2f5f9 52%, #e6edf5 100%);
+  }
+
+  .dark .app-canvas {
+    background: radial-gradient(circle at 12% -8%, rgb(51 65 85 / 52%), transparent 30rem),
+      radial-gradient(circle at 90% 8%, rgb(30 64 175 / 20%), transparent 32rem),
+      linear-gradient(180deg, #0b1422 0%, #101b2b 55%, #0b1320 100%);
+  }
+
+  .app-surface {
+    @apply border border-white/70 bg-white/55 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/55;
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 55%), 0 10px 30px rgb(15 23 42 / 6%);
+  }
+
   .weather-scene {
     @apply relative min-h-screen overflow-hidden text-white;
     background: linear-gradient(180deg, var(--weather-top), var(--weather-bottom));
@@ -96,8 +113,12 @@
   }
 
   .weather-panel {
-    @apply rounded-2xl border border-white/20 bg-slate-950/20 text-white shadow-lg backdrop-blur-xl;
-    box-shadow: inset 0 1px 0 rgb(255 255 255 / 12%), 0 12px 35px rgb(15 23 42 / 12%);
+    @apply rounded-2xl border border-white/20 bg-slate-950/25 text-white shadow-lg backdrop-blur-xl;
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 12%), 0 12px 35px rgb(15 23 42 / 14%);
+  }
+
+  .weather-panel-muted {
+    @apply rounded-xl border border-white/15 bg-white/10 text-white backdrop-blur-md;
   }
 
   .weather-panel-title {

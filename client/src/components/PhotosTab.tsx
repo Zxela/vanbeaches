@@ -13,7 +13,7 @@ export function PhotosTab({ beach }: PhotosTabProps) {
   const hashtag = personality?.instagramHashtag ?? beach.name.toLowerCase().replace(/\s+/g, '');
 
   return (
-    <section className="weather-panel mt-3 space-y-6 p-5">
+    <section className="space-y-6 p-5">
       <div>
         <h2 className="text-2xl font-bold text-white">Community photos</h2>
         <p className="mt-1 text-sm text-white/60">
@@ -25,8 +25,7 @@ export function PhotosTab({ beach }: PhotosTabProps) {
 
       <div className="pt-4">
         <p className="text-sm text-white/70">
-          Share your visit! Tag <span className="font-semibold text-white">#{hashtag}</span> on
-          Instagram to appear here
+          A curated gallery of verified community photography is coming in a future update.
         </p>
       </div>
     </section>

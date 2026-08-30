@@ -2,7 +2,6 @@ import { expect, test } from '@playwright/test';
 
 /**
  * E2E Tests for Caching and Performance
- * Design Doc: docs/design/van-beaches-design.md
  * Acceptance Criteria: Caching and Performance section
  */
 

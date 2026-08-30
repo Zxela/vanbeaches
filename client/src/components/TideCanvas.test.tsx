@@ -68,6 +68,19 @@ describe('TideCanvas - stale now marker fix', () => {
 });
 
 describe('TideCanvas - redesigned layout', () => {
+  it('clamps the estimated height before the first prediction', async () => {
+    vi.useFakeTimers();
+    const today = new Date();
+    today.setHours(0, 30, 0, 0);
+    vi.setSystemTime(today);
+    const { TideCanvas } = await import('./TideCanvas');
+
+    render(<TideCanvas predictions={makeTodayTides()} loading={false} />);
+
+    expect(screen.getAllByText('0.3m').length).toBeGreaterThan(0);
+    vi.useRealTimers();
+  });
+
   it('summarizes the estimated current direction and emphasizes the next tide', async () => {
     vi.useFakeTimers();
     const today = new Date();

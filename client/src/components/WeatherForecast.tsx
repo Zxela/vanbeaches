@@ -7,6 +7,11 @@ interface WeatherForecastProps {
   loading?: boolean;
 }
 
+export function parseLocalForecastDate(value: string): Date {
+  const [year, month, dateOfMonth] = value.split('-').map(Number);
+  return new Date(year, month - 1, dateOfMonth);
+}
+
 export function WeatherForecast({ forecast, loading }: WeatherForecastProps) {
   if (loading) {
     return (
@@ -45,7 +50,9 @@ export function WeatherForecast({ forecast, loading }: WeatherForecastProps) {
       </div>
       <div className="px-4">
         {daily.slice(0, 10).map((day, idx) => {
-          const date = new Date(day.date);
+          // Date-only forecast values describe a Vancouver calendar day. Parsing
+          // them as UTC can display the previous weekday in Pacific time.
+          const date = parseLocalForecastDate(day.date);
           const dayName =
             idx === 0 ? 'Today' : date.toLocaleDateString('en-US', { weekday: 'short' });
           const WeatherIcon = getWeatherIcon(day.condition);

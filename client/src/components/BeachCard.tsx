@@ -11,13 +11,13 @@ interface BeachCardProps {
 }
 
 const conditionStyles: Record<string, string> = {
-  sunny: 'from-[#1677d2] via-[#3999df] to-[#73c8f2]',
-  'partly-cloudy': 'from-[#487faf] via-[#73a2c4] to-[#a8c9df]',
-  cloudy: 'from-[#61778a] via-[#8799a7] to-[#b3c0c8]',
-  rainy: 'from-[#273f59] via-[#49637c] to-[#718aa1]',
-  stormy: 'from-[#17243a] via-[#304058] to-[#4b5e78]',
-  foggy: 'from-[#788995] via-[#9aa9b1] to-[#bcc7cc]',
-  snowy: 'from-[#8bbbd4] via-[#b6d2df] to-[#d9e6ec]',
+  sunny: 'from-[#25679d] via-[#397ba8] to-[#6697b6]',
+  'partly-cloudy': 'from-[#405f7b] via-[#55758e] to-[#7893a6]',
+  cloudy: 'from-[#4b6174] via-[#607588] to-[#8193a1]',
+  rainy: 'from-[#293f57] via-[#3b536a] to-[#587086]',
+  stormy: 'from-[#17283e] via-[#2b3d55] to-[#43576e]',
+  foggy: 'from-[#5d7180] via-[#718491] to-[#8e9da6]',
+  snowy: 'from-[#52758d] via-[#7392a4] to-[#9aadb8]',
 };
 
 function formatCondition(condition?: string) {
@@ -42,12 +42,12 @@ export function BeachCard({ beach, conditions, isFavorite = false }: BeachCardPr
   const background = conditionStyles[weather?.condition ?? ''] ?? conditionStyles.cloudy;
 
   return (
-    <article className="group relative overflow-hidden rounded-[1.35rem] shadow-sm ring-1 ring-black/5">
+    <article className="group relative overflow-hidden rounded-[1.35rem] shadow-md shadow-slate-950/10 ring-1 ring-white/40 dark:ring-white/10">
       <Link
         to={`/beach/${beach.id}`}
-        className={`relative flex min-h-32 items-stretch overflow-hidden bg-gradient-to-br ${background} p-5 text-white transition duration-200 hover:brightness-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ocean-500 focus-visible:ring-offset-2`}
+        className={`relative flex min-h-32 items-stretch overflow-hidden bg-gradient-to-br ${background} p-5 text-white transition duration-200 hover:saturate-[1.05] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2`}
       >
-        <span className="absolute -right-10 -top-12 h-40 w-40 rounded-full bg-white/15 blur-2xl" />
+        <span className="absolute inset-0 bg-gradient-to-r from-slate-950/10 via-transparent to-white/5" />
         <span className="relative flex min-w-0 flex-1 flex-col justify-between gap-5">
           <span>
             <span className="flex items-start gap-2">

@@ -1,17 +1,21 @@
 interface ErrorStateProps {
   message: string;
   onRetry?: () => void;
+  variant?: 'app' | 'weather';
 }
 
-export function ErrorState({ message, onRetry }: ErrorStateProps) {
+export function ErrorState({ message, onRetry, variant = 'app' }: ErrorStateProps) {
+  const isWeather = variant === 'weather';
   return (
-    <div className="rounded-2xl border border-sand-200 bg-white dark:bg-sand-800 dark:border-sand-700 p-6 text-center">
-      <p className="text-sand-600 dark:text-sand-400 mb-3">{message}</p>
+    <div className={`${isWeather ? 'weather-panel' : 'app-surface'} rounded-2xl p-6 text-center`}>
+      <p className={`mb-3 ${isWeather ? 'text-white/75' : 'text-slate-700 dark:text-slate-200'}`}>
+        {message}
+      </p>
       {onRetry && (
         <button
           type="button"
           onClick={onRetry}
-          className="text-sm font-medium text-ocean-600 hover:text-ocean-700 dark:text-ocean-400 dark:hover:text-ocean-300"
+          className={`rounded-lg px-3 py-2 text-sm font-medium text-white transition-colors ${isWeather ? 'bg-white/10 hover:bg-white/15' : 'bg-blue-600 hover:bg-blue-700'}`}
         >
           Try again
         </button>

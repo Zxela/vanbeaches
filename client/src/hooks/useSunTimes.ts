@@ -42,6 +42,7 @@ export function useSunTimes(latitude: number, longitude: number): SunTimes {
   }, [latitude, longitude]);
 }
 
-export function formatSunTime(date: Date): string {
+export function formatSunTime(value: Date | string): string {
+  const date = typeof value === 'string' ? new Date(value) : value;
   return date.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true });
 }

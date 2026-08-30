@@ -19,6 +19,8 @@ interface TodayTabProps {
   onRetryWeather?: () => void;
   tideError?: string | null;
   onRetryTide?: () => void;
+  waterQualityError?: string | null;
+  onRetryWaterQuality?: () => void;
 }
 
 function getUvLabel(uvIndex: number): string {
@@ -45,6 +47,8 @@ export function TodayTab({
   onRetryWeather,
   tideError,
   onRetryTide,
+  waterQualityError,
+  onRetryWaterQuality,
 }: TodayTabProps) {
   const showTides = beach.tideStationId !== null && tides !== null;
   const showTideError = beach.tideStationId !== null && tideError && !tides;
@@ -64,7 +68,15 @@ export function TodayTab({
 
       {/* Weather error state */}
       {weatherError && !weather && (
-        <ErrorState message="Couldn't load conditions" onRetry={onRetryWeather} />
+        <ErrorState message="Couldn't load conditions" onRetry={onRetryWeather} variant="weather" />
+      )}
+
+      {waterQualityError && !waterQuality && (
+        <ErrorState
+          message="Water quality data unavailable"
+          onRetry={onRetryWaterQuality}
+          variant="weather"
+        />
       )}
 
       {/* Compact conditions grid */}
@@ -163,14 +175,18 @@ export function TodayTab({
             <Sunrise className="h-7 w-7 text-amber-200" />
             <div>
               <p className="text-xs text-white/55">Sunrise</p>
-              <p className="text-lg font-semibold">{formatSunTime(sunTimes.sunrise)}</p>
+              <p className="text-lg font-semibold">
+                {formatSunTime(weather?.daily?.[0]?.sunrise ?? sunTimes.sunrise)}
+              </p>
             </div>
           </div>
           <div className="flex items-center justify-end gap-3">
             <Sunset className="h-7 w-7 text-orange-200" />
             <div>
               <p className="text-xs text-white/55">Sunset</p>
-              <p className="text-lg font-semibold">{formatSunTime(sunTimes.sunset)}</p>
+              <p className="text-lg font-semibold">
+                {formatSunTime(weather?.daily?.[0]?.sunset ?? sunTimes.sunset)}
+              </p>
             </div>
           </div>
         </div>
@@ -188,7 +204,9 @@ export function TodayTab({
       )}
 
       {/* Tide error state */}
-      {showTideError && <ErrorState message="Tide data unavailable" onRetry={onRetryTide} />}
+      {showTideError && (
+        <ErrorState message="Tide data unavailable" onRetry={onRetryTide} variant="weather" />
+      )}
 
       {/* Activity recommendations */}
       {weather && <ActivityRecommendations weather={weather} activities={beach.activities} />}

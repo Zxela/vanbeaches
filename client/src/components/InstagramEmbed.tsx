@@ -39,7 +39,7 @@ export function InstagramEmbed({
     return (
       <div className="grid grid-cols-2 gap-3">
         {[0, 1, 2, 3].map((i) => (
-          <div key={i} className="animate-pulse bg-sand-100 rounded-xl aspect-square" />
+          <div key={i} className="aspect-square animate-pulse rounded-xl bg-white/10" />
         ))}
       </div>
     );
@@ -54,11 +54,11 @@ export function InstagramEmbed({
             href={url}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex flex-col items-center justify-center gap-2 rounded-xl bg-sand-50 border border-sand-200 p-4 text-coral-600 hover:bg-sand-100 transition-colors aspect-square"
+            className="flex aspect-square flex-col items-center justify-center gap-2 rounded-xl border border-white/15 bg-white/10 p-4 text-white/80 transition-colors hover:bg-white/15 hover:text-white"
             aria-label="View on Instagram"
           >
             <InstagramIcon />
-            <span className="text-xs font-medium text-sand-700">View on Instagram</span>
+            <span className="text-xs font-medium">View on Instagram</span>
           </a>
         ))}
       </div>
@@ -81,10 +81,10 @@ export function InstagramEmbed({
   }
 
   return (
-    <div className="rounded-xl bg-sand-50 border border-sand-200 p-6 text-center text-sand-600">
+    <div className="rounded-xl border border-white/15 bg-white/10 p-6 text-center text-white/65">
       <p className="text-sm">
         Share your photos on Instagram with{' '}
-        <span className="font-semibold text-coral-500">#{hashtag}</span>
+        <span className="font-semibold text-white">#{hashtag}</span>
       </p>
     </div>
   );

@@ -9,7 +9,7 @@ import {
   UV,
   WIND,
 } from '../lib/constants';
-import { Card, CardContent, CardTitle, Icon } from './ui';
+import { Icon } from './ui';
 
 interface ActivityRecommendationsProps {
   weather: WeatherForecast | null;
@@ -179,12 +179,12 @@ export function ActivityRecommendations({ weather, activities }: ActivityRecomme
   if (recommendations.length === 0) return null;
 
   return (
-    <Card variant="default" className="weather-panel">
-      <CardTitle className="flex items-center gap-2 text-white">
+    <section className="weather-panel p-4">
+      <h2 className="flex items-center gap-2 text-lg font-semibold text-white">
         <Icon icon={Star} size="lg" color="warning" />
         Recommended Activities
-      </CardTitle>
-      <CardContent className="mt-3">
+      </h2>
+      <div className="mt-3">
         <div className="space-y-2">
           {recommendations.map((rec) => (
             <div
@@ -202,7 +202,7 @@ export function ActivityRecommendations({ weather, activities }: ActivityRecomme
             </div>
           ))}
         </div>
-      </CardContent>
-    </Card>
+      </div>
+    </section>
   );
 }

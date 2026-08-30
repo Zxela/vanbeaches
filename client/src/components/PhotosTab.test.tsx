@@ -96,29 +96,17 @@ describe('PhotosTab', () => {
     });
   });
 
-  // AC-003: PhotosTab renders a 'Share your visit' CTA with the hashtag
-  describe('renders Share your visit CTA', () => {
-    it('should display "Share your visit" CTA text', () => {
+  describe('sets honest expectations for the future gallery', () => {
+    it('mentions that the gallery is curated and coming later', () => {
       mockedGetPersonality.mockReturnValue(mockPersonality);
       render(<PhotosTab beach={mockBeach} />);
-      expect(screen.getByText(/share your visit/i)).toBeInTheDocument();
+      expect(screen.getByText(/curated gallery.*coming in a future update/i)).toBeInTheDocument();
     });
 
-    it('should include hashtag in Share your visit CTA', () => {
+    it('does not promise automatic hashtag ingestion', () => {
       mockedGetPersonality.mockReturnValue(mockPersonality);
       const { container } = render(<PhotosTab beach={mockBeach} />);
-      const ctaText = container.innerHTML;
-      expect(ctaText).toMatch(
-        new RegExp(`share your visit.*#${mockPersonality.instagramHashtag}`, 'i'),
-      );
-    });
-
-    it('should mention Instagram in the CTA text', () => {
-      mockedGetPersonality.mockReturnValue(mockPersonality);
-      render(<PhotosTab beach={mockBeach} />);
-      // Check that "Share your visit" contains Instagram mention
-      const cta = screen.getByText(/share your visit/i);
-      expect(cta.textContent).toMatch(/instagram/i);
+      expect(container.textContent).not.toMatch(/tag.*to appear here/i);
     });
   });
 
