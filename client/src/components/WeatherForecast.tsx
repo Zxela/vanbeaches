@@ -16,7 +16,7 @@ export function WeatherForecast({ forecast, loading }: WeatherForecastProps) {
   if (loading) {
     return (
       <section className="weather-panel p-4">
-        <h2 className="mb-4 text-sm text-white/70">10-Day Forecast</h2>
+        <h2 className="mb-4 text-sm text-white/85">10-Day Forecast</h2>
         <div className="grid grid-cols-5 gap-2">
           {[1, 2, 3, 4, 5].map((i) => (
             <div key={i} className="text-center">
@@ -35,7 +35,7 @@ export function WeatherForecast({ forecast, loading }: WeatherForecastProps) {
     return (
       <section className="weather-panel p-4">
         <h2>10-Day Forecast</h2>
-        <p className="mt-4 text-white/60">Forecast unavailable</p>
+        <p className="mt-4 text-white/85">Forecast unavailable</p>
       </section>
     );
   }
@@ -69,7 +69,7 @@ export function WeatherForecast({ forecast, loading }: WeatherForecastProps) {
             >
               <p className="text-sm font-semibold text-white">{dayName}</p>
               <WeatherIcon className="h-6 w-6 text-white" strokeWidth={1.5} />
-              <p className="text-sm text-white/55">{day.low.toFixed(0)}°</p>
+              <p className="text-sm text-white/85">{day.low.toFixed(0)}°</p>
               <div className="relative h-1 rounded-full bg-white/20">
                 <span
                   className="absolute h-1 rounded-full bg-gradient-to-r from-sky-200 via-amber-200 to-orange-300"

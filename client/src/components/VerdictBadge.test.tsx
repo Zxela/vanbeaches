@@ -61,11 +61,6 @@ describe('VerdictBadge', () => {
     expect(container.firstChild).not.toBeNull();
     expect(container.innerHTML).toMatch(/text-xs|px-2/);
   });
-
-  it('does not use any dark: classes', () => {
-    const { container } = render(<VerdictBadge recommendation="perfect" />);
-    expect(container.innerHTML).not.toContain('dark:');
-  });
 });
 
 describe('VerdictBadgeSkeleton', () => {

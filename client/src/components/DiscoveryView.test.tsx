@@ -166,7 +166,7 @@ describe('DiscoveryView', () => {
   // Tagline visible
   it('renders tagline', () => {
     renderDiscoveryView();
-    expect(screen.getByText("Live conditions for Vancouver's 9 best beaches")).toBeInTheDocument();
+    expect(screen.getByText(/Live conditions for \d+ Vancouver beaches/)).toBeInTheDocument();
   });
 
   it('passes search-filtered beaches to the map', () => {

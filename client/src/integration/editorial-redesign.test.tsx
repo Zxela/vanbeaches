@@ -154,12 +154,6 @@ vi.mock('../components/SunTimesWidget', () => ({
   SunTimesWidget: () => <div data-testid="sun-times-widget" />,
 }));
 
-// Mock ThemeProvider as a passthrough and useTheme with a no-op
-vi.mock('../contexts/ThemeContext', () => ({
-  ThemeProvider: ({ children }: { children: React.ReactNode }) => <>{children}</>,
-  useTheme: () => ({ theme: 'light', toggleTheme: vi.fn() }),
-}));
-
 // ============================================================
 // Mock @van-beaches/shared with minimal beach data
 // (inline object — cannot reference top-level vars in vi.mock factory)
@@ -249,9 +243,7 @@ describe('Integration: editorial redesign user flows', () => {
 
       renderApp('/discover');
 
-      expect(
-        screen.getByText("Live conditions for Vancouver's 9 best beaches"),
-      ).toBeInTheDocument();
+      expect(screen.getByText(/Live conditions for \d+ Vancouver beaches/)).toBeInTheDocument();
     });
   });
 
@@ -262,9 +254,7 @@ describe('Integration: editorial redesign user flows', () => {
 
       renderApp('/discover');
 
-      expect(
-        screen.getByText("Live conditions for Vancouver's 9 best beaches"),
-      ).toBeInTheDocument();
+      expect(screen.getByText(/Live conditions for \d+ Vancouver beaches/)).toBeInTheDocument();
     });
 
     it('shows beach list when user has no favorites', () => {
@@ -305,9 +295,8 @@ describe('Integration: editorial redesign user flows', () => {
       renderApp('/beach/kitsilano-beach');
 
       const disclosure = document.querySelector('details#photos');
-      expect(disclosure).toBeInTheDocument();
-      expect(disclosure).not.toHaveAttribute('open');
-      expect(screen.getByRole('link', { name: /community/i })).toHaveAttribute('href', '#photos');
+      expect(disclosure).not.toBeInTheDocument();
+      expect(screen.queryByRole('link', { name: /community/i })).not.toBeInTheDocument();
     });
   });
 
@@ -319,9 +308,7 @@ describe('Integration: editorial redesign user flows', () => {
       renderApp('/compare');
 
       // After redirect, the DiscoveryView tagline should be visible
-      expect(
-        screen.getByText("Live conditions for Vancouver's 9 best beaches"),
-      ).toBeInTheDocument();
+      expect(screen.getByText(/Live conditions for \d+ Vancouver beaches/)).toBeInTheDocument();
     });
 
     it('navigating to /compare does not render Compare-specific content', () => {

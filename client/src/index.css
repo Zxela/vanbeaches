@@ -13,7 +13,7 @@
   }
 
   body {
-    @apply bg-slate-100 font-sans text-slate-950 antialiased dark:bg-slate-950 dark:text-slate-100;
+    @apply bg-canvas font-sans text-primary antialiased;
     margin: 0;
     /* Optimize text rendering */
     -webkit-font-smoothing: antialiased;
@@ -21,14 +21,39 @@
     text-rendering: optimizeLegibility;
   }
 
-  /* Smooth theme transitions - exclude borders to prevent flicker */
-  *:not(path):not(line):not(rect):not(circle) {
+  button,
+  a,
+  input,
+  select,
+  .app-surface {
     @apply transition-colors duration-200;
+  }
+
+  button,
+  select,
+  input,
+  a[role="button"] {
+    min-height: 44px;
+  }
+  button {
+    min-width: 44px;
+  }
+
+  :root {
+    color-scheme: dark;
+    --canvas: 15 23 42;
+    --surface: 30 41 59;
+    --raised: 51 65 85;
+    --primary: 248 250 252;
+    --muted: 203 213 225;
+    --divider: 71 85 105;
+    --accent: 147 197 253;
+    --weather-glass: 15 23 42 / 35%;
   }
 
   /* Focus visible styles for accessibility */
   :focus-visible {
-    @apply outline-2 outline-offset-2 outline-ocean-500;
+    @apply outline-2 outline-offset-2 outline outline-blue-500;
   }
 
   /* Remove default focus for mouse users */
@@ -53,26 +78,22 @@
 
   /* Selection colors */
   ::selection {
-    @apply bg-ocean-200 dark:bg-ocean-800 text-ocean-900 dark:text-ocean-100;
+    @apply bg-blue-800 text-blue-100;
   }
 }
 
 @layer utilities {
   .app-canvas {
-    background: radial-gradient(circle at 12% -8%, rgb(255 255 255 / 92%), transparent 32rem),
-      radial-gradient(circle at 92% 8%, rgb(191 219 254 / 45%), transparent 34rem),
-      linear-gradient(180deg, #e8eef6 0%, #f2f5f9 52%, #e6edf5 100%);
+    background: rgb(var(--canvas));
   }
-
-  .dark .app-canvas {
-    background: radial-gradient(circle at 12% -8%, rgb(51 65 85 / 52%), transparent 30rem),
-      radial-gradient(circle at 90% 8%, rgb(30 64 175 / 20%), transparent 32rem),
-      linear-gradient(180deg, #0b1422 0%, #101b2b 55%, #0b1320 100%);
-  }
-
   .app-surface {
-    @apply border border-white/70 bg-white/55 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/55;
-    box-shadow: inset 0 1px 0 rgb(255 255 255 / 55%), 0 10px 30px rgb(15 23 42 / 6%);
+    border: 1px solid rgb(var(--divider));
+    background: rgb(var(--surface));
+    color: rgb(var(--primary));
+    box-shadow: 0 2px 8px rgb(15 23 42 / 8%);
+  }
+  .weather-background {
+    background: linear-gradient(160deg, var(--weather-top), var(--weather-bottom));
   }
 
   .weather-scene {
@@ -81,38 +102,44 @@
   }
 
   .weather-sunny {
-    --weather-top: #1677d2;
-    --weather-bottom: #73c8f2;
+    --weather-top: #195888;
+    --weather-bottom: #244e70;
   }
   .weather-partly-cloudy {
-    --weather-top: #487faf;
-    --weather-bottom: #a8c9df;
+    --weather-top: #385a76;
+    --weather-bottom: #344e63;
   }
   .weather-cloudy {
-    --weather-top: #61778a;
-    --weather-bottom: #b3c0c8;
+    --weather-top: #42596b;
+    --weather-bottom: #354a59;
   }
   .weather-rainy {
     --weather-top: #273f59;
-    --weather-bottom: #718aa1;
+    --weather-bottom: #344c63;
   }
   .weather-stormy {
     --weather-top: #17243a;
     --weather-bottom: #4b5e78;
   }
   .weather-foggy {
-    --weather-top: #788995;
-    --weather-bottom: #bcc7cc;
+    --weather-top: #465d6b;
+    --weather-bottom: #3c515e;
+  }
+
+  .weather-snowy {
+    --weather-top: #466579;
+    --weather-bottom: #354c5c;
   }
 
   .weather-atmosphere {
     @apply pointer-events-none fixed inset-0;
-    background: radial-gradient(circle at 72% 12%, rgb(255 255 255 / 20%), transparent 24rem),
-      radial-gradient(ellipse at 20% 35%, rgb(255 255 255 / 10%), transparent 34rem);
+    background: radial-gradient(circle at 72% 12%, rgb(255 255 255 / 4%), transparent 24rem),
+      radial-gradient(ellipse at 20% 35%, rgb(255 255 255 / 3%), transparent 34rem);
   }
 
   .weather-panel {
-    @apply rounded-2xl border border-white/20 bg-slate-950/25 text-white shadow-lg backdrop-blur-xl;
+    @apply rounded-2xl border border-white/20 bg-slate-950/25 text-white shadow-md backdrop-blur-xl;
+    background: rgb(var(--weather-glass));
     box-shadow: inset 0 1px 0 rgb(255 255 255 / 12%), 0 12px 35px rgb(15 23 42 / 14%);
   }
 
@@ -121,7 +148,7 @@
   }
 
   .weather-panel-title {
-    @apply flex items-center gap-2 border-b border-white/15 px-4 py-3 text-xs font-semibold uppercase tracking-wider text-white/65;
+    @apply flex items-center gap-2 border-b border-white/15 px-4 py-3 text-xs font-semibold uppercase tracking-wider text-white/85;
   }
 
   .weather-embedded-card {
@@ -130,24 +157,19 @@
 
   /* Glassmorphism utilities */
   .glass {
-    @apply bg-white/85 dark:bg-sand-900/90 backdrop-blur-xl;
+    @apply bg-slate-900/90 backdrop-blur-xl;
   }
 
   .glass-subtle {
-    @apply bg-white/60 dark:bg-sand-900/60 backdrop-blur-md;
+    @apply bg-slate-900/60 backdrop-blur-md;
   }
 
   /* Shimmer effect for skeletons */
   .shimmer {
     @apply relative overflow-hidden;
-    background: linear-gradient(90deg, #d8e1ec 0%, #f5f7fa 50%, #d8e1ec 100%);
-    background-size: 200% 100%;
-    animation: shimmer 2s linear infinite;
-  }
-
-  .dark .shimmer {
     background: linear-gradient(90deg, #142236 0%, #233348 50%, #142236 100%);
     background-size: 200% 100%;
+    animation: shimmer 2s linear infinite;
   }
 
   /* Safe area insets for iOS devices */
@@ -171,10 +193,7 @@
   /* Custom scrollbar styling */
   .scrollbar-thin {
     scrollbar-width: thin;
-    scrollbar-color: #bbc8d8 transparent; /* sand-300 */
-  }
-  .dark .scrollbar-thin {
-    scrollbar-color: #4d6076 transparent; /* sand-600 */
+    scrollbar-color: #4d6076 transparent; /* slate-300 */
   }
   .scrollbar-thin::-webkit-scrollbar {
     width: 6px;
@@ -184,10 +203,10 @@
     background: transparent;
   }
   .scrollbar-thin::-webkit-scrollbar-thumb {
-    @apply bg-sand-300 dark:bg-sand-600 rounded-full;
+    @apply bg-slate-600 rounded-full;
   }
   .scrollbar-thin::-webkit-scrollbar-thumb:hover {
-    @apply bg-sand-400 dark:bg-sand-500;
+    @apply bg-slate-500;
   }
 
   /* Touch action for better mobile scrolling */
@@ -196,5 +215,34 @@
   }
   .touch-pan-y {
     touch-action: pan-y;
+  }
+}
+
+/* Tide labels and canvas share a stable surface. */
+.tide-surface {
+  color: #fff;
+  background: #10283e;
+  border-radius: 1rem;
+}
+
+@layer components {
+  .header-control {
+    @apply inline-flex h-11 shrink-0 items-center justify-center gap-2 rounded-xl border border-white/10 bg-white/5 px-3.5 text-sm font-medium text-slate-200;
+    transition: background-color 160ms, border-color 160ms, color 160ms;
+  }
+  .header-control:hover {
+    @apply border-white/20 bg-white/10 text-white;
+  }
+  .header-control:active {
+    @apply bg-white/15;
+  }
+  .header-control-selected {
+    @apply border-blue-300/25 bg-blue-300/10 text-blue-200;
+  }
+  .beach-selector {
+    @apply text-left;
+  }
+  .beach-selector option {
+    @apply bg-slate-800 text-slate-100;
   }
 }

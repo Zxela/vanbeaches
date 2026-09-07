@@ -28,9 +28,9 @@ function getColorConfig(recommendation: RecommendationLevel): {
       };
     case 'good':
       return {
-        badge: 'bg-ocean-100 text-ocean-800',
-        border: 'border-ocean-200',
-        heading: 'text-ocean-700',
+        badge: 'bg-blue-100 text-blue-800',
+        border: 'border-blue-200',
+        heading: 'text-blue-700',
         bestTime: 'bg-blue-50 text-blue-800',
         reasonBullet: 'bg-blue-400',
       };
@@ -74,33 +74,34 @@ export function BeachVerdict({ weather, tides, waterQuality, sunsetTime }: Beach
   const label = getRecommendationLabel(verdict.recommendation);
 
   return (
-    <div className="weather-panel p-5">
-      {/* Heading */}
-      <h2 className="font-display mb-1 text-xl font-semibold text-white">Today's Verdict</h2>
+    <div className="weather-panel p-5 lg:grid lg:grid-cols-[2fr_1fr] lg:gap-x-10">
+      <div>
+        {/* Heading */}
+        <h2 className="mb-1 text-xl font-semibold text-white">Today's Verdict</h2>
 
-      {/* Recommendation badge */}
-      <span
-        className={`inline-block text-xs font-semibold px-2 py-0.5 rounded-full mb-3 ${colors.badge}`}
-      >
-        {label}
-      </span>
+        {/* Recommendation badge */}
+        <span
+          className={`inline-block text-xs font-semibold px-2 py-0.5 rounded-full mb-3 ${colors.badge}`}
+        >
+          {label}
+        </span>
 
-      {/* Summary prose */}
-      <p className="mb-4 text-base leading-relaxed text-white/85">{verdict.summary}</p>
+        {/* Summary prose */}
+        <p className="mb-4 text-base leading-relaxed text-white/85">{verdict.summary}</p>
 
-      {/* Best time window */}
-      <div
-        className={`inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 mb-4 ${colors.bestTime}`}
-      >
-        <span className="text-xs font-semibold uppercase tracking-wide">Best time</span>
-        <span className="text-sm font-medium">{verdict.bestTimeWindow}</span>
+        {/* Best time window */}
+        <div
+          className={`inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 mb-4 ${colors.bestTime}`}
+        >
+          <span className="text-xs font-semibold uppercase tracking-wide">Best time</span>
+          <span className="text-sm font-medium">{verdict.bestTimeWindow}</span>
+        </div>
       </div>
-
       {/* Reasons */}
       {verdict.reasons.length > 0 && (
-        <ul className="space-y-1.5">
+        <ul className="space-y-1.5 lg:self-center lg:border-l lg:border-white/20 lg:pl-8">
           {verdict.reasons.map((reason) => (
-            <li key={reason} className="flex items-center gap-2 text-sm text-white/70">
+            <li key={reason} className="flex items-center gap-2 text-sm text-white/85">
               <span className={`w-1.5 h-1.5 rounded-full flex-shrink-0 ${colors.reasonBullet}`} />
               {reason}
             </li>

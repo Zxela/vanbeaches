@@ -178,7 +178,7 @@ describe('DiscoveryView (task 007)', () => {
   // AC-001: Tagline header
   it('renders tagline "Live conditions for Vancouver\'s 9 best beaches" as first visible content', () => {
     renderDiscoveryView();
-    expect(screen.getByText("Live conditions for Vancouver's 9 best beaches")).toBeVisible();
+    expect(screen.getByText(/Live conditions for \d+ Vancouver beaches/)).toBeVisible();
   });
 
   // AC-018: No vibe filters

@@ -33,7 +33,7 @@ export function HourlyForecast({ forecast }: HourlyForecastProps) {
               key={hour.time}
               className="flex w-[4.5rem] shrink-0 snap-start flex-col items-center gap-2 rounded-2xl px-2 py-3 text-white"
             >
-              <span className="text-sm font-semibold">
+              <span className="whitespace-nowrap text-sm font-semibold">
                 {index === 0 ? 'Now' : date.toLocaleTimeString('en-CA', { hour: 'numeric' })}
               </span>
               <div className="flex h-5 items-center gap-0.5 text-xs text-sky-100">
@@ -78,7 +78,7 @@ export function HourlyForecast({ forecast }: HourlyForecastProps) {
                   role="tab"
                   aria-selected={metric === item}
                   onClick={() => setMetric(item)}
-                  className={`rounded-full px-3 py-1.5 text-xs font-semibold capitalize ${metric === item ? 'bg-white text-slate-700' : 'bg-white/10 text-white/65 hover:bg-white/15'}`}
+                  className={`rounded-full px-3 py-1.5 text-xs font-semibold capitalize ${metric === item ? 'bg-white text-slate-700' : 'bg-white/10 text-white/85 hover:bg-white/15'}`}
                 >
                   {item}
                 </button>
@@ -114,15 +114,19 @@ function HourlyBars({
           : '';
 
   return (
-    <div role="tabpanel" aria-label={`Hourly ${metric}`} className="flex h-40 items-end gap-1.5">
+    <div
+      role="tabpanel"
+      aria-label={`Hourly ${metric}`}
+      className="flex h-48 items-end gap-2 overflow-x-auto pb-3"
+    >
       {hours.map((hour, index) => {
         const height = 18 + ((values[index] - min) / (max - min)) * 74;
         return (
           <div
             key={hour.time}
-            className="flex min-w-0 flex-1 flex-col items-center justify-end gap-1"
+            className="flex h-full min-w-16 flex-1 flex-col items-center justify-end gap-1"
           >
-            <span className="text-[10px] font-medium text-white/75">
+            <span className="text-xs font-medium text-white/75">
               {Math.round(values[index])}
               {unit}
             </span>
@@ -130,7 +134,7 @@ function HourlyBars({
               className="w-full rounded-t bg-gradient-to-t from-white/25 to-white/75"
               style={{ height: `${height}%` }}
             />
-            <span className="text-[9px] text-white/45">
+            <span className="whitespace-nowrap text-xs text-white/85">
               {new Date(hour.time).toLocaleTimeString('en-CA', { hour: 'numeric' })}
             </span>
           </div>

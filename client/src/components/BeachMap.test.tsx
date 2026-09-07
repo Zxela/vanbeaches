@@ -207,8 +207,8 @@ describe('BeachMap', () => {
     expect(Array.isArray(maxBounds)).toBe(true);
   });
 
-  // 003-AC1: selected marker styling (ocean-600 = #00acc1, scale 1.3)
-  it('applies selected styling (ocean-600 background, scale 1.3) for selectedBeachId', () => {
+  // 003-AC1: selected marker styling (blue-600 = #00acc1, scale 1.3)
+  it('applies selected styling (blue-600 background, scale 1.3) for selectedBeachId', () => {
     const { container } = renderBeachMap({ selectedBeachId: 'english-bay' });
     const markers = container.querySelectorAll('.beach-marker');
     let foundSelected = false;
@@ -223,8 +223,8 @@ describe('BeachMap', () => {
     expect(foundSelected).toBe(true);
   });
 
-  // 003-AC2: favorite marker with heart and shore-500 background
-  it('renders heart and shore-500 background for favorite markers', () => {
+  // 003-AC2: favorite marker with heart and blue-500 background
+  it('renders heart and blue-500 background for favorite markers', () => {
     (useFavorites as ReturnType<typeof vi.fn>).mockReturnValue({
       favorites: ['english-bay'],
       toggleFavorite: vi.fn(),
@@ -251,8 +251,8 @@ describe('BeachMap', () => {
     expect(screen.getByText('English Bay')).toBeTruthy();
   });
 
-  // 003-AC6: default markers use ocean-500 (#00bcd4)
-  it('renders default markers with ocean-500 background color', () => {
+  // 003-AC6: default markers use blue-500 (#00bcd4)
+  it('renders default markers with blue-500 background color', () => {
     const { container } = renderBeachMap();
     const markers = container.querySelectorAll('.beach-marker');
     let foundDefault = false;
@@ -264,24 +264,5 @@ describe('BeachMap', () => {
       }
     }
     expect(foundDefault).toBe(true);
-  });
-
-  // 003-AC4: dark mode tile filter CSS is present in the component output
-  it('includes dark mode CSS filter for .leaflet-tile-pane', () => {
-    const { container } = renderBeachMap();
-    // Check that the <style> tag contains the dark mode filter rule
-    const styleEl = container.querySelector('style');
-    expect(styleEl).toBeTruthy();
-    const css = styleEl?.textContent ?? '';
-    expect(css).toContain('invert(1)');
-    expect(css).toContain('.dark .leaflet-tile-pane');
-  });
-
-  // 003-AC5: dark mode popup styling is present in CSS
-  it('includes dark mode popup styles', () => {
-    const { container } = renderBeachMap();
-    const styleEl = container.querySelector('style');
-    const css = styleEl?.textContent ?? '';
-    expect(css).toContain('.dark .leaflet-popup-content-wrapper');
   });
 });

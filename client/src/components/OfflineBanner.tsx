@@ -16,7 +16,7 @@ export function OfflineBanner() {
           transition={{ duration: 0.3 }}
           className="overflow-hidden"
         >
-          <div className="bg-sand-700 text-white px-4 py-2 flex items-center justify-center gap-2 text-sm">
+          <div className="bg-slate-700 text-white px-4 py-2 flex items-center justify-center gap-2 text-sm">
             <Icon icon={WifiOff} size="sm" />
             <span>You're offline — some live conditions may be unavailable</span>
           </div>

@@ -17,14 +17,7 @@ const mockWeather = {
 };
 
 describe('ActivityRecommendations', () => {
-  it('wraps content in a Card component instead of raw div', () => {
-    const { container } = render(<ActivityRecommendations weather={mockWeather} />);
-    // Card component means no bg-white raw class at root level
-    const html = container.innerHTML;
-    expect(html).not.toContain('bg-white dark:bg-gray-800');
-  });
-
-  it('replaces gray-* color classes with sand-* equivalents for poor rating', () => {
+  it('replaces gray-* color classes with slate-* equivalents for poor rating', () => {
     const poorWeather = {
       ...mockWeather,
       current: {
@@ -36,7 +29,7 @@ describe('ActivityRecommendations', () => {
     };
     const { container } = render(<ActivityRecommendations weather={poorWeather} />);
     const html = container.innerHTML;
-    // Poor rating should use sand-* not gray-*
+    // Poor rating should use slate-* not gray-*
     expect(html).not.toContain('bg-gray-100');
     expect(html).not.toContain('text-gray-500');
   });
@@ -45,7 +38,6 @@ describe('ActivityRecommendations', () => {
     const { container } = render(<ActivityRecommendations weather={mockWeather} />);
     const html = container.innerHTML;
     expect(html).not.toContain('text-gray-900');
-    expect(html).not.toContain('dark:text-white');
   });
 
   it('renders activity recommendations with beach walk always present', () => {

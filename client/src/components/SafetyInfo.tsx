@@ -38,7 +38,7 @@ export function SafetyInfo({ beach, waterQuality, weather }: SafetyInfoProps) {
             : 'border-emerald-300/30 bg-emerald-400/10',
         ].join(' ')}
       >
-        <p className="text-xs font-semibold uppercase tracking-[0.14em] text-white/60">
+        <p className="text-xs font-semibold uppercase tracking-[0.14em] text-white/85">
           Beach safety snapshot
         </p>
         <p className="mt-1 font-semibold text-white">
@@ -46,7 +46,7 @@ export function SafetyInfo({ beach, waterQuality, weather }: SafetyInfoProps) {
             ? `${conditionWarnings} ${conditionWarnings === 1 ? 'item needs' : 'items need'} attention`
             : 'No current warnings in the available data'}
         </p>
-        <p className="mt-1 text-xs text-white/65">
+        <p className="mt-1 text-xs text-white/85">
           Combines the reported water-quality status with guidance derived from current UV and wind.
         </p>
       </div>
@@ -138,7 +138,7 @@ export function SafetyInfo({ beach, waterQuality, weather }: SafetyInfoProps) {
               </>
             ) : (
               <>
-                <UserX className="w-5 h-5 text-white/55 flex-shrink-0" aria-hidden="true" />
+                <UserX className="w-5 h-5 text-white/85 flex-shrink-0" aria-hidden="true" />
                 <p className="text-sm text-white/75">
                   No lifeguard on duty — swim at your own risk.
                 </p>
@@ -157,7 +157,7 @@ export function SafetyInfo({ beach, waterQuality, weather }: SafetyInfoProps) {
         )}
 
         {/* AC-007: Disclaimer */}
-        <p className="border-t border-white/15 pt-3 text-xs text-white/55">
+        <p className="border-t border-white/15 pt-3 text-xs text-white/85">
           Water-quality labels reflect the latest available reported status. UV and wind guidance is
           generated from forecast conditions, not an official advisory. This information is for
           reference only; always follow posted signs and official advisories.

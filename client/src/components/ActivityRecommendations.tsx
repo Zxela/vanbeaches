@@ -1,5 +1,15 @@
 import type { WeatherForecast } from '@van-beaches/shared';
-import { Star } from 'lucide-react';
+import {
+  Camera,
+  Footprints,
+  type LucideIcon,
+  Star,
+  Sun,
+  Utensils,
+  Volleyball,
+  Waves,
+  Wind,
+} from 'lucide-react';
 import {
   type ActivityRating,
   BAD_WEATHER,
@@ -18,7 +28,7 @@ interface ActivityRecommendationsProps {
 
 interface Recommendation {
   activity: string;
-  icon: string;
+  icon: LucideIcon;
   rating: ActivityRating;
   reason: string;
 }
@@ -32,7 +42,7 @@ interface Conditions {
 
 type ActivityRule = {
   activity: string;
-  icon: string;
+  icon: LucideIcon;
   requires?: string;
   evaluate: (c: Conditions) => { rating: ActivityRating; reason: string } | null;
 };
@@ -40,7 +50,7 @@ type ActivityRule = {
 const ACTIVITY_RULES: ActivityRule[] = [
   {
     activity: 'Swimming',
-    icon: '\u{1F3CA}',
+    icon: Waves,
     evaluate: ({ temperature, condition }) => {
       if (
         temperature >= TEMP.SWIMMING_MIN &&
@@ -59,7 +69,7 @@ const ACTIVITY_RULES: ActivityRule[] = [
   },
   {
     activity: 'Sunbathing',
-    icon: '\u2600\uFE0F',
+    icon: Sun,
     evaluate: ({ temperature, windSpeed, condition, uvIndex }) => {
       if (
         temperature < TEMP.SUNBATHING_MIN ||
@@ -82,7 +92,7 @@ const ACTIVITY_RULES: ActivityRule[] = [
   },
   {
     activity: 'Beach Walking',
-    icon: '\u{1F6B6}',
+    icon: Footprints,
     evaluate: ({ windSpeed, condition }) => {
       if (BAD_WEATHER.includes(condition as (typeof BAD_WEATHER)[number])) {
         return { rating: 'poor', reason: 'Poor weather for walking' };
@@ -95,7 +105,7 @@ const ACTIVITY_RULES: ActivityRule[] = [
   },
   {
     activity: 'Volleyball',
-    icon: '\u{1F3D0}',
+    icon: Volleyball,
     requires: 'volleyball',
     evaluate: ({ windSpeed, condition }) => {
       if (
@@ -112,7 +122,7 @@ const ACTIVITY_RULES: ActivityRule[] = [
   },
   {
     activity: 'Kiteboarding',
-    icon: '\u{1FA81}',
+    icon: Wind,
     evaluate: ({ windSpeed, condition }) => {
       if (
         windSpeed < WIND.CALM ||
@@ -129,7 +139,7 @@ const ACTIVITY_RULES: ActivityRule[] = [
   },
   {
     activity: 'Photography',
-    icon: '\u{1F4F8}',
+    icon: Camera,
     evaluate: ({ condition }) => {
       if (!GOOD_WEATHER.includes(condition as (typeof GOOD_WEATHER)[number])) return null;
       return { rating: 'excellent', reason: 'Great lighting conditions' };
@@ -137,7 +147,7 @@ const ACTIVITY_RULES: ActivityRule[] = [
   },
   {
     activity: 'Picnic',
-    icon: '\u{1F9FA}',
+    icon: Utensils,
     evaluate: ({ temperature, windSpeed, condition }) => {
       if (
         temperature < TEMP.OUTDOOR_MIN ||
@@ -181,7 +191,7 @@ export function ActivityRecommendations({ weather, activities }: ActivityRecomme
   return (
     <section className="weather-panel p-4">
       <h2 className="flex items-center gap-2 text-lg font-semibold text-white">
-        <Icon icon={Star} size="lg" color="warning" />
+        <Icon icon={Star} size="lg" />
         Recommended Activities
       </h2>
       <div className="mt-3">
@@ -191,10 +201,10 @@ export function ActivityRecommendations({ weather, activities }: ActivityRecomme
               key={rec.activity}
               className="flex items-center gap-3 rounded-lg border border-white/15 bg-white/10 p-3 text-white"
             >
-              <span className="text-2xl">{rec.icon}</span>
+              <rec.icon className="h-6 w-6 shrink-0" aria-hidden="true" />
               <div className="flex-1 min-w-0">
                 <p className="font-medium">{rec.activity}</p>
-                <p className="truncate text-xs text-white/65">{rec.reason}</p>
+                <p className="text-xs text-white/85">{rec.reason}</p>
               </div>
               <span className="rounded bg-white/15 px-2 py-1 text-xs font-medium uppercase">
                 {rec.rating}

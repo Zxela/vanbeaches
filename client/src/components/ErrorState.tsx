@@ -8,9 +8,7 @@ export function ErrorState({ message, onRetry, variant = 'app' }: ErrorStateProp
   const isWeather = variant === 'weather';
   return (
     <div className={`${isWeather ? 'weather-panel' : 'app-surface'} rounded-2xl p-6 text-center`}>
-      <p className={`mb-3 ${isWeather ? 'text-white/75' : 'text-slate-700 dark:text-slate-200'}`}>
-        {message}
-      </p>
+      <p className={`mb-3 ${isWeather ? 'text-white/75' : 'text-slate-200'}`}>{message}</p>
       {onRetry && (
         <button
           type="button"

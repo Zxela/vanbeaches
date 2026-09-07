@@ -30,9 +30,9 @@ describe('getWaterQualityBgColor', () => {
     expect(getWaterQualityBgColor('closed')).toBe('bg-red-100 text-red-800');
   });
   it('returns sand classes for unknown', () => {
-    expect(getWaterQualityBgColor('unknown')).toBe('bg-sand-100 text-sand-600');
+    expect(getWaterQualityBgColor('unknown')).toBe('bg-slate-100 text-slate-600');
   });
   it('returns sand classes for off-season', () => {
-    expect(getWaterQualityBgColor('off-season')).toBe('bg-sand-100 text-sand-600');
+    expect(getWaterQualityBgColor('off-season')).toBe('bg-slate-100 text-slate-600');
   });
 });

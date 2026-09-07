@@ -1,9 +1,13 @@
-import { render, screen } from '@testing-library/react';
+import { render as rtlRender, screen } from '@testing-library/react';
 import type { Beach, BeachAmenities } from '@van-beaches/shared';
 import type { WaterQualityStatus } from '@van-beaches/shared';
 import type { WeatherForecast } from '@van-beaches/shared';
+import type { ReactElement } from 'react';
+import { MemoryRouter } from 'react-router-dom';
 import { beforeAll, describe, expect, it } from 'vitest';
 import { AboutTab } from './AboutTab';
+
+const render = (ui: ReactElement) => rtlRender(<MemoryRouter>{ui}</MemoryRouter>);
 
 // IntersectionObserver is not available in jsdom
 beforeAll(() => {
@@ -199,7 +203,7 @@ describe('AboutTab', () => {
   describe('AC-005: Webcam section', () => {
     it('renders a Webcam section heading when beach.webcamUrl is set', () => {
       render(<AboutTab beach={mockBeachWithWebcam} waterQuality={null} weather={null} />);
-      expect(screen.getByText(/webcam/i)).toBeInTheDocument();
+      expect(screen.getByRole('heading', { name: 'Webcam' })).toBeInTheDocument();
     });
 
     it('does not render webcam section when beach.webcamUrl is null', () => {
@@ -222,17 +226,6 @@ describe('AboutTab', () => {
       expect(link).toBeInTheDocument();
       expect(link).toHaveAttribute('href', expect.stringContaining('49.2741'));
       expect(link).toHaveAttribute('href', expect.stringContaining('-123.153'));
-    });
-  });
-
-  // Light-mode only
-  describe('Light-mode-only styles', () => {
-    it('does not use dark: Tailwind variants', () => {
-      const { container } = render(
-        <AboutTab beach={mockBeachKits} waterQuality={null} weather={null} />,
-      );
-      const html = container.innerHTML;
-      expect(html).not.toContain('dark:');
     });
   });
 

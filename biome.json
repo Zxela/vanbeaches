@@ -35,6 +35,8 @@
       "build",
       ".next",
       "coverage",
+      "playwright-report",
+      "test-results",
       ".wrangler",
       "docs/tasks.json",
       "state.json"

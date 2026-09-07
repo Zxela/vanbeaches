@@ -165,8 +165,7 @@ describe('TideCanvas - redesigned layout', () => {
 
     // Key Tides items should have rounded-lg styling
     expect(html).toContain('rounded-lg');
-    // Should have the ocean-50 background
-    expect(html).toContain('ocean-50');
+    expect(html).toContain('tide-surface');
   });
 
   it('renders loading state with h-[220px] shimmer', async () => {

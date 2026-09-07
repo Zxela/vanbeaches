@@ -41,7 +41,7 @@ describe('ShareButton', () => {
     expect(html).not.toContain('M5 13l4 4L19 7');
   });
 
-  it('replaces gray-* color classes with sand-* equivalents', () => {
+  it('replaces gray-* color classes with slate-* equivalents', () => {
     const { container } = render(<ShareButton beachName="Kitsilano Beach" beachId="kitsilano" />);
     const html = container.innerHTML;
     expect(html).not.toContain('bg-gray-100');

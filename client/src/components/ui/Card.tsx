@@ -6,49 +6,35 @@ import { cn } from '../../lib/utils';
 const cardVariants = cva('rounded-2xl border transition-all duration-200', {
   variants: {
     variant: {
-      default: [
-        'bg-white/90 dark:bg-sand-800/90',
-        'border-sand-200/50 dark:border-sand-700/50',
-        'shadow-card dark:shadow-card-dark',
-        'backdrop-blur-sm',
-      ],
-      glass: [
-        'bg-white/80 dark:bg-sand-900/80',
-        'border-white/30 dark:border-sand-700/30',
-        'shadow-lg',
-        'backdrop-blur-xl',
-      ],
-      elevated: [
-        'bg-white dark:bg-sand-800',
-        'border-sand-100 dark:border-sand-700',
-        'shadow-xl dark:shadow-card-dark',
-      ],
+      default: ['bg-slate-800/90', 'border-slate-700/50', 'shadow-md', 'backdrop-blur-sm'],
+      glass: ['bg-slate-900/80', 'border-slate-700/30', 'shadow-md', 'backdrop-blur-xl'],
+      elevated: ['bg-slate-800', 'border-slate-700', 'shadow-md'],
       interactive: [
-        'bg-white/90 dark:bg-sand-800/90',
-        'border-sand-200/50 dark:border-sand-700/50',
-        'shadow-card dark:shadow-card-dark',
+        'bg-slate-800/90',
+        'border-slate-700/50',
+        'shadow-md',
         'backdrop-blur-sm',
-        'hover:shadow-card-hover dark:hover:shadow-ocean-md',
+        'hover:shadow-md',
         'hover:-translate-y-0.5',
         'cursor-pointer',
       ],
       ocean: [
-        'bg-gradient-to-br from-ocean-50 to-sky-50',
-        'dark:from-sand-800 dark:to-sand-800',
-        'border-ocean-100 dark:border-sand-700',
-        'shadow-ocean-sm dark:shadow-card-dark',
+        'bg-gradient-to-br from-blue-50 to-sky-50',
+        'from-slate-800 to-slate-800',
+        'border-slate-700',
+        'shadow-md',
       ],
       shore: [
-        'bg-gradient-to-br from-shore-50 to-ocean-50',
-        'dark:from-sand-800 dark:to-sand-800',
-        'border-shore-100 dark:border-sand-700',
-        'shadow-shore-sm dark:shadow-card-dark',
+        'bg-gradient-to-br from-blue-50 to-blue-50',
+        'from-slate-800 to-slate-800',
+        'border-slate-700',
+        'shadow-md',
       ],
       sky: [
-        'bg-gradient-to-br from-sky-50 to-ocean-50',
-        'dark:from-sand-800 dark:to-sand-800',
-        'border-sky-100 dark:border-sand-700',
-        'shadow-ocean-sm dark:shadow-card-dark',
+        'bg-gradient-to-br from-sky-50 to-blue-50',
+        'from-slate-800 to-slate-800',
+        'border-slate-700',
+        'shadow-md',
       ],
     },
     padding: {
@@ -110,7 +96,7 @@ const CardTitle = forwardRef<HTMLHeadingElement, HTMLAttributes<HTMLHeadingEleme
       ref={ref}
       className={cn(
         'text-lg font-semibold leading-none tracking-tight',
-        'text-sand-900 dark:text-sand-100',
+        'text-slate-100',
         className,
       )}
       {...props}
@@ -121,7 +107,7 @@ CardTitle.displayName = 'CardTitle';
 
 const CardDescription = forwardRef<HTMLParagraphElement, HTMLAttributes<HTMLParagraphElement>>(
   ({ className, ...props }, ref) => (
-    <p ref={ref} className={cn('text-sm text-sand-500 dark:text-sand-400', className)} {...props} />
+    <p ref={ref} className={cn('text-sm text-slate-400', className)} {...props} />
   ),
 );
 CardDescription.displayName = 'CardDescription';

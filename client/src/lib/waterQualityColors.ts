@@ -4,8 +4,8 @@ const dotColorMap: Record<WaterQualityLevel, string> = {
   good: 'bg-emerald-500',
   advisory: 'bg-amber-500',
   closed: 'bg-red-500',
-  unknown: 'bg-sand-300',
-  'off-season': 'bg-sand-300',
+  unknown: 'bg-slate-300',
+  'off-season': 'bg-slate-300',
 };
 
 const labelMap: Record<WaterQualityLevel, string> = {
@@ -17,7 +17,7 @@ const labelMap: Record<WaterQualityLevel, string> = {
 };
 
 export function getWaterQualityDotColor(level: WaterQualityLevel): string {
-  return dotColorMap[level] ?? 'bg-sand-300';
+  return dotColorMap[level] ?? 'bg-slate-300';
 }
 
 export function getWaterQualityLabel(level: WaterQualityLevel): string {
@@ -40,8 +40,8 @@ export function getWaterQualityBgColor(level: WaterQualityLevel): string {
     good: 'bg-emerald-100 text-emerald-800',
     advisory: 'bg-amber-100 text-amber-800',
     closed: 'bg-red-100 text-red-800',
-    unknown: 'bg-sand-100 text-sand-600',
-    'off-season': 'bg-sand-100 text-sand-600',
+    unknown: 'bg-slate-100 text-slate-600',
+    'off-season': 'bg-slate-100 text-slate-600',
   };
-  return map[level] ?? 'bg-sand-100 text-sand-600';
+  return map[level] ?? 'bg-slate-100 text-slate-600';
 }

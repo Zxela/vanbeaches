@@ -10,6 +10,7 @@ import {
   Volleyball,
 } from 'lucide-react';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { beachPersonalities, getPersonality } from '../data/beach-personalities';
 import { SafetyInfo } from './SafetyInfo';
 import { WebcamEmbed } from './WebcamEmbed';
@@ -34,115 +35,111 @@ export function AboutTab({ beach, waterQuality = null, weather = null }: AboutTa
   const hasSportsAmenities = amenities && amenities.volleyballCourts > 0;
 
   return (
-    <div className="space-y-3 pb-10 pt-3 text-white">
+    <div className="grid gap-5 pb-10 pt-3 text-white lg:grid-cols-2 lg:items-start">
       {/* Editorial description */}
       {personality && (
-        <section className="weather-panel p-5">
-          <h2 className="font-display mb-3 text-xl font-semibold text-white">About this beach</h2>
+        <section className="px-2 py-5">
+          <h2 className="mb-3 text-xl font-semibold text-white">About this beach</h2>
           <p className="leading-relaxed text-white/75">{personality.editorial}</p>
-        </section>
-      )}
-
-      {/* What makes it special */}
-      {personality && personality.differentiators.length > 0 && (
-        <section className="weather-panel p-5">
-          <h2 className="font-display mb-3 text-xl font-semibold text-white">
-            What makes it special
-          </h2>
-          <ul className="space-y-2">
-            {personality.differentiators.map((item) => (
-              <li key={item} className="flex items-start gap-2 text-white/75">
-                <span
-                  className="mt-1 w-2 h-2 rounded-full bg-ocean-400 shrink-0"
-                  aria-hidden="true"
-                />
-                {item}
-              </li>
-            ))}
-          </ul>
+          <div className="mt-5">
+            <h2 className="mb-3 text-xl font-semibold text-white">What makes it special</h2>
+            <ul className="space-y-2">
+              {personality.differentiators.map((item) => (
+                <li key={item} className="flex items-start gap-2 text-white/75">
+                  <span
+                    className="mt-1 w-2 h-2 rounded-full bg-white/85 shrink-0"
+                    aria-hidden="true"
+                  />
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
         </section>
       )}
 
       {/* Similar vibes */}
       <SimilarVibes currentBeachId={beach.id} />
 
-      {/* Amenities grouped by use case */}
-      {amenities && (hasFamilyAmenities || hasDogAmenities || hasSportsAmenities) && (
-        <section className="weather-panel space-y-5 p-5">
-          {hasFamilyAmenities && (
-            <div>
-              <h3 className="font-display mb-2 text-lg font-semibold text-white">For families</h3>
-              <div className="flex flex-wrap gap-2">
-                {amenities.restrooms && (
-                  <AmenityChip icon={<MapPin className="w-4 h-4" />} label="Restrooms" />
-                )}
-                {amenities.lifeguard !== 'none' && (
-                  <AmenityChip
-                    icon={<Users className="w-4 h-4" />}
-                    label={
-                      amenities.lifeguard === 'year-round'
-                        ? 'Year-round lifeguard'
-                        : 'Seasonal lifeguard'
-                    }
-                  />
-                )}
-                {amenities.wheelchairAccessible && (
-                  <AmenityChip
-                    icon={<Accessibility className="w-4 h-4" />}
-                    label="Wheelchair accessible"
-                  />
-                )}
+      <div className="grid gap-5 border-y border-white/20 py-5 sm:grid-cols-2 lg:col-span-2">
+        {/* Amenities grouped by use case */}
+        {amenities && (hasFamilyAmenities || hasDogAmenities || hasSportsAmenities) && (
+          <section className="space-y-5 px-2">
+            {hasFamilyAmenities && (
+              <div>
+                <h3 className="mb-2 text-lg font-semibold text-white">For families</h3>
+                <div className="flex flex-wrap gap-2">
+                  {amenities.restrooms && (
+                    <AmenityChip icon={<MapPin className="w-4 h-4" />} label="Restrooms" />
+                  )}
+                  {amenities.lifeguard !== 'none' && (
+                    <AmenityChip
+                      icon={<Users className="w-4 h-4" />}
+                      label={
+                        amenities.lifeguard === 'year-round'
+                          ? 'Year-round lifeguard'
+                          : 'Seasonal lifeguard'
+                      }
+                    />
+                  )}
+                  {amenities.wheelchairAccessible && (
+                    <AmenityChip
+                      icon={<Accessibility className="w-4 h-4" />}
+                      label="Wheelchair accessible"
+                    />
+                  )}
+                </div>
               </div>
-            </div>
-          )}
+            )}
 
-          {hasDogAmenities && (
-            <div>
-              <h3 className="font-display mb-2 text-lg font-semibold text-white">For dogs</h3>
-              <AmenityChip icon={<Dog className="w-4 h-4" />} label="Dog friendly" />
-            </div>
-          )}
+            {hasDogAmenities && (
+              <div>
+                <h3 className="mb-2 text-lg font-semibold text-white">For dogs</h3>
+                <AmenityChip icon={<Dog className="w-4 h-4" />} label="Dog friendly" />
+              </div>
+            )}
 
-          {hasSportsAmenities && (
-            <div>
-              <h3 className="font-display mb-2 text-lg font-semibold text-white">For sports</h3>
-              <AmenityChip
-                icon={<Volleyball className="w-4 h-4" />}
-                label={`${amenities.volleyballCourts} volleyball court${amenities.volleyballCourts !== 1 ? 's' : ''}`}
-              />
-            </div>
-          )}
-        </section>
-      )}
+            {hasSportsAmenities && (
+              <div>
+                <h3 className="mb-2 text-lg font-semibold text-white">For sports</h3>
+                <AmenityChip
+                  icon={<Volleyball className="w-4 h-4" />}
+                  label={`${amenities.volleyballCourts} volleyball court${amenities.volleyballCourts !== 1 ? 's' : ''}`}
+                />
+              </div>
+            )}
+          </section>
+        )}
 
-      {/* Getting there */}
-      <section className="weather-panel p-5">
-        <h2 className="font-display mb-3 text-xl font-semibold text-white">Getting there</h2>
-        <div className="space-y-3">
-          <div className="flex items-start gap-2 text-white/75">
-            <Navigation className="w-5 h-5 text-ocean-500 shrink-0 mt-0.5" aria-hidden="true" />
-            <span>
-              {beach.name}, Vancouver, BC
-              {amenities?.parking && amenities.parking !== 'none' && (
-                <span className="mt-0.5 block text-sm text-white/55">
-                  {amenities.parking === 'free' && 'Free parking available'}
-                  {amenities.parking === 'paid' && 'Paid parking available'}
-                  {amenities.parking === 'street' && 'Street parking nearby'}
-                </span>
-              )}
-            </span>
+        {/* Getting there */}
+        <section className="px-2 py-5">
+          <h2 className="mb-3 text-xl font-semibold text-white">Getting there</h2>
+          <div className="space-y-3">
+            <div className="flex items-start gap-2 text-white/75">
+              <Navigation className="w-5 h-5 text-white/85 shrink-0 mt-0.5" aria-hidden="true" />
+              <span>
+                {beach.name}, Vancouver, BC
+                {amenities?.parking && amenities.parking !== 'none' && (
+                  <span className="mt-0.5 block text-sm text-white/85">
+                    {amenities.parking === 'free' && 'Free parking available'}
+                    {amenities.parking === 'paid' && 'Paid parking available'}
+                    {amenities.parking === 'street' && 'Street parking nearby'}
+                  </span>
+                )}
+              </span>
+            </div>
+            <a
+              href={mapsUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex min-h-11 items-center gap-2 bg-blue-700 hover:bg-blue-800 text-white px-4 py-2.5 rounded-xl text-sm font-medium transition-colors"
+            >
+              <ExternalLink className="w-4 h-4" aria-hidden="true" />
+              Open in Google Maps
+            </a>
           </div>
-          <a
-            href={mapsUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 bg-ocean-500 hover:bg-ocean-600 text-white px-4 py-2.5 rounded-xl text-sm font-medium transition-colors"
-          >
-            <ExternalLink className="w-4 h-4" aria-hidden="true" />
-            Open in Google Maps
-          </a>
-        </div>
-      </section>
+        </section>
+      </div>
 
       {/* Safety */}
       <SafetyInfo beach={beach} waterQuality={waterQuality} weather={weather} />
@@ -150,8 +147,9 @@ export function AboutTab({ beach, waterQuality = null, weather = null }: AboutTa
       {/* Webcam */}
       {beach.webcamUrl && showWebcam && (
         <section>
-          <h2 className="font-display text-xl font-semibold text-sand-900 mb-3">Webcam</h2>
+          <h2 className="text-xl font-semibold text-white mb-3">Webcam</h2>
           <WebcamEmbed
+            key={`${beach.id}-${beach.webcamUrl}`}
             url={beach.webcamUrl}
             beachName={beach.name}
             onHide={() => setShowWebcam(false)}
@@ -188,30 +186,30 @@ function SimilarVibes({ currentBeachId }: { currentBeachId: string }) {
   if (similar.length === 0) return null;
 
   return (
-    <section className="weather-panel p-5">
-      <h2 className="font-display mb-3 text-xl font-semibold text-white">Similar vibes</h2>
+    <section className="px-2 py-5">
+      <h2 className="mb-3 text-xl font-semibold text-white">Similar vibes</h2>
       <div className="space-y-2">
         {similar.map((beach) => {
           const beachData = BEACHES.find((b) => b.id === beach.slug);
           return (
-            <a
+            <Link
               key={beach.slug}
-              href={`/beach/${beach.slug}`}
+              to={`/beach/${beach.slug}`}
               data-testid="similar-vibe-link"
-              className="flex items-center justify-between rounded-xl bg-white/10 px-3 py-2 transition-colors hover:bg-white/15"
+              className="flex min-h-11 flex-wrap gap-2 items-center justify-between rounded-xl bg-white/10 px-3 py-2 transition-colors hover:bg-white/15"
             >
               <span className="font-medium text-white">{beachData?.name ?? beach.slug}</span>
               <div className="flex gap-1">
                 {beach.sharedVibes.map((v) => (
                   <span
                     key={v}
-                    className="rounded-full bg-white/10 px-2 py-0.5 text-xs text-white/65"
+                    className="rounded-full bg-white/10 px-2 py-0.5 text-xs text-white/85"
                   >
                     {v}
                   </span>
                 ))}
               </div>
-            </a>
+            </Link>
           );
         })}
       </div>

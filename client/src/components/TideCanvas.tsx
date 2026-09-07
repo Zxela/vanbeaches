@@ -3,7 +3,6 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { TrendingDown, TrendingUp, Waves } from 'lucide-react';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { clamp, cn, formatNumber, formatTideTime, mapRange } from '../lib/utils';
-import { Card, CardContent, CardTitle, Icon } from './ui';
 
 interface TideCanvasProps {
   predictions: TidePrediction[];
@@ -24,25 +23,13 @@ const CANVAS_CONFIG = {
   padding: { top: 20, right: 16, bottom: 36, left: 44 },
   gridLines: { horizontal: 5, vertical: 5 },
   colors: {
-    light: {
-      curve: '#0097a7',
-      curveGlow: 'rgba(0, 151, 167, 0.3)',
-      gradientTop: 'rgba(0, 151, 167, 0.3)',
-      gradientBottom: 'rgba(0, 150, 136, 0.05)',
-      grid: 'rgba(0, 0, 0, 0.06)',
-      text: '#616161',
-      now: '#ef4444',
-      nowGlow: 'rgba(239, 68, 68, 0.4)',
-      high: '#10b981',
-      low: '#06b6d4',
-    },
-    dark: {
+    chart: {
       curve: '#26c6da',
       curveGlow: 'rgba(38, 198, 218, 0.3)',
       gradientTop: 'rgba(0, 188, 212, 0.3)',
       gradientBottom: 'rgba(0, 150, 136, 0.02)',
-      grid: 'rgba(255, 255, 255, 0.08)',
-      text: '#9e9e9e',
+      grid: 'rgba(255, 255, 255, 0.22)',
+      text: '#e2e8f0',
       now: '#f87171',
       nowGlow: 'rgba(248, 113, 113, 0.4)',
       high: '#34d399',
@@ -57,7 +44,6 @@ export function TideCanvas({ predictions, loading, className }: TideCanvasProps)
   const animationRef = useRef<number>(0);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
   const [tooltip, setTooltip] = useState<TooltipData | null>(null);
-  const [isDark, setIsDark] = useState(false);
   const [animationProgress, setAnimationProgress] = useState(0);
 
   // Get today's data - update every 60 seconds so the now marker stays accurate
@@ -97,17 +83,6 @@ export function TideCanvas({ predictions, loading, className }: TideCanvasProps)
     const total = 24 * 60 * 60 * 1000;
     return clamp(elapsed / total, 0, 1);
   }, [now, todayStart]);
-
-  // Detect dark mode
-  useEffect(() => {
-    const checkDarkMode = () => {
-      setIsDark(document.documentElement.classList.contains('dark'));
-    };
-    checkDarkMode();
-    const observer = new MutationObserver(checkDarkMode);
-    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
-    return () => observer.disconnect();
-  }, []);
 
   // Handle resize — re-run when canvas view mounts (loading/empty states
   // render a different tree where containerRef is not in the DOM)
@@ -214,7 +189,7 @@ export function TideCanvas({ predictions, loading, className }: TideCanvasProps)
     ctx.scale(dpr, dpr);
 
     const { padding, colors } = CANVAS_CONFIG;
-    const theme = isDark ? colors.dark : colors.light;
+    const theme = colors.chart;
     const chartWidth = dimensions.width - padding.left - padding.right;
     const chartHeight = dimensions.height - padding.top - padding.bottom;
 
@@ -245,7 +220,7 @@ export function TideCanvas({ predictions, loading, className }: TideCanvasProps)
 
     // Y-axis labels
     ctx.fillStyle = theme.text;
-    ctx.font = '11px "DM Sans", system-ui, sans-serif';
+    ctx.font = '12px "DM Sans Variable", system-ui, sans-serif';
     ctx.textAlign = 'right';
     for (let i = 0; i <= 4; i++) {
       const value = maxHeight - ((maxHeight - minHeight) / 4) * i;
@@ -336,7 +311,7 @@ export function TideCanvas({ predictions, loading, className }: TideCanvasProps)
       // White inner circle
       ctx.beginPath();
       ctx.arc(nowX, nowY, 3, 0, Math.PI * 2);
-      ctx.fillStyle = isDark ? '#1f2937' : '#ffffff';
+      ctx.fillStyle = '#10283e';
       ctx.fill();
     }
 
@@ -354,14 +329,13 @@ export function TideCanvas({ predictions, loading, className }: TideCanvasProps)
         ctx.arc(x, y, 5, 0, Math.PI * 2);
         ctx.fillStyle = tide.type === 'high' ? theme.high : theme.low;
         ctx.fill();
-        ctx.strokeStyle = isDark ? '#1f2937' : '#ffffff';
+        ctx.strokeStyle = '#10283e';
         ctx.lineWidth = 2;
         ctx.stroke();
       }
     }
   }, [
     dimensions,
-    isDark,
     todayTides,
     todayStart,
     minHeight,
@@ -443,42 +417,42 @@ export function TideCanvas({ predictions, loading, className }: TideCanvasProps)
 
   if (loading) {
     return (
-      <Card variant="ocean" className={className}>
-        <CardTitle className="flex items-center gap-2">
-          <Icon icon={Waves} size="lg" color="ocean" />
+      <div className={cn('tide-surface p-4', className)}>
+        <h3 className="flex items-center gap-2 text-lg font-semibold text-white">
+          <Waves className="h-5 w-5 text-white" aria-hidden="true" />
           Today's Tides
-        </CardTitle>
-        <CardContent className="mt-4">
+        </h3>
+        <div className="mt-4">
           <div className="h-[220px] shimmer rounded-lg" />
-        </CardContent>
-      </Card>
+        </div>
+      </div>
     );
   }
 
   if (todayTides.length === 0) {
     return (
-      <Card variant="ocean" className={className}>
-        <CardTitle className="flex items-center gap-2">
-          <Icon icon={Waves} size="lg" color="ocean" />
+      <div className={cn('tide-surface p-4', className)}>
+        <h3 className="flex items-center gap-2 text-lg font-semibold text-white">
+          <Waves className="h-5 w-5 text-white" aria-hidden="true" />
           Today's Tides
-        </CardTitle>
-        <CardContent className="mt-4">
-          <p className="text-sand-500 text-center py-8">No tide data available for today</p>
-        </CardContent>
-      </Card>
+        </h3>
+        <div className="mt-4">
+          <p className="text-white/85 text-center py-8">No tide data available for today</p>
+        </div>
+      </div>
     );
   }
 
   return (
-    <Card variant="ocean" padding="none" className={cn('overflow-hidden', className)}>
+    <div data-testid="tide-card" className={cn('tide-surface overflow-hidden', className)}>
       <div className="p-4 pb-0">
-        <CardTitle className="flex items-center gap-2">
-          <Icon icon={Waves} size="lg" color="ocean" />
+        <h3 className="flex items-center gap-2 text-lg font-semibold text-white">
+          <Waves className="h-5 w-5 text-white" aria-hidden="true" />
           Today's Tides
-        </CardTitle>
+        </h3>
         <div className="weather-panel-muted mt-4 flex items-end justify-between gap-4 p-3">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-white/55">
+            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-white/85">
               Right now · estimated
             </p>
             <p className="mt-1 text-2xl font-semibold text-white">{formatNumber(currentHeight)}m</p>
@@ -520,7 +494,7 @@ export function TideCanvas({ predictions, loading, className }: TideCanvasProps)
               transition={{ duration: 0.15 }}
               className={cn(
                 'absolute pointer-events-none z-10',
-                'rounded-lg border border-white/20 bg-slate-950/80 text-white shadow-lg backdrop-blur-xl',
+                'rounded-lg border border-white/20 bg-slate-950/80 text-white shadow-md backdrop-blur-xl',
                 'px-3 py-2 text-sm',
               )}
               style={{
@@ -557,7 +531,7 @@ export function TideCanvas({ predictions, loading, className }: TideCanvasProps)
         {/* Crosshair */}
         {tooltip && (
           <div
-            className="absolute w-px bg-ocean-400/50 pointer-events-none"
+            className="absolute w-px bg-blue-400/50 pointer-events-none"
             style={{
               left: tooltip.x,
               top: CANVAS_CONFIG.padding.top,
@@ -569,7 +543,7 @@ export function TideCanvas({ predictions, loading, className }: TideCanvasProps)
 
       {/* Key Tides summary grid */}
       <div className="px-4 pb-4 pt-2">
-        <p className="mb-2 text-xs font-medium uppercase tracking-wide text-white/55">Key Tides</p>
+        <p className="mb-2 text-xs font-medium uppercase tracking-wide text-white/85">Key Tides</p>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
           {todayTides.map((tide) => {
             const isNext = tide.time === nextTide?.time;
@@ -592,9 +566,9 @@ export function TideCanvas({ predictions, loading, className }: TideCanvasProps)
                   <span className="font-bold text-base text-white leading-none">
                     {formatNumber(tide.height)}m
                   </span>
-                  <span className="text-sm text-white/60">{formatTideTime(tide.time)}</span>
+                  <span className="text-sm text-white/85">{formatTideTime(tide.time)}</span>
                   {isNext && (
-                    <span className="mt-1 text-[10px] font-bold uppercase tracking-wide text-sky-200">
+                    <span className="mt-1 text-xs font-bold uppercase tracking-wide text-sky-200">
                       Next tide
                     </span>
                   )}
@@ -612,6 +586,6 @@ export function TideCanvas({ predictions, loading, className }: TideCanvasProps)
           ))}
         </ul>
       </div>
-    </Card>
+    </div>
   );
 }

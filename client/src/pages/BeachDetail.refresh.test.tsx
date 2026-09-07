@@ -173,7 +173,7 @@ describe('BeachDetail - continuous layout rendering', () => {
         <BeachDetail />
       </MemoryRouter>,
     );
-    const heroEl = document.querySelector('[class*="max-h-"]');
+    const heroEl = document.querySelector('[data-testid="beach-hero"]');
     expect(heroEl).toBeInTheDocument();
     const conditionEls = screen.getAllByText(/18°/);
     expect(conditionEls.length).toBeGreaterThanOrEqual(1);

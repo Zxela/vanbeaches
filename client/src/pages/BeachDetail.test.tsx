@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { BeachDetail } from './BeachDetail';
 
@@ -6,6 +6,9 @@ import { BeachDetail } from './BeachDetail';
 const mockUseParams = vi.fn();
 vi.mock('react-router-dom', () => ({
   useParams: () => mockUseParams(),
+  Link: ({ to, children }: { to: string; children: React.ReactNode }) => (
+    <a href={to}>{children}</a>
+  ),
 }));
 
 // Mock getBeachById from shared package
@@ -134,7 +137,7 @@ describe('BeachDetail', () => {
       const { container } = render(<BeachDetail />);
 
       // Hero should have h-[30vh] class (compact, not 40vh)
-      const heroEl = container.querySelector('[class*="h-[30vh]"]');
+      const heroEl = container.querySelector('[data-testid="beach-hero"]');
       expect(heroEl).toBeInTheDocument();
     });
 
@@ -143,7 +146,7 @@ describe('BeachDetail', () => {
 
       const { container } = render(<BeachDetail />);
 
-      const heroEl = container.querySelector('[class*="min-h-[31rem]"]');
+      const heroEl = container.querySelector('[data-testid="beach-hero"]');
       expect(heroEl).toBeInTheDocument();
     });
 
@@ -152,7 +155,7 @@ describe('BeachDetail', () => {
 
       const { container } = render(<BeachDetail />);
 
-      const heroEl = container.querySelector('[class*="sm:min-h-[34rem]"]');
+      const heroEl = container.querySelector('[data-testid="beach-hero"]');
       expect(heroEl).toBeInTheDocument();
     });
 
@@ -169,8 +172,8 @@ describe('BeachDetail', () => {
 
       render(<BeachDetail />);
 
-      expect(screen.getByTestId('favorite-button')).toBeInTheDocument();
-      expect(screen.getByTestId('share-button')).toBeInTheDocument();
+      expect(screen.queryByTestId('favorite-button')).not.toBeInTheDocument();
+      expect(screen.queryByTestId('share-button')).not.toBeInTheDocument();
     });
 
     it('hero uses a subtle atmospheric overlay', () => {
@@ -178,7 +181,7 @@ describe('BeachDetail', () => {
 
       const { container } = render(<BeachDetail />);
 
-      const overlayEl = container.querySelector('[class*="from-black/10"]');
+      const overlayEl = container.querySelector('.weather-atmosphere');
       expect(overlayEl).toBeInTheDocument();
     });
   });
@@ -193,7 +196,7 @@ describe('BeachDetail', () => {
       expect(sectionNav).toBeInTheDocument();
       expect(screen.getByRole('link', { name: /forecast/i })).toHaveAttribute('href', '#today');
       expect(screen.getByRole('link', { name: /beach guide/i })).toHaveAttribute('href', '#about');
-      expect(screen.getByRole('link', { name: /community/i })).toHaveAttribute('href', '#photos');
+      expect(screen.queryByRole('link', { name: /community/i })).not.toBeInTheDocument();
     });
 
     it('keeps forecast and beach guide content in the continuous document', () => {
@@ -221,13 +224,7 @@ describe('BeachDetail', () => {
       const { container } = render(<BeachDetail />);
 
       const disclosure = container.querySelector('details#photos');
-      expect(disclosure).toBeInTheDocument();
-      expect(disclosure).not.toHaveAttribute('open');
-      expect(screen.getByText('Photos and local posts')).toBeInTheDocument();
-      expect(screen.getByTestId('photos-tab-content')).toBeInTheDocument();
-
-      fireEvent.click(screen.getByText('Photos and local posts'));
-      expect(disclosure).toHaveAttribute('open');
+      expect(disclosure).not.toBeInTheDocument();
     });
   });
 

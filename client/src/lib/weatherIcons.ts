@@ -13,10 +13,10 @@ const weatherIconMap: Record<string, LucideIcon> = {
 const weatherColorMap: Record<string, string> = {
   sunny: 'text-amber-500',
   'partly-cloudy': 'text-sky-400',
-  cloudy: 'text-sand-400',
+  cloudy: 'text-slate-400',
   rainy: 'text-sky-500',
   stormy: 'text-purple-500',
-  foggy: 'text-sand-400',
+  foggy: 'text-slate-400',
 };
 
 export const weatherLabels: Record<string, string> = {
@@ -33,5 +33,5 @@ export function getWeatherIcon(condition: string): LucideIcon {
 }
 
 export function getWeatherColor(condition: string): string {
-  return weatherColorMap[condition] ?? 'text-sand-500';
+  return weatherColorMap[condition] ?? 'text-slate-500';
 }

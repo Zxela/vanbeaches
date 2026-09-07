@@ -45,9 +45,8 @@ export const UV = {
 export type ActivityRating = 'excellent' | 'good' | 'fair' | 'poor';
 
 export const RATING_COLORS: Record<ActivityRating, string> = {
-  excellent:
-    'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 border-green-200 dark:border-green-800',
-  good: 'bg-ocean-50 dark:bg-ocean-900/30 text-ocean-700 dark:text-ocean-300 border-ocean-200 dark:border-ocean-800',
-  fair: 'bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-300 border-yellow-200 dark:border-yellow-800',
-  poor: 'bg-sand-100 dark:bg-sand-700 text-sand-500 dark:text-sand-400 border-sand-200 dark:border-sand-600',
+  excellent: 'bg-green-900/30 text-green-300 border-green-800',
+  good: 'bg-blue-900/30 text-blue-300 border-blue-800',
+  fair: 'bg-yellow-900/30 text-yellow-300 border-yellow-800',
+  poor: 'bg-slate-700 text-slate-400 border-slate-600',
 };

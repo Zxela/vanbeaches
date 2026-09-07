@@ -13,18 +13,18 @@ export function BeachNavigation({ currentBeachId }: BeachNavigationProps) {
   const next = sorted[(currentIndex + 1) % sorted.length];
 
   return (
-    <div className="flex items-center justify-between border-t border-white/15 px-4 py-6">
+    <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 border-t border-white/15 px-4 py-6">
       <Link
         to={`/beach/${prev.id}`}
         data-testid="beach-nav-prev"
-        className="flex items-center gap-1 text-sm text-white/70 transition-colors hover:text-white"
+        className="flex min-h-11 items-center gap-1 text-sm text-white/85 transition-colors hover:text-white"
       >
         <ChevronLeft className="w-4 h-4" /> {prev.name}
       </Link>
       <Link
         to={`/beach/${next.id}`}
         data-testid="beach-nav-next"
-        className="flex items-center gap-1 text-sm text-white/70 transition-colors hover:text-white"
+        className="flex min-h-11 items-center gap-1 text-sm text-white/85 transition-colors hover:text-white"
       >
         {next.name} <ChevronRight className="w-4 h-4" />
       </Link>

@@ -1,4 +1,4 @@
-import { Check, Share2 } from 'lucide-react';
+import { Check, Upload } from 'lucide-react';
 import { useState } from 'react';
 
 interface ShareButtonProps {
@@ -35,21 +35,21 @@ export function ShareButton({ beachName, beachId }: ShareButtonProps) {
   };
 
   return (
-    <button
-      type="button"
-      onClick={handleShare}
-      className="flex items-center gap-2 rounded-lg border border-white/15 bg-white/10 px-3 py-2 text-sm text-white transition-colors hover:bg-white/15"
-    >
+    <button type="button" onClick={handleShare} className="header-control min-w-[96px]">
       {copied ? (
         <>
-          <Check className="w-4 h-4 text-green-500" />
+          <Check
+            className="h-[18px] w-[18px] text-emerald-300"
+            strokeWidth={1.7}
+            aria-hidden="true"
+          />
           <span>Copied!</span>
         </>
       ) : copyFailed ? (
         <span>Copy link</span>
       ) : (
         <>
-          <Share2 className="w-4 h-4" />
+          <Upload className="h-[18px] w-[18px]" strokeWidth={1.7} aria-hidden="true" />
           <span>Share</span>
         </>
       )}

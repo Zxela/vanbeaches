@@ -118,3 +118,52 @@ test('Discover presents a retry action when summaries fail', async ({ page }) =>
 
   await expect(page.getByRole('button', { name: /try again/i })).toBeVisible();
 });
+
+test('query, view and favorites survive reload', async ({ page }) => {
+  await mockBeachSummaries(page);
+  await page.goto('/discover');
+  await page.getByRole('searchbox').fill('Kits');
+  await page.getByRole('button', { name: 'Map', exact: true }).click();
+  await page.getByRole('button', { name: 'Favorites', exact: true }).click();
+  await page.reload();
+  await expect(page.getByRole('searchbox')).toHaveValue('Kits');
+  await expect(page.getByRole('button', { name: 'Map', exact: true })).toHaveAttribute(
+    'aria-pressed',
+    'true',
+  );
+  await expect(page.getByRole('button', { name: 'Favorites', exact: true })).toHaveAttribute(
+    'aria-pressed',
+    'true',
+  );
+});
+
+test('loading and errors preserve discovery controls', async ({ page }) => {
+  let release: () => void = () => {};
+  const pending = new Promise<void>((resolve) => {
+    release = resolve;
+  });
+  await page.route('**/api/beaches', async (route) => {
+    await pending;
+    await route.fulfill({ json: { success: false, error: 'Unavailable' } });
+  });
+  await page.goto('/discover');
+  await expect(page.getByRole('status')).toContainText('Loading beaches');
+  await expect(page.getByRole('searchbox')).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Map', exact: true })).toBeVisible();
+  release();
+  await expect(page.getByText("Couldn't load beaches")).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Vancouver beaches' })).toBeVisible();
+  await expect(page.getByRole('searchbox')).toBeVisible();
+});
+
+test('desktop Discovery uses two columns', async ({ page }) => {
+  await mockBeachSummaries(page);
+  await page.setViewportSize({ width: 1440, height: 1000 });
+  await page.goto('/discover');
+  const cards = page.getByTestId('discovery-beach-list').locator('article');
+  await expect(cards).toHaveCount(9);
+  const first = await cards.nth(0).boundingBox();
+  const second = await cards.nth(1).boundingBox();
+  expect(first && second && second.x > first.x + first.width).toBeTruthy();
+  expect(first && second && first.y === second.y).toBeTruthy();
+});

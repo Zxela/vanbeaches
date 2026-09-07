@@ -4,7 +4,7 @@ import type React from 'react';
 import { type HTMLAttributes, forwardRef, useId } from 'react';
 import { cn } from '../../lib/utils';
 
-const skeletonVariants = cva('relative overflow-hidden rounded-md bg-sand-200 dark:bg-sand-700', {
+const skeletonVariants = cva('relative overflow-hidden rounded-md bg-slate-700', {
   variants: {
     animation: {
       shimmer: 'shimmer',
@@ -114,8 +114,8 @@ const SkeletonCard = forwardRef<HTMLDivElement, SkeletonCardProps>(
       <motion.div
         ref={ref}
         className={cn(
-          'rounded-2xl border border-sand-200/50 dark:border-sand-700/50',
-          'bg-white/90 dark:bg-sand-800/90 p-4 space-y-4',
+          'rounded-2xl border border-slate-700/50',
+          'bg-slate-800/90 p-4 space-y-4',
           className,
         )}
         initial={{ opacity: 0 }}

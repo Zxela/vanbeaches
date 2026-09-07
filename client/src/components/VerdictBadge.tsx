@@ -12,7 +12,7 @@ function getBadgeColors(recommendation: RecommendationLevel): string {
     case 'perfect':
       return 'bg-emerald-100 text-emerald-800';
     case 'good':
-      return 'bg-ocean-100 text-ocean-800';
+      return 'bg-blue-100 text-blue-800';
     case 'fair':
       return 'bg-amber-100 text-amber-800';
     case 'skip':
@@ -48,5 +48,5 @@ export function VerdictBadge({ recommendation, size = 'sm' }: VerdictBadgeProps)
 export function VerdictBadgeSkeleton({ size = 'sm' }: { size?: 'sm' | 'md' }) {
   const sizeClasses = size === 'md' ? 'h-6 w-14 rounded-full' : 'h-5 w-12 rounded-full';
 
-  return <span className={`inline-block animate-pulse bg-sand-200 ${sizeClasses}`} />;
+  return <span className={`inline-block animate-pulse bg-slate-200 ${sizeClasses}`} />;
 }

@@ -9,17 +9,9 @@ interface WebcamEmbedProps {
 
 export function WebcamEmbed({ url, beachName, onHide }: WebcamEmbedProps) {
   const [isVisible, setIsVisible] = useState(false);
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [isHovered, setIsHovered] = useState(false);
+  const [status, setStatus] = useState<'loading' | 'loaded' | 'error'>('loading');
+  const [attempt, setAttempt] = useState(0);
   const ref = useRef<HTMLDivElement>(null);
-
-  // Detect touch device for always-visible hide button
-  const [isTouchDevice, setIsTouchDevice] = useState(false);
-
-  useEffect(() => {
-    // Check for touch capability
-    setIsTouchDevice('ontouchstart' in window || navigator.maxTouchPoints > 0);
-  }, []);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -32,40 +24,54 @@ export function WebcamEmbed({ url, beachName, onHide }: WebcamEmbedProps) {
     return () => observer.disconnect();
   }, []);
 
-  const showHideButton = isHovered || isTouchDevice;
-
   return (
-    <div
-      ref={ref}
-      className="bg-white dark:bg-sand-800 rounded-xl shadow-lg overflow-hidden relative"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
-      {isVisible && !isLoaded && (
-        <div className="animate-pulse bg-ocean-100 dark:bg-sand-700 aspect-video" />
+    <div ref={ref} className="weather-panel relative overflow-hidden">
+      {(!isVisible || status === 'loading') && (
+        <output className="block aspect-video animate-pulse p-5">Loading webcam…</output>
       )}
-      {isVisible && (
+      {isVisible && status !== 'error' && (
         <img
+          key={`${url}-${attempt}`}
           src={url}
           alt={beachName}
-          className={`w-full aspect-video object-cover ${isLoaded ? '' : 'absolute opacity-0'}`}
-          onLoad={() => setIsLoaded(true)}
-          onError={() => setIsLoaded(true)}
+          className={`aspect-video w-full object-cover ${status === 'loaded' ? '' : 'absolute opacity-0'}`}
+          onLoad={() => setStatus('loaded')}
+          onError={() => setStatus('error')}
         />
       )}
-      {isLoaded && (
-        <button
-          type="button"
-          onClick={onHide}
-          className={`absolute top-3 right-12 bg-black/50 hover:bg-black/70 text-white p-2 rounded-lg flex items-center gap-1.5 transition-opacity duration-150 ${
-            showHideButton ? 'opacity-100' : 'opacity-0'
-          }`}
-          aria-label="Hide webcam"
-        >
-          <EyeOff className="w-4 h-4" />
-          <span className="text-sm">Hide</span>
-        </button>
+      {status === 'error' && (
+        <div className="space-y-3 p-5">
+          <p role="alert">Webcam unavailable</p>
+          <div className="flex flex-wrap gap-3">
+            <button
+              type="button"
+              className="rounded-lg bg-blue-700 px-4 text-white"
+              onClick={() => {
+                setStatus('loading');
+                setAttempt((value) => value + 1);
+              }}
+            >
+              Retry
+            </button>
+            <a
+              href={url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex min-h-11 items-center underline"
+            >
+              Open source
+            </a>
+          </div>
+        </div>
       )}
+      <button
+        type="button"
+        onClick={onHide}
+        aria-label="Hide webcam"
+        className="flex items-center gap-2 px-4 py-2 text-white"
+      >
+        <EyeOff className="h-4 w-4" /> Hide
+      </button>
     </div>
   );
 }

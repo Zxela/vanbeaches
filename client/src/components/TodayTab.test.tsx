@@ -205,7 +205,7 @@ describe('TodayTab', () => {
     expect(waterEls.length).toBeGreaterThan(0);
   });
 
-  it('renders conditions grid as 3-col grid on mobile', () => {
+  it('renders conditions grid as five equal desktop columns', () => {
     const { container } = render(
       <TodayTab
         beach={makeBeach()}
@@ -215,9 +215,9 @@ describe('TodayTab', () => {
         sunsetTime={null}
       />,
     );
-    // The conditions grid should use grid-cols-3 class
+    // The conditions grid should use grid-cols-5 class
     const html = container.innerHTML;
-    expect(html).toMatch(/grid-cols-3/);
+    expect(html).toMatch(/grid-cols-5/);
   });
 
   // AC-003: TodayTab renders TideCanvas when beach has a tide station
@@ -298,23 +298,7 @@ describe('TodayTab', () => {
       />,
     );
     const conditionsHeading = screen.getByText(/^conditions$/i);
-    expect(conditionsHeading.className).toMatch(/font-display/);
-  });
-
-  // Light-mode only — TodayTab's own wrapper element should not use dark: classes
-  it('does not use dark: classes in TodayTab own wrapper', () => {
-    const { container } = render(
-      <TodayTab
-        beach={makeBeach()}
-        weather={makeWeather()}
-        tides={makeTides()}
-        waterQuality={makeWaterQuality()}
-        sunsetTime="2026-02-27T19:45:00.000Z"
-      />,
-    );
-    // The outermost wrapper div should not have dark: classes
-    const outerDiv = container.firstChild as HTMLElement;
-    expect(outerDiv.className).not.toContain('dark:');
+    expect(conditionsHeading.className).not.toMatch(/font-display/);
   });
 
   // ActivityRecommendations section (What to do)

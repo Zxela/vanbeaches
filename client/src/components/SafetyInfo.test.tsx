@@ -399,21 +399,6 @@ describe('SafetyInfo', () => {
     });
   });
 
-  // AC-009: Light-mode-only styles (no dark: classes)
-  describe('AC-009: Light-mode-only styles', () => {
-    it('does not use dark: Tailwind variants', () => {
-      const { container } = render(
-        <SafetyInfo
-          beach={mockBeach}
-          waterQuality={mockWaterQualityGood}
-          weather={mockWeatherNormal}
-        />,
-      );
-      const html = container.innerHTML;
-      expect(html).not.toContain('dark:');
-    });
-  });
-
   // Null handling
   describe('Null state handling', () => {
     it('renders without errors when waterQuality is null', () => {

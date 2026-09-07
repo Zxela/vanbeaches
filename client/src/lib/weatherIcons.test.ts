@@ -35,8 +35,8 @@ describe('weatherIcons', () => {
     it('returns text-sky-400 for partly-cloudy', () => {
       expect(getWeatherColor('partly-cloudy')).toBe('text-sky-400');
     });
-    it('returns text-sand-400 for cloudy', () => {
-      expect(getWeatherColor('cloudy')).toBe('text-sand-400');
+    it('returns text-slate-400 for cloudy', () => {
+      expect(getWeatherColor('cloudy')).toBe('text-slate-400');
     });
     it('returns text-sky-500 for rainy', () => {
       expect(getWeatherColor('rainy')).toBe('text-sky-500');
@@ -44,11 +44,11 @@ describe('weatherIcons', () => {
     it('returns text-purple-500 for stormy', () => {
       expect(getWeatherColor('stormy')).toBe('text-purple-500');
     });
-    it('returns text-sand-400 for foggy', () => {
-      expect(getWeatherColor('foggy')).toBe('text-sand-400');
+    it('returns text-slate-400 for foggy', () => {
+      expect(getWeatherColor('foggy')).toBe('text-slate-400');
     });
-    it('returns text-sand-500 for unknown values', () => {
-      expect(getWeatherColor('unknown')).toBe('text-sand-500');
+    it('returns text-slate-500 for unknown values', () => {
+      expect(getWeatherColor('unknown')).toBe('text-slate-500');
     });
   });
 

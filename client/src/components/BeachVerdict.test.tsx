@@ -177,15 +177,7 @@ describe('BeachVerdict', () => {
       <BeachVerdict weather={makeWeather()} tides={null} waterQuality={null} sunsetTime={null} />,
     );
     const heading = screen.getByText(/today's verdict/i);
-    expect(heading.className).toMatch(/font-display/);
-  });
-
-  // No dark: classes (light-mode only)
-  it('does not use any dark: classes in the component', () => {
-    const { container } = render(
-      <BeachVerdict weather={makeWeather()} tides={null} waterQuality={null} sunsetTime={null} />,
-    );
-    expect(container.innerHTML).not.toContain('dark:');
+    expect(heading.className).not.toMatch(/font-display/);
   });
 
   // Renders correctly with tides and sunset time provided

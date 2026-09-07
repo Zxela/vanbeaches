@@ -103,12 +103,13 @@ export function BeachMap({ beaches = BEACHES, selectedBeachId, onSelectBeach }: 
   };
 
   return (
-    <div className="app-surface overflow-hidden rounded-2xl shadow-lg">
+    <div className="app-surface overflow-hidden rounded-2xl shadow-md">
       <style>{`
-        .dark .leaflet-tile-pane {
+        .leaflet-tile-pane {
           filter: brightness(0.7) invert(1) contrast(1.1) hue-rotate(200deg) saturate(0.3);
         }
         .leaflet-popup-content-wrapper {
+          background: #172033;
           border-radius: 12px;
           padding: 0;
           overflow: hidden;
@@ -118,12 +119,6 @@ export function BeachMap({ beaches = BEACHES, selectedBeachId, onSelectBeach }: 
           min-width: 180px;
         }
         .leaflet-popup-tip {
-          background: white;
-        }
-        .dark .leaflet-popup-content-wrapper {
-          background: #172033;
-        }
-        .dark .leaflet-popup-tip {
           background: #172033;
         }
         .beach-popup-img {
@@ -137,18 +132,12 @@ export function BeachMap({ beaches = BEACHES, selectedBeachId, onSelectBeach }: 
         .beach-popup-name {
           font-weight: 600;
           font-size: 14px;
-          color: #1a1a1a;
-        }
-        .dark .beach-popup-name {
           color: #f5f5f5;
         }
         .beach-popup-tagline {
           font-size: 12px;
-          color: #777;
-          margin-top: 2px;
-        }
-        .dark .beach-popup-tagline {
           color: #aaa;
+          margin-top: 2px;
         }
       `}</style>
       <div className="aspect-[4/3] md:aspect-[16/9] max-h-[500px]">
@@ -160,7 +149,7 @@ export function BeachMap({ beaches = BEACHES, selectedBeachId, onSelectBeach }: 
           maxBounds={VANCOUVER_BOUNDS}
           maxBoundsViscosity={1.0}
           style={{ height: '100%', width: '100%' }}
-          scrollWheelZoom={true}
+          scrollWheelZoom={false}
         >
           <TileLayer
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
