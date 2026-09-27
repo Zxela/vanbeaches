@@ -1,5 +1,10 @@
 # Coastal world: production and release operations
 
+The current deployment target is [independent R2 world storage](../world-assets/README.md).
+Production app builds reference its immutable manifest and exclude generated world
+files from the Pages bundle. The matching R2 archive is restored only for browser
+CI, recovery and local inspection. GitHub Releases is not used for the world archive.
+
 The world uses one metre-based origin and one tide reference throughout. The existing
 [coastal pipeline](README.md), [web export](WEB.md), [environment](ENVIRONMENT.md), and
 [regional terrain](REGIONAL.md) documents describe the source acquisition and numerical

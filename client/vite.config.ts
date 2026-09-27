@@ -1,10 +1,30 @@
+import { cp } from 'node:fs/promises';
 import path from 'node:path';
 import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
 import { VitePWA } from 'vite-plugin-pwa';
 
+const hostedWorld = Boolean(process.env.VITE_COAST_MANIFEST_URL);
+const publicPath = path.resolve(__dirname, 'public');
+const worldPath = path.join(publicPath, 'coast-assets');
+
 export default defineConfig({
+  publicDir: hostedWorld ? false : 'public',
   plugins: [
+    ...(hostedWorld
+      ? [
+          {
+            name: 'copy-application-public-assets',
+            async writeBundle() {
+              await cp(publicPath, path.resolve(__dirname, 'dist'), {
+                recursive: true,
+                filter: (source) =>
+                  source !== worldPath && !source.startsWith(`${worldPath}${path.sep}`),
+              });
+            },
+          },
+        ]
+      : []),
     react(),
     VitePWA({
       registerType: 'autoUpdate',

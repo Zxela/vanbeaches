@@ -1,0 +1,11 @@
+name = "vanbeaches-world"
+main = "index.ts"
+compatibility_date = "2026-02-01"
+workers_dev = true
+
+[vars]
+WORLD_ASSETS_ENABLED = "true"
+
+[[r2_buckets]]
+binding = "WORLD_ASSETS"
+bucket_name = "vanbeaches-world"

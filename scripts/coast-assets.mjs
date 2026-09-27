@@ -25,6 +25,33 @@ const checkedPath = (name) => {
   return resolved;
 };
 
+async function verifyHosted() {
+  const url = new URL(process.env.VITE_COAST_MANIFEST_URL);
+  if (url.protocol !== 'https:') throw new Error('Hosted world assets must use HTTPS');
+  const response = await fetch(url);
+  if (!response.ok) throw new Error('Hosted coast manifest is unavailable');
+  const bytes = Buffer.from(await response.arrayBuffer());
+  if (JSON.parse(bytes.toString('utf8')).version !== 1)
+    throw new Error('Hosted coast manifest is incompatible');
+  const buildResponse = await fetch(new URL('world-build.json', url));
+  if (!buildResponse.ok) throw new Error('Hosted world build record is unavailable');
+  const { id, ...record } = await buildResponse.json();
+  if (
+    id !== `world-${hash(JSON.stringify(record)).slice(0, 20)}` ||
+    record.assets?.['manifest.json']?.sha256 !== hash(bytes) ||
+    !url.pathname.includes(`/${id}/`)
+  )
+    throw new Error('Hosted world build and versioned manifest do not match');
+  console.log(`Using separately hosted coastal assets ${id}.`);
+}
+
+// Hosted application builds verify the immutable remote release. Local assets and
+// archive restore variables must not silently turn them into bundled deployments.
+if (['prepare', 'verify'].includes(mode) && process.env.VITE_COAST_MANIFEST_URL) {
+  await verifyHosted();
+  process.exit(0);
+}
+
 async function verify({ checkBuild = true } = {}) {
   const manifest = JSON.parse(await readFile(path.join(folder, 'manifest.json'), 'utf8'));
   if (manifest.version !== 1 || !manifest.tiles?.length || !manifest.depthTexture)
@@ -225,23 +252,6 @@ if (await exists(path.join(folder, 'manifest.json'))) {
     await writeFile(`${destination}.sha256`, `${digest}\n`);
     console.log(`${destination}\nSHA256 ${digest}`);
   }
-} else if (process.env.VITE_COAST_MANIFEST_URL) {
-  const response = await fetch(process.env.VITE_COAST_MANIFEST_URL);
-  if (!response.ok) throw new Error('Hosted coast manifest is unavailable');
-  const bytes = Buffer.from(await response.arrayBuffer());
-  if (JSON.parse(bytes.toString('utf8')).version !== 1)
-    throw new Error('Hosted coast manifest is incompatible');
-  const buildResponse = await fetch(
-    new URL('world-build.json', process.env.VITE_COAST_MANIFEST_URL),
-  );
-  if (!buildResponse.ok) throw new Error('Hosted world build record is unavailable');
-  const { id, ...record } = await buildResponse.json();
-  if (
-    id !== `world-${hash(JSON.stringify(record)).slice(0, 20)}` ||
-    record.assets?.['manifest.json']?.sha256 !== hash(bytes)
-  )
-    throw new Error('Hosted world build and manifest do not match');
-  console.log(`Using hosted coastal assets ${id}.`);
 } else if (mode === 'prepare') {
   console.warn(
     'Coast assets are absent: the site will show its beach-page fallback. Run pnpm 3d:export before releasing.',

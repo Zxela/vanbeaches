@@ -10,6 +10,10 @@ Start with [production operations](3d/PRODUCTION.md), [coastal topology](3d/COAS
 [urban sources](3d/URBAN.md) and [movement sources](3d/PHASE7-SOURCES.md). Priorities below
 describe the order of follow-up work, not an instruction to rebuild every subsystem.
 
+The release now uses [separate R2 world storage](world-assets/README.md). Keep the
+application revision, immutable world URL and archive checksum together when
+recording deployment or rollback evidence; ordinary application builds do not upload assets.
+
 ## P1 — next reliability and acceptance work
 
 - [ ] **Measure physical mobile and hardware-GPU performance.** Exercise current iOS Safari,
