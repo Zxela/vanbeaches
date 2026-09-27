@@ -12,7 +12,21 @@ test-results/
 dev-dist/
 *.tsbuildinfo
 .claude/
+.tmp/
+.ruff_cache/
 
 # Homerun workflow artifacts
 docs/
 state.json
+
+# Offline coastal world sources and generated assets
+3d/.venv/
+3d/data/raw/
+3d/data/processed/
+3d/data/cache/
+3d/output/
+3d/**/__pycache__/
+3d/.pytest_cache/
+3d/.ruff_cache/
+*.blend1
+client/public/coast-assets/

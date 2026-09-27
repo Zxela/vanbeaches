@@ -1,0 +1,196 @@
+{
+  "version": 1,
+  "coordinateSystem": "Metres east (+x), south (+z), relative to manifest beach worldPosition; polygons omit height, sampled from exported terrain atlas.",
+  "provenance": "Coarse hand-authored visualization envelopes, September 2026; not surveyed activity areas, navigation guidance, or permission boundaries. Elevation, slope and tide filter every cell. Replace with reviewed GIS/Blender polygons when available. Dogs disabled pending verified permission masks. Wreck profile awaits an exported destination and reviewed masks.",
+  "beaches": {
+    "kitsilano-beach": [
+      {
+        "id": "sand",
+        "kind": "sand",
+        "maxElevation": 4.8,
+        "polygon": [[-160, -150], [25, -145], [35, 95], [-110, 100]]
+      },
+      {
+        "id": "shore",
+        "kind": "shoreline",
+        "maxElevation": 3,
+        "polygon": [[-210, -175], [-100, -180], [-105, 95], [-205, 95]]
+      },
+      {
+        "id": "water",
+        "kind": "shallows",
+        "maxElevation": 3,
+        "polygon": [[-250, -190], [-115, -190], [-130, 95], [-255, 90]]
+      },
+      {
+        "id": "courts",
+        "kind": "volleyball",
+        "maxElevation": 5,
+        "polygon": [[-30, -90], [6, -90], [6, -55], [-30, -55]]
+      },
+      {
+        "id": "lawn",
+        "kind": "grass",
+        "maxElevation": 7,
+        "polygon": [[38, -70], [75, -70], [75, 40], [38, 40]]
+      },
+      {
+        "id": "court-buffer",
+        "kind": "restricted",
+        "excludeFrom": ["sand"],
+        "polygon": [[-34, -94], [10, -94], [10, -51], [-34, -51]]
+      }
+    ],
+    "spanish-banks": [
+      {
+        "id": "sand",
+        "kind": "sand",
+        "maxElevation": 4.5,
+        "polygon": [[-570, -180], [560, -220], [560, -75], [-570, -80]]
+      },
+      {
+        "id": "flats",
+        "kind": "shoreline",
+        "maxElevation": 2,
+        "polygon": [[-570, -530], [560, -530], [560, -220], [-570, -180]]
+      },
+      {
+        "id": "water",
+        "kind": "shallows",
+        "maxElevation": 3,
+        "polygon": [[-570, -650], [560, -650], [560, -150], [-570, -150]]
+      },
+      {
+        "id": "path",
+        "kind": "path",
+        "maxElevation": 5,
+        "polygon": [[-420, -100], [420, -130], [420, -118], [-420, -88]]
+      }
+    ],
+    "english-bay": [
+      {
+        "id": "sand",
+        "kind": "sand",
+        "maxElevation": 4.5,
+        "polygon": [[-165, -60], [-115, -100], [105, 155], [50, 180]]
+      },
+      {
+        "id": "shore",
+        "kind": "shoreline",
+        "maxElevation": 3,
+        "polygon": [[-205, -45], [-165, -60], [50, 180], [10, 220]]
+      },
+      {
+        "id": "water",
+        "kind": "shallows",
+        "maxElevation": 3,
+        "polygon": [[-245, -10], [-205, -45], [10, 220], [-35, 250]]
+      },
+      {
+        "id": "seawall",
+        "kind": "path",
+        "maxElevation": 6,
+        "polygon": [[-108, -108], [-98, -118], [130, 145], [120, 155]]
+      }
+    ],
+    "jericho-beach": [
+      {
+        "id": "sand",
+        "kind": "sand",
+        "maxElevation": 4.5,
+        "polygon": [[-130, -145], [230, -145], [230, -30], [-130, -30]]
+      },
+      {
+        "id": "shore",
+        "kind": "shoreline",
+        "maxElevation": 2.5,
+        "polygon": [[-130, -260], [230, -260], [230, -140], [-130, -140]]
+      },
+      {
+        "id": "grass",
+        "kind": "grass",
+        "maxElevation": 6,
+        "polygon": [[-120, -25], [60, -25], [60, 30], [-120, 30]]
+      }
+    ],
+    "locarno-beach": [
+      {
+        "id": "sand",
+        "kind": "sand",
+        "maxElevation": 4.5,
+        "polygon": [[-170, 85], [130, 85], [130, 175], [-170, 175]]
+      },
+      {
+        "id": "flats",
+        "kind": "shoreline",
+        "maxElevation": 2,
+        "polygon": [[-170, -180], [130, -180], [130, 90], [-170, 90]]
+      },
+      {
+        "id": "water",
+        "kind": "shallows",
+        "maxElevation": 3,
+        "polygon": [[-170, -270], [130, -270], [130, 80], [-170, 80]]
+      }
+    ],
+    "second-beach": [
+      {
+        "id": "sand",
+        "kind": "sand",
+        "maxElevation": 4.5,
+        "polygon": [[-190, 10], [-110, 5], [-85, 130], [-175, 150]]
+      },
+      {
+        "id": "shore",
+        "kind": "shoreline",
+        "maxElevation": 3,
+        "polygon": [[-225, 30], [-190, 10], [-175, 150], [-210, 170]]
+      },
+      {
+        "id": "pool",
+        "kind": "restricted",
+        "polygon": [[-180, -160], [30, -160], [30, 0], [-180, 0]]
+      }
+    ],
+    "sunset-beach": [
+      {
+        "id": "sand",
+        "kind": "sand",
+        "maxElevation": 4.5,
+        "polygon": [[-290, 25], [-225, -25], [-95, 160], [-150, 200]]
+      },
+      {
+        "id": "shore",
+        "kind": "shoreline",
+        "maxElevation": 3,
+        "polygon": [[-330, 50], [-290, 25], [-150, 200], [-185, 225]]
+      },
+      {
+        "id": "seawall",
+        "kind": "path",
+        "maxElevation": 6,
+        "polygon": [[-220, -30], [-210, -40], [-70, 150], [-80, 160]]
+      }
+    ],
+    "third-beach": [
+      {
+        "id": "sand",
+        "kind": "sand",
+        "maxElevation": 4.5,
+        "polygon": [[-65, -100], [25, -100], [55, 85], [-50, 100]]
+      },
+      {
+        "id": "shore",
+        "kind": "shoreline",
+        "maxElevation": 3,
+        "polygon": [[-110, -100], [-65, -100], [-50, 100], [-90, 115]]
+      },
+      {
+        "id": "water",
+        "kind": "shallows",
+        "maxElevation": 3,
+        "polygon": [[-160, -100], [-110, -100], [-90, 115], [-140, 125]]
+      }
+    ]
+  }
+}

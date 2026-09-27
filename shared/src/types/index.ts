@@ -3,3 +3,4 @@ export * from './weather.js';
 export * from './tide.js';
 export * from './waterQuality.js';
 export * from './api.js';
+export * from './environment.js';

@@ -1,0 +1,54 @@
+{
+  "environment": {
+    "node": "v22.16.0",
+    "platform": "win32"
+  },
+  "samples": [
+    {
+      "tile": "tile_479500_5454500",
+      "lod": 1,
+      "rawBytes": 9752,
+      "draco": {
+        "bytes": 1716,
+        "encodeMs": 10,
+        "decodeMs": 1.1283000000000016
+      },
+      "meshopt": {
+        "bytes": 4052,
+        "encodeMs": 6,
+        "decodeMs": 0.5144600000000026
+      }
+    },
+    {
+      "tile": "tile_483500_5458000",
+      "lod": 1,
+      "rawBytes": 306884,
+      "draco": {
+        "bytes": 31332,
+        "encodeMs": 17,
+        "decodeMs": 2.2302999999999997
+      },
+      "meshopt": {
+        "bytes": 59688,
+        "encodeMs": 16,
+        "decodeMs": 0.8136400000000037
+      }
+    },
+    {
+      "tile": "tile_479500_5455000",
+      "lod": 2,
+      "rawBytes": 319976,
+      "draco": {
+        "bytes": 7660,
+        "encodeMs": 13,
+        "decodeMs": 2.23596
+      },
+      "meshopt": {
+        "bytes": 38604,
+        "encodeMs": 6,
+        "decodeMs": 0.42520000000000097
+      }
+    }
+  ],
+  "textureDecision": "WebP: 128x128 regional, 256x256 nearby. At most 12 detail textures require about 4 MiB with mipmaps. Regional textures and the elevation atlas keep total estimated residency below 64 MiB in profiling. KTX2/Basis deferred pending a measured GPU-memory bottleneck; no KTX2 encoder benchmark was run."
+}

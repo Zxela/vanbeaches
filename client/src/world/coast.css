@@ -1,0 +1,476 @@
+.coast {
+  position: relative;
+  height: calc(100svh - 70px);
+  min-height: 580px;
+  overflow: hidden;
+  background: #183f4b;
+  color: #eef7f4;
+  font-family: "DM Sans Variable", sans-serif;
+}
+.coast-viewport {
+  position: absolute;
+  inset: 0;
+}
+.coast-viewport canvas {
+  display: block;
+  touch-action: none;
+  outline-offset: -4px;
+}
+.coast-heading {
+  position: absolute;
+  top: 32px;
+  left: 36px;
+  pointer-events: none;
+  text-shadow: 0 2px 24px #143c4260;
+  color: #eef7f4;
+}
+.coast-heading p {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .22em;
+  margin: 0 0 10px;
+}
+.coast-heading h1 {
+  font-size: clamp(25px, 3.2vw, 44px);
+  letter-spacing: -.045em;
+  font-weight: 500;
+  margin: 0 0 4px;
+}
+.coast-heading > span {
+  font-size: 13px;
+}
+.coast-marker {
+  position: absolute;
+  left: 0;
+  top: 0;
+  visibility: hidden;
+  border: 1px solid #ffffff66;
+  background: #173f4bd9;
+  color: #f0f8f4;
+  border-radius: 30px;
+  padding: 7px 12px;
+  font-size: 11px;
+  box-shadow: 0 3px 16px #082a3333;
+}
+.coast-marker::after {
+  content: "";
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  background: #e6efe3;
+  border-radius: 50%;
+  left: calc(50% - 2px);
+  bottom: -10px;
+}
+.coast-controls {
+  position: absolute;
+  bottom: 53px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(760px, calc(100% - 40px));
+  border: 1px solid #edf9f32b;
+  background: #12363fed;
+  backdrop-filter: blur(18px);
+  box-shadow: 0 12px 40px #082d3940;
+  border-radius: 18px;
+  padding: 12px 16px;
+}
+.coast-navigation,
+.coast-environment {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.coast-navigation {
+  flex-wrap: wrap;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #ffffff20;
+}
+.coast button,
+.coast select,
+.coast a {
+  -webkit-tap-highlight-color: transparent;
+}
+.coast-controls button,
+.coast-controls select,
+.coast-controls a,
+.coast-fallback button,
+.coast-fallback a {
+  min-height: 42px;
+  padding: 7px 12px;
+  border-radius: 9px;
+  font-size: 12px;
+}
+.coast-controls button:hover,
+.coast-controls a:hover {
+  background: #ffffff18;
+}
+.coast-controls select {
+  background: #234b54;
+  color: #f0f8f4;
+  max-width: 245px;
+  border: 1px solid #ffffff20;
+}
+.coast-select {
+  flex: 1;
+}
+.coast-environment {
+  padding-top: 10px;
+}
+.coast-modes {
+  display: flex;
+  border: 1px solid #ffffff25;
+  border-radius: 10px;
+  padding: 3px;
+}
+.coast-modes button[aria-pressed="true"] {
+  color: #143a42;
+  background: #d6e8de;
+}
+.coast-tide {
+  flex: 1;
+  font-size: 11px;
+  color: #bfd1d0;
+}
+.coast-tide output {
+  float: right;
+  color: #f2f8f5;
+  font-variant-numeric: tabular-nums;
+}
+.coast-tide input {
+  display: block;
+  width: 100%;
+  min-height: 24px;
+  accent-color: #d6e8de;
+  cursor: pointer;
+}
+.coast-presets {
+  display: flex;
+  gap: 1px;
+}
+.coast-presets button {
+  font-size: 10px;
+  padding: 5px 7px;
+  min-width: 32px;
+}
+.coast-presets button[aria-pressed="true"] {
+  background: #ffffff18;
+}
+.coast-depth-key {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  font-size: 10px;
+  padding-top: 10px;
+}
+.coast-depth-key span {
+  border-top: 4px solid;
+  padding-top: 5px;
+  min-width: 55px;
+  text-align: center;
+}
+.coast-footer {
+  position: absolute;
+  bottom: 14px;
+  left: 24px;
+  right: 24px;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  color: #e0efec;
+  font-size: 10px;
+  text-shadow: 0 1px 4px #102f36;
+  pointer-events: none;
+}
+.coast-footer a {
+  pointer-events: auto;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.coast-status {
+  position: absolute;
+  top: 28px;
+  right: 28px;
+  color: #eef7f4;
+  font-size: 12px;
+}
+.coast-status button {
+  margin-left: 8px;
+  text-decoration: underline;
+}
+.coast-fallback {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(460px, 85%);
+  padding: 28px;
+  background: #123640;
+  border: 1px solid #ffffff30;
+  border-radius: 18px;
+}
+.coast-fallback h2 {
+  font-size: 25px;
+  margin-bottom: 12px;
+}
+.coast-fallback p {
+  font-size: 14px;
+  margin-bottom: 18px;
+}
+.coast-fallback button {
+  background: #d6e8de;
+  color: #143a42;
+}
+.coast-outside {
+  margin: 8px 0 0;
+  font-size: 12px;
+}
+.coast-profile {
+  position: absolute;
+  top: 120px;
+  right: 18px;
+  padding: 12px;
+  font-size: 11px;
+  background: #102f36e8;
+  border-radius: 10px;
+  max-height: 50%;
+  overflow: auto;
+}
+.coast-profile pre {
+  font-size: 10px;
+}
+.coast-profile label {
+  display: block;
+}
+.coast-profile input {
+  width: 100%;
+}
+.coast :focus-visible {
+  outline: 3px solid #f0d79b;
+  outline-offset: 3px;
+}
+@media (max-width: 640px) {
+  .coast {
+    min-height: 610px;
+  }
+  .coast-heading {
+    top: 22px;
+    left: 20px;
+  }
+  .coast-heading > span {
+    font-size: 11px;
+  }
+  .coast-status {
+    top: 112px;
+    left: 20px;
+    right: auto;
+  }
+  .coast-controls {
+    bottom: 58px;
+    width: calc(100% - 24px);
+    padding: 10px;
+  }
+  .coast-navigation {
+    gap: 3px;
+  }
+  .coast-controls button,
+  .coast-controls a {
+    padding: 7px 9px;
+    min-height: 44px;
+  }
+  .coast-controls select {
+    max-width: 195px;
+    width: 100%;
+  }
+  .coast-environment {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .coast-tide {
+    min-width: 140px;
+  }
+  .coast-presets {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .coast-presets button {
+    flex: 1;
+  }
+  .coast-footer {
+    bottom: 10px;
+    left: 18px;
+    right: 18px;
+    display: block;
+    font-size: 9px;
+  }
+  .coast-footer span {
+    display: block;
+    margin-bottom: 4px;
+  }
+  .coast-marker {
+    font-size: 10px;
+    padding: 8px;
+  }
+}
+
+.coast-timeline {
+  margin-top: 8px;
+  font-size: 11px;
+}
+.coast-time-heading,
+.coast-conditions,
+.coast-time-labels {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: space-between;
+}
+.coast-time-heading button[aria-pressed="true"] {
+  background: #d6e8de;
+  color: #143a42;
+}
+.coast-time-heading output {
+  margin-left: auto;
+  font-variant-numeric: tabular-nums;
+}
+.coast-conditions {
+  margin: 8px 0 0;
+  flex-wrap: wrap;
+  color: #c2d7d5;
+}
+.coast-conditions strong {
+  color: #f2f8f5;
+  font-weight: 500;
+}
+.coast-curve {
+  position: relative;
+  height: 52px;
+  margin-top: 4px;
+}
+.coast-curve svg {
+  width: 100%;
+  height: 48px;
+}
+.coast-curve input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  cursor: pointer;
+  accent-color: #f0d79b;
+  opacity: 0.55;
+}
+.coast-time-labels {
+  font-size: 10px;
+  color: #a6c2c2;
+}
+.coast-tide-events {
+  display: flex;
+  flex-wrap: wrap;
+}
+.coast-tide-events button {
+  font-size: 10px;
+  padding: 4px 7px;
+  min-height: 32px;
+}
+.coast-data-status {
+  color: #adc7c7;
+  margin-top: 5px;
+}
+.coast-data-status summary {
+  cursor: pointer;
+  min-height: 24px;
+}
+.coast-data-status p {
+  margin: 5px 0;
+  line-height: 1.5;
+}
+.coast-controls {
+  max-height: 60%;
+  overflow-y: auto;
+}
+@media (max-width: 640px) {
+  .coast-conditions {
+    font-size: 10px;
+  }
+  .coast-time-heading {
+    gap: 3px;
+  }
+  .coast-time-heading output {
+    font-size: 10px;
+  }
+  .coast-controls {
+    max-height: 62%;
+  }
+}
+
+.coast-time-heading {
+  flex-wrap: wrap;
+}
+.coast-crowd {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid #ffffff20;
+  font-size: 11px;
+  color: #bfd1d0;
+}
+.coast-crowd summary {
+  cursor: pointer;
+  min-height: 28px;
+}
+.coast-crowd strong {
+  color: #f2f8f5;
+  font-weight: 500;
+}
+.coast-crowd p {
+  margin: 4px 0 8px;
+  line-height: 1.5;
+}
+.coast-time-heading > button {
+  min-height: 38px;
+}
+.coast-time-heading .coast-modes {
+  margin-right: 8px;
+}
+@media (max-width: 640px) {
+  .coast-time-heading output {
+    flex-basis: 100%;
+    text-align: right;
+  }
+  .coast-time-heading .coast-modes {
+    margin-right: auto;
+  }
+}
+.coast-layer-controls {
+  margin-top: .5rem;
+  font-size: .8rem;
+}
+.coast-layer-controls summary {
+  cursor: pointer;
+  padding: .35rem 0;
+}
+.coast-layer-controls p {
+  margin: .4rem 0;
+}
+.coast-layer-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem 1rem;
+}
+.coast-layer-grid label {
+  display: flex;
+  align-items: center;
+  gap: .3rem;
+}
+.coast-layer-controls select {
+  color: #fff;
+  background: #193438;
+  border: 1px solid #70898a;
+  border-radius: .3rem;
+  padding: .2rem;
+}
+.coast-condition-details > summary {
+  cursor: pointer;
+  padding: 10px 0;
+  font-size: 12px;
+  color: #eef7f4;
+}

@@ -1,10 +1,30 @@
+import { cp } from 'node:fs/promises';
 import path from 'node:path';
 import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
 import { VitePWA } from 'vite-plugin-pwa';
 
+const hostedWorld = Boolean(process.env.VITE_COAST_MANIFEST_URL);
+const publicPath = path.resolve(__dirname, 'public');
+const worldPath = path.join(publicPath, 'coast-assets');
+
 export default defineConfig({
+  publicDir: hostedWorld ? false : 'public',
   plugins: [
+    ...(hostedWorld
+      ? [
+          {
+            name: 'copy-application-public-assets',
+            async writeBundle() {
+              await cp(publicPath, path.resolve(__dirname, 'dist'), {
+                recursive: true,
+                filter: (source) =>
+                  source !== worldPath && !source.startsWith(`${worldPath}${path.sep}`),
+              });
+            },
+          },
+        ]
+      : []),
     react(),
     VitePWA({
       registerType: 'autoUpdate',
@@ -35,8 +55,10 @@ export default defineConfig({
         ],
       },
       workbox: {
+        // Terrain is streamed by the world runtime, never precached by the PWA.
+        globIgnores: ['**/coast-assets/**', '**/Coast-*.js', '**/Coast-*.css'],
         navigateFallback: 'index.html',
-        navigateFallbackDenylist: [/^\/api\//],
+        navigateFallbackDenylist: [/^\/api\//, /^\/coast-assets\//],
         runtimeCaching: [
           {
             urlPattern: /^.*\/api\/.*/i,
@@ -64,6 +86,7 @@ export default defineConfig({
   },
   server: {
     port: 5173,
+    proxy: { '/api': 'http://127.0.0.1:8788' },
   },
   test: {
     exclude: ['**/node_modules/**', '**/dist/**', '**/e2e/**'],

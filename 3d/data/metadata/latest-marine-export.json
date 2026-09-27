@@ -1,0 +1,30 @@
+{
+  "assetUrl": "marine-a77d081c811c.png",
+  "bounds": [
+    -6687.109224495303,
+    -4905.455647868104,
+    6822.890775504697,
+    4104.544352131896
+  ],
+  "bytes": 799964,
+  "sha256": "a77d081c811cc16ea5e89735cb3bf20851158fe70f3c032fefbba55800f65675",
+  "encoding": "RG uint16 centimetres above -512m; alpha coverage",
+  "opticalOnlyCells": 123797,
+  "opticalOnlyAreaM2": 12379700.0,
+  "opticalEncoding": "Blue=255: 2D OSM sea affiliation only; no surveyed depth; RG sentinel -512m",
+  "opticalLimitation": "Fixed mapped sea affiliation only inside unknown survey cells; tide/bed relationship is unknown there",
+  "sourceAttribution": "OpenStreetMap contributors, ODbL 1.0",
+  "sources": [
+    {
+      "id": "osm-coastline-optical-affiliation",
+      "url": "https://www.openstreetmap.org/copyright",
+      "definition": "https://wiki.openstreetmap.org/wiki/Tag:natural%3Dcoastline",
+      "query": "[out:json][timeout:60];way[natural=coastline](49.224999999999994,-123.3,49.34,-123.08);out tags geom;",
+      "requestKey": "51cd8b7697781783c10d1a6c712915384049f63d76fe43bb6a05f20e664baf30",
+      "retrievedAt": "2026-09-19T08:46:57.107632+00:00",
+      "sha256": "76c9e194b6ec68421a5558ea167e7db6a60a1d56a8e778b2504b363697b0e0ee",
+      "license": "ODbL 1.0; copyright OpenStreetMap contributors",
+      "purpose": "2D optical sea affiliation in unknown survey cells; not elevation or depth"
+    }
+  ]
+}

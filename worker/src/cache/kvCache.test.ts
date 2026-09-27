@@ -68,12 +68,12 @@ describe('kvCache', () => {
       expect(mockKv.put).toHaveBeenCalled();
     });
 
-    it('writes a fetching:{key} soft lock marker with 30s TTL before calling fetcher', async () => {
+    it('writes a fetching:{key} soft lock marker with 60s TTL before calling fetcher', async () => {
       const fetcher = vi.fn().mockResolvedValue({ temperature: 25 });
 
       await kvCache.getOrFetch(mockKv, 'weather:test', fetcher, 1800);
 
-      expect(mockKv.put).toHaveBeenCalledWith('fetching:weather:test', '1', { expirationTtl: 30 });
+      expect(mockKv.put).toHaveBeenCalledWith('fetching:weather:test', '1', { expirationTtl: 60 });
     });
 
     it('waits and retries KV read when soft lock exists on cache miss', async () => {

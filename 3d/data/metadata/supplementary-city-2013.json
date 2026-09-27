@@ -1,0 +1,2285 @@
+{
+  "dataset": "lidar-2013",
+  "metadata": {
+    "title": "LiDAR 2013",
+    "description": "<div><p>LiDAR (Light Detection and Ranging) data collected in 2013 with coverage up to extents of City of Vancouver\u2019s legal jurisdiction.</p><p> Data products include \"bare earth\" ground surface and of the upper most surface defined by vegetation cover, buildings and other structures.</p></div> <h3>Note</h3><div><p>The 2013 LiDAR data was used for the City\u2019s coastal flood model, which was done as part of the City\u2019s climate adaptation strategy. </p><h3>Data access</h3><p>Each of the 168 polygons on the map or rows in the table provides two links to the data. One is in GeoTIFF format (zipped, file sizes range from 12 KB to 15.8 MB), the other in LAS format (zipped, file sizes range from 1.0 MB to 349.8 MB).</p><h3>Attributes</h3><p>Point data was classified as:</p><ol><li>Bare-earth;</li><li>Low vegetation;</li><li>High vegetation;</li><li>Water; and</li><li>Buildings</li></ol></div> <h3>Data currency</h3><div><p>Data was collected on February 7, 15, and 19, 2013 and is current as of those dates.</p></div> <h3>Data accuracy</h3><div><ul><li>Average point density: at least 12 points per square metre</li><li>Sidelap: at least 50%</li><li>Vertical accuracy: 0.18 metre (95% confidence level)</li><li>Horizontal accuracy: 0.36 metre (95% confidence level </li></ul></div><h3>Coordinate system</h3><p>The map of grid cells on this portal is in WGS 84 but the LiDAR data\u00a0in the GeoTIFF and LAS files\u00a0are in the following coordinate system: </p><div><ul><li>Projection: UTM Zone 10 (Central Meridian 123 West)</li><li>Hz Datum: NAD 83 (CSRS)</li><li>Vertical Datum:\u00a0 CGVD28</li><li><a href=\"https://www2.gov.bc.ca/gov/content/data/geographic-data-services/georeferencing/geoid-model-data\"><span style=\"text-decoration:underline;\"><font color=\"#0066cc\">Metro Vancouver Geoid</font></span></a>\u00a0(HTMVBC00_Abbbyn.zip)</li></ul></div> <h3>Websites for further information</h3><div><ul><li>\n<a href=\"https://opendata.vancouver.ca/explore/dataset/city-boundary/\">City boundary dataset</a></li></ul></div>",
+    "theme": [
+      "Geography and imagery"
+    ],
+    "keyword": null,
+    "license": "Open Government Licence - Vancouver",
+    "license_url": "https://opendata.vancouver.ca/pages/licence/",
+    "language": "en",
+    "metadata_languages": [
+      "en"
+    ],
+    "timezone": null,
+    "modified": "2019-05-16T15:44:58+00:00",
+    "modified_updates_on_metadata_change": false,
+    "modified_updates_on_data_change": false,
+    "data_processed": "2020-11-19T11:59:21+00:00",
+    "metadata_processed": "2026-09-17T13:48:23.428000+00:00",
+    "geographic_reference": null,
+    "geographic_reference_auto": null,
+    "territory": null,
+    "geometry_types": [
+      "Polygon"
+    ],
+    "bbox": {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -123.01372532732785,
+              49.31966689880937
+            ],
+            [
+              -123.23375271633267,
+              49.31966689880937
+            ],
+            [
+              -123.23375271633267,
+              49.19370156247169
+            ],
+            [
+              -123.01372532732785,
+              49.19370156247169
+            ],
+            [
+              -123.01372532732785,
+              49.31966689880937
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {}
+    },
+    "publisher": "City of Vancouver",
+    "references": null,
+    "records_count": 168,
+    "attributions": null,
+    "source_domain": null,
+    "source_domain_title": null,
+    "source_domain_address": null,
+    "source_dataset": null,
+    "shared_catalog": null,
+    "federated": false,
+    "parent_domain": null,
+    "update_frequency": null
+  },
+  "tiles": [
+    {
+      "id": "4830E_54540N",
+      "url": "https://webtransfer.vancouver.ca/opendata/2013GeoTIFF/4830E_54540N.zip",
+      "path": "data\\raw\\reference-2013\\4830E_54540N.zip",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -123.233540385675,
+              49.238540629924
+            ],
+            [
+              -123.233582808806,
+              49.2475357590952
+            ],
+            [
+              -123.219842666468,
+              49.2475627222743
+            ],
+            [
+              -123.21980273876,
+              49.2385675846008
+            ],
+            [
+              -123.233540385675,
+              49.238540629924
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "status": "missing",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "id": "4880E_54580N",
+      "url": "https://webtransfer.vancouver.ca/opendata/2013GeoTIFF/4880E_54580N.zip",
+      "path": "data\\raw\\reference-2013\\4880E_54580N.zip",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -123.164972291497,
+              49.2746397381294
+            ],
+            [
+              -123.165002297272,
+              49.2836348482921
+            ],
+            [
+              -123.151252073413,
+              49.2836536646335
+            ],
+            [
+              -123.151224568101,
+              49.2746585485363
+            ],
+            [
+              -123.164972291497,
+              49.2746397381294
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "status": "missing",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "id": "4880E_54620N",
+      "url": "https://webtransfer.vancouver.ca/opendata/2013GeoTIFF/4880E_54620N.zip",
+      "path": "data\\raw\\reference-2013\\4880E_54620N.zip",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -123.165092404777,
+              49.310620184176
+            ],
+            [
+              -123.165122470806,
+              49.3196153279154
+            ],
+            [
+              -123.15136223256,
+              49.3196341680162
+            ],
+            [
+              -123.151334672015,
+              49.3106390183337
+            ],
+            [
+              -123.165092404777,
+              49.310620184176
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "status": "missing",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "id": "4910E_54550N",
+      "url": "https://webtransfer.vancouver.ca/opendata/2013GeoTIFF/4910E_54550N.zip",
+      "path": "data\\raw\\reference-2013\\4910E_54550N.zip",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -123.123661862007,
+              49.2477057083522
+            ],
+            [
+              -123.123684332761,
+              49.2567008770266
+            ],
+            [
+              -123.109941682533,
+              49.256714771521
+            ],
+            [
+              -123.109921708507,
+              49.2477195984651
+            ],
+            [
+              -123.123661862007,
+              49.2477057083522
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "status": "missing",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "id": "4910E_54560N",
+      "url": "https://webtransfer.vancouver.ca/opendata/2013GeoTIFF/4910E_54560N.zip",
+      "path": "data\\raw\\reference-2013\\4910E_54560N.zip",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -123.123684332761,
+              49.2567008770266
+            ],
+            [
+              -123.123706814948,
+              49.2656961215483
+            ],
+            [
+              -123.109961666722,
+              49.2657100204259
+            ],
+            [
+              -123.109941682533,
+              49.256714771521
+            ],
+            [
+              -123.123684332761,
+              49.2567008770266
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "status": "missing",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "id": "4910E_54580N",
+      "url": "https://webtransfer.vancouver.ca/opendata/2013GeoTIFF/4910E_54580N.zip",
+      "path": "data\\raw\\reference-2013\\4910E_54580N.zip",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -123.123729308127,
+              49.2746912620509
+            ],
+            [
+              -123.123751812529,
+              49.2836863884688
+            ],
+            [
+              -123.110001664617,
+              49.2837002961175
+            ],
+            [
+              -123.109981660681,
+              49.2747051653133
+            ],
+            [
+              -123.123729308127,
+              49.2746912620509
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "status": "missing",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "id": "4910E_54600N",
+      "url": "https://webtransfer.vancouver.ca/opendata/2013GeoTIFF/4910E_54600N.zip",
+      "path": "data\\raw\\reference-2013\\4910E_54600N.zip",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -123.123774328386,
+              49.2926815907357
+            ],
+            [
+              -123.123796855256,
+              49.3016766889861
+            ],
+            [
+              -123.110041702642,
+              49.3016906054122
+            ],
+            [
+              -123.110021678735,
+              49.2926955027723
+            ],
+            [
+              -123.123774328386,
+              49.2926815907357
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "status": "missing",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "id": "4830E_54570N",
+      "url": "https://webtransfer.vancouver.ca/opendata/2013GeoTIFF/4830E_54570N.zip",
+      "path": "data\\raw\\reference-2013\\4830E_54570N.zip",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -123.233667718982,
+              49.2655260650527
+            ],
+            [
+              -123.233710205629,
+              49.2745211519072
+            ],
+            [
+              -123.219962569525,
+              49.2745481406116
+            ],
+            [
+              -123.219922582038,
+              49.2655530452456
+            ],
+            [
+              -123.233667718982,
+              49.2655260650527
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "status": "missing",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "id": "4860E_54540N",
+      "url": "https://webtransfer.vancouver.ca/opendata/2013GeoTIFF/4860E_54540N.zip",
+      "path": "data\\raw\\reference-2013\\4860E_54540N.zip",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -123.192327613029,
+              49.2386165927789
+            ],
+            [
+              -123.192362549893,
+              49.2476117459109
+            ],
+            [
+              -123.178622464847,
+              49.2476338065868
+            ],
+            [
+              -123.178590023421,
+              49.2386386464984
+            ],
+            [
+              -123.192327613029,
+              49.2386165927789
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "status": "missing",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "id": "4890E_54600N",
+      "url": "https://webtransfer.vancouver.ca/opendata/2013GeoTIFF/4890E_54600N.zip",
+      "path": "data\\raw\\reference-2013\\4890E_54600N.zip",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -123.151279592726,
+              49.2926488565758
+            ],
+            [
+              -123.151307125499,
+              49.301643944498
+            ],
+            [
+              -123.137551996625,
+              49.3016611353468
+            ],
+            [
+              -123.137526966799,
+              49.2926660420024
+            ],
+            [
+              -123.151279592726,
+              49.2926488565758
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "status": "missing",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "id": "4890E_54610N",
+      "url": "https://webtransfer.vancouver.ca/opendata/2013GeoTIFF/4890E_54610N.zip",
+      "path": "data\\raw\\reference-2013\\4890E_54610N.zip",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -123.151307125499,
+              49.301643944498
+            ],
+            [
+              -123.151334672015,
+              49.3106390183337
+            ],
+            [
+              -123.137577038944,
+              49.3106562146068
+            ],
+            [
+              -123.137551996625,
+              49.3016611353468
+            ],
+            [
+              -123.151307125499,
+              49.301643944498
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "status": "missing",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "id": "4900E_54610N",
+      "url": "https://webtransfer.vancouver.ca/opendata/2013GeoTIFF/4900E_54610N.zip",
+      "path": "data\\raw\\reference-2013\\4900E_54610N.zip",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -123.137551996625,
+              49.3016611353468
+            ],
+            [
+              -123.137577038944,
+              49.3106562146068
+            ],
+            [
+              -123.12381939337,
+              49.3106717731537
+            ],
+            [
+              -123.123796855256,
+              49.3016766889861
+            ],
+            [
+              -123.137551996625,
+              49.3016611353468
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "status": "missing",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "id": "4900E_54620N",
+      "url": "https://webtransfer.vancouver.ca/opendata/2013GeoTIFF/4900E_54620N.zip",
+      "path": "data\\raw\\reference-2013\\4900E_54620N.zip",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -123.137577038944,
+              49.3106562146068
+            ],
+            [
+              -123.137602094017,
+              49.3196513697156
+            ],
+            [
+              -123.123841942963,
+              49.319666933172
+            ],
+            [
+              -123.12381939337,
+              49.3106717731537
+            ],
+            [
+              -123.137577038944,
+              49.3106562146068
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "status": "missing",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "id": "4840E_54570N",
+      "url": "https://webtransfer.vancouver.ca/opendata/2013GeoTIFF/4840E_54570N.zip",
+      "path": "data\\raw\\reference-2013\\4840E_54570N.zip",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -123.219922582038,
+              49.2655530452456
+            ],
+            [
+              -123.219962569525,
+              49.2745481406116
+            ],
+            [
+              -123.206215026828,
+              49.2745734934538
+            ],
+            [
+              -123.206177538493,
+              49.2655783900922
+            ],
+            [
+              -123.219922582038,
+              49.2655530452456
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "status": "missing",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "id": "4860E_54550N",
+      "url": "https://webtransfer.vancouver.ca/opendata/2013GeoTIFF/4860E_54550N.zip",
+      "path": "data\\raw\\reference-2013\\4860E_54550N.zip",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -123.192362549893,
+              49.2476117459109
+            ],
+            [
+              -123.192397504182,
+              49.2566068849455
+            ],
+            [
+              -123.178654922452,
+              49.2566289525802
+            ],
+            [
+              -123.178622464847,
+              49.2476338065868
+            ],
+            [
+              -123.192362549893,
+              49.2476117459109
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "status": "missing",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "id": "4900E_54590N",
+      "url": "https://webtransfer.vancouver.ca/opendata/2013GeoTIFF/4900E_54590N.zip",
+      "path": "data\\raw\\reference-2013\\4900E_54590N.zip",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -123.13750194921,
+              49.2836708446397
+            ],
+            [
+              -123.137526966799,
+              49.2926660420024
+            ],
+            [
+              -123.123774328386,
+              49.2926815907357
+            ],
+            [
+              -123.123751812529,
+              49.2836863884688
+            ],
+            [
+              -123.13750194921,
+              49.2836708446397
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "status": "missing",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "id": "4910E_54590N",
+      "url": "https://webtransfer.vancouver.ca/opendata/2013GeoTIFF/4910E_54590N.zip",
+      "path": "data\\raw\\reference-2013\\4910E_54590N.zip",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -123.123751812529,
+              49.2836863884688
+            ],
+            [
+              -123.123774328386,
+              49.2926815907357
+            ],
+            [
+              -123.110021678735,
+              49.2926955027723
+            ],
+            [
+              -123.110001664617,
+              49.2837002961175
+            ],
+            [
+              -123.123751812529,
+              49.2836863884688
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "status": "missing",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "id": "4920E_54590N",
+      "url": "https://webtransfer.vancouver.ca/opendata/2013GeoTIFF/4920E_54590N.zip",
+      "path": "data\\raw\\reference-2013\\4920E_54590N.zip",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -123.110001664617,
+              49.2837002961175
+            ],
+            [
+              -123.110021678735,
+              49.2926955027723
+            ],
+            [
+              -123.096268905692,
+              49.2927077782037
+            ],
+            [
+              -123.09625139334,
+              49.2837125676771
+            ],
+            [
+              -123.110001664617,
+              49.2837002961175
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "status": "missing",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "id": "4920E_54560N",
+      "url": "https://webtransfer.vancouver.ca/opendata/2013GeoTIFF/4920E_54560N.zip",
+      "path": "data\\raw\\reference-2013\\4920E_54560N.zip",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -123.109941682533,
+              49.256714771521
+            ],
+            [
+              -123.109961666722,
+              49.2657100204259
+            ],
+            [
+              -123.096216395185,
+              49.2657222842463
+            ],
+            [
+              -123.096198909021,
+              49.2567270314738
+            ],
+            [
+              -123.109941682533,
+              49.256714771521
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "status": "missing",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "id": "4840E_54560N",
+      "url": "https://webtransfer.vancouver.ca/opendata/2013GeoTIFF/4840E_54560N.zip",
+      "path": "data\\raw\\reference-2013\\4840E_54560N.zip",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -123.21988261409,
+              49.2565578458446
+            ],
+            [
+              -123.219922582038,
+              49.2655530452456
+            ],
+            [
+              -123.206177538493,
+              49.2655783900922
+            ],
+            [
+              -123.206140068476,
+              49.2565831826985
+            ],
+            [
+              -123.21988261409,
+              49.2565578458446
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "status": "missing",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "id": "4850E_54580N",
+      "url": "https://webtransfer.vancouver.ca/opendata/2013GeoTIFF/4850E_54580N.zip",
+      "path": "data\\raw\\reference-2013\\4850E_54580N.zip",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -123.206215026828,
+              49.2745734934538
+            ],
+            [
+              -123.206252533869,
+              49.2835685827172
+            ],
+            [
+              -123.192502472057,
+              49.2835923074035
+            ],
+            [
+              -123.192467465427,
+              49.2745972106577
+            ],
+            [
+              -123.206215026828,
+              49.2745734934538
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "status": "missing",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "id": "4870E_54580N",
+      "url": "https://webtransfer.vancouver.ca/opendata/2013GeoTIFF/4870E_54580N.zip",
+      "path": "data\\raw\\reference-2013\\4870E_54580N.zip",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -123.178719886568,
+              49.2746192922178
+            ],
+            [
+              -123.178752392775,
+              49.2836143959301
+            ],
+            [
+              -123.165002297272,
+              49.2836348482921
+            ],
+            [
+              -123.164972291497,
+              49.2746397381294
+            ],
+            [
+              -123.178719886568,
+              49.2746192922178
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "status": "missing",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "id": "4890E_54550N",
+      "url": "https://webtransfer.vancouver.ca/opendata/2013GeoTIFF/4890E_54550N.zip",
+      "path": "data\\raw\\reference-2013\\4890E_54550N.zip",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -123.151142134159,
+              49.2476730257774
+            ],
+            [
+              -123.151169598346,
+              49.2566681841423
+            ],
+            [
+              -123.137426971781,
+              49.2566853478992
+            ],
+            [
+              -123.137402004306,
+              49.2476901841218
+            ],
+            [
+              -123.151142134159,
+              49.2476730257774
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "status": "missing",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "id": "4890E_54560N",
+      "url": "https://webtransfer.vancouver.ca/opendata/2013GeoTIFF/4890E_54560N.zip",
+      "path": "data\\raw\\reference-2013\\4890E_54560N.zip",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -123.151169598346,
+              49.2566681841423
+            ],
+            [
+              -123.151197076507,
+              49.2656634183506
+            ],
+            [
+              -123.137451951959,
+              49.2656805875221
+            ],
+            [
+              -123.137426971781,
+              49.2566853478992
+            ],
+            [
+              -123.151169598346,
+              49.2566681841423
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "status": "missing",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "id": "4890E_54580N",
+      "url": "https://webtransfer.vancouver.ca/opendata/2013GeoTIFF/4890E_54580N.zip",
+      "path": "data\\raw\\reference-2013\\4890E_54580N.zip",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -123.151224568101,
+              49.2746585485363
+            ],
+            [
+              -123.151252073413,
+              49.2836536646335
+            ],
+            [
+              -123.13750194921,
+              49.2836708446397
+            ],
+            [
+              -123.137476944349,
+              49.2746757231241
+            ],
+            [
+              -123.151224568101,
+              49.2746585485363
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "status": "missing",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "id": "4900E_54550N",
+      "url": "https://webtransfer.vancouver.ca/opendata/2013GeoTIFF/4900E_54550N.zip",
+      "path": "data\\raw\\reference-2013\\4900E_54550N.zip",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -123.137402004306,
+              49.2476901841218
+            ],
+            [
+              -123.137426971781,
+              49.2566853478992
+            ],
+            [
+              -123.123684332761,
+              49.2567008770266
+            ],
+            [
+              -123.123661862007,
+              49.2477057083522
+            ],
+            [
+              -123.137402004306,
+              49.2476901841218
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "status": "missing",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "id": "4920E_54550N",
+      "url": "https://webtransfer.vancouver.ca/opendata/2013GeoTIFF/4920E_54550N.zip",
+      "path": "data\\raw\\reference-2013\\4920E_54550N.zip",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -123.109921708507,
+              49.2477195984651
+            ],
+            [
+              -123.109941682533,
+              49.256714771521
+            ],
+            [
+              -123.096198909021,
+              49.2567270314738
+            ],
+            [
+              -123.09618143175,
+              49.2477318545517
+            ],
+            [
+              -123.109921708507,
+              49.2477195984651
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "status": "missing",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "id": "4920E_54600N",
+      "url": "https://webtransfer.vancouver.ca/opendata/2013GeoTIFF/4920E_54600N.zip",
+      "path": "data\\raw\\reference-2013\\4920E_54600N.zip",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -123.110021678735,
+              49.2926955027723
+            ],
+            [
+              -123.110041702642,
+              49.3016906054122
+            ],
+            [
+              -123.09628642661,
+              49.3017028847166
+            ],
+            [
+              -123.096268905692,
+              49.2927077782037
+            ],
+            [
+              -123.110021678735,
+              49.2926955027723
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "status": "missing",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "id": "4840E_54540N",
+      "url": "https://webtransfer.vancouver.ca/opendata/2013GeoTIFF/4840E_54540N.zip",
+      "path": "data\\raw\\reference-2013\\4840E_54540N.zip",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -123.21980273876,
+              49.2385675846008
+            ],
+            [
+              -123.219842666468,
+              49.2475627222743
+            ],
+            [
+              -123.206102617515,
+              49.2475880511384
+            ],
+            [
+              -123.206065185223,
+              49.238592905478
+            ],
+            [
+              -123.21980273876,
+              49.2385675846008
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "status": "missing",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "id": "4850E_54540N",
+      "url": "https://webtransfer.vancouver.ca/opendata/2013GeoTIFF/4850E_54540N.zip",
+      "path": "data\\raw\\reference-2013\\4850E_54540N.zip",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -123.206065185223,
+              49.238592905478
+            ],
+            [
+              -123.206102617515,
+              49.2475880511384
+            ],
+            [
+              -123.192362549893,
+              49.2476117459109
+            ],
+            [
+              -123.192327613029,
+              49.2386165927789
+            ],
+            [
+              -123.206065185223,
+              49.238592905478
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "status": "missing",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "id": "4850E_54550N",
+      "url": "https://webtransfer.vancouver.ca/opendata/2013GeoTIFF/4850E_54550N.zip",
+      "path": "data\\raw\\reference-2013\\4850E_54550N.zip",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -123.206102617515,
+              49.2475880511384
+            ],
+            [
+              -123.206140068476,
+              49.2565831826985
+            ],
+            [
+              -123.192397504182,
+              49.2566068849455
+            ],
+            [
+              -123.192362549893,
+              49.2476117459109
+            ],
+            [
+              -123.206102617515,
+              49.2475880511384
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "status": "missing",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "id": "4870E_54540N",
+      "url": "https://webtransfer.vancouver.ca/opendata/2013GeoTIFF/4870E_54540N.zip",
+      "path": "data\\raw\\reference-2013\\4870E_54540N.zip",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -123.178590023421,
+              49.2386386464984
+            ],
+            [
+              -123.178622464847,
+              49.2476338065868
+            ],
+            [
+              -123.16488236362,
+              49.2476542331611
+            ],
+            [
+              -123.164852417644,
+              49.2386590666315
+            ],
+            [
+              -123.178590023421,
+              49.2386386464984
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "status": "missing",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "id": "4880E_54560N",
+      "url": "https://webtransfer.vancouver.ca/opendata/2013GeoTIFF/4880E_54560N.zip",
+      "path": "data\\raw\\reference-2013\\4880E_54560N.zip",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -123.164912324531,
+              49.2566493855979
+            ],
+            [
+              -123.164942300687,
+              49.265644613876
+            ],
+            [
+              -123.151197076507,
+              49.2656634183506
+            ],
+            [
+              -123.151169598346,
+              49.2566681841423
+            ],
+            [
+              -123.164912324531,
+              49.2566493855979
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "status": "missing",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "id": "4870E_54570N",
+      "url": "https://webtransfer.vancouver.ca/opendata/2013GeoTIFF/4870E_54570N.zip",
+      "path": "data\\raw\\reference-2013\\4870E_54570N.zip",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -123.178687396572,
+              49.2656241744125
+            ],
+            [
+              -123.178719886568,
+              49.2746192922178
+            ],
+            [
+              -123.164972291497,
+              49.2746397381294
+            ],
+            [
+              -123.164942300687,
+              49.265644613876
+            ],
+            [
+              -123.178687396572,
+              49.2656241744125
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "status": "missing",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "id": "4880E_54570N",
+      "url": "https://webtransfer.vancouver.ca/opendata/2013GeoTIFF/4880E_54570N.zip",
+      "path": "data\\raw\\reference-2013\\4880E_54570N.zip",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -123.164942300687,
+              49.265644613876
+            ],
+            [
+              -123.164972291497,
+              49.2746397381294
+            ],
+            [
+              -123.151224568101,
+              49.2746585485363
+            ],
+            [
+              -123.151197076507,
+              49.2656634183506
+            ],
+            [
+              -123.164942300687,
+              49.265644613876
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "status": "missing",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "id": "4880E_54610N",
+      "url": "https://webtransfer.vancouver.ca/opendata/2013GeoTIFF/4880E_54610N.zip",
+      "path": "data\\raw\\reference-2013\\4880E_54610N.zip",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -123.165062354052,
+              49.3016251162812
+            ],
+            [
+              -123.165092404777,
+              49.310620184176
+            ],
+            [
+              -123.151334672015,
+              49.3106390183337
+            ],
+            [
+              -123.151307125499,
+              49.301643944498
+            ],
+            [
+              -123.165062354052,
+              49.3016251162812
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "status": "missing",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "id": "4900E_54580N",
+      "url": "https://webtransfer.vancouver.ca/opendata/2013GeoTIFF/4900E_54580N.zip",
+      "path": "data\\raw\\reference-2013\\4900E_54580N.zip",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -123.137476944349,
+              49.2746757231241
+            ],
+            [
+              -123.13750194921,
+              49.2836708446397
+            ],
+            [
+              -123.123751812529,
+              49.2836863884688
+            ],
+            [
+              -123.123729308127,
+              49.2746912620509
+            ],
+            [
+              -123.137476944349,
+              49.2746757231241
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "status": "missing",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "id": "4910E_54570N",
+      "url": "https://webtransfer.vancouver.ca/opendata/2013GeoTIFF/4910E_54570N.zip",
+      "path": "data\\raw\\reference-2013\\4910E_54570N.zip",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -123.123706814948,
+              49.2656961215483
+            ],
+            [
+              -123.123729308127,
+              49.2746912620509
+            ],
+            [
+              -123.109981660681,
+              49.2747051653133
+            ],
+            [
+              -123.109961666722,
+              49.2657100204259
+            ],
+            [
+              -123.123706814948,
+              49.2656961215483
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "status": "missing",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "id": "4910E_54610N",
+      "url": "https://webtransfer.vancouver.ca/opendata/2013GeoTIFF/4910E_54610N.zip",
+      "path": "data\\raw\\reference-2013\\4910E_54610N.zip",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -123.123796855256,
+              49.3016766889861
+            ],
+            [
+              -123.12381939337,
+              49.3106717731537
+            ],
+            [
+              -123.110061736545,
+              49.3106856939709
+            ],
+            [
+              -123.110041702642,
+              49.3016906054122
+            ],
+            [
+              -123.123796855256,
+              49.3016766889861
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "status": "missing",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "id": "4830E_54580N",
+      "url": "https://webtransfer.vancouver.ca/opendata/2013GeoTIFF/4830E_54580N.zip",
+      "path": "data\\raw\\reference-2013\\4830E_54580N.zip",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -123.233710205629,
+              49.2745211519072
+            ],
+            [
+              -123.233752713475,
+              49.2835162246576
+            ],
+            [
+              -123.220002576964,
+              49.2835432218765
+            ],
+            [
+              -123.219962569525,
+              49.2745481406116
+            ],
+            [
+              -123.233710205629,
+              49.2745211519072
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "status": "missing",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "id": "4890E_54570N",
+      "url": "https://webtransfer.vancouver.ca/opendata/2013GeoTIFF/4890E_54570N.zip",
+      "path": "data\\raw\\reference-2013\\4890E_54570N.zip",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -123.151197076507,
+              49.2656634183506
+            ],
+            [
+              -123.151224568101,
+              49.2746585485363
+            ],
+            [
+              -123.137476944349,
+              49.2746757231241
+            ],
+            [
+              -123.137451951959,
+              49.2656805875221
+            ],
+            [
+              -123.151197076507,
+              49.2656634183506
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "status": "missing",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "id": "4890E_54620N",
+      "url": "https://webtransfer.vancouver.ca/opendata/2013GeoTIFF/4890E_54620N.zip",
+      "path": "data\\raw\\reference-2013\\4890E_54620N.zip",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -123.151334672015,
+              49.3106390183337
+            ],
+            [
+              -123.15136223256,
+              49.3196341680162
+            ],
+            [
+              -123.137602094017,
+              49.3196513697156
+            ],
+            [
+              -123.137577038944,
+              49.3106562146068
+            ],
+            [
+              -123.151334672015,
+              49.3106390183337
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "status": "missing",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "id": "4880E_54550N",
+      "url": "https://webtransfer.vancouver.ca/opendata/2013GeoTIFF/4880E_54550N.zip",
+      "path": "data\\raw\\reference-2013\\4880E_54550N.zip",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -123.16488236362,
+              49.2476542331611
+            ],
+            [
+              -123.164912324531,
+              49.2566493855979
+            ],
+            [
+              -123.151169598346,
+              49.2566681841423
+            ],
+            [
+              -123.151142134159,
+              49.2476730257774
+            ],
+            [
+              -123.16488236362,
+              49.2476542331611
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "status": "missing",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "id": "4860E_54560N",
+      "url": "https://webtransfer.vancouver.ca/opendata/2013GeoTIFF/4860E_54560N.zip",
+      "path": "data\\raw\\reference-2013\\4860E_54560N.zip",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -123.192397504182,
+              49.2566068849455
+            ],
+            [
+              -123.192432476256,
+              49.2656020998163
+            ],
+            [
+              -123.178687396572,
+              49.2656241744125
+            ],
+            [
+              -123.178654922452,
+              49.2566289525802
+            ],
+            [
+              -123.192397504182,
+              49.2566068849455
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "status": "missing",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "id": "4860E_54570N",
+      "url": "https://webtransfer.vancouver.ca/opendata/2013GeoTIFF/4860E_54570N.zip",
+      "path": "data\\raw\\reference-2013\\4860E_54570N.zip",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -123.192432476256,
+              49.2656020998163
+            ],
+            [
+              -123.192467465427,
+              49.2745972106577
+            ],
+            [
+              -123.178719886568,
+              49.2746192922178
+            ],
+            [
+              -123.178687396572,
+              49.2656241744125
+            ],
+            [
+              -123.192432476256,
+              49.2656020998163
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "status": "missing",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "id": "4870E_54550N",
+      "url": "https://webtransfer.vancouver.ca/opendata/2013GeoTIFF/4870E_54550N.zip",
+      "path": "data\\raw\\reference-2013\\4870E_54550N.zip",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -123.178622464847,
+              49.2476338065868
+            ],
+            [
+              -123.178654922452,
+              49.2566289525802
+            ],
+            [
+              -123.164912324531,
+              49.2566493855979
+            ],
+            [
+              -123.16488236362,
+              49.2476542331611
+            ],
+            [
+              -123.178622464847,
+              49.2476338065868
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "status": "missing",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "id": "4880E_54600N",
+      "url": "https://webtransfer.vancouver.ca/opendata/2013GeoTIFF/4880E_54600N.zip",
+      "path": "data\\raw\\reference-2013\\4880E_54600N.zip",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -123.165032318921,
+              49.2926302141636
+            ],
+            [
+              -123.165062354653,
+              49.3016252961467
+            ],
+            [
+              -123.15130712605,
+              49.3016441243636
+            ],
+            [
+              -123.151279593277,
+              49.2926490364418
+            ],
+            [
+              -123.165032318921,
+              49.2926302141636
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "status": "missing",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "id": "4850E_54560N",
+      "url": "https://webtransfer.vancouver.ca/opendata/2013GeoTIFF/4850E_54560N.zip",
+      "path": "data\\raw\\reference-2013\\4850E_54560N.zip",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -123.206140068476,
+              49.2565831826985
+            ],
+            [
+              -123.206177538493,
+              49.2655783900922
+            ],
+            [
+              -123.192432476256,
+              49.2656020998163
+            ],
+            [
+              -123.192397504182,
+              49.2566068849455
+            ],
+            [
+              -123.206140068476,
+              49.2565831826985
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "status": "missing",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "id": "4870E_54560N",
+      "url": "https://webtransfer.vancouver.ca/opendata/2013GeoTIFF/4870E_54560N.zip",
+      "path": "data\\raw\\reference-2013\\4870E_54560N.zip",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -123.178654922452,
+              49.2566289525802
+            ],
+            [
+              -123.178687396572,
+              49.2656241744125
+            ],
+            [
+              -123.164942300687,
+              49.265644613876
+            ],
+            [
+              -123.164912324531,
+              49.2566493855979
+            ],
+            [
+              -123.178654922452,
+              49.2566289525802
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "status": "missing",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "id": "4840E_54580N",
+      "url": "https://webtransfer.vancouver.ca/opendata/2013GeoTIFF/4840E_54580N.zip",
+      "path": "data\\raw\\reference-2013\\4840E_54580N.zip",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -123.219962569525,
+              49.2745481406116
+            ],
+            [
+              -123.220002576964,
+              49.2835432218765
+            ],
+            [
+              -123.206252533869,
+              49.2835685827172
+            ],
+            [
+              -123.206215026828,
+              49.2745734934538
+            ],
+            [
+              -123.219962569525,
+              49.2745481406116
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "status": "missing",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "id": "4910E_54540N",
+      "url": "https://webtransfer.vancouver.ca/opendata/2013GeoTIFF/4910E_54540N.zip",
+      "path": "data\\raw\\reference-2013\\4910E_54540N.zip",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -123.123639402455,
+              49.238710525591
+            ],
+            [
+              -123.123661862007,
+              49.2477057083522
+            ],
+            [
+              -123.109921708507,
+              49.2477195984651
+            ],
+            [
+              -123.109901744438,
+              49.2387244113239
+            ],
+            [
+              -123.123639402455,
+              49.238710525591
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "status": "missing",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "id": "4920E_54570N",
+      "url": "https://webtransfer.vancouver.ca/opendata/2013GeoTIFF/4920E_54570N.zip",
+      "path": "data\\raw\\reference-2013\\4920E_54570N.zip",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -123.109961666722,
+              49.2657100204259
+            ],
+            [
+              -123.109981660681,
+              49.2747051653133
+            ],
+            [
+              -123.096233889898,
+              49.2747174330025
+            ],
+            [
+              -123.096216395185,
+              49.2657222842463
+            ],
+            [
+              -123.109961666722,
+              49.2657100204259
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "status": "missing",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "id": "4880E_54540N",
+      "url": "https://webtransfer.vancouver.ca/opendata/2013GeoTIFF/4880E_54540N.zip",
+      "path": "data\\raw\\reference-2013\\4880E_54540N.zip",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -123.164852417644,
+              49.2386590666315
+            ],
+            [
+              -123.16488236362,
+              49.2476542331611
+            ],
+            [
+              -123.151142134159,
+              49.2476730257774
+            ],
+            [
+              -123.151114683663,
+              49.238677853322
+            ],
+            [
+              -123.164852417644,
+              49.2386590666315
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "status": "missing",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "id": "4900E_54560N",
+      "url": "https://webtransfer.vancouver.ca/opendata/2013GeoTIFF/4900E_54560N.zip",
+      "path": "data\\raw\\reference-2013\\4900E_54560N.zip",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -123.137426971781,
+              49.2566853478992
+            ],
+            [
+              -123.137451951959,
+              49.2656805875221
+            ],
+            [
+              -123.123706814948,
+              49.2656961215483
+            ],
+            [
+              -123.123684332761,
+              49.2567008770266
+            ],
+            [
+              -123.137426971781,
+              49.2566853478992
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "status": "missing",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "id": "4890E_54540N",
+      "url": "https://webtransfer.vancouver.ca/opendata/2013GeoTIFF/4890E_54540N.zip",
+      "path": "data\\raw\\reference-2013\\4890E_54540N.zip",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -123.151114683663,
+              49.238677853322
+            ],
+            [
+              -123.151142134159,
+              49.2476730257774
+            ],
+            [
+              -123.137402004306,
+              49.2476901841218
+            ],
+            [
+              -123.137377049278,
+              49.2386950062559
+            ],
+            [
+              -123.151114683663,
+              49.238677853322
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "status": "missing",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "id": "4900E_54570N",
+      "url": "https://webtransfer.vancouver.ca/opendata/2013GeoTIFF/4900E_54570N.zip",
+      "path": "data\\raw\\reference-2013\\4900E_54570N.zip",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -123.137451951959,
+              49.2656805875221
+            ],
+            [
+              -123.137476944349,
+              49.2746757231241
+            ],
+            [
+              -123.123729308127,
+              49.2746912620509
+            ],
+            [
+              -123.123706814948,
+              49.2656961215483
+            ],
+            [
+              -123.137451951959,
+              49.2656805875221
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "status": "missing",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "id": "4900E_54600N",
+      "url": "https://webtransfer.vancouver.ca/opendata/2013GeoTIFF/4900E_54600N.zip",
+      "path": "data\\raw\\reference-2013\\4900E_54600N.zip",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -123.137526966799,
+              49.2926660420024
+            ],
+            [
+              -123.137551996625,
+              49.3016611353468
+            ],
+            [
+              -123.123796855256,
+              49.3016766889861
+            ],
+            [
+              -123.123774328386,
+              49.2926815907357
+            ],
+            [
+              -123.137526966799,
+              49.2926660420024
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "status": "missing",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "id": "4920E_54540N",
+      "url": "https://webtransfer.vancouver.ca/opendata/2013GeoTIFF/4920E_54540N.zip",
+      "path": "data\\raw\\reference-2013\\4920E_54540N.zip",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -123.109901744438,
+              49.2387244113239
+            ],
+            [
+              -123.109921708507,
+              49.2477195984651
+            ],
+            [
+              -123.09618143175,
+              49.2477318545517
+            ],
+            [
+              -123.096163963191,
+              49.2387366635459
+            ],
+            [
+              -123.109901744438,
+              49.2387244113239
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "status": "missing",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "id": "4920E_54580N",
+      "url": "https://webtransfer.vancouver.ca/opendata/2013GeoTIFF/4920E_54580N.zip",
+      "path": "data\\raw\\reference-2013\\4920E_54580N.zip",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -123.109981660681,
+              49.2747051653133
+            ],
+            [
+              -123.110001664617,
+              49.2837002961175
+            ],
+            [
+              -123.09625139334,
+              49.2837125676771
+            ],
+            [
+              -123.096233889898,
+              49.2747174330025
+            ],
+            [
+              -123.109981660681,
+              49.2747051653133
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "status": "missing",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "id": "4850E_54570N",
+      "url": "https://webtransfer.vancouver.ca/opendata/2013GeoTIFF/4850E_54570N.zip",
+      "path": "data\\raw\\reference-2013\\4850E_54570N.zip",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -123.206177538493,
+              49.2655783900922
+            ],
+            [
+              -123.206215026828,
+              49.2745734934538
+            ],
+            [
+              -123.192467465427,
+              49.2745972106577
+            ],
+            [
+              -123.192432476256,
+              49.2656020998163
+            ],
+            [
+              -123.206177538493,
+              49.2655783900922
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "status": "missing",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "id": "4860E_54580N",
+      "url": "https://webtransfer.vancouver.ca/opendata/2013GeoTIFF/4860E_54580N.zip",
+      "path": "data\\raw\\reference-2013\\4860E_54580N.zip",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -123.192467465427,
+              49.2745972106577
+            ],
+            [
+              -123.192502472057,
+              49.2835923074035
+            ],
+            [
+              -123.178752392775,
+              49.2836143959301
+            ],
+            [
+              -123.178719886568,
+              49.2746192922178
+            ],
+            [
+              -123.192467465427,
+              49.2745972106577
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "status": "missing",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "id": "4880E_54590N",
+      "url": "https://webtransfer.vancouver.ca/opendata/2013GeoTIFF/4880E_54590N.zip",
+      "path": "data\\raw\\reference-2013\\4880E_54590N.zip",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -123.165002297272,
+              49.2836348482921
+            ],
+            [
+              -123.165032318921,
+              49.2926302141636
+            ],
+            [
+              -123.151279593277,
+              49.2926490364418
+            ],
+            [
+              -123.151252073413,
+              49.2836536646335
+            ],
+            [
+              -123.165002297272,
+              49.2836348482921
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "status": "missing",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "id": "4890E_54590N",
+      "url": "https://webtransfer.vancouver.ca/opendata/2013GeoTIFF/4890E_54590N.zip",
+      "path": "data\\raw\\reference-2013\\4890E_54590N.zip",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -123.151252073413,
+              49.2836536646335
+            ],
+            [
+              -123.151279592726,
+              49.2926488565758
+            ],
+            [
+              -123.137526966799,
+              49.2926660420024
+            ],
+            [
+              -123.13750194921,
+              49.2836708446397
+            ],
+            [
+              -123.151252073413,
+              49.2836536646335
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "status": "missing",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "id": "4900E_54540N",
+      "url": "https://webtransfer.vancouver.ca/opendata/2013GeoTIFF/4900E_54540N.zip",
+      "path": "data\\raw\\reference-2013\\4900E_54540N.zip",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -123.137377049278,
+              49.2386950062559
+            ],
+            [
+              -123.137402004306,
+              49.2476901841218
+            ],
+            [
+              -123.123661862007,
+              49.2477057083522
+            ],
+            [
+              -123.123639402455,
+              49.238710525591
+            ],
+            [
+              -123.137377049278,
+              49.2386950062559
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "status": "missing",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "id": "4920E_54610N",
+      "url": "https://webtransfer.vancouver.ca/opendata/2013GeoTIFF/4920E_54610N.zip",
+      "path": "data\\raw\\reference-2013\\4920E_54610N.zip",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -123.110041702642,
+              49.3016906054122
+            ],
+            [
+              -123.110061736545,
+              49.3106856939709
+            ],
+            [
+              -123.096303956273,
+              49.3106979771498
+            ],
+            [
+              -123.09628642661,
+              49.3017028847166
+            ],
+            [
+              -123.110041702642,
+              49.3016906054122
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "status": "missing",
+      "error": "HTTP Error 403: Forbidden"
+    }
+  ],
+  "policy": "Reference candidates only. Product semantics and datum overlap must be validated before use."
+}

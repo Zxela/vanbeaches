@@ -1,6 +1,9 @@
+import type { EnvironmentalWeather } from './environment.js';
+
 export type WeatherCondition = 'sunny' | 'partly-cloudy' | 'cloudy' | 'rainy' | 'stormy' | 'foggy';
 
 export interface WeatherForecast {
+  environment?: { current: EnvironmentalWeather | null; hourly: EnvironmentalWeather[] };
   beachId: string;
   current: {
     temperature: number;

@@ -1,0 +1,104 @@
+{
+  "version": 1,
+  "provenance": "Design priors authored for Phase 4, September 2026. No attendance measurements. Capacity is a visualization reference, not a legal or surveyed capacity. Curves and modifiers are uncalibrated hypotheses.",
+  "timeZone": "America/Vancouver",
+  "holidayDates": [],
+  "curves": {
+    "weekday": [
+      0.01, 0.01, 0.01, 0.01, 0.01, 0.02, 0.04, 0.07, 0.1, 0.14, 0.2, 0.28, 0.38, 0.46, 0.5, 0.52,
+      0.56, 0.62, 0.64, 0.59, 0.48, 0.29, 0.12, 0.04
+    ],
+    "weekend": [
+      0.02, 0.01, 0.01, 0.01, 0.01, 0.02, 0.04, 0.07, 0.12, 0.22, 0.36, 0.5, 0.66, 0.79, 0.88, 0.92,
+      0.88, 0.8, 0.71, 0.62, 0.49, 0.3, 0.13, 0.05
+    ]
+  },
+  "modifiers": {
+    "season": [0.22, 0.24, 0.35, 0.5, 0.72, 0.9, 1, 1, 0.78, 0.48, 0.28, 0.22],
+    "temperature": [[-10, 0.12], [5, 0.25], [12, 0.5], [18, 0.8], [24, 1], [30, 1.1], [38, 0.65]],
+    "precipitation": [[0, 1], [0.2, 0.8], [1, 0.42], [3, 0.17], [8, 0.06]],
+    "wind": [[0, 1], [15, 1], [30, 0.7], [50, 0.3], [80, 0.1]],
+    "cloudPenalty": 0.22,
+    "nightFactor": 0.15,
+    "nightElevation": -6,
+    "sunsetWindowMinutes": 100,
+    "lowTideCD": 1.8,
+    "lowTideBoost": 1.08,
+    "peopleRounding": 25
+  },
+  "thresholds": { "moderate": 0.2, "busy": 0.5, "veryBusy": 0.78 },
+  "beaches": {
+    "kitsilano-beach": {
+      "capacityEstimate": 1200,
+      "baselineScale": 1.05,
+      "sunsetBoost": 0.08,
+      "tidal": false,
+      "profile": "social",
+      "calibrationScale": 1
+    },
+    "spanish-banks": {
+      "capacityEstimate": 1600,
+      "baselineScale": 0.68,
+      "sunsetBoost": 0.08,
+      "tidal": true,
+      "profile": "spread",
+      "calibrationScale": 1
+    },
+    "english-bay": {
+      "capacityEstimate": 1500,
+      "baselineScale": 1.05,
+      "sunsetBoost": 0.7,
+      "tidal": false,
+      "profile": "urban",
+      "calibrationScale": 1
+    },
+    "wreck-beach": {
+      "capacityEstimate": 650,
+      "baselineScale": 0.62,
+      "sunsetBoost": 0.12,
+      "tidal": false,
+      "profile": "natural",
+      "calibrationScale": 1
+    },
+    "jericho-beach": {
+      "capacityEstimate": 800,
+      "baselineScale": 0.7,
+      "sunsetBoost": 0.08,
+      "tidal": true,
+      "profile": "spread",
+      "calibrationScale": 1
+    },
+    "locarno-beach": {
+      "capacityEstimate": 600,
+      "baselineScale": 0.55,
+      "sunsetBoost": 0.08,
+      "tidal": true,
+      "profile": "spread",
+      "calibrationScale": 1
+    },
+    "second-beach": {
+      "capacityEstimate": 700,
+      "baselineScale": 0.8,
+      "sunsetBoost": 0.15,
+      "tidal": false,
+      "profile": "social",
+      "calibrationScale": 1
+    },
+    "sunset-beach": {
+      "capacityEstimate": 750,
+      "baselineScale": 0.82,
+      "sunsetBoost": 0.5,
+      "tidal": false,
+      "profile": "urban",
+      "calibrationScale": 1
+    },
+    "third-beach": {
+      "capacityEstimate": 500,
+      "baselineScale": 0.6,
+      "sunsetBoost": 0.3,
+      "tidal": false,
+      "profile": "natural",
+      "calibrationScale": 1
+    }
+  }
+}

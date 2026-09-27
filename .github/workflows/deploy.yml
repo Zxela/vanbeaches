@@ -10,6 +10,11 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+env:
+  COAST_MANIFEST_URL: https://vanbeaches-world.alex-zvaniga.workers.dev/world-e14570b34f5918329b77/manifest.json
+  COAST_ASSET_ARCHIVE_URL: https://vanbeaches-world.alex-zvaniga.workers.dev/world-e14570b34f5918329b77/coast-web.tar.gz
+  COAST_ASSET_ARCHIVE_SHA256: fc67cbe6971a3746addcdb8b644e98e386ff801b58623d092856b3208d99538b
+
 jobs:
   build:
     name: Install & Build
@@ -32,6 +37,8 @@ jobs:
 
       - name: Build client
         run: pnpm --filter @van-beaches/client build
+        env:
+          VITE_COAST_MANIFEST_URL: ${{ env.COAST_MANIFEST_URL }}
 
       - name: Upload shared dist
         uses: actions/upload-artifact@v4
@@ -99,6 +106,9 @@ jobs:
       - name: Type-check
         run: pnpm type-check
 
+      - name: Type-check the independent R2 delivery Worker
+        run: pnpm exec tsc -p world-assets/tsconfig.json
+
   test:
     name: Test
     needs: build
@@ -124,6 +134,12 @@ jobs:
 
       - name: Test
         run: pnpm test
+
+      - name: Test Pages functions and R2 delivery
+        run: pnpm exec vitest run --config functions/vitest.config.ts functions world-assets
+
+      - name: Test hosted release identity and independent asset loading
+        run: node --test scripts/coast-assets.test.mjs
 
   e2e:
     name: Browser tests
@@ -151,8 +167,24 @@ jobs:
       - name: Install Chromium
         run: pnpm --filter @van-beaches/client exec playwright install --with-deps chromium
 
+      - name: Restore the pinned R2 world for browser tests only
+        run: node scripts/coast-assets.mjs prepare
+
+      - name: Verify the restored test world
+        run: node scripts/coast-assets.mjs verify
+
       - name: Run browser tests
-        run: pnpm --filter @van-beaches/client exec playwright test --project=chromium
+        run: pnpm --filter @van-beaches/client exec playwright test --project=chromium --workers=1
+
+      - name: Preserve world acceptance captures and failure traces
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: browser-acceptance
+          path: |
+            client/playwright-report
+            client/test-results
+          retention-days: 7
 
   deploy:
     name: Deploy
@@ -189,6 +221,14 @@ jobs:
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+
+      - name: Verify coastal assets before deployment
+        run: node scripts/coast-assets.mjs verify client/dist/coast-assets
+        env:
+          VITE_COAST_MANIFEST_URL: ${{ env.COAST_MANIFEST_URL }}
+
+      - name: Confirm world assets stay outside the app deployment
+        run: test ! -d client/dist/coast-assets
 
       - name: Deploy Pages (preview)
         if: github.event_name == 'pull_request'

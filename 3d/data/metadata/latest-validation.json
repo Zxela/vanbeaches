@@ -1,0 +1,449 @@
+{
+  "structural_checks_pass": true,
+  "numerical_acceptance_pass": true,
+  "source_acquisition_complete": true,
+  "primary_source_preservation_pass": true,
+  "secondary_above_tide_range_pass": true,
+  "secondary_ground_nodes": 14100,
+  "orientation": {
+    "west_to_east_beach_order": true,
+    "stanley_north_of_kitsilano": true,
+    "coastal_destinations_inside": true,
+    "Wreck Beach (gazetteer centre)_inside": true,
+    "Wreck Beach (gazetteer centre)_roundtrip": true
+  },
+  "bathymetry_sign_check": {
+    "name": "English Bay basin sign check",
+    "status": "pass",
+    "world_z_m": -27.679922103881836
+  },
+  "inland_destinations_inside_aoi": {
+    "trout-lake": false
+  },
+  "tile_errors": [],
+  "z_range_m": [
+    -123.18319702148438,
+    101.9499282836914
+  ],
+  "coverage_nodes": {
+    "0": 193584,
+    "1": 471764,
+    "2": 526732,
+    "3": 11071,
+    "4": 14100
+  },
+  "missing_components": 302,
+  "overlap": {
+    "overlap_nodes": 5999,
+    "overlap_conflicts": 1104,
+    "overlap_p95_m": 7.443894863128662
+  },
+  "source_review": {
+    "report": "source-review.json",
+    "large_gap_count": 29,
+    "known_fraction_inside_aoi": 0.937196071605255,
+    "rejected_source_join_faces_active": 20767
+  },
+  "largest_overlap_conflicts": [
+    {
+      "longitude": -123.10109281492525,
+      "latitude": 49.29028062832481,
+      "local_xy": [
+        6467.890775504697,
+        1130.4556478681043
+      ],
+      "lidar_z_m": 4.082626819610596,
+      "nonna_z_m": -22.936206817626953,
+      "difference_m": 27.01883316040039
+    },
+    {
+      "longitude": -123.10095529481049,
+      "latitude": 49.29028074854705,
+      "local_xy": [
+        6477.890775504697,
+        1130.4556478681043
+      ],
+      "lidar_z_m": 4.0690083503723145,
+      "nonna_z_m": -22.936206817626953,
+      "difference_m": 27.00521469116211
+    },
+    {
+      "longitude": -123.10123015086536,
+      "latitude": 49.290190556454846,
+      "local_xy": [
+        6457.890775504697,
+        1120.4556478681043
+      ],
+      "lidar_z_m": 3.772428274154663,
+      "nonna_z_m": -22.445899963378906,
+      "difference_m": 26.21832847595215
+    },
+    {
+      "longitude": -123.10164141600666,
+      "latitude": 49.28956053389647,
+      "local_xy": [
+        6427.890775504697,
+        1050.4556478681043
+      ],
+      "lidar_z_m": 3.9071738719940186,
+      "nonna_z_m": -19.930683135986328,
+      "difference_m": 23.83785629272461
+    },
+    {
+      "longitude": -123.10164160092448,
+      "latitude": 49.289650485389245,
+      "local_xy": [
+        6427.890775504697,
+        1060.4556478681043
+      ],
+      "lidar_z_m": 3.2277514934539795,
+      "nonna_z_m": -19.930683135986328,
+      "difference_m": 23.15843391418457
+    },
+    {
+      "longitude": -123.1001301741028,
+      "latitude": 49.290281466443744,
+      "local_xy": [
+        6537.890775504697,
+        1130.4556478681043
+      ],
+      "lidar_z_m": 3.8919622898101807,
+      "nonna_z_m": -18.611000061035156,
+      "difference_m": 22.502962112426758
+    },
+    {
+      "longitude": -123.10054291738435,
+      "latitude": 49.290371059716406,
+      "local_xy": [
+        6507.890775504697,
+        1140.4556478681043
+      ],
+      "lidar_z_m": 3.90826416015625,
+      "nonna_z_m": -18.543292999267578,
+      "difference_m": 22.451557159423828
+    },
+    {
+      "longitude": -123.1002678766462,
+      "latitude": 49.29037129868875,
+      "local_xy": [
+        6527.890775504697,
+        1140.4556478681043
+      ],
+      "lidar_z_m": 3.9367141723632812,
+      "nonna_z_m": -18.349544525146484,
+      "difference_m": 22.286258697509766
+    },
+    {
+      "longitude": -123.10040539701572,
+      "latitude": 49.29037117928442,
+      "local_xy": [
+        6517.890775504697,
+        1140.4556478681043
+      ],
+      "lidar_z_m": 3.8970487117767334,
+      "nonna_z_m": -18.349544525146484,
+      "difference_m": 22.246593475341797
+    },
+    {
+      "longitude": -123.1142924541701,
+      "latitude": 49.28927885902392,
+      "local_xy": [
+        5507.890775504697,
+        1020.4556478681043
+      ],
+      "lidar_z_m": 9.190757751464844,
+      "nonna_z_m": -12.73283576965332,
+      "difference_m": 21.923593521118164
+    },
+    {
+      "longitude": -123.11484126965776,
+      "latitude": 49.288738604895606,
+      "local_xy": [
+        5467.890775504697,
+        960.4556478681043
+      ],
+      "lidar_z_m": 11.037702560424805,
+      "nonna_z_m": -10.879201889038086,
+      "difference_m": 21.91690444946289
+    },
+    {
+      "longitude": -123.1019158959738,
+      "latitude": 49.28929043717337,
+      "local_xy": [
+        6407.890775504697,
+        1020.4556478681043
+      ],
+      "lidar_z_m": 2.525969982147217,
+      "nonna_z_m": -19.017520904541016,
+      "difference_m": 21.54349136352539
+    },
+    {
+      "longitude": -123.1017789341152,
+      "latitude": 49.28956041285899,
+      "local_xy": [
+        6417.890775504697,
+        1050.4556478681043
+      ],
+      "lidar_z_m": 1.3430224657058716,
+      "nonna_z_m": -19.930683135986328,
+      "difference_m": 21.273706436157227
+    },
+    {
+      "longitude": -123.1015044519028,
+      "latitude": 49.28983050924555,
+      "local_xy": [
+        6437.890775504697,
+        1080.4556478681043
+      ],
+      "lidar_z_m": 3.5750365257263184,
+      "nonna_z_m": -16.763648986816406,
+      "difference_m": 20.338685989379883
+    },
+    {
+      "longitude": -123.10205229935572,
+      "latitude": 49.28875060680504,
+      "local_xy": [
+        6397.890775504697,
+        960.4556478681043
+      ],
+      "lidar_z_m": 3.9833452701568604,
+      "nonna_z_m": -16.159523010253906,
+      "difference_m": 20.142868041992188
+    },
+    {
+      "longitude": -123.10205211369656,
+      "latitude": 49.28866065529933,
+      "local_xy": [
+        6397.890775504697,
+        950.4556478681043
+      ],
+      "lidar_z_m": 3.9827797412872314,
+      "nonna_z_m": -16.159523010253906,
+      "difference_m": 20.142303466796875
+    },
+    {
+      "longitude": -123.10177911928324,
+      "latitude": 49.28965036435138,
+      "local_xy": [
+        6417.890775504697,
+        1060.4556478681043
+      ],
+      "lidar_z_m": 0.20285069942474365,
+      "nonna_z_m": -19.930683135986328,
+      "difference_m": 20.133533477783203
+    },
+    {
+      "longitude": -123.11429224623869,
+      "latitude": 49.28918890756281,
+      "local_xy": [
+        5507.890775504697,
+        1010.4556478681043
+      ],
+      "lidar_z_m": 7.227214813232422,
+      "nonna_z_m": -12.70440673828125,
+      "difference_m": 19.931621551513672
+    },
+    {
+      "longitude": -123.10191441268367,
+      "latitude": 49.28857082515278,
+      "local_xy": [
+        6407.890775504697,
+        940.4556478681043
+      ],
+      "lidar_z_m": 3.995427370071411,
+      "nonna_z_m": -15.42487907409668,
+      "difference_m": 19.420307159423828
+    },
+    {
+      "longitude": -123.11277586592432,
+      "latitude": 49.28757126714625,
+      "local_xy": [
+        5617.890775504697,
+        830.4556478681043
+      ],
+      "lidar_z_m": 13.918724060058594,
+      "nonna_z_m": -5.384487152099609,
+      "difference_m": 19.303211212158203
+    }
+  ],
+  "source_boundary_max_step_m": 33.822776794433594,
+  "spanish_banks": {
+    "known_fraction": 0.981941558728615,
+    "tidal_area_changes": true,
+    "states": [
+      {
+        "tide_cd_m": 0.5,
+        "water_z_m": -2.5,
+        "spanish_banks_known_submerged_m2": 292000,
+        "spanish_banks_interpolated_submerged_m2": 3000
+      },
+      {
+        "tide_cd_m": 1.5,
+        "water_z_m": -1.5,
+        "spanish_banks_known_submerged_m2": 826000,
+        "spanish_banks_interpolated_submerged_m2": 3000
+      },
+      {
+        "tide_cd_m": 3.0,
+        "water_z_m": 0.0,
+        "spanish_banks_known_submerged_m2": 1763700,
+        "spanish_banks_interpolated_submerged_m2": 3200
+      },
+      {
+        "tide_cd_m": 4.5,
+        "water_z_m": 1.5,
+        "spanish_banks_known_submerged_m2": 1802500,
+        "spanish_banks_interpolated_submerged_m2": 3200
+      },
+      {
+        "tide_cd_m": 5.0,
+        "water_z_m": 2.0,
+        "spanish_banks_known_submerged_m2": 1815000,
+        "spanish_banks_interpolated_submerged_m2": 3200
+      }
+    ],
+    "northward_transects": [
+      {
+        "east_offset_m": -500,
+        "missing_samples": 0,
+        "crossings": [
+          {
+            "tide_cd_m": 0.5,
+            "shoreline_north_of_destination_m": 1260.9488988518715
+          },
+          {
+            "tide_cd_m": 1.5,
+            "shoreline_north_of_destination_m": null
+          },
+          {
+            "tide_cd_m": 3.0,
+            "shoreline_north_of_destination_m": 290.115296959877
+          },
+          {
+            "tide_cd_m": 4.5,
+            "shoreline_north_of_destination_m": 279.12332344055176
+          },
+          {
+            "tide_cd_m": 5.0,
+            "shoreline_north_of_destination_m": 276.6266622543335
+          }
+        ],
+        "shoreline_shift_m": 984.322236597538
+      },
+      {
+        "east_offset_m": -250,
+        "missing_samples": 0,
+        "crossings": [
+          {
+            "tide_cd_m": 0.5,
+            "shoreline_north_of_destination_m": 1180.6685572862625
+          },
+          {
+            "tide_cd_m": 1.5,
+            "shoreline_north_of_destination_m": null
+          },
+          {
+            "tide_cd_m": 3.0,
+            "shoreline_north_of_destination_m": 244.19496059417725
+          },
+          {
+            "tide_cd_m": 4.5,
+            "shoreline_north_of_destination_m": 235.35580205917358
+          },
+          {
+            "tide_cd_m": 5.0,
+            "shoreline_north_of_destination_m": 233.41718220710754
+          }
+        ],
+        "shoreline_shift_m": 947.251375079155
+      },
+      {
+        "east_offset_m": 0,
+        "missing_samples": 0,
+        "crossings": [
+          {
+            "tide_cd_m": 0.5,
+            "shoreline_north_of_destination_m": 1110.3418633937836
+          },
+          {
+            "tide_cd_m": 1.5,
+            "shoreline_north_of_destination_m": 751.7914924621582
+          },
+          {
+            "tide_cd_m": 3.0,
+            "shoreline_north_of_destination_m": 155.5269341468811
+          },
+          {
+            "tide_cd_m": 4.5,
+            "shoreline_north_of_destination_m": 138.21336936950684
+          },
+          {
+            "tide_cd_m": 5.0,
+            "shoreline_north_of_destination_m": 134.16290473937988
+          }
+        ],
+        "shoreline_shift_m": 976.1789586544037
+      },
+      {
+        "east_offset_m": 250,
+        "missing_samples": 17,
+        "crossings": [
+          {
+            "tide_cd_m": 0.5,
+            "shoreline_north_of_destination_m": null
+          },
+          {
+            "tide_cd_m": 1.5,
+            "shoreline_north_of_destination_m": null
+          },
+          {
+            "tide_cd_m": 3.0,
+            "shoreline_north_of_destination_m": null
+          },
+          {
+            "tide_cd_m": 4.5,
+            "shoreline_north_of_destination_m": null
+          },
+          {
+            "tide_cd_m": 5.0,
+            "shoreline_north_of_destination_m": null
+          }
+        ],
+        "shoreline_shift_m": null
+      },
+      {
+        "east_offset_m": 500,
+        "missing_samples": 12,
+        "crossings": [
+          {
+            "tide_cd_m": 0.5,
+            "shoreline_north_of_destination_m": null
+          },
+          {
+            "tide_cd_m": 1.5,
+            "shoreline_north_of_destination_m": null
+          },
+          {
+            "tide_cd_m": 3.0,
+            "shoreline_north_of_destination_m": null
+          },
+          {
+            "tide_cd_m": 4.5,
+            "shoreline_north_of_destination_m": null
+          },
+          {
+            "tide_cd_m": 5.0,
+            "shoreline_north_of_destination_m": null
+          }
+        ],
+        "shoreline_shift_m": null
+      }
+    ]
+  },
+  "warnings": [
+    "Measured land/NONNA overlap disagrees by > configured tolerance; inspect provenance and seams",
+    "Large elevation step at a measured-source boundary; inspect rejected joins"
+  ],
+  "source_caveats": "Known measurement gaps and source disagreements remain visible. Numerical acceptance is not survey or navigation certification.",
+  "non_navigation": true
+}

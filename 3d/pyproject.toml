@@ -1,0 +1,28 @@
+[project]
+name = "vanbeaches-coast"
+version = "0.1.0"
+description = "Offline Vancouver coastal GIS and Blender asset pipeline"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+  "numpy==2.2.6", "scipy==1.15.3", "rasterio==1.4.3",
+  "pyproj==3.7.1", "shapely==2.1.1", "laspy==2.6.1",
+  "lazrs==0.7.0", "PyYAML==6.0.2",
+]
+
+[project.optional-dependencies]
+dev = ["pytest==8.4.1", "ruff==0.11.13"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.setuptools]
+packages = ["gis"]
+
+[build-system]
+requires = ["setuptools==80.9.0"]
+build-backend = "setuptools.build_meta"

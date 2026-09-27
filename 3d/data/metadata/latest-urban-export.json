@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "assetUrl": "urban-ca62d8b451c4.json",
+  "sha256": "ca62d8b451c4ba3dd6e8556133eeb7c19c1ad6116a214457a0c2f37771055c8e",
+  "bytes": 4864284,
+  "coarseAssetUrl": "urban-skyline-cea5beac609f.json",
+  "coarseSha256": "cea5beac609f953259c44fdd97c34e683449643da89aec7e2220000c1899f639",
+  "coarseBytes": 978933,
+  "counts": {
+    "buildings": 11927,
+    "roads": 2449,
+    "bridges": 4,
+    "landcover": 521,
+    "waterfront": 894
+  },
+  "worldConfigSha256": "a87b3515abcafebcfa59cde186bd64b768e0247eb5c8ed2a6e18e1a6faaa90d4",
+  "configSha256": "72e4d6705f431df1aa62d5ce83243a392a2d835b8f1d37009dacc66dbae9713e",
+  "sources": [
+    {
+      "id": "city-buildings",
+      "url": "https://opendata.vancouver.ca/api/explore/v2.1/catalog/datasets/building-footprints-2009",
+      "license": "Open Government Licence - Vancouver",
+      "requestKey": "2ed3ac7e413c19e3200f5157fdca33ad0f03997ea56137b684e065d6d3e545ec",
+      "retrievedAt": "2026-09-19T08:19:14.178499+00:00",
+      "sha256": "9b6d776bb69a8dcdc6f84558b4c8002ccbf9e5ef5abd1ec280761ab1fb2a32a5"
+    },
+    {
+      "id": "osm-context",
+      "url": "https://www.openstreetmap.org/copyright",
+      "license": "ODbL 1.0; copyright OpenStreetMap contributors",
+      "requestKey": "e62dd3b1f34fa01473c9183c772e91aa9d1ace834c26f90ab3b6366370d799bd",
+      "retrievedAt": "2026-09-19T08:19:23.143093+00:00",
+      "sha256": "0381a26c25ad62167403f7ae3d4bcd3edb30d87319fed4f64148e1f0df9e4003"
+    },
+    {
+      "id": "osm-parks",
+      "url": "https://www.openstreetmap.org/copyright",
+      "license": "ODbL 1.0; copyright OpenStreetMap contributors",
+      "requestKey": "1b52eacdae0ec67ab82df6f36fe8d5745dc4ce5bfcb591fc27af359d12f71b6e",
+      "retrievedAt": "2026-09-19T08:26:36.350465+00:00",
+      "sha256": "51401175d19f94e600d8f02e8a9b1ec1cce7c9d8ab8597fddc77a1689f853901"
+    },
+    {
+      "id": "osm-towers",
+      "url": "https://www.openstreetmap.org/copyright",
+      "license": "ODbL 1.0; copyright OpenStreetMap contributors",
+      "requestKey": "1c3a6c391edad1e5a94639d6e3160133ec93ff73af1b2ef92462871ac233226c",
+      "retrievedAt": "2026-09-19T08:25:07.031899+00:00",
+      "sha256": "cb72255997d1b2a4971c19720c8e3eb28f3723f00d0faf991bf5517d9462d9d0"
+    }
+  ],
+  "sourceAttribution": "City of Vancouver building footprints 2009 (Open Government Licence - Vancouver); OpenStreetMap contributors (ODbL 1.0)."
+}

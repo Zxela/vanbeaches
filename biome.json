@@ -30,6 +30,9 @@
   },
   "files": {
     "ignore": [
+      ".tmp",
+      "3d",
+      "client/public/coast-assets",
       "node_modules",
       "dist",
       "build",

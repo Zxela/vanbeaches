@@ -1,0 +1,90 @@
+[
+  {
+    "id": "nonna10_248e1f9f45a9b85e",
+    "kind": "bathymetry",
+    "status": "ready",
+    "url": "https://nonna-geoserver.data.chs-shc.ca/geoserver/wcs?service=WCS&version=1.0.0&request=GetCoverage&coverage=nonna%3ANONNA+10+Coverage&crs=EPSG%3A3857&response_crs=EPSG%3A3857&bbox=-13723500.220842004%2C6316484.321958548%2C-13717867.454607865%2C6325116.977469198&width=368&height=564&format=GeoTIFF&interpolation=nearest+neighbor",
+    "bytes": 1649074,
+    "sha256": "4a22c86cb3a15ac9e7f2d94be7b29e02d375d553665a5c444374b208e543d3fc",
+    "etag": null,
+    "last_modified": null,
+    "retrieved_utc": "2026-09-18T05:58:09.927658+00:00"
+  },
+  {
+    "id": "nonna10_112d0c010eaac917",
+    "kind": "bathymetry",
+    "status": "ready",
+    "url": "https://nonna-geoserver.data.chs-shc.ca/geoserver/wcs?service=WCS&version=1.0.0&request=GetCoverage&coverage=nonna%3ANONNA+10+Coverage&crs=EPSG%3A3857&response_crs=EPSG%3A3857&bbox=-13717934.24630234%2C6316484.321958548%2C-13712301.480068201%2C6325116.977469198&width=368&height=564&format=GeoTIFF&interpolation=nearest+neighbor",
+    "bytes": 2064834,
+    "sha256": "4a61ad666f34eec5bdfa81cc559174dc1971a6a4cf1e729bf86ecff7cb33d1c2",
+    "etag": null,
+    "last_modified": null,
+    "retrieved_utc": "2026-09-18T05:58:08.316611+00:00"
+  },
+  {
+    "id": "nonna10_eed3031ed788f7cc",
+    "kind": "bathymetry",
+    "status": "ready",
+    "url": "https://nonna-geoserver.data.chs-shc.ca/geoserver/wcs?service=WCS&version=1.0.0&request=GetCoverage&coverage=nonna%3ANONNA+10+Coverage&crs=EPSG%3A3857&response_crs=EPSG%3A3857&bbox=-13712368.271762678%2C6316484.321958548%2C-13706735.505528538%2C6325116.977469198&width=368&height=564&format=GeoTIFF&interpolation=nearest+neighbor",
+    "bytes": 1649074,
+    "sha256": "f34ef37c25993f14604f90fbb4415482034cee04100fd0da9928d7ecc59e74d0",
+    "etag": null,
+    "last_modified": null,
+    "retrieved_utc": "2026-09-18T05:58:08.240332+00:00"
+  },
+  {
+    "id": "nonna10_df567fd6e4acc953",
+    "kind": "bathymetry",
+    "status": "ready",
+    "url": "https://nonna-geoserver.data.chs-shc.ca/geoserver/wcs?service=WCS&version=1.0.0&request=GetCoverage&coverage=nonna%3ANONNA+10+Coverage&crs=EPSG%3A3857&response_crs=EPSG%3A3857&bbox=-13706802.297223011%2C6316484.321958548%2C-13703395.920804739%2C6325116.977469198&width=223&height=564&format=GeoTIFF&interpolation=nearest+neighbor",
+    "bytes": 1262018,
+    "sha256": "56377e1692ed60b437acb569cd20e1ae207ded6fb400708c8ea59d29a5d2a243",
+    "etag": null,
+    "last_modified": null,
+    "retrieved_utc": "2026-09-18T05:58:09.108259+00:00"
+  },
+  {
+    "id": "nonna10_b7e5839735e23b67",
+    "kind": "bathymetry",
+    "status": "ready",
+    "url": "https://nonna-geoserver.data.chs-shc.ca/geoserver/wcs?service=WCS&version=1.0.0&request=GetCoverage&coverage=nonna%3ANONNA+10+Coverage&crs=EPSG%3A3857&response_crs=EPSG%3A3857&bbox=-13723500.220842004%2C6325014.5620690575%2C-13717867.454607865%2C6329385.394476033&width=368&height=285&format=GeoTIFF&interpolation=nearest+neighbor",
+    "bytes": 424354,
+    "sha256": "63e71f5dce5f7b334352c823f2c05eda0cfa8888e74fc292108cf2007a36f530",
+    "etag": null,
+    "last_modified": null,
+    "retrieved_utc": "2026-09-18T05:58:09.118251+00:00"
+  },
+  {
+    "id": "nonna10_561d82d4276f5790",
+    "kind": "bathymetry",
+    "status": "ready",
+    "url": "https://nonna-geoserver.data.chs-shc.ca/geoserver/wcs?service=WCS&version=1.0.0&request=GetCoverage&coverage=nonna%3ANONNA+10+Coverage&crs=EPSG%3A3857&response_crs=EPSG%3A3857&bbox=-13717934.24630234%2C6325014.5620690575%2C-13712301.480068201%2C6329385.394476033&width=368&height=285&format=GeoTIFF&interpolation=nearest+neighbor",
+    "bytes": 663986,
+    "sha256": "81f7b131e8e1548543ce44eb9bee1b9567af4833e902702b6076d7bf3722d0c8",
+    "etag": null,
+    "last_modified": null,
+    "retrieved_utc": "2026-09-18T05:58:09.841765+00:00"
+  },
+  {
+    "id": "nonna10_c968066f57ad06e0",
+    "kind": "bathymetry",
+    "status": "ready",
+    "url": "https://nonna-geoserver.data.chs-shc.ca/geoserver/wcs?service=WCS&version=1.0.0&request=GetCoverage&coverage=nonna%3ANONNA+10+Coverage&crs=EPSG%3A3857&response_crs=EPSG%3A3857&bbox=-13712368.271762678%2C6325014.5620690575%2C-13706735.505528538%2C6329385.394476033&width=368&height=285&format=GeoTIFF&interpolation=nearest+neighbor",
+    "bytes": 424354,
+    "sha256": "0ef1bba673de21db1a3c87c789aaefab1a25b4aef0d3f7856b8dd0b006c05e9f",
+    "etag": null,
+    "last_modified": null,
+    "retrieved_utc": "2026-09-18T05:58:09.810602+00:00"
+  },
+  {
+    "id": "nonna10_3539f90b97dc8c75",
+    "kind": "bathymetry",
+    "status": "ready",
+    "url": "https://nonna-geoserver.data.chs-shc.ca/geoserver/wcs?service=WCS&version=1.0.0&request=GetCoverage&coverage=nonna%3ANONNA+10+Coverage&crs=EPSG%3A3857&response_crs=EPSG%3A3857&bbox=-13706802.297223011%2C6325014.5620690575%2C-13703395.920804739%2C6329385.394476033&width=223&height=285&format=GeoTIFF&interpolation=nearest+neighbor",
+    "bytes": 405938,
+    "sha256": "c55fc1e68e71bf9cf314d3534190ad44a818301e2f389a5412971da6925fec74",
+    "etag": null,
+    "last_modified": null,
+    "retrieved_utc": "2026-09-18T05:58:10.457566+00:00"
+  }
+]

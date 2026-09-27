@@ -28,6 +28,13 @@ export function Layout({ children }: { children: ReactNode }) {
             <span>{beach ? 'Beaches' : 'Van Beaches'}</span>
           </Link>
           <div className="ml-auto flex items-center gap-2 lg:order-last">
+            <Link
+              to={beach ? `/coast?beach=${beach.id}` : '/coast'}
+              className="header-control flex items-center px-3 text-sm"
+              aria-current={location.pathname === '/coast' ? 'page' : undefined}
+            >
+              3D coast
+            </Link>
             {beach && <FavoriteButton beachId={beach.id} beachName={beach.name} size="lg" />}
             {beach && <ShareButton beachName={beach.name} beachId={beach.id} />}
           </div>

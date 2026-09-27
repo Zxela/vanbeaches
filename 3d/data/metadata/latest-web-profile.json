@@ -1,0 +1,846 @@
+{
+  "capturedAt": "2026-09-18T09:50:53.598Z",
+  "node": "v22.16.0",
+  "browser": "143.0.7499.4",
+  "url": "http://localhost:5173",
+  "physicalMobileTested": false,
+  "gpuBytesAreEstimates": true,
+  "runs": [
+    {
+      "mobile": false,
+      "gpu": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+      "overview": {
+        "fps": 15,
+        "frameP95": 83.29999999999927,
+        "calls": 478,
+        "triangles": 203117,
+        "geometries": 478,
+        "textures": 261,
+        "loadedTiles": 476,
+        "detailTiles": 0,
+        "pendingTiles": 0,
+        "failedTiles": 0,
+        "downloadedBytes": 4886720,
+        "estimatedGpuBytes": 33235996.666666575,
+        "detail": "mobile",
+        "cameraState": "overview",
+        "position": [
+          -1499.9999999999995,
+          11000,
+          6500.000000000001
+        ],
+        "target": [
+          0,
+          0,
+          -100
+        ],
+        "tide": -0.8467149656166042,
+        "depthMode": 0,
+        "targetTide": -0.8679999999999999,
+        "environment": {
+          "timestamp": "2026-09-18T09:49:20.028Z",
+          "mode": "LIVE",
+          "tide": {
+            "heightCD": 2.132,
+            "observed": true,
+            "source": "observed",
+            "sampleTime": "2026-09-18T09:44:00Z",
+            "fetchedAt": "2026-09-18T09:44:59.004Z",
+            "stale": false,
+            "nextHigh": {
+              "time": "2026-09-18T20:29:00Z",
+              "height": 4.03,
+              "type": "high"
+            },
+            "nextLow": {
+              "time": "2026-09-18T12:21:00Z",
+              "height": 1.38,
+              "type": "low"
+            }
+          },
+          "sun": {
+            "elevation": -34.24197198578718,
+            "azimuth": 31.3143380509714
+          },
+          "weather": {
+            "time": "2026-09-18T09:30:00.000Z",
+            "temperature": 11.9,
+            "condition": "sunny",
+            "cloudCover": 7,
+            "precipitation": 0,
+            "rain": 0,
+            "windSpeed": 4.2,
+            "windDirection": 301,
+            "visibility": 12400,
+            "source": "current-model",
+            "fetchedAt": "2026-09-18T09:44:59.324Z",
+            "stale": false
+          }
+        },
+        "visual": {
+          "amplitude": 0.0376,
+          "speed": 0.18813333333333332,
+          "roughness": 0.1648,
+          "haze": 0.00008064516129032258,
+          "sunlight": 0,
+          "wetness": 0
+        }
+      },
+      "initialDetailRequests": 0,
+      "beach": {
+        "fps": 19,
+        "frameP95": 66.70000000000437,
+        "calls": 115,
+        "triangles": 73614,
+        "geometries": 486,
+        "textures": 269,
+        "loadedTiles": 484,
+        "detailTiles": 8,
+        "pendingTiles": 0,
+        "failedTiles": 0,
+        "downloadedBytes": 5146924,
+        "estimatedGpuBytes": 37442055.33333323,
+        "detail": "mobile",
+        "cameraState": "beach",
+        "position": [
+          -2614.4562709690067,
+          227.99402856826785,
+          871.0142267439516
+        ],
+        "target": [
+          -2539.4562709690067,
+          7.994028568267821,
+          371.0142267439515
+        ],
+        "tide": -0.8618504481166956,
+        "depthMode": 0,
+        "targetTide": -0.8679999999999999,
+        "environment": {
+          "timestamp": "2026-09-18T09:49:20.028Z",
+          "mode": "LIVE",
+          "tide": {
+            "heightCD": 2.132,
+            "observed": true,
+            "source": "observed",
+            "sampleTime": "2026-09-18T09:44:00Z",
+            "fetchedAt": "2026-09-18T09:44:59.004Z",
+            "stale": false,
+            "nextHigh": {
+              "time": "2026-09-18T20:29:00Z",
+              "height": 4.03,
+              "type": "high"
+            },
+            "nextLow": {
+              "time": "2026-09-18T12:21:00Z",
+              "height": 1.38,
+              "type": "low"
+            }
+          },
+          "sun": {
+            "elevation": -34.24481569663854,
+            "azimuth": 31.30286658120238
+          },
+          "weather": {
+            "time": "2026-09-18T09:30:00.000Z",
+            "temperature": 11.9,
+            "condition": "sunny",
+            "cloudCover": 7,
+            "precipitation": 0,
+            "rain": 0,
+            "windSpeed": 4.2,
+            "windDirection": 301,
+            "visibility": 12400,
+            "source": "current-model",
+            "fetchedAt": "2026-09-18T09:44:59.324Z",
+            "stale": false
+          }
+        },
+        "visual": {
+          "amplitude": 0.0376,
+          "speed": 0.18813333333333332,
+          "roughness": 0.1648,
+          "haze": 0.00008064516129032258,
+          "sunlight": 0,
+          "wetness": 0
+        }
+      },
+      "low": {
+        "fps": 19,
+        "frameP95": 66.60000000000582,
+        "calls": 115,
+        "triangles": 73614,
+        "geometries": 486,
+        "textures": 269,
+        "loadedTiles": 484,
+        "detailTiles": 8,
+        "pendingTiles": 0,
+        "failedTiles": 0,
+        "downloadedBytes": 5146924,
+        "estimatedGpuBytes": 37442055.33333323,
+        "detail": "mobile",
+        "cameraState": "beach",
+        "position": [
+          -2614.4562709690067,
+          227.99402856826785,
+          871.0142267439516
+        ],
+        "target": [
+          -2539.4562709690067,
+          7.994028568267821,
+          371.0142267439515
+        ],
+        "tide": -1.615527044756927,
+        "depthMode": 1,
+        "targetTide": -1.6158000000000001,
+        "environment": {
+          "timestamp": "2026-09-18T12:21:00.000Z",
+          "mode": "TIMELINE",
+          "tide": {
+            "heightCD": 1.3841999999999999,
+            "observed": false,
+            "source": "predicted",
+            "sampleTime": "2026-09-18T12:21:00.000Z",
+            "fetchedAt": "2026-09-18T09:44:59.116Z",
+            "stale": false,
+            "nextHigh": {
+              "time": "2026-09-18T20:29:00Z",
+              "height": 4.03,
+              "type": "high"
+            },
+            "nextLow": {
+              "time": "2026-09-19T01:39:00Z",
+              "height": 3.58,
+              "type": "low"
+            }
+          },
+          "sun": {
+            "elevation": -15.468687609277762,
+            "azimuth": 67.9799228697997
+          },
+          "weather": {
+            "time": "2026-09-18T12:21:00.000Z",
+            "temperature": 11.665,
+            "condition": "sunny",
+            "cloudCover": 2,
+            "precipitation": 0,
+            "rain": 0,
+            "windSpeed": 6.24,
+            "windDirection": 329.9,
+            "visibility": 12665,
+            "source": "forecast",
+            "fetchedAt": "2026-09-18T09:44:59.324Z",
+            "stale": false
+          }
+        },
+        "visual": {
+          "amplitude": 0.04372,
+          "speed": 0.22122666666666665,
+          "roughness": 0.18656,
+          "haze": 0.00007895775759968417,
+          "sunlight": 0,
+          "wetness": 0
+        }
+      },
+      "high": {
+        "fps": 19,
+        "frameP95": 66.70000000000437,
+        "calls": 115,
+        "triangles": 73614,
+        "geometries": 486,
+        "textures": 269,
+        "loadedTiles": 484,
+        "detailTiles": 8,
+        "pendingTiles": 0,
+        "failedTiles": 0,
+        "downloadedBytes": 5146924,
+        "estimatedGpuBytes": 37442055.33333323,
+        "detail": "mobile",
+        "cameraState": "beach",
+        "position": [
+          -2614.4562709690067,
+          227.99402856826785,
+          871.0142267439516
+        ],
+        "target": [
+          -2539.4562709690067,
+          7.994028568267821,
+          371.0142267439515
+        ],
+        "tide": 1.0268172105717015,
+        "depthMode": 1,
+        "targetTide": 1.0278,
+        "environment": {
+          "timestamp": "2026-09-18T20:29:00.000Z",
+          "mode": "TIMELINE",
+          "tide": {
+            "heightCD": 4.0278,
+            "observed": false,
+            "source": "predicted",
+            "sampleTime": "2026-09-18T20:29:00.000Z",
+            "fetchedAt": "2026-09-18T09:44:59.116Z",
+            "stale": false,
+            "nextHigh": {
+              "time": "2026-09-19T04:52:00Z",
+              "height": 3.69,
+              "type": "high"
+            },
+            "nextLow": {
+              "time": "2026-09-19T01:39:00Z",
+              "height": 3.58,
+              "type": "low"
+            }
+          },
+          "sun": {
+            "elevation": 42.29339195170368,
+            "azimuth": 187.31572401987904
+          },
+          "weather": {
+            "time": "2026-09-18T20:29:00.000Z",
+            "temperature": 18.438333333333336,
+            "condition": "sunny",
+            "cloudCover": 7.583333333333334,
+            "precipitation": 0,
+            "rain": 0,
+            "windSpeed": 7.288333333333333,
+            "windDirection": 206.45000000000005,
+            "visibility": 15583.333333333334,
+            "source": "forecast",
+            "fetchedAt": "2026-09-18T09:44:59.324Z",
+            "stale": false
+          }
+        },
+        "visual": {
+          "amplitude": 0.046865000000000004,
+          "speed": 0.23823296296296292,
+          "roughness": 0.1977422222222222,
+          "haze": 0.0000641711229946524,
+          "sunlight": 0.9393333333333334,
+          "wetness": 0
+        }
+      },
+      "returned": {
+        "fps": 15,
+        "frameP95": 83.40000000000146,
+        "calls": 478,
+        "triangles": 203117,
+        "geometries": 478,
+        "textures": 261,
+        "loadedTiles": 476,
+        "detailTiles": 0,
+        "pendingTiles": 0,
+        "failedTiles": 0,
+        "downloadedBytes": 5183528,
+        "estimatedGpuBytes": 33235996.666666575,
+        "detail": "mobile",
+        "cameraState": "overview",
+        "position": [
+          -1499.9999999999995,
+          11000,
+          6500.000000000001
+        ],
+        "target": [
+          0,
+          0,
+          -100
+        ],
+        "tide": 1.027799998142508,
+        "depthMode": 1,
+        "targetTide": 1.0278,
+        "environment": {
+          "timestamp": "2026-09-18T20:29:00.000Z",
+          "mode": "TIMELINE",
+          "tide": {
+            "heightCD": 4.0278,
+            "observed": false,
+            "source": "predicted",
+            "sampleTime": "2026-09-18T20:29:00.000Z",
+            "fetchedAt": "2026-09-18T09:44:59.116Z",
+            "stale": false,
+            "nextHigh": {
+              "time": "2026-09-19T04:52:00Z",
+              "height": 3.69,
+              "type": "high"
+            },
+            "nextLow": {
+              "time": "2026-09-19T01:39:00Z",
+              "height": 3.58,
+              "type": "low"
+            }
+          },
+          "sun": {
+            "elevation": 42.293163856332086,
+            "azimuth": 187.32912426979226
+          },
+          "weather": {
+            "time": "2026-09-18T20:29:00.000Z",
+            "temperature": 18.438333333333336,
+            "condition": "sunny",
+            "cloudCover": 7.583333333333334,
+            "precipitation": 0,
+            "rain": 0,
+            "windSpeed": 7.288333333333333,
+            "windDirection": 206.45000000000005,
+            "visibility": 15583.333333333334,
+            "source": "forecast",
+            "fetchedAt": "2026-09-18T09:44:59.324Z",
+            "stale": false
+          }
+        },
+        "visual": {
+          "amplitude": 0.046865000000000004,
+          "speed": 0.23823296296296292,
+          "roughness": 0.1977422222222222,
+          "haze": 0.0000641711229946524,
+          "sunlight": 0.9393333333333334,
+          "wetness": 0
+        }
+      },
+      "errors": [],
+      "assetRequests": 492,
+      "transferredAssetBytes": 7246248
+    },
+    {
+      "mobile": true,
+      "gpu": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+      "overview": {
+        "fps": 30,
+        "frameP95": 33.400000000000546,
+        "calls": 477,
+        "triangles": 202884,
+        "geometries": 477,
+        "textures": 260,
+        "loadedTiles": 475,
+        "detailTiles": 0,
+        "pendingTiles": 0,
+        "failedTiles": 0,
+        "downloadedBytes": 4875124,
+        "estimatedGpuBytes": 33140861.333333243,
+        "detail": "mobile",
+        "cameraState": "overview",
+        "position": [
+          -3134.541984732823,
+          22986.641221374044,
+          13691.984732824427
+        ],
+        "target": [
+          0,
+          0,
+          -100
+        ],
+        "tide": -0.3769675014125724,
+        "depthMode": 0,
+        "targetTide": -0.9119999999999999,
+        "environment": {
+          "timestamp": "2026-09-18T09:50:21.302Z",
+          "mode": "LIVE",
+          "tide": {
+            "heightCD": 2.088,
+            "observed": true,
+            "source": "observed",
+            "sampleTime": "2026-09-18T09:50:00Z",
+            "fetchedAt": "2026-09-18T09:50:21.927Z",
+            "stale": false,
+            "nextHigh": {
+              "time": "2026-09-18T20:29:00Z",
+              "height": 4.03,
+              "type": "high"
+            },
+            "nextLow": {
+              "time": "2026-09-18T12:21:00Z",
+              "height": 1.38,
+              "type": "low"
+            }
+          },
+          "sun": {
+            "elevation": -34.15527781288689,
+            "azimuth": 31.604566303821514
+          },
+          "weather": {
+            "time": "2026-09-18T09:30:00.000Z",
+            "temperature": 11.9,
+            "condition": "sunny",
+            "cloudCover": 7,
+            "precipitation": 0,
+            "rain": 0,
+            "windSpeed": 4.2,
+            "windDirection": 301,
+            "visibility": 12400,
+            "source": "current-model",
+            "fetchedAt": "2026-09-18T09:44:59.324Z",
+            "stale": false
+          }
+        },
+        "atmosphere": {
+          "rainVisible": false,
+          "rainParticles": 0,
+          "sunDirection": [
+            0.43366449304251353,
+            -0.5614376294335386,
+            -0.7047857090848454
+          ],
+          "cloudCover": 0.07
+        },
+        "visual": {
+          "amplitude": 0.0376,
+          "speed": 0.18813333333333332,
+          "roughness": 0.1648,
+          "haze": 0.00008064516129032258,
+          "sunlight": 0,
+          "wetness": 0
+        }
+      },
+      "initialDetailRequests": 0,
+      "beach": {
+        "fps": 30,
+        "frameP95": 33.399999999999636,
+        "calls": 53,
+        "triangles": 46796,
+        "geometries": 485,
+        "textures": 268,
+        "loadedTiles": 483,
+        "detailTiles": 8,
+        "pendingTiles": 0,
+        "failedTiles": 0,
+        "downloadedBytes": 5135328,
+        "estimatedGpuBytes": 37346919.999999896,
+        "detail": "mobile",
+        "cameraState": "beach",
+        "position": [
+          -2614.4562709690067,
+          227.99402856826785,
+          871.0142267439516
+        ],
+        "target": [
+          -2539.4562709690067,
+          7.994028568267821,
+          371.0142267439515
+        ],
+        "tide": -0.7432864190152395,
+        "depthMode": 0,
+        "targetTide": -0.9119999999999999,
+        "environment": {
+          "timestamp": "2026-09-18T09:50:21.302Z",
+          "mode": "LIVE",
+          "tide": {
+            "heightCD": 2.088,
+            "observed": true,
+            "source": "observed",
+            "sampleTime": "2026-09-18T09:50:00Z",
+            "fetchedAt": "2026-09-18T09:50:21.927Z",
+            "stale": false,
+            "nextHigh": {
+              "time": "2026-09-18T20:29:00Z",
+              "height": 4.03,
+              "type": "high"
+            },
+            "nextLow": {
+              "time": "2026-09-18T12:21:00Z",
+              "height": 1.38,
+              "type": "low"
+            }
+          },
+          "sun": {
+            "elevation": -34.15815102044906,
+            "azimuth": 31.593117552307348
+          },
+          "weather": {
+            "time": "2026-09-18T09:30:00.000Z",
+            "temperature": 11.9,
+            "condition": "sunny",
+            "cloudCover": 7,
+            "precipitation": 0,
+            "rain": 0,
+            "windSpeed": 4.2,
+            "windDirection": 301,
+            "visibility": 12400,
+            "source": "current-model",
+            "fetchedAt": "2026-09-18T09:44:59.324Z",
+            "stale": false
+          }
+        },
+        "atmosphere": {
+          "rainVisible": false,
+          "rainParticles": 0,
+          "sunDirection": [
+            0.4335089050667111,
+            -0.5614791262694738,
+            -0.7048483666658593
+          ],
+          "cloudCover": 0.07
+        },
+        "visual": {
+          "amplitude": 0.0376,
+          "speed": 0.18813333333333332,
+          "roughness": 0.1648,
+          "haze": 0.00008064516129032258,
+          "sunlight": 0,
+          "wetness": 0
+        }
+      },
+      "low": {
+        "fps": 30,
+        "frameP95": 33.400000000001455,
+        "calls": 53,
+        "triangles": 46796,
+        "geometries": 485,
+        "textures": 268,
+        "loadedTiles": 483,
+        "detailTiles": 8,
+        "pendingTiles": 0,
+        "failedTiles": 0,
+        "downloadedBytes": 5135328,
+        "estimatedGpuBytes": 37346919.999999896,
+        "detail": "mobile",
+        "cameraState": "beach",
+        "position": [
+          -2614.4562709690067,
+          227.99402856826785,
+          871.0142267439516
+        ],
+        "target": [
+          -2539.4562709690067,
+          7.994028568267821,
+          371.0142267439515
+        ],
+        "tide": -1.6154023680892857,
+        "depthMode": 1,
+        "targetTide": -1.6158000000000001,
+        "environment": {
+          "timestamp": "2026-09-18T12:21:00.000Z",
+          "mode": "TIMELINE",
+          "tide": {
+            "heightCD": 1.3841999999999999,
+            "observed": false,
+            "source": "predicted",
+            "sampleTime": "2026-09-18T12:21:00.000Z",
+            "fetchedAt": "2026-09-18T09:44:59.116Z",
+            "stale": false,
+            "nextHigh": {
+              "time": "2026-09-18T20:29:00Z",
+              "height": 4.03,
+              "type": "high"
+            },
+            "nextLow": {
+              "time": "2026-09-19T01:39:00Z",
+              "height": 3.58,
+              "type": "low"
+            }
+          },
+          "sun": {
+            "elevation": -15.468687609277762,
+            "azimuth": 67.9799228697997
+          },
+          "weather": {
+            "time": "2026-09-18T12:21:00.000Z",
+            "temperature": 11.665,
+            "condition": "sunny",
+            "cloudCover": 2,
+            "precipitation": 0,
+            "rain": 0,
+            "windSpeed": 6.24,
+            "windDirection": 329.9,
+            "visibility": 12665,
+            "source": "forecast",
+            "fetchedAt": "2026-09-18T09:44:59.324Z",
+            "stale": false
+          }
+        },
+        "atmosphere": {
+          "rainVisible": false,
+          "rainParticles": 0,
+          "sunDirection": [
+            0.8934713103465824,
+            -0.2667117079963086,
+            -0.36135008289088955
+          ],
+          "cloudCover": 0.02
+        },
+        "visual": {
+          "amplitude": 0.04372,
+          "speed": 0.22122666666666665,
+          "roughness": 0.18656,
+          "haze": 0.00007895775759968417,
+          "sunlight": 0,
+          "wetness": 0
+        }
+      },
+      "high": {
+        "fps": 30,
+        "frameP95": 33.400000000001455,
+        "calls": 53,
+        "triangles": 46796,
+        "geometries": 485,
+        "textures": 268,
+        "loadedTiles": 483,
+        "detailTiles": 8,
+        "pendingTiles": 0,
+        "failedTiles": 0,
+        "downloadedBytes": 5135328,
+        "estimatedGpuBytes": 37346919.999999896,
+        "detail": "mobile",
+        "cameraState": "beach",
+        "position": [
+          -2614.4562709690067,
+          227.99402856826785,
+          871.0142267439516
+        ],
+        "target": [
+          -2539.4562709690067,
+          7.994028568267821,
+          371.0142267439515
+        ],
+        "tide": 1.0266238449734046,
+        "depthMode": 1,
+        "targetTide": 1.0278,
+        "environment": {
+          "timestamp": "2026-09-18T20:29:00.000Z",
+          "mode": "TIMELINE",
+          "tide": {
+            "heightCD": 4.0278,
+            "observed": false,
+            "source": "predicted",
+            "sampleTime": "2026-09-18T20:29:00.000Z",
+            "fetchedAt": "2026-09-18T09:44:59.116Z",
+            "stale": false,
+            "nextHigh": {
+              "time": "2026-09-19T04:52:00Z",
+              "height": 3.69,
+              "type": "high"
+            },
+            "nextLow": {
+              "time": "2026-09-19T01:39:00Z",
+              "height": 3.58,
+              "type": "low"
+            }
+          },
+          "sun": {
+            "elevation": 42.29339195170368,
+            "azimuth": 187.31572401987904
+          },
+          "weather": {
+            "time": "2026-09-18T20:29:00.000Z",
+            "temperature": 18.438333333333336,
+            "condition": "sunny",
+            "cloudCover": 7.583333333333334,
+            "precipitation": 0,
+            "rain": 0,
+            "windSpeed": 7.288333333333333,
+            "windDirection": 206.45000000000005,
+            "visibility": 15583.333333333334,
+            "source": "forecast",
+            "fetchedAt": "2026-09-18T09:44:59.324Z",
+            "stale": false
+          }
+        },
+        "atmosphere": {
+          "rainVisible": false,
+          "rainParticles": 0,
+          "sunDirection": [
+            -0.09419215137220835,
+            0.6729272057526194,
+            0.7336871365765156
+          ],
+          "cloudCover": 0.07583333333333334
+        },
+        "visual": {
+          "amplitude": 0.046865000000000004,
+          "speed": 0.23823296296296292,
+          "roughness": 0.1977422222222222,
+          "haze": 0.0000641711229946524,
+          "sunlight": 0.9393333333333334,
+          "wetness": 0
+        }
+      },
+      "returned": {
+        "fps": 30,
+        "frameP95": 33.400000000001455,
+        "calls": 477,
+        "triangles": 202884,
+        "geometries": 477,
+        "textures": 260,
+        "loadedTiles": 475,
+        "detailTiles": 0,
+        "pendingTiles": 0,
+        "failedTiles": 0,
+        "downloadedBytes": 5152308,
+        "estimatedGpuBytes": 33140861.333333243,
+        "detail": "mobile",
+        "cameraState": "overview",
+        "position": [
+          -3134.541984732823,
+          22986.641221374044,
+          13691.984732824427
+        ],
+        "target": [
+          0,
+          0,
+          -100
+        ],
+        "tide": 1.0277999925819583,
+        "depthMode": 1,
+        "targetTide": 1.0278,
+        "environment": {
+          "timestamp": "2026-09-18T20:29:00.000Z",
+          "mode": "TIMELINE",
+          "tide": {
+            "heightCD": 4.0278,
+            "observed": false,
+            "source": "predicted",
+            "sampleTime": "2026-09-18T20:29:00.000Z",
+            "fetchedAt": "2026-09-18T09:44:59.116Z",
+            "stale": false,
+            "nextHigh": {
+              "time": "2026-09-19T04:52:00Z",
+              "height": 3.69,
+              "type": "high"
+            },
+            "nextLow": {
+              "time": "2026-09-19T01:39:00Z",
+              "height": 3.58,
+              "type": "low"
+            }
+          },
+          "sun": {
+            "elevation": 42.293163856332086,
+            "azimuth": 187.32912426979226
+          },
+          "weather": {
+            "time": "2026-09-18T20:29:00.000Z",
+            "temperature": 18.438333333333336,
+            "condition": "sunny",
+            "cloudCover": 7.583333333333334,
+            "precipitation": 0,
+            "rain": 0,
+            "windSpeed": 7.288333333333333,
+            "windDirection": 206.45000000000005,
+            "visibility": 15583.333333333334,
+            "source": "forecast",
+            "fetchedAt": "2026-09-18T09:44:59.324Z",
+            "stale": false
+          }
+        },
+        "atmosphere": {
+          "rainVisible": false,
+          "rainParticles": 0,
+          "sunDirection": [
+            -0.09436408417552573,
+            0.672924260955637,
+            0.7336677440333764
+          ],
+          "cloudCover": 0.07583333333333334
+        },
+        "visual": {
+          "amplitude": 0.046865000000000004,
+          "speed": 0.23823296296296292,
+          "roughness": 0.1977422222222222,
+          "haze": 0.0000641711229946524,
+          "sunlight": 0.9393333333333334,
+          "wetness": 0
+        }
+      },
+      "errors": [],
+      "assetRequests": 490,
+      "transferredAssetBytes": 8004954
+    }
+  ]
+}

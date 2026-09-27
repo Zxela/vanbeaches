@@ -1,0 +1,1124 @@
+{
+  "config_sha256": "a87b3515abcafebcfa59cde186bd64b768e0247eb5c8ed2a6e18e1a6faaa90d4",
+  "grid_spacing_m": 10,
+  "aoi_nodes": 1091540,
+  "missing_inside_aoi_nodes": 68553,
+  "known_fraction_inside_aoi": 0.937196071605255,
+  "large_gap_minimum_area_m2": 10000,
+  "large_gap_count": 29,
+  "large_gaps": [
+    {
+      "id": "gap_00081",
+      "area_m2": 2148600,
+      "nodes": 21486,
+      "nonna_nodata_nodes": 21486,
+      "nonna_excluded_above_tide_nodes": 0,
+      "cause": "missing_elevation_sources",
+      "touches_aoi_boundary": true,
+      "projected_bounds": [
+        479625.0,
+        5455925.0,
+        481665.0,
+        5459505.0
+      ],
+      "projected_crs": "EPSG:3157",
+      "grid_spacing_m": 10,
+      "action": "Additional authoritative measurements required; not automatically filled",
+      "geographic_bounds": [
+        -123.28006862543303,
+        49.25578781954303,
+        -123.25214521575468,
+        49.28802584023184
+      ],
+      "lidar_files": [
+        "data/raw/lidar/480000_5455000.zip",
+        "data/raw/lidar/480000_5456000.zip",
+        "data/raw/lidar/480000_5457000.zip",
+        "data/raw/lidar/481000_5458000.zip"
+      ],
+      "nonna_files": [
+        "data/raw/bathymetry/nonna10_248e1f9f45a9b85e.tif"
+      ],
+      "metro_members": [
+        "478500_5455500.las",
+        "480000_5457000.las",
+        "480000_5455500.las"
+      ],
+      "nearest_existing_destination": "spanish-banks"
+    },
+    {
+      "id": "gap_00303",
+      "area_m2": 1104900,
+      "nodes": 11049,
+      "nonna_nodata_nodes": 11049,
+      "nonna_excluded_above_tide_nodes": 0,
+      "cause": "missing_elevation_sources",
+      "touches_aoi_boundary": true,
+      "projected_bounds": [
+        479625.0,
+        5454725.0,
+        481305.0,
+        5456145.0
+      ],
+      "projected_crs": "EPSG:3157",
+      "grid_spacing_m": 10,
+      "action": "Additional authoritative measurements required; not automatically filled",
+      "geographic_bounds": [
+        -123.28002790623674,
+        49.2449656815309,
+        -123.25687466199024,
+        49.25773841370677
+      ],
+      "lidar_files": [
+        "data/raw/lidar/480000_5455000.zip",
+        "data/raw/lidar/481000_5454000.zip"
+      ],
+      "nonna_files": [
+        "data/raw/bathymetry/nonna10_248e1f9f45a9b85e.tif"
+      ],
+      "metro_members": [
+        "478500_5455500.las",
+        "480000_5455500.las",
+        "480000_5454000.las"
+      ],
+      "nearest_existing_destination": "spanish-banks"
+    },
+    {
+      "id": "gap_00004",
+      "area_m2": 879300,
+      "nodes": 8793,
+      "nonna_nodata_nodes": 8793,
+      "nonna_excluded_above_tide_nodes": 0,
+      "cause": "missing_elevation_sources",
+      "touches_aoi_boundary": true,
+      "projected_bounds": [
+        489935.0,
+        5461815.0,
+        492735.0,
+        5463035.0
+      ],
+      "projected_crs": "EPSG:3157",
+      "grid_spacing_m": 10,
+      "action": "Additional authoritative measurements required; not automatically filled",
+      "geographic_bounds": [
+        -123.1385125419919,
+        49.30902854859036,
+        -123.09997000867654,
+        49.32001053453197
+      ],
+      "lidar_files": [
+        "data/raw/lidar/489000_5462000.zip",
+        "data/raw/lidar/490000_5462000.zip",
+        "data/raw/lidar/491000_5461000.zip"
+      ],
+      "nonna_files": [
+        "data/raw/bathymetry/nonna10_c968066f57ad06e0.tif",
+        "data/raw/bathymetry/nonna10_3539f90b97dc8c75.tif"
+      ],
+      "metro_members": [
+        "489000_5461500.las",
+        "490500_5461500.las"
+      ],
+      "nearest_existing_destination": "second-beach"
+    },
+    {
+      "id": "gap_00153",
+      "area_m2": 508600,
+      "nodes": 5086,
+      "nonna_nodata_nodes": 5086,
+      "nonna_excluded_above_tide_nodes": 0,
+      "cause": "missing_elevation_sources",
+      "touches_aoi_boundary": false,
+      "projected_bounds": [
+        485935.0,
+        5457725.0,
+        489155.0,
+        5458495.0
+      ],
+      "projected_crs": "EPSG:3157",
+      "grid_spacing_m": 10,
+      "action": "Additional authoritative measurements required; not automatically filled",
+      "geographic_bounds": [
+        -123.1933776743331,
+        49.272155618297745,
+        -123.14912008539943,
+        49.27911636770951
+      ],
+      "lidar_files": [
+        "data/raw/lidar/485000_5458000.zip",
+        "data/raw/lidar/486000_5457000.zip",
+        "data/raw/lidar/487000_5457000.zip",
+        "data/raw/lidar/487000_5458000.zip",
+        "data/raw/lidar/488000_5457000.zip",
+        "data/raw/lidar/488000_5458000.zip",
+        "data/raw/lidar/489000_5458000.zip"
+      ],
+      "nonna_files": [
+        "data/raw/bathymetry/nonna10_112d0c010eaac917.tif",
+        "data/raw/bathymetry/nonna10_eed3031ed788f7cc.tif"
+      ],
+      "metro_members": [
+        "484500_5457000.las",
+        "486000_5457000.las",
+        "487500_5457000.las",
+        "489000_5457000.las"
+      ],
+      "nearest_existing_destination": "kitsilano-beach"
+    },
+    {
+      "id": "gap_00307",
+      "area_m2": 496100,
+      "nodes": 4961,
+      "nonna_nodata_nodes": 4961,
+      "nonna_excluded_above_tide_nodes": 0,
+      "cause": "missing_elevation_sources",
+      "touches_aoi_boundary": true,
+      "projected_bounds": [
+        481005.0,
+        5454715.0,
+        482655.0,
+        5456045.0
+      ],
+      "projected_crs": "EPSG:3157",
+      "grid_spacing_m": 10,
+      "action": "Additional authoritative measurements required; not automatically filled",
+      "geographic_bounds": [
+        -123.2610533653275,
+        49.24495490090564,
+        -123.23832612562684,
+        49.256886051059396
+      ],
+      "lidar_files": [
+        "data/raw/lidar/481000_5454000.zip",
+        "data/raw/lidar/481000_5455000.zip",
+        "data/raw/lidar/481000_5456000.zip",
+        "data/raw/lidar/482000_5454000.zip",
+        "data/raw/lidar/482000_5455000.zip"
+      ],
+      "nonna_files": [
+        "data/raw/bathymetry/nonna10_248e1f9f45a9b85e.tif"
+      ],
+      "metro_members": [
+        "480000_5455500.las",
+        "480000_5454000.las",
+        "481500_5454000.las"
+      ],
+      "nearest_existing_destination": "spanish-banks"
+    },
+    {
+      "id": "gap_00015",
+      "area_m2": 168600,
+      "nodes": 1686,
+      "nonna_nodata_nodes": 1686,
+      "nonna_excluded_above_tide_nodes": 0,
+      "cause": "missing_elevation_sources",
+      "touches_aoi_boundary": false,
+      "projected_bounds": [
+        489755.0,
+        5460795.0,
+        491405.0,
+        5462335.0
+      ],
+      "projected_crs": "EPSG:3157",
+      "grid_spacing_m": 10,
+      "action": "Additional authoritative measurements required; not automatically filled",
+      "geographic_bounds": [
+        -123.14097166898095,
+        49.29984321258341,
+        -123.11823783387686,
+        49.31367172443538
+      ],
+      "lidar_files": [
+        "data/raw/lidar/489000_5462000.zip",
+        "data/raw/lidar/490000_5460000.zip",
+        "data/raw/lidar/490000_5461000.zip",
+        "data/raw/lidar/490000_5462000.zip",
+        "data/raw/lidar/491000_5460000.zip",
+        "data/raw/lidar/491000_5461000.zip"
+      ],
+      "nonna_files": [
+        "data/raw/bathymetry/nonna10_c968066f57ad06e0.tif",
+        "data/raw/bathymetry/nonna10_3539f90b97dc8c75.tif"
+      ],
+      "metro_members": [
+        "489000_5461500.las",
+        "489000_5460000.las",
+        "490500_5460000.las"
+      ],
+      "nearest_existing_destination": "third-beach"
+    },
+    {
+      "id": "gap_00042",
+      "area_m2": 138700,
+      "nodes": 1387,
+      "nonna_nodata_nodes": 1387,
+      "nonna_excluded_above_tide_nodes": 0,
+      "cause": "missing_elevation_sources",
+      "touches_aoi_boundary": false,
+      "projected_bounds": [
+        489475.0,
+        5460135.0,
+        490055.0,
+        5460505.0
+      ],
+      "projected_crs": "EPSG:3157",
+      "grid_spacing_m": 10,
+      "action": "Additional authoritative measurements required; not automatically filled",
+      "geographic_bounds": [
+        -123.14477265137776,
+        49.293881298732046,
+        -123.13679480567122,
+        49.2972143097501
+      ],
+      "lidar_files": [
+        "data/raw/lidar/489000_5460000.zip",
+        "data/raw/lidar/490000_5460000.zip"
+      ],
+      "nonna_files": [
+        "data/raw/bathymetry/nonna10_eed3031ed788f7cc.tif",
+        "data/raw/bathymetry/nonna10_c968066f57ad06e0.tif"
+      ],
+      "metro_members": [
+        "489000_5460000.las"
+      ],
+      "nearest_existing_destination": "second-beach"
+    },
+    {
+      "id": "gap_00095",
+      "area_m2": 79800,
+      "nodes": 798,
+      "nonna_nodata_nodes": 798,
+      "nonna_excluded_above_tide_nodes": 0,
+      "cause": "missing_elevation_sources",
+      "touches_aoi_boundary": false,
+      "projected_bounds": [
+        483755.0,
+        5458865.0,
+        484235.0,
+        5459245.0
+      ],
+      "projected_crs": "EPSG:3157",
+      "grid_spacing_m": 10,
+      "action": "Additional authoritative measurements required; not automatically filled",
+      "geographic_bounds": [
+        -123.2233967354098,
+        49.28233679543925,
+        -123.21678300541234,
+        49.28574651819438
+      ],
+      "lidar_files": [
+        "data/raw/lidar/483000_5458000.zip",
+        "data/raw/lidar/484000_5458000.zip"
+      ],
+      "nonna_files": [
+        "data/raw/bathymetry/nonna10_112d0c010eaac917.tif"
+      ],
+      "metro_members": [],
+      "nearest_existing_destination": "spanish-banks"
+    },
+    {
+      "id": "gap_00038",
+      "area_m2": 71600,
+      "nodes": 716,
+      "nonna_nodata_nodes": 716,
+      "nonna_excluded_above_tide_nodes": 0,
+      "cause": "missing_elevation_sources",
+      "touches_aoi_boundary": false,
+      "projected_bounds": [
+        490895.0,
+        5460045.0,
+        491485.0,
+        5460605.0
+      ],
+      "projected_crs": "EPSG:3157",
+      "grid_spacing_m": 10,
+      "action": "Additional authoritative measurements required; not automatically filled",
+      "geographic_bounds": [
+        -123.12523658006742,
+        49.29309165040442,
+        -123.11713169693928,
+        49.29813256761212
+      ],
+      "lidar_files": [
+        "data/raw/lidar/490000_5460000.zip",
+        "data/raw/lidar/491000_5460000.zip"
+      ],
+      "nonna_files": [
+        "data/raw/bathymetry/nonna10_df567fd6e4acc953.tif",
+        "data/raw/bathymetry/nonna10_3539f90b97dc8c75.tif"
+      ],
+      "metro_members": [
+        "490500_5460000.las"
+      ],
+      "nearest_existing_destination": "english-bay"
+    },
+    {
+      "id": "gap_00301",
+      "area_m2": 69000,
+      "nodes": 690,
+      "nonna_nodata_nodes": 690,
+      "nonna_excluded_above_tide_nodes": 0,
+      "cause": "missing_elevation_sources",
+      "touches_aoi_boundary": false,
+      "projected_bounds": [
+        480585.0,
+        5455675.0,
+        481135.0,
+        5456225.0
+      ],
+      "projected_crs": "EPSG:3157",
+      "grid_spacing_m": 10,
+      "action": "Additional authoritative measurements required; not automatically filled",
+      "geographic_bounds": [
+        -123.26681786039208,
+        49.25355382815314,
+        -123.25925650062135,
+        49.25849489547245
+      ],
+      "lidar_files": [
+        "data/raw/lidar/480000_5455000.zip",
+        "data/raw/lidar/480000_5456000.zip",
+        "data/raw/lidar/481000_5455000.zip"
+      ],
+      "nonna_files": [
+        "data/raw/bathymetry/nonna10_248e1f9f45a9b85e.tif"
+      ],
+      "metro_members": [
+        "480000_5455500.las"
+      ],
+      "nearest_existing_destination": "spanish-banks"
+    },
+    {
+      "id": "gap_00041",
+      "area_m2": 50900,
+      "nodes": 509,
+      "nonna_nodata_nodes": 509,
+      "nonna_excluded_above_tide_nodes": 0,
+      "cause": "missing_elevation_sources",
+      "touches_aoi_boundary": false,
+      "projected_bounds": [
+        488635.0,
+        5459975.0,
+        489065.0,
+        5460505.0
+      ],
+      "projected_crs": "EPSG:3157",
+      "grid_spacing_m": 10,
+      "action": "Additional authoritative measurements required; not automatically filled",
+      "geographic_bounds": [
+        -123.15632881256354,
+        49.29243043104343,
+        -123.15040041145953,
+        49.297191469470825
+      ],
+      "lidar_files": [
+        "data/raw/lidar/488000_5460000.zip",
+        "data/raw/lidar/489000_5459000.zip",
+        "data/raw/lidar/489000_5460000.zip"
+      ],
+      "nonna_files": [
+        "data/raw/bathymetry/nonna10_eed3031ed788f7cc.tif",
+        "data/raw/bathymetry/nonna10_c968066f57ad06e0.tif"
+      ],
+      "metro_members": [
+        "487500_5460000.las",
+        "489000_5460000.las"
+      ],
+      "nearest_existing_destination": "second-beach"
+    },
+    {
+      "id": "gap_00160",
+      "area_m2": 43800,
+      "nodes": 438,
+      "nonna_nodata_nodes": 438,
+      "nonna_excluded_above_tide_nodes": 0,
+      "cause": "missing_elevation_sources",
+      "touches_aoi_boundary": false,
+      "projected_bounds": [
+        491715.0,
+        5458065.0,
+        491975.0,
+        5458345.0
+      ],
+      "projected_crs": "EPSG:3157",
+      "grid_spacing_m": 10,
+      "action": "Additional authoritative measurements required; not automatically filled",
+      "geographic_bounds": [
+        -123.11391809454595,
+        49.27529240487976,
+        -123.11034460755683,
+        49.277812921612956
+      ],
+      "lidar_files": [
+        "data/raw/lidar/491000_5458000.zip"
+      ],
+      "nonna_files": [
+        "data/raw/bathymetry/nonna10_df567fd6e4acc953.tif"
+      ],
+      "metro_members": [
+        "490500_5457000.las"
+      ],
+      "nearest_existing_destination": "sunset-beach"
+    },
+    {
+      "id": "gap_00033",
+      "area_m2": 34800,
+      "nodes": 348,
+      "nonna_nodata_nodes": 348,
+      "nonna_excluded_above_tide_nodes": 0,
+      "cause": "missing_elevation_sources",
+      "touches_aoi_boundary": false,
+      "projected_bounds": [
+        488405.0,
+        5460975.0,
+        488605.0,
+        5461475.0
+      ],
+      "projected_crs": "EPSG:3157",
+      "grid_spacing_m": 10,
+      "action": "Additional authoritative measurements required; not automatically filled",
+      "geographic_bounds": [
+        -123.15951397677769,
+        49.301414305556634,
+        -123.15676796231067,
+        49.30591468134017
+      ],
+      "lidar_files": [
+        "data/raw/lidar/488000_5460000.zip",
+        "data/raw/lidar/488000_5461000.zip"
+      ],
+      "nonna_files": [
+        "data/raw/bathymetry/nonna10_c968066f57ad06e0.tif"
+      ],
+      "metro_members": [
+        "487500_5460000.las"
+      ],
+      "nearest_existing_destination": "third-beach"
+    },
+    {
+      "id": "gap_00149",
+      "area_m2": 33500,
+      "nodes": 335,
+      "nonna_nodata_nodes": 324,
+      "nonna_excluded_above_tide_nodes": 11,
+      "cause": "mixed_missing_and_excluded_nonna",
+      "touches_aoi_boundary": false,
+      "projected_bounds": [
+        484885.0,
+        5458135.0,
+        485535.0,
+        5458525.0
+      ],
+      "projected_crs": "EPSG:3157",
+      "grid_spacing_m": 10,
+      "action": "Additional authoritative measurements required; not automatically filled",
+      "geographic_bounds": [
+        -123.20783049379729,
+        49.275805444509274,
+        -123.19888144737035,
+        49.27929950522118
+      ],
+      "lidar_files": [
+        "data/raw/lidar/484000_5458000.zip",
+        "data/raw/lidar/485000_5458000.zip"
+      ],
+      "nonna_files": [
+        "data/raw/bathymetry/nonna10_112d0c010eaac917.tif"
+      ],
+      "metro_members": [
+        "484500_5457000.las"
+      ],
+      "nearest_existing_destination": "locarno-beach"
+    },
+    {
+      "id": "gap_00019",
+      "area_m2": 31400,
+      "nodes": 314,
+      "nonna_nodata_nodes": 314,
+      "nonna_excluded_above_tide_nodes": 0,
+      "cause": "missing_elevation_sources",
+      "touches_aoi_boundary": false,
+      "projected_bounds": [
+        491045.0,
+        5462025.0,
+        491305.0,
+        5462285.0
+      ],
+      "projected_crs": "EPSG:3157",
+      "grid_spacing_m": 10,
+      "action": "Additional authoritative measurements required; not automatically filled",
+      "geographic_bounds": [
+        -123.1232184801445,
+        49.31090506195548,
+        -123.11964031294399,
+        49.31324321116905
+      ],
+      "lidar_files": [],
+      "nonna_files": [
+        "data/raw/bathymetry/nonna10_3539f90b97dc8c75.tif"
+      ],
+      "metro_members": [
+        "490500_5461500.las"
+      ],
+      "nearest_existing_destination": "second-beach"
+    },
+    {
+      "id": "gap_00022",
+      "area_m2": 28800,
+      "nodes": 288,
+      "nonna_nodata_nodes": 288,
+      "nonna_excluded_above_tide_nodes": 0,
+      "cause": "missing_elevation_sources",
+      "touches_aoi_boundary": false,
+      "projected_bounds": [
+        488795.0,
+        5461875.0,
+        489095.0,
+        5462245.0
+      ],
+      "projected_crs": "EPSG:3157",
+      "grid_spacing_m": 10,
+      "action": "Additional authoritative measurements required; not automatically filled",
+      "geographic_bounds": [
+        -123.15416943794855,
+        49.30951661183402,
+        -123.15004927177777,
+        49.31285023022493
+      ],
+      "lidar_files": [
+        "data/raw/lidar/488000_5461000.zip",
+        "data/raw/lidar/488000_5462000.zip",
+        "data/raw/lidar/489000_5462000.zip"
+      ],
+      "nonna_files": [
+        "data/raw/bathymetry/nonna10_c968066f57ad06e0.tif"
+      ],
+      "metro_members": [
+        "487500_5461500.las",
+        "489000_5461500.las"
+      ],
+      "nearest_existing_destination": "third-beach"
+    },
+    {
+      "id": "gap_00065",
+      "area_m2": 28100,
+      "nodes": 281,
+      "nonna_nodata_nodes": 281,
+      "nonna_excluded_above_tide_nodes": 0,
+      "cause": "missing_elevation_sources",
+      "touches_aoi_boundary": false,
+      "projected_bounds": [
+        489305.0,
+        5459265.0,
+        489545.0,
+        5459695.0
+      ],
+      "projected_crs": "EPSG:3157",
+      "grid_spacing_m": 10,
+      "action": "Additional authoritative measurements required; not automatically filled",
+      "geographic_bounds": [
+        -123.1470920297645,
+        49.28605144427811,
+        -123.1437850429748,
+        49.28991692557185
+      ],
+      "lidar_files": [
+        "data/raw/lidar/489000_5459000.zip"
+      ],
+      "nonna_files": [
+        "data/raw/bathymetry/nonna10_eed3031ed788f7cc.tif"
+      ],
+      "metro_members": [
+        "489000_5458500.las"
+      ],
+      "nearest_existing_destination": "english-bay"
+    },
+    {
+      "id": "gap_00014",
+      "area_m2": 27300,
+      "nodes": 273,
+      "nonna_nodata_nodes": 273,
+      "nonna_excluded_above_tide_nodes": 0,
+      "cause": "missing_elevation_sources",
+      "touches_aoi_boundary": false,
+      "projected_bounds": [
+        490865.0,
+        5462145.0,
+        491075.0,
+        5462425.0
+      ],
+      "projected_crs": "EPSG:3157",
+      "grid_spacing_m": 10,
+      "action": "Additional authoritative measurements required; not automatically filled",
+      "geographic_bounds": [
+        -123.1256976647223,
+        49.311981702079365,
+        -123.1228106598314,
+        49.3145003315923
+      ],
+      "lidar_files": [
+        "data/raw/lidar/490000_5462000.zip"
+      ],
+      "nonna_files": [
+        "data/raw/bathymetry/nonna10_3539f90b97dc8c75.tif"
+      ],
+      "metro_members": [
+        "490500_5461500.las"
+      ],
+      "nearest_existing_destination": "third-beach"
+    },
+    {
+      "id": "gap_00037",
+      "area_m2": 24100,
+      "nodes": 241,
+      "nonna_nodata_nodes": 241,
+      "nonna_excluded_above_tide_nodes": 0,
+      "cause": "missing_elevation_sources",
+      "touches_aoi_boundary": false,
+      "projected_bounds": [
+        480625.0,
+        5460435.0,
+        480765.0,
+        5460725.0
+      ],
+      "projected_crs": "EPSG:3157",
+      "grid_spacing_m": 10,
+      "action": "Additional authoritative measurements required; not automatically filled",
+      "geographic_bounds": [
+        -123.26650749014978,
+        49.29635915698177,
+        -123.26457948373617,
+        49.298971517061304
+      ],
+      "lidar_files": [],
+      "nonna_files": [
+        "data/raw/bathymetry/nonna10_b7e5839735e23b67.tif"
+      ],
+      "metro_members": [
+        "480000_5460000.las"
+      ],
+      "nearest_existing_destination": "spanish-banks"
+    },
+    {
+      "id": "gap_00001",
+      "area_m2": 22300,
+      "nodes": 223,
+      "nonna_nodata_nodes": 223,
+      "nonna_excluded_above_tide_nodes": 0,
+      "cause": "missing_elevation_sources",
+      "touches_aoi_boundary": true,
+      "projected_bounds": [
+        489305.0,
+        5462935.0,
+        489635.0,
+        5463035.0
+      ],
+      "projected_crs": "EPSG:3157",
+      "grid_spacing_m": 10,
+      "action": "Additional authoritative measurements required; not automatically filled",
+      "geographic_bounds": [
+        -123.14718175415796,
+        49.319062476629696,
+        -123.14264035147185,
+        49.319965761146214
+      ],
+      "lidar_files": [
+        "data/raw/lidar/489000_5462000.zip"
+      ],
+      "nonna_files": [
+        "data/raw/bathymetry/nonna10_c968066f57ad06e0.tif"
+      ],
+      "metro_members": [
+        "489000_5461500.las"
+      ],
+      "nearest_existing_destination": "third-beach"
+    },
+    {
+      "id": "gap_00073",
+      "area_m2": 18700,
+      "nodes": 187,
+      "nonna_nodata_nodes": 187,
+      "nonna_excluded_above_tide_nodes": 0,
+      "cause": "missing_elevation_sources",
+      "touches_aoi_boundary": false,
+      "projected_bounds": [
+        491735.0,
+        5459455.0,
+        492085.0,
+        5459635.0
+      ],
+      "projected_crs": "EPSG:3157",
+      "grid_spacing_m": 10,
+      "action": "Additional authoritative measurements required; not automatically filled",
+      "geographic_bounds": [
+        -123.11367083466455,
+        49.28779567515781,
+        -123.10886042225151,
+        49.28941890135169
+      ],
+      "lidar_files": [
+        "data/raw/lidar/491000_5459000.zip",
+        "data/raw/lidar/492000_5459000.zip"
+      ],
+      "nonna_files": [
+        "data/raw/bathymetry/nonna10_df567fd6e4acc953.tif"
+      ],
+      "metro_members": [
+        "490500_5458500.las",
+        "492000_5458500.las"
+      ],
+      "nearest_existing_destination": "sunset-beach"
+    },
+    {
+      "id": "gap_00068",
+      "area_m2": 18300,
+      "nodes": 183,
+      "nonna_nodata_nodes": 183,
+      "nonna_excluded_above_tide_nodes": 0,
+      "cause": "missing_elevation_sources",
+      "touches_aoi_boundary": false,
+      "projected_bounds": [
+        491465.0,
+        5459525.0,
+        491675.0,
+        5459675.0
+      ],
+      "projected_crs": "EPSG:3157",
+      "grid_spacing_m": 10,
+      "action": "Additional authoritative measurements required; not automatically filled",
+      "geographic_bounds": [
+        -123.11738627210113,
+        49.288422607222564,
+        -123.11449883422509,
+        49.28977174094973
+      ],
+      "lidar_files": [
+        "data/raw/lidar/491000_5459000.zip"
+      ],
+      "nonna_files": [
+        "data/raw/bathymetry/nonna10_df567fd6e4acc953.tif"
+      ],
+      "metro_members": [
+        "490500_5458500.las"
+      ],
+      "nearest_existing_destination": "sunset-beach"
+    },
+    {
+      "id": "gap_00287",
+      "area_m2": 17100,
+      "nodes": 171,
+      "nonna_nodata_nodes": 171,
+      "nonna_excluded_above_tide_nodes": 0,
+      "cause": "missing_elevation_sources",
+      "touches_aoi_boundary": false,
+      "projected_bounds": [
+        490895.0,
+        5456475.0,
+        491085.0,
+        5456615.0
+      ],
+      "projected_crs": "EPSG:3157",
+      "grid_spacing_m": 10,
+      "action": "Additional authoritative measurements required; not automatically filled",
+      "geographic_bounds": [
+        -123.12515598201422,
+        49.26097773632372,
+        -123.12254259243711,
+        49.262238983950155
+      ],
+      "lidar_files": [
+        "data/raw/lidar/490000_5456000.zip",
+        "data/raw/lidar/491000_5456000.zip"
+      ],
+      "nonna_files": [
+        "data/raw/bathymetry/nonna10_df567fd6e4acc953.tif"
+      ],
+      "metro_members": [
+        "490500_5455500.las"
+      ],
+      "nearest_existing_destination": "sunset-beach"
+    },
+    {
+      "id": "gap_00034",
+      "area_m2": 16100,
+      "nodes": 161,
+      "nonna_nodata_nodes": 161,
+      "nonna_excluded_above_tide_nodes": 0,
+      "cause": "missing_elevation_sources",
+      "touches_aoi_boundary": false,
+      "projected_bounds": [
+        488325.0,
+        5460605.0,
+        488465.0,
+        5460915.0
+      ],
+      "projected_crs": "EPSG:3157",
+      "grid_spacing_m": 10,
+      "action": "Additional authoritative measurements required; not automatically filled",
+      "geographic_bounds": [
+        -123.16060303618386,
+        49.298086492146986,
+        -123.15867014803365,
+        49.30087365009022
+      ],
+      "lidar_files": [
+        "data/raw/lidar/488000_5460000.zip"
+      ],
+      "nonna_files": [
+        "data/raw/bathymetry/nonna10_c968066f57ad06e0.tif"
+      ],
+      "metro_members": [
+        "487500_5460000.las"
+      ],
+      "nearest_existing_destination": "third-beach"
+    },
+    {
+      "id": "gap_00158",
+      "area_m2": 11800,
+      "nodes": 118,
+      "nonna_nodata_nodes": 118,
+      "nonna_excluded_above_tide_nodes": 0,
+      "cause": "missing_elevation_sources",
+      "touches_aoi_boundary": false,
+      "projected_bounds": [
+        492005.0,
+        5458305.0,
+        492155.0,
+        5458415.0
+      ],
+      "projected_crs": "EPSG:3157",
+      "grid_spacing_m": 10,
+      "action": "Additional authoritative measurements required; not automatically filled",
+      "geographic_bounds": [
+        -123.10993536124617,
+        49.277455083156575,
+        -123.10787209535225,
+        49.27844494056851
+      ],
+      "lidar_files": [
+        "data/raw/lidar/492000_5458000.zip"
+      ],
+      "nonna_files": [
+        "data/raw/bathymetry/nonna10_df567fd6e4acc953.tif"
+      ],
+      "metro_members": [
+        "492000_5457000.las"
+      ],
+      "nearest_existing_destination": "sunset-beach"
+    },
+    {
+      "id": "gap_00291",
+      "area_m2": 11300,
+      "nodes": 113,
+      "nonna_nodata_nodes": 113,
+      "nonna_excluded_above_tide_nodes": 0,
+      "cause": "missing_elevation_sources",
+      "touches_aoi_boundary": false,
+      "projected_bounds": [
+        482325.0,
+        5456355.0,
+        482465.0,
+        5456505.0
+      ],
+      "projected_crs": "EPSG:3157",
+      "grid_spacing_m": 10,
+      "action": "Additional authoritative measurements required; not automatically filled",
+      "geographic_bounds": [
+        -123.2429382196928,
+        49.25971243124534,
+        -123.241009715863,
+        49.26106256383259
+      ],
+      "lidar_files": [
+        "data/raw/lidar/482000_5456000.zip"
+      ],
+      "nonna_files": [
+        "data/raw/bathymetry/nonna10_248e1f9f45a9b85e.tif"
+      ],
+      "metro_members": [
+        "481500_5455500.las"
+      ],
+      "nearest_existing_destination": "spanish-banks"
+    },
+    {
+      "id": "gap_00036",
+      "area_m2": 10600,
+      "nodes": 106,
+      "nonna_nodata_nodes": 106,
+      "nonna_excluded_above_tide_nodes": 0,
+      "cause": "missing_elevation_sources",
+      "touches_aoi_boundary": false,
+      "projected_bounds": [
+        491485.0,
+        5460565.0,
+        491625.0,
+        5460915.0
+      ],
+      "projected_crs": "EPSG:3157",
+      "grid_spacing_m": 10,
+      "action": "Additional authoritative measurements required; not automatically filled",
+      "geographic_bounds": [
+        -123.11713233642779,
+        49.29777658162817,
+        -123.11521094669148,
+        49.30092557117188
+      ],
+      "lidar_files": [
+        "data/raw/lidar/491000_5460000.zip"
+      ],
+      "nonna_files": [
+        "data/raw/bathymetry/nonna10_3539f90b97dc8c75.tif"
+      ],
+      "metro_members": [
+        "490500_5460000.las"
+      ],
+      "nearest_existing_destination": "second-beach"
+    },
+    {
+      "id": "gap_00043",
+      "area_m2": 10400,
+      "nodes": 104,
+      "nonna_nodata_nodes": 104,
+      "nonna_excluded_above_tide_nodes": 0,
+      "cause": "missing_elevation_sources",
+      "touches_aoi_boundary": false,
+      "projected_bounds": [
+        490735.0,
+        5460225.0,
+        490945.0,
+        5460455.0
+      ],
+      "projected_crs": "EPSG:3157",
+      "grid_spacing_m": 10,
+      "action": "Additional authoritative measurements required; not automatically filled",
+      "geographic_bounds": [
+        -123.12744169490385,
+        49.294708088980705,
+        -123.12455595697452,
+        49.29677906302078
+      ],
+      "lidar_files": [
+        "data/raw/lidar/490000_5460000.zip"
+      ],
+      "nonna_files": [
+        "data/raw/bathymetry/nonna10_df567fd6e4acc953.tif",
+        "data/raw/bathymetry/nonna10_3539f90b97dc8c75.tif"
+      ],
+      "metro_members": [
+        "490500_5460000.las"
+      ],
+      "nearest_existing_destination": "second-beach"
+    },
+    {
+      "id": "gap_00023",
+      "area_m2": 10100,
+      "nodes": 101,
+      "nonna_nodata_nodes": 101,
+      "nonna_excluded_above_tide_nodes": 0,
+      "cause": "missing_elevation_sources",
+      "touches_aoi_boundary": false,
+      "projected_bounds": [
+        491745.0,
+        5462035.0,
+        491825.0,
+        5462225.0
+      ],
+      "projected_crs": "EPSG:3157",
+      "grid_spacing_m": 10,
+      "action": "Additional authoritative measurements required; not automatically filled",
+      "geographic_bounds": [
+        -123.11358933150328,
+        49.311003111897975,
+        -123.11248621982486,
+        49.31271298940595
+      ],
+      "lidar_files": [],
+      "nonna_files": [
+        "data/raw/bathymetry/nonna10_3539f90b97dc8c75.tif"
+      ],
+      "metro_members": [
+        "490500_5461500.las"
+      ],
+      "nearest_existing_destination": "second-beach"
+    }
+  ],
+  "destination_overlap_reviews": [
+    {
+      "destination_id": "english-bay",
+      "radius_m": 1200,
+      "overlap_nodes": 160,
+      "median_lidar_minus_nonna_m": 2.1265268325805664,
+      "absolute_difference_p95_m": 4.872843265533447,
+      "absolute_difference_max_m": 8.529655456542969,
+      "known_fraction_inside_aoi": 0.945583944832464
+    },
+    {
+      "destination_id": "jericho-beach",
+      "radius_m": 1200,
+      "overlap_nodes": 1107,
+      "median_lidar_minus_nonna_m": -0.3203962445259094,
+      "absolute_difference_p95_m": 1.7755600214004517,
+      "absolute_difference_max_m": 2.7715888023376465,
+      "known_fraction_inside_aoi": 0.9701297839881492
+    },
+    {
+      "destination_id": "kitsilano-beach",
+      "radius_m": 1200,
+      "overlap_nodes": 78,
+      "median_lidar_minus_nonna_m": 1.550531268119812,
+      "absolute_difference_p95_m": 5.4643778800964355,
+      "absolute_difference_max_m": 7.388009071350098,
+      "known_fraction_inside_aoi": 0.9237587868606039
+    },
+    {
+      "destination_id": "locarno-beach",
+      "radius_m": 1200,
+      "overlap_nodes": 2974,
+      "median_lidar_minus_nonna_m": -0.23783382773399353,
+      "absolute_difference_p95_m": 1.4040073156356812,
+      "absolute_difference_max_m": 2.7715888023376465,
+      "known_fraction_inside_aoi": 0.9829152392529561
+    },
+    {
+      "destination_id": "second-beach",
+      "radius_m": 1200,
+      "overlap_nodes": 82,
+      "median_lidar_minus_nonna_m": 1.8167948722839355,
+      "absolute_difference_p95_m": 2.735974073410034,
+      "absolute_difference_max_m": 6.882293701171875,
+      "known_fraction_inside_aoi": 0.9471776510630774
+    },
+    {
+      "destination_id": "spanish-banks",
+      "radius_m": 1200,
+      "overlap_nodes": 2939,
+      "median_lidar_minus_nonna_m": -0.2452062964439392,
+      "absolute_difference_p95_m": 1.464750051498413,
+      "absolute_difference_max_m": 2.5050320625305176,
+      "known_fraction_inside_aoi": 0.981941558728615
+    },
+    {
+      "destination_id": "sunset-beach",
+      "radius_m": 1200,
+      "overlap_nodes": 398,
+      "median_lidar_minus_nonna_m": 3.3230390548706055,
+      "absolute_difference_p95_m": 7.245002746582031,
+      "absolute_difference_max_m": 10.429600715637207,
+      "known_fraction_inside_aoi": 0.9741419320617941
+    },
+    {
+      "destination_id": "third-beach",
+      "radius_m": 1200,
+      "overlap_nodes": 61,
+      "median_lidar_minus_nonna_m": 2.2022738456726074,
+      "absolute_difference_p95_m": 4.300937175750732,
+      "absolute_difference_max_m": 9.209423065185547,
+      "known_fraction_inside_aoi": 0.9735573734247182
+    }
+  ],
+  "rejected_source_join_faces_active": 20767,
+  "policy": "No datum adjustment inferred from disagreements. Missing geometry stays missing; steep mixed-source connectors are excluded and retained as debug wireframes.",
+  "supplemental_ground_accepted": true,
+  "gap_geometry": "coverage-gaps.geojson",
+  "source_gap_reference": "https://open.canada.ca/data/en/dataset/d3881c4c-650d-4070-bf9b-1e00aabf0a1d"
+}

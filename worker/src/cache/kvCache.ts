@@ -1,4 +1,4 @@
-const LOCK_TTL_SECONDS = 30;
+const LOCK_TTL_SECONDS = 60; // Cloudflare KV minimum TTL
 const LOCK_WAIT_MS = 500;
 
 async function get<T>(kv: KVNamespace, key: string): Promise<T | null> {
@@ -41,4 +41,50 @@ async function getOrFetch<T>(
   return value;
 }
 
-export const kvCache = { get, set, getOrFetch };
+const pending = new Map<string, Promise<unknown>>();
+
+// Reuse the existing cache keys. Keep last-good values separately from freshness TTLs.
+// KV locks are advisory across isolates; same-isolate requests are coalesced exactly.
+async function resilient<T>(
+  kv: KVNamespace,
+  key: string,
+  fetcher: () => Promise<T>,
+  ttl: number,
+): Promise<T> {
+  const cached = await get<T>(kv, key);
+  if (cached !== null) return cached;
+  const active = pending.get(key);
+  if (active) return active as Promise<T>;
+  const task = (async () => {
+    const stale = await get<T>(kv, `last-good:${key}`);
+    if (await kv.get(`retry:${key}`)) {
+      if (stale !== null) return stale;
+      throw new Error('Environmental source temporarily unavailable');
+    }
+    if (await kv.get(`fetching:${key}`)) {
+      if (stale !== null) return stale;
+      throw new Error('Environmental source refresh in progress');
+    }
+    await set(kv, `fetching:${key}`, true, 60);
+    try {
+      const value = await fetcher();
+      await set(kv, key, value, ttl);
+      await set(kv, `last-good:${key}`, value, 7 * 86400);
+      return value;
+    } catch (error) {
+      await set(kv, `retry:${key}`, true, 60);
+      if (stale !== null) return stale;
+      throw error;
+    } finally {
+      await kv.delete(`fetching:${key}`);
+    }
+  })();
+  pending.set(key, task);
+  try {
+    return await task;
+  } finally {
+    pending.delete(key);
+  }
+}
+
+export const kvCache = { get, set, getOrFetch, resilient };
