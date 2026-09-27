@@ -35,8 +35,10 @@ export default defineConfig({
         ],
       },
       workbox: {
+        // Terrain is streamed by the world runtime, never precached by the PWA.
+        globIgnores: ['**/coast-assets/**', '**/Coast-*.js', '**/Coast-*.css'],
         navigateFallback: 'index.html',
-        navigateFallbackDenylist: [/^\/api\//],
+        navigateFallbackDenylist: [/^\/api\//, /^\/coast-assets\//],
         runtimeCaching: [
           {
             urlPattern: /^.*\/api\/.*/i,
@@ -64,6 +66,7 @@ export default defineConfig({
   },
   server: {
     port: 5173,
+    proxy: { '/api': 'http://127.0.0.1:8788' },
   },
   test: {
     exclude: ['**/node_modules/**', '**/dist/**', '**/e2e/**'],

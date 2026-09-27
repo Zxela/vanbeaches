@@ -1,0 +1,81 @@
+{
+  "metadata": {
+    "id": "d510200c39294832aa7dffab716adfa2",
+    "owner": "mvagoladmin",
+    "ownerId": "4071c20870444c3baea8ccd4aff2396e",
+    "orgId": "56eqCzQ5SZhBaDST",
+    "created": 1772155736000,
+    "modified": 1772603133000,
+    "guid": null,
+    "name": "Vancouver.zip",
+    "title": "Vancouver Area Bare Earth LiDAR 2022",
+    "type": "Desktop Application",
+    "typeKeywords": [
+      "Desktop Application"
+    ],
+    "description": "<span style='white-space:pre-wrap'>The Horizontal Coordinate System has been defined in the header of the accompanying .LAS file by Metro Vancouver GIS staff as:\n\n\tEPSG:3157\n\nThe vertical datum used in the collection of this LiDAR data was CGVD28GVRD2018. This is not available as an option to specify in ArcGIS Pro software. According to MV Surveyors and Aeroquest, EPSG:10588 (Canadian Geodetic Vertical Datum of 1928, height transformation version 2.0) is the closest available vertical coordinate system that is included in the default ArcGIS Pro installation, and in the Lower Mainland the difference between EPSG:10588 and CGVD28GVRD2018 is typically 1 to 2 centimeters. \n\nThis LiDAR achieves British Columbia LiDAR standards Quality Level 3.\n\n=============================================================================================\nThe following information was taken from the LiDAR Processing and Accuracy Report that accompanied the LiDAR data provided by Aeroquest Mapcon Inc. Note that the full report is available on the Metro Vancouver open data portal. This information is included here for posterity.\n=============================================================================================\n\n1. Field Operations\n\tNine missions were flown between April 4th and September 27th, 2022, to cover the area successfully. The Early Spring lines were acquired between April 7th and August 6th, the Late Spring lines were acquired on August 24th and 25th, and the final re-flight was on September 27th. Surveying the entirety of Metro Vancouver including the watersheds posed a significant challenge due to the congested airspace that is managed to the minute by YVR Air Traffic Control.  \n\n2. Lidar Equipment\n\tA Riegl VQ-1560ii lidar sensor (two lasers in one unit) equipped with a GSM4000 gyro-stabilized mount was used for this project. It was installed in a Piper Aztec (registration C-GXNF) which is owned and operated by Kisik Aerial Surveys Inc. \nScanner parameters used for acquisition. \n\n3. Positioning Information\n\tThis project was based on the NAD83 (CSRS) v6 (2002) horizontal datum which is derived from ITRF2008 (International Terrestrial reference Frame. The vertical datum used was, CGVD28GVRD2018 using the Metro Vancouver Geoid, with the data projected to UTM Zone 10. The trajectory was based on the BCLC base station in Langley using differential GPS processing. POSPac software was used for processing the trajectory.\n\n4. Point Cloud Edit\n\tIngest and automated classification. \nUpon receipt of the raw point cloud data it was subjected to a basic quality control process, primarily checking for consistent calibration (agreement) between flight swathes and acceptable point density and coverage of the client AOI. \nThe software package Terrasolid, was used to create the project file for the calibrated point cloud data ensuring the required projection system, datums and units are included in all aspects of the LiDAR classification.   \nThe data was initially auto- classified within Terrasolid into the following classes: \n0 - unclassified never classified \n2 - bare earth \n7 - noise \nThis autoclassification was inspected to ensure the software settings were giving the classification an appropriate/accurate initial class assignment.\n\n5. Manual classification and Quality Control\n\tFollowing successful autoclassification run(s) a series of manual classification edits were accomplished to ensure data fidelity and accuracy.  Common examples of these edits include reassigning points initially classified as class 2 (bare earth) to class 1 (unclassified points) and the movement of points, erroneously classified as class 0 (unclassified) to class 2 (bare earth) points. Water points are commonly manually assigned to class 9 (water) as the auto-classification often fails at this task.  100 percent of the LiDAR data is subjected to this quality control process. \nQuality Assurance \n\tFollowing the manual editing/Quality control process the data is again combed in a quality assurance process.\n\t\t-All water areas are checked to ensure correct classification.\n\t\t-10% of all areas were re-checked for an evaluation of quality and adherence to specifications.  If issues are found in this step the data would be returned for further manual edits.</span><br /><br /><a href='https://metrovancouver.maps.arcgis.com/sharing/rest/content/items/5668f8b1d4914c36960e3829e2aa6639/data' style='text-decoration:underline' rel='nofollow ugc'>Click here to download the full 2022 LiDAR Processing and Accuracy Report</a>",
+    "tags": [
+      "Vancouver",
+      "UBC",
+      "UEL",
+      "Electoral Area A"
+    ],
+    "snippet": "Contains 2022 Bare Earth LiDAR point data contained in LAS files for the area shown in the magenta grid on the thumbnail image. Includes data for:  Vancouver, UBC, UEL, Electoral Area A.",
+    "thumbnail": "thumbnail/Vancouver.jpg",
+    "documentation": null,
+    "extent": [],
+    "categories": [
+      "/Categories/Imagery, basemaps, and Earth cover/LiDAR (Point Clouds)"
+    ],
+    "spatialReference": null,
+    "accessInformation": null,
+    "classification": null,
+    "licenseInfo": "<a href='https://open-data-portal-metrovancouver.hub.arcgis.com/pages/Open%20Government%20Licence' style='text-decoration:underline' rel='nofollow ugc'>Open Government Licence | Metro Vancouver Open Data Portal</a>",
+    "culture": "",
+    "properties": null,
+    "advancedSettings": null,
+    "url": null,
+    "proxyFilter": null,
+    "access": "public",
+    "size": 4674400900,
+    "subInfo": 0,
+    "appCategories": [],
+    "industries": [],
+    "languages": [],
+    "largeThumbnail": null,
+    "banner": null,
+    "screenshots": [],
+    "listed": false,
+    "commentsEnabled": true,
+    "numComments": 0,
+    "numRatings": 0,
+    "avgRating": 0,
+    "numViews": 74,
+    "scoreCompleteness": 100,
+    "groupDesignations": null,
+    "apiToken1ExpirationDate": -1,
+    "apiToken2ExpirationDate": -1,
+    "lastViewed": 1789714800000
+  },
+  "receipt": {
+    "url": "https://metrovancouver.maps.arcgis.com/sharing/rest/content/items/d510200c39294832aa7dffab716adfa2/data",
+    "bytes": 4674400900,
+    "sha256": "3c78c2e2928f8b761043896528a86124dd4f98cef24b4a602ac7947e3bc5e0e2"
+  },
+  "settings": {
+    "enabled": true,
+    "dataset": "d510200c39294832aa7dffab716adfa2",
+    "metadata_url": "https://www.arcgis.com/sharing/rest/content/items/d510200c39294832aa7dffab716adfa2?f=json",
+    "url": "https://metrovancouver.maps.arcgis.com/sharing/rest/content/items/d510200c39294832aa7dffab716adfa2/data",
+    "path": "data/raw/metro-2022/Vancouver.zip",
+    "crs": "EPSG:3157",
+    "vertical_datum": "CGVD28GVRD2018",
+    "world_offset_m": 0.0,
+    "ground_classes": [
+      2
+    ],
+    "max_median_difference_m": 0.5,
+    "max_p95_difference_m": 2.0,
+    "minimum_height_above_high_tide_m": 0.5
+  }
+}

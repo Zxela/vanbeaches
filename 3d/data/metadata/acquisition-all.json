@@ -1,0 +1,10 @@
+{
+    "id":  "481000_5458000",
+    "kind":  "lidar",
+    "status":  "ready",
+    "url":  "https://webtransfer.vancouver.ca/opendata/2022LiDAR/481000_5458000.zip",
+    "bytes":  325431826,
+    "sha256":  "9514fed83807843c480351b56d8ea118daf9a55527729a1c7645826d140c3788",
+    "acquisition":  "local_manual",
+    "imported_utc":  "2026-09-18T06:22:01.0770216Z"
+}

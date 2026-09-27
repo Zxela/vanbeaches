@@ -23,6 +23,9 @@
 
 ## What is this?
 
+Release work remaining is tracked in [FOLLOW_UPS.md](FOLLOW_UPS.md). The coastal
+world implementation and validation record is in [3d/COMPLETION.md](3d/COMPLETION.md).
+
 Van Beaches pulls together live weather, tide predictions, and UV data into a single dashboard so you can figure out the best time to hit the beach — no tab-juggling required.
 
 It covers **9 beaches** across Vancouver: English Bay, Kitsilano, Jericho, Spanish Banks, Locarno, Second Beach, Third Beach, Sunset Beach, and Trout Lake.
@@ -69,6 +72,22 @@ A **Cloudflare Worker** runs cron jobs to keep a KV cache warm (weather every 30
 
 ## Getting Started
 
+The interactive coastal world is available at **`/coast`**. Export the existing Blender world with
+`pnpm 3d:export`, then run the client normally. See [Phase 2 web runtime](3d/WEB.md) for asset builds,
+terrain streaming, profiling, mobile behaviour and deployment bundle setup.
+[Phase 3 environment](3d/ENVIRONMENT.md) adds live tides, weather, real solar lighting and a
+six-hour-past / 48-hour-ahead timeline with cached data and offline fallbacks.
+[Phase 4 estimated activity](CROWD_MODEL.md) adds configurable crowd estimates, semantic activity
+masks, animated instanced characters, distance LOD and mobile budgets. Activity is always labeled
+as a low-confidence estimate; it is not a live headcount.
+[Regional terrain](3d/REGIONAL.md) adds measured North Shore mountains.
+[Coastal topology](3d/COASTAL-TOPOLOGY.md) and [urban context](3d/URBAN.md) add tide-dependent
+marine connectivity, City **2009** building massing, sourced bridges, roads and park coverage.
+[Harbour movement](3d/PHASE7-SOURCES.md) adds explicitly simulated vessels, aircraft and optional
+bridge traffic. SeaBus remains suppressed where the surveyed marine corridor cannot be verified.
+[Production operations](3d/PRODUCTION.md) covers quality tiers, reproducible releases and acceptance
+checks; current browser validation is separate from the earlier phase benchmarks.
+
 **Prerequisites:** Node.js >= 20, pnpm 9
 
 ```sh
@@ -90,7 +109,7 @@ pnpm test             # run Vitest + Playwright
 | Source | What it provides | Refresh rate |
 |---|---|---|
 | [Open-Meteo](https://open-meteo.com/) | Weather, UV index, wind, humidity | 30 min |
-| [DFO IWLS](https://api-iwls.dfo-mpo.gc.ca/) | Tide predictions (Point Atkinson) | 1 h |
+| [DFO IWLS](https://api-iwls.dfo-mpo.gc.ca/) | Observed levels and predictions (Vancouver 07735) | 1 h |
 
 ## Beach photography
 
@@ -101,6 +120,20 @@ generic stock photo.
 Production derivatives should be delivered from a Cloudflare R2 custom domain using
 `beaches/{beach-id}/hero-1600.webp`, `hero-960.webp`, and `thumb-640.webp`. Publish only optimized
 derivatives, strip EXIF metadata, and serve versioned objects with a one-year immutable cache.
+
+## Offline coastal world
+
+The [3D coastal pipeline](3d/README.md) prepares Vancouver LiDAR, CHS NONNA, regional DEM and
+urban source data for Blender and versioned web assets. Its separate Python environment performs
+offline asset generation; normal frontend builds restore or reuse those assets without running GIS
+or Blender. Genuine survey gaps remain unknown. The City building layer represents 2009, while
+harbour movement is simulated rather than a live AIS or aircraft feed.
+
+After refreshing urban/marine assets and exporting existing Blender scenes, run
+`python 3d/pipeline.py finalize --threads 4` to update native cameras and evaluated tide bindings
+and verify all four saved scenes without regenerating terrain. Run heavyweight GIS, Blender and
+browser checks sequentially on constrained hardware. See [production operations](3d/PRODUCTION.md)
+for release packaging and validation.
 
 ## License
 

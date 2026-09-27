@@ -1,0 +1,11 @@
+{
+  "blender": "4.4.3",
+  "objects": 414,
+  "triangles": 241477,
+  "maximumCurvatureErrorMetres": 0.00013916782700107433,
+  "tideStatesPass": true,
+  "waterVolumeSeparationMetres": 0.02490234375,
+  "regionalCameras": 9,
+  "sourceWorld": "C:\\Users\\Alex\\vanbeaches\\3d\\output\\vancouver_coast_overview.blend",
+  "render": "C:\\Users\\Alex\\vanbeaches\\3d\\output\\regional-review\\blender-spanish-banks.png"
+}

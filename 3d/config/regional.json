@@ -1,0 +1,18 @@
+{
+  "survey_radius_m": 140000,
+  "survey_spacing_m": 100,
+  "tile_size_m": 4000,
+  "azimuth_step_degrees": 0.25,
+  "ray_step_m": 50,
+  "earth_radius_m": 6371008.8,
+  "curvature": true,
+  "cgvd2013_to_world_m": -0.12,
+  "datum_note": "Approximate Vancouver station 07735 relationship: CD to CGVD28 -3.00 m, CD to CGVD2013 -2.88 m. Not a regional geodetic transformation.",
+  "distance_bands": [[15000, 25], [30000, 50], [90000, 100]],
+  "lod_height_error_m": [18, 6],
+  "horizon_tolerance_degrees": 0.06,
+  "snow": {"lineMetres": 1400, "amount": 0.35, "transitionMetres": 200},
+  "budgets": {"coarseTriangles": 280000, "detailTriangles": 500000, "downloadBytes": 30000000, "textureBytes": 0, "drawCalls": 200},
+  "stac": "https://datacube.services.geo.ca/stac/api",
+  "collections": ["hrdem-mosaic-2m", "mrdem-30"]
+}

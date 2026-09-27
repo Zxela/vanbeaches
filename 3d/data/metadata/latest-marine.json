@@ -1,0 +1,30 @@
+{
+  "worldConfigSha256": "a87b3515abcafebcfa59cde186bd64b768e0247eb5c8ed2a6e18e1a6faaa90d4",
+  "algorithm": "4-neighbour minimax connection to NONNA below -5m world; unknown barriers",
+  "sourceSha256": "c02f85d82d8a8904846e3eb60be63b2867dc8c0090e0aa264449a28977476a3d",
+  "maximumWorldLevel": 5.0,
+  "connectedCells": 591936,
+  "unknownCells": 193584,
+  "tides": [
+    {
+      "heightCD": 0.5,
+      "wetCells": 499258
+    },
+    {
+      "heightCD": 1.5,
+      "wetCells": 519485
+    },
+    {
+      "heightCD": 3.0,
+      "wetCells": 540093
+    },
+    {
+      "heightCD": 4.5,
+      "wetCells": 545883
+    },
+    {
+      "heightCD": 5.0,
+      "wetCells": 547301
+    }
+  ]
+}

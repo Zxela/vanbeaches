@@ -1,0 +1,115 @@
+name: vancouver_coast
+aoi:
+  west: -123.28
+  east: -123.10
+  south: 49.245
+  north: 49.32
+horizontal:
+  crs: EPSG:3157  # NAD83(CSRS) / UTM zone 10N; preserves City metre coordinates
+  origin_lon: -123.19
+  origin_lat: 49.28
+vertical:
+  world_datum: CGVD28GVRD
+  chart_datum_offset_m: -3.0
+  tide_station: "07735"
+  relationship: approximate_local_visualization_only
+  source: https://tides.gc.ca/en/stations/07735
+sources:
+  lidar:
+    dataset: lidar-2022
+    api: https://opendata.vancouver.ca/api/explore/v2.1/catalog/datasets/lidar-2022
+    crs: EPSG:3157
+    vertical_datum: CGVD28GVRD
+    ground_classes: [2]
+    density_points_m2: 49
+    vertical_accuracy_95_m: 0.081
+  bathymetry:
+    dataset: d3881c4c-650d-4070-bf9b-1e00aabf0a1d
+    wcs: https://nonna-geoserver.data.chs-shc.ca/geoserver/wcs
+    coverage: "nonna:NONNA 10 Coverage"
+    vertical_datum: Chart Datum
+    # The WCS float band returns signed elevations (bay sample is negative).
+    # Downloaded XYZ products may instead be positive-down: use a per-file sidecar.
+    value_convention: elevation_positive_up
+    nominal_resolution_m: 10
+    request_spacing_degrees: 0.0001
+    request_chunk_degrees: 0.05
+    request_overlap_degrees: 0.0003  # Shared source pixels prevent WCS chunk-edge holes.
+  supplemental_ground:
+    enabled: true
+    dataset: d510200c39294832aa7dffab716adfa2
+    metadata_url: https://www.arcgis.com/sharing/rest/content/items/d510200c39294832aa7dffab716adfa2?f=json
+    url: https://metrovancouver.maps.arcgis.com/sharing/rest/content/items/d510200c39294832aa7dffab716adfa2/data
+    path: data/raw/metro-2022/Vancouver.zip
+    crs: EPSG:3157
+    vertical_datum: CGVD28GVRD2018
+    world_offset_m: 0.0  # Same nominal local datum; tested against City overlap, not survey certification.
+    ground_classes: [2]
+    max_median_difference_m: 0.5
+    max_p95_difference_m: 2.0
+    minimum_height_above_high_tide_m: 0.5  # Exclude water-surface returns present in the bare-earth product.
+processing:
+  tile_size_m: 500
+  overview_spacing_m: 10
+  coastal_spacing_m: 2
+  coastal_distance_m: 250
+  # A low-elevation band derived from measured data selects fine land tiles.
+  coastal_elevation_band_m: [-4, 6]
+  max_gap_distance_m: 20
+  max_gap_area_m2: 1600
+  max_transition_slope: 0.5
+  overlap_warning_m: 2
+  # Reject only mixed LiDAR/NONNA connectors exceeding BOTH limits. Keep real cliffs.
+  max_source_join_step_m: 2
+  max_source_join_slope: 0.5
+  max_vertices_per_tile: 100000
+  chunk_points: 1000000
+water:
+  initial_tide_cd_m: 3.0
+  tide_test_states_cd_m: [0.5, 1.5, 3.0, 4.5, 5.0]
+  wave_amplitude_m: 0.08
+  wave_direction_degrees: 270
+  wave_speed: 0.3
+  wind_strength: 0.2
+  depth_bands:
+    - {max_m: 2, color: [0.55, 0.91, 0.85, 1]}
+    - {max_m: 5, color: [0.08, 0.72, 0.80, 1]}
+    - {max_m: 10, color: [0.02, 0.40, 0.48, 1]}
+    - {max_m: 20, color: [0.025, 0.19, 0.48, 1]}
+    - {max_m: 100, color: [0.008, 0.035, 0.15, 1]}
+blender:
+  tested_version: "4.4.3"
+  render_engine: CYCLES
+  samples: 32
+  resolution: [1600, 1000]
+  animation_frames: [1, 80, 160, 240, 320]
+imagery:
+  enabled: true
+  dataset: orthophoto-imagery-2022
+  api: https://opendata.vancouver.ca/api/explore/v2.1/catalog/datasets/orthophoto-imagery-2022
+  service: https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer
+  zoom: 16  # ~1.56m ground pixels locally; source orthophotos are 7.5cm.
+  tile_pixels: 256  # Per 500m geometry tile; bounded portable textures.
+  minimum_height_above_high_tide_m: 0.5
+  fade_height_m: 2
+validation:
+  gap_report_min_area_m2: 10000
+  overlap_review_radius_m: 1200
+  inland_destination_ids: [trout-lake]
+  bathymetry_check:
+    name: English Bay basin sign check
+    longitude: -123.20
+    latitude: 49.30
+    expected_world_z_m: [-150, -5]
+  # Gazetteer reference checks, NOT destination records or terrain constraints.
+  landmarks:
+    - name: Wreck Beach (gazetteer centre)
+      longitude: -123.251111111
+      latitude: 49.249722222
+      source: https://apps.gov.bc.ca/pub/bcgnws/names/35001.html
+  spanish_banks_radius_m: 1200
+  spanish_banks_transects:
+    length_m: 1800
+    sample_spacing_m: 10
+    east_offsets_m: [-500, -250, 0, 250, 500]
+  plausible_z_range_m: [-500, 300]

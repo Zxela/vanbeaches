@@ -1,0 +1,22 @@
+name: Offline coastal pipeline
+
+on:
+  pull_request:
+    paths: ['3d/**', '.github/workflows/coast.yml', 'shared/src/data/beaches.ts']
+  push:
+    branches: [master]
+    paths: ['3d/**', '.github/workflows/coast.yml', 'shared/src/data/beaches.ts']
+
+jobs:
+  numeric-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -r 3d/requirements.lock.txt
+      - run: python -m ruff check 3d
+      - run: python -m ruff format --check 3d
+      - run: python -m pytest -c 3d/pyproject.toml 3d/tests
+      # No large downloads, Blender, or GIS dependencies in application CI/deploy jobs.

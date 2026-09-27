@@ -1,0 +1,13 @@
+{
+  "rawBytes": 754560892,
+  "optimizedBytes": 58405792,
+  "overviewBytes": 4886720,
+  "overviewTriangles": 202587,
+  "textureInputBytes": 51958654,
+  "textureOutputBytes": 4893822,
+  "maxAssetBytes": 430964,
+  "seconds": 35,
+  "assets": 1130,
+  "manifestBytes": 790525,
+  "manifestSha256": "190684c2d14ef53b4e84615ae98fcd5b73ce05e64197dfd2ab0777496e0ee654"
+}

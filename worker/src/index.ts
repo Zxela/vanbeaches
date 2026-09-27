@@ -1,5 +1,5 @@
 import { BEACHES } from '@van-beaches/shared';
-import { fetchTidesForStation } from './services/iwlsService';
+import { fetchTidesForStation, getCoastalTides } from './services/iwlsService';
 import { fetchWaterQualityForBeach } from './services/waterQualityService';
 import { fetchWeatherForBeach } from './services/weatherService';
 
@@ -45,6 +45,9 @@ export default {
   async scheduled(event: ScheduledEvent, env: Env, ctx: ExecutionContext): Promise<void> {
     const task = async () => {
       switch (event.cron) {
+        case '*/5 * * * *':
+          await getCoastalTides(env.BEACH_CACHE);
+          break;
         case '*/30 * * * *':
           console.log('Cron triggered: weather refresh');
           await refreshWeather(env.BEACH_CACHE);

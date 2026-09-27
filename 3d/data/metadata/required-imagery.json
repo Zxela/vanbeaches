@@ -1,0 +1,3065 @@
+{
+  "config_sha256": "a87b3515abcafebcfa59cde186bd64b768e0247eb5c8ed2a6e18e1a6faaa90d4",
+  "dataset": "orthophoto-imagery-2022",
+  "city_metadata": {
+    "title": "Orthophoto imagery 2022",
+    "description": "<div><p>This dataset provides links to aerial imagery (orthophoto) taken in 2022 as individual tiled areas over the City of Vancouver.<br></p><p>An orthophoto is an aerial photograph that has been processed (via a scanning and rectification process) in such a way as to eliminate image displacement due to camera tilt and terrain relief, so that it represents every object as if viewed directly from above, as in a map which is usually in an orthographic projection. An orthophoto combines the visual properties of a photograph with the geometric qualities of a map and offers a realistic visualization of the landscape.</p><p>The City's orthophoto coverage includes the City, UBC, and the University Endowment Lands and parts of Richmond and the Vancouver International Airport (YVR) as well. The area is defined by the City's facet grid\u00a0(see\u00a0<a href=\"https://opendata.vancouver.ca/explore/dataset/facet-grid-boundaries/\">Facet Grid Boundaries</a>).</p><p>Since the 2015 orthophotos, resolution for our imagery is 7.5 cm. Orthophotos are in coordinate system UTM NAD83, Zone 10 (EPSG:26910).<br></p></div> <h3>Note</h3><div><p>\u200bAtmospheric correction was not applied to this dataset.<br></p></div> <h3>Data currency</h3><div><p>\u200bThe 2022 orthophotos were captured between June 6, 2022 and July 1, 2022. This imagery is current as of these dates.\u200b<br></p></div> <h3>Data accuracy</h3><div><p>\u200bImagery is accurate as of the dates it was taken although colours may or may not be exactly as occurred on that day as colours change from moment to moment due to sun and cloud cover.<br><br></p></div> ",
+    "theme": [
+      "Geography and imagery"
+    ],
+    "keyword": null,
+    "license": "Open Government Licence - Vancouver",
+    "license_url": "https://opendata.vancouver.ca/pages/licence/",
+    "language": "en",
+    "metadata_languages": [
+      "en"
+    ],
+    "timezone": null,
+    "modified": "2024-05-08T16:59:54+00:00",
+    "modified_updates_on_metadata_change": false,
+    "modified_updates_on_data_change": false,
+    "data_processed": "2024-04-22T19:37:05+00:00",
+    "metadata_processed": "2026-09-17T13:49:37.266000+00:00",
+    "geographic_reference": null,
+    "geographic_reference_auto": null,
+    "territory": null,
+    "geometry_types": [
+      "Polygon"
+    ],
+    "bbox": {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -123.0122978053987,
+              49.31697106920183
+            ],
+            [
+              -123.26530773192644,
+              49.31697106920183
+            ],
+            [
+              -123.26530773192644,
+              49.195496421307325
+            ],
+            [
+              -123.0122978053987,
+              49.195496421307325
+            ],
+            [
+              -123.0122978053987,
+              49.31697106920183
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {}
+    },
+    "publisher": "City of Vancouver",
+    "references": null,
+    "records_count": 470,
+    "attributions": null,
+    "source_domain": null,
+    "source_domain_title": null,
+    "source_domain_address": null,
+    "source_dataset": null,
+    "shared_catalog": null,
+    "federated": false,
+    "parent_domain": null,
+    "update_frequency": null
+  },
+  "tile_info": {
+    "rows": 256,
+    "cols": 256,
+    "dpi": 96,
+    "format": "MIXED",
+    "compressionQuality": 75,
+    "bandCount": 1,
+    "lercError": 0,
+    "storageFormat": "esriMapCacheStorageModeCompactV2",
+    "origin": {
+      "x": -20037508.342787,
+      "y": 20037508.342787
+    },
+    "spatialReference": {
+      "wkid": 102100,
+      "latestWkid": 3857
+    },
+    "lods": [
+      {
+        "level": 0,
+        "resolution": 156543.033928,
+        "scale": 591657527.591555
+      },
+      {
+        "level": 1,
+        "resolution": 78271.5169639999,
+        "scale": 295828763.795777
+      },
+      {
+        "level": 2,
+        "resolution": 39135.7584820001,
+        "scale": 147914381.897889
+      },
+      {
+        "level": 3,
+        "resolution": 19567.8792409999,
+        "scale": 73957190.948944
+      },
+      {
+        "level": 4,
+        "resolution": 9783.93962049996,
+        "scale": 36978595.474472
+      },
+      {
+        "level": 5,
+        "resolution": 4891.96981024998,
+        "scale": 18489297.737236
+      },
+      {
+        "level": 6,
+        "resolution": 2445.98490512499,
+        "scale": 9244648.868618
+      },
+      {
+        "level": 7,
+        "resolution": 1222.99245256249,
+        "scale": 4622324.434309
+      },
+      {
+        "level": 8,
+        "resolution": 611.49622628138,
+        "scale": 2311162.217155
+      },
+      {
+        "level": 9,
+        "resolution": 305.748113140558,
+        "scale": 1155581.108577
+      },
+      {
+        "level": 10,
+        "resolution": 152.874056570411,
+        "scale": 577790.554289
+      },
+      {
+        "level": 11,
+        "resolution": 76.4370282850732,
+        "scale": 288895.277144
+      },
+      {
+        "level": 12,
+        "resolution": 38.2185141425366,
+        "scale": 144447.638572
+      },
+      {
+        "level": 13,
+        "resolution": 19.1092570712683,
+        "scale": 72223.819286
+      },
+      {
+        "level": 14,
+        "resolution": 9.55462853563415,
+        "scale": 36111.909643
+      },
+      {
+        "level": 15,
+        "resolution": 4.77731426794937,
+        "scale": 18055.954822
+      },
+      {
+        "level": 16,
+        "resolution": 2.38865713397468,
+        "scale": 9027.977411
+      },
+      {
+        "level": 17,
+        "resolution": 1.19432856685505,
+        "scale": 4513.988705
+      },
+      {
+        "level": 18,
+        "resolution": 0.597164283559817,
+        "scale": 2256.994353
+      },
+      {
+        "level": 19,
+        "resolution": 0.298582141647617,
+        "scale": 1128.497176
+      },
+      {
+        "level": 20,
+        "resolution": 0.14929107082380833,
+        "scale": 564.248588
+      },
+      {
+        "level": 21,
+        "resolution": 0.07464553541190416,
+        "scale": 282.124294
+      },
+      {
+        "level": 22,
+        "resolution": 0.03732276770595208,
+        "scale": 141.062147
+      },
+      {
+        "level": 23,
+        "resolution": 0.01866138385297604,
+        "scale": 70.5310735
+      }
+    ]
+  },
+  "tiles": [
+    {
+      "row": 22417,
+      "col": 10351,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22417/10351",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22417_10351.tile"
+    },
+    {
+      "row": 22417,
+      "col": 10352,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22417/10352",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22417_10352.tile"
+    },
+    {
+      "row": 22417,
+      "col": 10353,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22417/10353",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22417_10353.tile"
+    },
+    {
+      "row": 22417,
+      "col": 10354,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22417/10354",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22417_10354.tile"
+    },
+    {
+      "row": 22417,
+      "col": 10355,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22417/10355",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22417_10355.tile"
+    },
+    {
+      "row": 22417,
+      "col": 10356,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22417/10356",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22417_10356.tile"
+    },
+    {
+      "row": 22418,
+      "col": 10347,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22418/10347",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22418_10347.tile"
+    },
+    {
+      "row": 22418,
+      "col": 10348,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22418/10348",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22418_10348.tile"
+    },
+    {
+      "row": 22418,
+      "col": 10349,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22418/10349",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22418_10349.tile"
+    },
+    {
+      "row": 22418,
+      "col": 10350,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22418/10350",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22418_10350.tile"
+    },
+    {
+      "row": 22418,
+      "col": 10351,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22418/10351",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22418_10351.tile"
+    },
+    {
+      "row": 22418,
+      "col": 10352,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22418/10352",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22418_10352.tile"
+    },
+    {
+      "row": 22418,
+      "col": 10353,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22418/10353",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22418_10353.tile"
+    },
+    {
+      "row": 22418,
+      "col": 10354,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22418/10354",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22418_10354.tile"
+    },
+    {
+      "row": 22418,
+      "col": 10355,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22418/10355",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22418_10355.tile"
+    },
+    {
+      "row": 22418,
+      "col": 10356,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22418/10356",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22418_10356.tile"
+    },
+    {
+      "row": 22419,
+      "col": 10347,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22419/10347",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22419_10347.tile"
+    },
+    {
+      "row": 22419,
+      "col": 10348,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22419/10348",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22419_10348.tile"
+    },
+    {
+      "row": 22419,
+      "col": 10349,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22419/10349",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22419_10349.tile"
+    },
+    {
+      "row": 22419,
+      "col": 10350,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22419/10350",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22419_10350.tile"
+    },
+    {
+      "row": 22419,
+      "col": 10351,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22419/10351",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22419_10351.tile"
+    },
+    {
+      "row": 22419,
+      "col": 10352,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22419/10352",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22419_10352.tile"
+    },
+    {
+      "row": 22419,
+      "col": 10353,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22419/10353",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22419_10353.tile"
+    },
+    {
+      "row": 22419,
+      "col": 10354,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22419/10354",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22419_10354.tile"
+    },
+    {
+      "row": 22419,
+      "col": 10355,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22419/10355",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22419_10355.tile"
+    },
+    {
+      "row": 22419,
+      "col": 10356,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22419/10356",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22419_10356.tile"
+    },
+    {
+      "row": 22420,
+      "col": 10347,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22420/10347",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22420_10347.tile"
+    },
+    {
+      "row": 22420,
+      "col": 10348,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22420/10348",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22420_10348.tile"
+    },
+    {
+      "row": 22420,
+      "col": 10349,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22420/10349",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22420_10349.tile"
+    },
+    {
+      "row": 22420,
+      "col": 10350,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22420/10350",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22420_10350.tile"
+    },
+    {
+      "row": 22420,
+      "col": 10351,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22420/10351",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22420_10351.tile"
+    },
+    {
+      "row": 22420,
+      "col": 10352,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22420/10352",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22420_10352.tile"
+    },
+    {
+      "row": 22420,
+      "col": 10353,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22420/10353",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22420_10353.tile"
+    },
+    {
+      "row": 22420,
+      "col": 10354,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22420/10354",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22420_10354.tile"
+    },
+    {
+      "row": 22420,
+      "col": 10355,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22420/10355",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22420_10355.tile"
+    },
+    {
+      "row": 22420,
+      "col": 10356,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22420/10356",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22420_10356.tile"
+    },
+    {
+      "row": 22421,
+      "col": 10346,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22421/10346",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22421_10346.tile"
+    },
+    {
+      "row": 22421,
+      "col": 10347,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22421/10347",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22421_10347.tile"
+    },
+    {
+      "row": 22421,
+      "col": 10348,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22421/10348",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22421_10348.tile"
+    },
+    {
+      "row": 22421,
+      "col": 10349,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22421/10349",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22421_10349.tile"
+    },
+    {
+      "row": 22421,
+      "col": 10350,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22421/10350",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22421_10350.tile"
+    },
+    {
+      "row": 22421,
+      "col": 10351,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22421/10351",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22421_10351.tile"
+    },
+    {
+      "row": 22421,
+      "col": 10352,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22421/10352",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22421_10352.tile"
+    },
+    {
+      "row": 22421,
+      "col": 10353,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22421/10353",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22421_10353.tile"
+    },
+    {
+      "row": 22421,
+      "col": 10354,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22421/10354",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22421_10354.tile"
+    },
+    {
+      "row": 22421,
+      "col": 10355,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22421/10355",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22421_10355.tile"
+    },
+    {
+      "row": 22421,
+      "col": 10356,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22421/10356",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22421_10356.tile"
+    },
+    {
+      "row": 22422,
+      "col": 10346,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22422/10346",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22422_10346.tile"
+    },
+    {
+      "row": 22422,
+      "col": 10347,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22422/10347",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22422_10347.tile"
+    },
+    {
+      "row": 22422,
+      "col": 10348,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22422/10348",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22422_10348.tile"
+    },
+    {
+      "row": 22422,
+      "col": 10349,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22422/10349",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22422_10349.tile"
+    },
+    {
+      "row": 22422,
+      "col": 10350,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22422/10350",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22422_10350.tile"
+    },
+    {
+      "row": 22422,
+      "col": 10351,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22422/10351",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22422_10351.tile"
+    },
+    {
+      "row": 22422,
+      "col": 10352,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22422/10352",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22422_10352.tile"
+    },
+    {
+      "row": 22422,
+      "col": 10353,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22422/10353",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22422_10353.tile"
+    },
+    {
+      "row": 22422,
+      "col": 10354,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22422/10354",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22422_10354.tile"
+    },
+    {
+      "row": 22422,
+      "col": 10355,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22422/10355",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22422_10355.tile"
+    },
+    {
+      "row": 22422,
+      "col": 10356,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22422/10356",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22422_10356.tile"
+    },
+    {
+      "row": 22423,
+      "col": 10346,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22423/10346",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22423_10346.tile"
+    },
+    {
+      "row": 22423,
+      "col": 10347,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22423/10347",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22423_10347.tile"
+    },
+    {
+      "row": 22423,
+      "col": 10348,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22423/10348",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22423_10348.tile"
+    },
+    {
+      "row": 22423,
+      "col": 10349,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22423/10349",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22423_10349.tile"
+    },
+    {
+      "row": 22423,
+      "col": 10350,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22423/10350",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22423_10350.tile"
+    },
+    {
+      "row": 22423,
+      "col": 10351,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22423/10351",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22423_10351.tile"
+    },
+    {
+      "row": 22423,
+      "col": 10352,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22423/10352",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22423_10352.tile"
+    },
+    {
+      "row": 22423,
+      "col": 10353,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22423/10353",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22423_10353.tile"
+    },
+    {
+      "row": 22423,
+      "col": 10354,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22423/10354",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22423_10354.tile"
+    },
+    {
+      "row": 22423,
+      "col": 10355,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22423/10355",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22423_10355.tile"
+    },
+    {
+      "row": 22423,
+      "col": 10356,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22423/10356",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22423_10356.tile"
+    },
+    {
+      "row": 22424,
+      "col": 10347,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22424/10347",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22424_10347.tile"
+    },
+    {
+      "row": 22424,
+      "col": 10348,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22424/10348",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22424_10348.tile"
+    },
+    {
+      "row": 22424,
+      "col": 10349,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22424/10349",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22424_10349.tile"
+    },
+    {
+      "row": 22424,
+      "col": 10350,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22424/10350",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22424_10350.tile"
+    },
+    {
+      "row": 22424,
+      "col": 10351,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22424/10351",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22424_10351.tile"
+    },
+    {
+      "row": 22424,
+      "col": 10352,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22424/10352",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22424_10352.tile"
+    },
+    {
+      "row": 22424,
+      "col": 10353,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22424/10353",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22424_10353.tile"
+    },
+    {
+      "row": 22424,
+      "col": 10354,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22424/10354",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22424_10354.tile"
+    },
+    {
+      "row": 22424,
+      "col": 10355,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22424/10355",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22424_10355.tile"
+    },
+    {
+      "row": 22425,
+      "col": 10347,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22425/10347",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22425_10347.tile"
+    },
+    {
+      "row": 22425,
+      "col": 10348,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22425/10348",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22425_10348.tile"
+    },
+    {
+      "row": 22425,
+      "col": 10349,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22425/10349",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22425_10349.tile"
+    },
+    {
+      "row": 22425,
+      "col": 10350,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22425/10350",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22425_10350.tile"
+    },
+    {
+      "row": 22425,
+      "col": 10351,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22425/10351",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22425_10351.tile"
+    },
+    {
+      "row": 22425,
+      "col": 10352,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22425/10352",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22425_10352.tile"
+    },
+    {
+      "row": 22425,
+      "col": 10353,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22425/10353",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22425_10353.tile"
+    },
+    {
+      "row": 22425,
+      "col": 10354,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22425/10354",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22425_10354.tile"
+    },
+    {
+      "row": 22425,
+      "col": 10355,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22425/10355",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22425_10355.tile"
+    },
+    {
+      "row": 22425,
+      "col": 10356,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22425/10356",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22425_10356.tile"
+    },
+    {
+      "row": 22425,
+      "col": 10357,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22425/10357",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22425_10357.tile"
+    },
+    {
+      "row": 22425,
+      "col": 10358,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22425/10358",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22425_10358.tile"
+    },
+    {
+      "row": 22425,
+      "col": 10359,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22425/10359",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22425_10359.tile"
+    },
+    {
+      "row": 22426,
+      "col": 10348,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22426/10348",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22426_10348.tile"
+    },
+    {
+      "row": 22426,
+      "col": 10349,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22426/10349",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22426_10349.tile"
+    },
+    {
+      "row": 22426,
+      "col": 10350,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22426/10350",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22426_10350.tile"
+    },
+    {
+      "row": 22426,
+      "col": 10351,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22426/10351",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22426_10351.tile"
+    },
+    {
+      "row": 22426,
+      "col": 10352,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22426/10352",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22426_10352.tile"
+    },
+    {
+      "row": 22426,
+      "col": 10353,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22426/10353",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22426_10353.tile"
+    },
+    {
+      "row": 22426,
+      "col": 10354,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22426/10354",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22426_10354.tile"
+    },
+    {
+      "row": 22426,
+      "col": 10355,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22426/10355",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22426_10355.tile"
+    },
+    {
+      "row": 22426,
+      "col": 10356,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22426/10356",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22426_10356.tile"
+    },
+    {
+      "row": 22426,
+      "col": 10357,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22426/10357",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22426_10357.tile"
+    },
+    {
+      "row": 22426,
+      "col": 10358,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22426/10358",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22426_10358.tile"
+    },
+    {
+      "row": 22426,
+      "col": 10359,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22426/10359",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22426_10359.tile"
+    },
+    {
+      "row": 22427,
+      "col": 10330,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22427/10330",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22427_10330.tile"
+    },
+    {
+      "row": 22427,
+      "col": 10331,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22427/10331",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22427_10331.tile"
+    },
+    {
+      "row": 22427,
+      "col": 10332,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22427/10332",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22427_10332.tile"
+    },
+    {
+      "row": 22427,
+      "col": 10333,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22427/10333",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22427_10333.tile"
+    },
+    {
+      "row": 22427,
+      "col": 10334,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22427/10334",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22427_10334.tile"
+    },
+    {
+      "row": 22427,
+      "col": 10335,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22427/10335",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22427_10335.tile"
+    },
+    {
+      "row": 22427,
+      "col": 10336,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22427/10336",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22427_10336.tile"
+    },
+    {
+      "row": 22427,
+      "col": 10337,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22427/10337",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22427_10337.tile"
+    },
+    {
+      "row": 22427,
+      "col": 10348,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22427/10348",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22427_10348.tile"
+    },
+    {
+      "row": 22427,
+      "col": 10349,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22427/10349",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22427_10349.tile"
+    },
+    {
+      "row": 22427,
+      "col": 10350,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22427/10350",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22427_10350.tile"
+    },
+    {
+      "row": 22427,
+      "col": 10351,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22427/10351",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22427_10351.tile"
+    },
+    {
+      "row": 22427,
+      "col": 10352,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22427/10352",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22427_10352.tile"
+    },
+    {
+      "row": 22427,
+      "col": 10353,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22427/10353",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22427_10353.tile"
+    },
+    {
+      "row": 22427,
+      "col": 10354,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22427/10354",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22427_10354.tile"
+    },
+    {
+      "row": 22427,
+      "col": 10355,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22427/10355",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22427_10355.tile"
+    },
+    {
+      "row": 22427,
+      "col": 10356,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22427/10356",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22427_10356.tile"
+    },
+    {
+      "row": 22427,
+      "col": 10357,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22427/10357",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22427_10357.tile"
+    },
+    {
+      "row": 22427,
+      "col": 10358,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22427/10358",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22427_10358.tile"
+    },
+    {
+      "row": 22427,
+      "col": 10359,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22427/10359",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22427_10359.tile"
+    },
+    {
+      "row": 22428,
+      "col": 10328,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22428/10328",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22428_10328.tile"
+    },
+    {
+      "row": 22428,
+      "col": 10329,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22428/10329",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22428_10329.tile"
+    },
+    {
+      "row": 22428,
+      "col": 10330,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22428/10330",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22428_10330.tile"
+    },
+    {
+      "row": 22428,
+      "col": 10331,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22428/10331",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22428_10331.tile"
+    },
+    {
+      "row": 22428,
+      "col": 10332,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22428/10332",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22428_10332.tile"
+    },
+    {
+      "row": 22428,
+      "col": 10333,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22428/10333",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22428_10333.tile"
+    },
+    {
+      "row": 22428,
+      "col": 10334,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22428/10334",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22428_10334.tile"
+    },
+    {
+      "row": 22428,
+      "col": 10335,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22428/10335",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22428_10335.tile"
+    },
+    {
+      "row": 22428,
+      "col": 10336,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22428/10336",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22428_10336.tile"
+    },
+    {
+      "row": 22428,
+      "col": 10337,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22428/10337",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22428_10337.tile"
+    },
+    {
+      "row": 22428,
+      "col": 10338,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22428/10338",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22428_10338.tile"
+    },
+    {
+      "row": 22428,
+      "col": 10339,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22428/10339",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22428_10339.tile"
+    },
+    {
+      "row": 22428,
+      "col": 10340,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22428/10340",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22428_10340.tile"
+    },
+    {
+      "row": 22428,
+      "col": 10341,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22428/10341",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22428_10341.tile"
+    },
+    {
+      "row": 22428,
+      "col": 10347,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22428/10347",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22428_10347.tile"
+    },
+    {
+      "row": 22428,
+      "col": 10348,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22428/10348",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22428_10348.tile"
+    },
+    {
+      "row": 22428,
+      "col": 10349,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22428/10349",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22428_10349.tile"
+    },
+    {
+      "row": 22428,
+      "col": 10350,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22428/10350",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22428_10350.tile"
+    },
+    {
+      "row": 22428,
+      "col": 10351,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22428/10351",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22428_10351.tile"
+    },
+    {
+      "row": 22428,
+      "col": 10352,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22428/10352",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22428_10352.tile"
+    },
+    {
+      "row": 22428,
+      "col": 10353,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22428/10353",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22428_10353.tile"
+    },
+    {
+      "row": 22428,
+      "col": 10354,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22428/10354",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22428_10354.tile"
+    },
+    {
+      "row": 22428,
+      "col": 10355,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22428/10355",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22428_10355.tile"
+    },
+    {
+      "row": 22428,
+      "col": 10356,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22428/10356",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22428_10356.tile"
+    },
+    {
+      "row": 22428,
+      "col": 10357,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22428/10357",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22428_10357.tile"
+    },
+    {
+      "row": 22428,
+      "col": 10358,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22428/10358",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22428_10358.tile"
+    },
+    {
+      "row": 22428,
+      "col": 10359,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22428/10359",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22428_10359.tile"
+    },
+    {
+      "row": 22429,
+      "col": 10328,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22429/10328",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22429_10328.tile"
+    },
+    {
+      "row": 22429,
+      "col": 10329,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22429/10329",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22429_10329.tile"
+    },
+    {
+      "row": 22429,
+      "col": 10330,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22429/10330",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22429_10330.tile"
+    },
+    {
+      "row": 22429,
+      "col": 10331,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22429/10331",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22429_10331.tile"
+    },
+    {
+      "row": 22429,
+      "col": 10332,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22429/10332",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22429_10332.tile"
+    },
+    {
+      "row": 22429,
+      "col": 10333,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22429/10333",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22429_10333.tile"
+    },
+    {
+      "row": 22429,
+      "col": 10334,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22429/10334",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22429_10334.tile"
+    },
+    {
+      "row": 22429,
+      "col": 10335,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22429/10335",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22429_10335.tile"
+    },
+    {
+      "row": 22429,
+      "col": 10336,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22429/10336",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22429_10336.tile"
+    },
+    {
+      "row": 22429,
+      "col": 10337,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22429/10337",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22429_10337.tile"
+    },
+    {
+      "row": 22429,
+      "col": 10338,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22429/10338",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22429_10338.tile"
+    },
+    {
+      "row": 22429,
+      "col": 10339,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22429/10339",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22429_10339.tile"
+    },
+    {
+      "row": 22429,
+      "col": 10340,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22429/10340",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22429_10340.tile"
+    },
+    {
+      "row": 22429,
+      "col": 10341,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22429/10341",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22429_10341.tile"
+    },
+    {
+      "row": 22429,
+      "col": 10347,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22429/10347",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22429_10347.tile"
+    },
+    {
+      "row": 22429,
+      "col": 10348,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22429/10348",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22429_10348.tile"
+    },
+    {
+      "row": 22429,
+      "col": 10349,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22429/10349",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22429_10349.tile"
+    },
+    {
+      "row": 22429,
+      "col": 10350,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22429/10350",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22429_10350.tile"
+    },
+    {
+      "row": 22429,
+      "col": 10351,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22429/10351",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22429_10351.tile"
+    },
+    {
+      "row": 22429,
+      "col": 10352,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22429/10352",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22429_10352.tile"
+    },
+    {
+      "row": 22429,
+      "col": 10353,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22429/10353",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22429_10353.tile"
+    },
+    {
+      "row": 22429,
+      "col": 10354,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22429/10354",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22429_10354.tile"
+    },
+    {
+      "row": 22429,
+      "col": 10355,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22429/10355",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22429_10355.tile"
+    },
+    {
+      "row": 22429,
+      "col": 10356,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22429/10356",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22429_10356.tile"
+    },
+    {
+      "row": 22429,
+      "col": 10357,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22429/10357",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22429_10357.tile"
+    },
+    {
+      "row": 22429,
+      "col": 10358,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22429/10358",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22429_10358.tile"
+    },
+    {
+      "row": 22429,
+      "col": 10359,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22429/10359",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22429_10359.tile"
+    },
+    {
+      "row": 22430,
+      "col": 10327,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22430/10327",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22430_10327.tile"
+    },
+    {
+      "row": 22430,
+      "col": 10328,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22430/10328",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22430_10328.tile"
+    },
+    {
+      "row": 22430,
+      "col": 10329,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22430/10329",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22430_10329.tile"
+    },
+    {
+      "row": 22430,
+      "col": 10330,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22430/10330",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22430_10330.tile"
+    },
+    {
+      "row": 22430,
+      "col": 10331,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22430/10331",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22430_10331.tile"
+    },
+    {
+      "row": 22430,
+      "col": 10332,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22430/10332",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22430_10332.tile"
+    },
+    {
+      "row": 22430,
+      "col": 10333,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22430/10333",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22430_10333.tile"
+    },
+    {
+      "row": 22430,
+      "col": 10334,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22430/10334",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22430_10334.tile"
+    },
+    {
+      "row": 22430,
+      "col": 10335,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22430/10335",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22430_10335.tile"
+    },
+    {
+      "row": 22430,
+      "col": 10336,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22430/10336",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22430_10336.tile"
+    },
+    {
+      "row": 22430,
+      "col": 10337,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22430/10337",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22430_10337.tile"
+    },
+    {
+      "row": 22430,
+      "col": 10338,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22430/10338",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22430_10338.tile"
+    },
+    {
+      "row": 22430,
+      "col": 10339,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22430/10339",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22430_10339.tile"
+    },
+    {
+      "row": 22430,
+      "col": 10340,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22430/10340",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22430_10340.tile"
+    },
+    {
+      "row": 22430,
+      "col": 10341,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22430/10341",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22430_10341.tile"
+    },
+    {
+      "row": 22430,
+      "col": 10342,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22430/10342",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22430_10342.tile"
+    },
+    {
+      "row": 22430,
+      "col": 10343,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22430/10343",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22430_10343.tile"
+    },
+    {
+      "row": 22430,
+      "col": 10344,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22430/10344",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22430_10344.tile"
+    },
+    {
+      "row": 22430,
+      "col": 10345,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22430/10345",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22430_10345.tile"
+    },
+    {
+      "row": 22430,
+      "col": 10346,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22430/10346",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22430_10346.tile"
+    },
+    {
+      "row": 22430,
+      "col": 10347,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22430/10347",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22430_10347.tile"
+    },
+    {
+      "row": 22430,
+      "col": 10348,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22430/10348",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22430_10348.tile"
+    },
+    {
+      "row": 22430,
+      "col": 10349,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22430/10349",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22430_10349.tile"
+    },
+    {
+      "row": 22430,
+      "col": 10350,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22430/10350",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22430_10350.tile"
+    },
+    {
+      "row": 22430,
+      "col": 10351,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22430/10351",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22430_10351.tile"
+    },
+    {
+      "row": 22430,
+      "col": 10352,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22430/10352",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22430_10352.tile"
+    },
+    {
+      "row": 22430,
+      "col": 10353,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22430/10353",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22430_10353.tile"
+    },
+    {
+      "row": 22430,
+      "col": 10354,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22430/10354",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22430_10354.tile"
+    },
+    {
+      "row": 22430,
+      "col": 10355,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22430/10355",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22430_10355.tile"
+    },
+    {
+      "row": 22430,
+      "col": 10356,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22430/10356",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22430_10356.tile"
+    },
+    {
+      "row": 22430,
+      "col": 10357,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22430/10357",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22430_10357.tile"
+    },
+    {
+      "row": 22430,
+      "col": 10358,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22430/10358",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22430_10358.tile"
+    },
+    {
+      "row": 22430,
+      "col": 10359,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22430/10359",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22430_10359.tile"
+    },
+    {
+      "row": 22431,
+      "col": 10327,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22431/10327",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22431_10327.tile"
+    },
+    {
+      "row": 22431,
+      "col": 10328,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22431/10328",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22431_10328.tile"
+    },
+    {
+      "row": 22431,
+      "col": 10329,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22431/10329",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22431_10329.tile"
+    },
+    {
+      "row": 22431,
+      "col": 10330,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22431/10330",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22431_10330.tile"
+    },
+    {
+      "row": 22431,
+      "col": 10331,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22431/10331",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22431_10331.tile"
+    },
+    {
+      "row": 22431,
+      "col": 10332,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22431/10332",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22431_10332.tile"
+    },
+    {
+      "row": 22431,
+      "col": 10333,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22431/10333",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22431_10333.tile"
+    },
+    {
+      "row": 22431,
+      "col": 10334,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22431/10334",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22431_10334.tile"
+    },
+    {
+      "row": 22431,
+      "col": 10335,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22431/10335",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22431_10335.tile"
+    },
+    {
+      "row": 22431,
+      "col": 10336,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22431/10336",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22431_10336.tile"
+    },
+    {
+      "row": 22431,
+      "col": 10337,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22431/10337",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22431_10337.tile"
+    },
+    {
+      "row": 22431,
+      "col": 10338,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22431/10338",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22431_10338.tile"
+    },
+    {
+      "row": 22431,
+      "col": 10339,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22431/10339",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22431_10339.tile"
+    },
+    {
+      "row": 22431,
+      "col": 10340,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22431/10340",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22431_10340.tile"
+    },
+    {
+      "row": 22431,
+      "col": 10341,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22431/10341",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22431_10341.tile"
+    },
+    {
+      "row": 22431,
+      "col": 10342,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22431/10342",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22431_10342.tile"
+    },
+    {
+      "row": 22431,
+      "col": 10343,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22431/10343",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22431_10343.tile"
+    },
+    {
+      "row": 22431,
+      "col": 10344,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22431/10344",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22431_10344.tile"
+    },
+    {
+      "row": 22431,
+      "col": 10345,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22431/10345",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22431_10345.tile"
+    },
+    {
+      "row": 22431,
+      "col": 10346,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22431/10346",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22431_10346.tile"
+    },
+    {
+      "row": 22431,
+      "col": 10347,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22431/10347",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22431_10347.tile"
+    },
+    {
+      "row": 22431,
+      "col": 10348,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22431/10348",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22431_10348.tile"
+    },
+    {
+      "row": 22431,
+      "col": 10349,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22431/10349",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22431_10349.tile"
+    },
+    {
+      "row": 22431,
+      "col": 10350,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22431/10350",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22431_10350.tile"
+    },
+    {
+      "row": 22431,
+      "col": 10351,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22431/10351",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22431_10351.tile"
+    },
+    {
+      "row": 22431,
+      "col": 10352,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22431/10352",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22431_10352.tile"
+    },
+    {
+      "row": 22431,
+      "col": 10353,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22431/10353",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22431_10353.tile"
+    },
+    {
+      "row": 22431,
+      "col": 10354,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22431/10354",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22431_10354.tile"
+    },
+    {
+      "row": 22431,
+      "col": 10355,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22431/10355",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22431_10355.tile"
+    },
+    {
+      "row": 22431,
+      "col": 10356,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22431/10356",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22431_10356.tile"
+    },
+    {
+      "row": 22431,
+      "col": 10357,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22431/10357",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22431_10357.tile"
+    },
+    {
+      "row": 22431,
+      "col": 10358,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22431/10358",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22431_10358.tile"
+    },
+    {
+      "row": 22431,
+      "col": 10359,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22431/10359",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22431_10359.tile"
+    },
+    {
+      "row": 22432,
+      "col": 10327,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22432/10327",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22432_10327.tile"
+    },
+    {
+      "row": 22432,
+      "col": 10328,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22432/10328",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22432_10328.tile"
+    },
+    {
+      "row": 22432,
+      "col": 10329,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22432/10329",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22432_10329.tile"
+    },
+    {
+      "row": 22432,
+      "col": 10330,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22432/10330",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22432_10330.tile"
+    },
+    {
+      "row": 22432,
+      "col": 10331,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22432/10331",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22432_10331.tile"
+    },
+    {
+      "row": 22432,
+      "col": 10332,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22432/10332",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22432_10332.tile"
+    },
+    {
+      "row": 22432,
+      "col": 10333,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22432/10333",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22432_10333.tile"
+    },
+    {
+      "row": 22432,
+      "col": 10334,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22432/10334",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22432_10334.tile"
+    },
+    {
+      "row": 22432,
+      "col": 10335,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22432/10335",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22432_10335.tile"
+    },
+    {
+      "row": 22432,
+      "col": 10336,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22432/10336",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22432_10336.tile"
+    },
+    {
+      "row": 22432,
+      "col": 10337,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22432/10337",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22432_10337.tile"
+    },
+    {
+      "row": 22432,
+      "col": 10338,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22432/10338",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22432_10338.tile"
+    },
+    {
+      "row": 22432,
+      "col": 10339,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22432/10339",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22432_10339.tile"
+    },
+    {
+      "row": 22432,
+      "col": 10340,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22432/10340",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22432_10340.tile"
+    },
+    {
+      "row": 22432,
+      "col": 10341,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22432/10341",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22432_10341.tile"
+    },
+    {
+      "row": 22432,
+      "col": 10342,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22432/10342",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22432_10342.tile"
+    },
+    {
+      "row": 22432,
+      "col": 10343,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22432/10343",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22432_10343.tile"
+    },
+    {
+      "row": 22432,
+      "col": 10344,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22432/10344",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22432_10344.tile"
+    },
+    {
+      "row": 22432,
+      "col": 10345,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22432/10345",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22432_10345.tile"
+    },
+    {
+      "row": 22432,
+      "col": 10346,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22432/10346",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22432_10346.tile"
+    },
+    {
+      "row": 22432,
+      "col": 10347,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22432/10347",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22432_10347.tile"
+    },
+    {
+      "row": 22432,
+      "col": 10348,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22432/10348",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22432_10348.tile"
+    },
+    {
+      "row": 22432,
+      "col": 10349,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22432/10349",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22432_10349.tile"
+    },
+    {
+      "row": 22432,
+      "col": 10350,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22432/10350",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22432_10350.tile"
+    },
+    {
+      "row": 22432,
+      "col": 10351,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22432/10351",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22432_10351.tile"
+    },
+    {
+      "row": 22432,
+      "col": 10352,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22432/10352",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22432_10352.tile"
+    },
+    {
+      "row": 22432,
+      "col": 10353,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22432/10353",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22432_10353.tile"
+    },
+    {
+      "row": 22432,
+      "col": 10354,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22432/10354",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22432_10354.tile"
+    },
+    {
+      "row": 22432,
+      "col": 10355,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22432/10355",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22432_10355.tile"
+    },
+    {
+      "row": 22432,
+      "col": 10356,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22432/10356",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22432_10356.tile"
+    },
+    {
+      "row": 22432,
+      "col": 10357,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22432/10357",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22432_10357.tile"
+    },
+    {
+      "row": 22432,
+      "col": 10358,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22432/10358",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22432_10358.tile"
+    },
+    {
+      "row": 22432,
+      "col": 10359,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22432/10359",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22432_10359.tile"
+    },
+    {
+      "row": 22433,
+      "col": 10327,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22433/10327",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22433_10327.tile"
+    },
+    {
+      "row": 22433,
+      "col": 10328,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22433/10328",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22433_10328.tile"
+    },
+    {
+      "row": 22433,
+      "col": 10329,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22433/10329",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22433_10329.tile"
+    },
+    {
+      "row": 22433,
+      "col": 10330,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22433/10330",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22433_10330.tile"
+    },
+    {
+      "row": 22433,
+      "col": 10331,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22433/10331",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22433_10331.tile"
+    },
+    {
+      "row": 22433,
+      "col": 10332,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22433/10332",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22433_10332.tile"
+    },
+    {
+      "row": 22433,
+      "col": 10333,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22433/10333",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22433_10333.tile"
+    },
+    {
+      "row": 22433,
+      "col": 10334,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22433/10334",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22433_10334.tile"
+    },
+    {
+      "row": 22433,
+      "col": 10335,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22433/10335",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22433_10335.tile"
+    },
+    {
+      "row": 22433,
+      "col": 10336,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22433/10336",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22433_10336.tile"
+    },
+    {
+      "row": 22433,
+      "col": 10337,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22433/10337",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22433_10337.tile"
+    },
+    {
+      "row": 22433,
+      "col": 10338,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22433/10338",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22433_10338.tile"
+    },
+    {
+      "row": 22433,
+      "col": 10339,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22433/10339",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22433_10339.tile"
+    },
+    {
+      "row": 22433,
+      "col": 10340,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22433/10340",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22433_10340.tile"
+    },
+    {
+      "row": 22433,
+      "col": 10341,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22433/10341",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22433_10341.tile"
+    },
+    {
+      "row": 22433,
+      "col": 10342,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22433/10342",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22433_10342.tile"
+    },
+    {
+      "row": 22433,
+      "col": 10343,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22433/10343",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22433_10343.tile"
+    },
+    {
+      "row": 22433,
+      "col": 10344,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22433/10344",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22433_10344.tile"
+    },
+    {
+      "row": 22433,
+      "col": 10345,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22433/10345",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22433_10345.tile"
+    },
+    {
+      "row": 22433,
+      "col": 10346,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22433/10346",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22433_10346.tile"
+    },
+    {
+      "row": 22433,
+      "col": 10347,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22433/10347",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22433_10347.tile"
+    },
+    {
+      "row": 22433,
+      "col": 10348,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22433/10348",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22433_10348.tile"
+    },
+    {
+      "row": 22433,
+      "col": 10349,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22433/10349",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22433_10349.tile"
+    },
+    {
+      "row": 22433,
+      "col": 10350,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22433/10350",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22433_10350.tile"
+    },
+    {
+      "row": 22433,
+      "col": 10351,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22433/10351",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22433_10351.tile"
+    },
+    {
+      "row": 22433,
+      "col": 10352,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22433/10352",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22433_10352.tile"
+    },
+    {
+      "row": 22433,
+      "col": 10353,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22433/10353",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22433_10353.tile"
+    },
+    {
+      "row": 22433,
+      "col": 10354,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22433/10354",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22433_10354.tile"
+    },
+    {
+      "row": 22433,
+      "col": 10355,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22433/10355",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22433_10355.tile"
+    },
+    {
+      "row": 22433,
+      "col": 10356,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22433/10356",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22433_10356.tile"
+    },
+    {
+      "row": 22433,
+      "col": 10357,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22433/10357",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22433_10357.tile"
+    },
+    {
+      "row": 22433,
+      "col": 10358,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22433/10358",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22433_10358.tile"
+    },
+    {
+      "row": 22433,
+      "col": 10359,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22433/10359",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22433_10359.tile"
+    },
+    {
+      "row": 22434,
+      "col": 10327,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22434/10327",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22434_10327.tile"
+    },
+    {
+      "row": 22434,
+      "col": 10328,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22434/10328",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22434_10328.tile"
+    },
+    {
+      "row": 22434,
+      "col": 10329,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22434/10329",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22434_10329.tile"
+    },
+    {
+      "row": 22434,
+      "col": 10330,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22434/10330",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22434_10330.tile"
+    },
+    {
+      "row": 22434,
+      "col": 10331,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22434/10331",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22434_10331.tile"
+    },
+    {
+      "row": 22434,
+      "col": 10332,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22434/10332",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22434_10332.tile"
+    },
+    {
+      "row": 22434,
+      "col": 10333,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22434/10333",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22434_10333.tile"
+    },
+    {
+      "row": 22434,
+      "col": 10334,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22434/10334",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22434_10334.tile"
+    },
+    {
+      "row": 22434,
+      "col": 10335,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22434/10335",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22434_10335.tile"
+    },
+    {
+      "row": 22434,
+      "col": 10336,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22434/10336",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22434_10336.tile"
+    },
+    {
+      "row": 22434,
+      "col": 10337,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22434/10337",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22434_10337.tile"
+    },
+    {
+      "row": 22434,
+      "col": 10338,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22434/10338",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22434_10338.tile"
+    },
+    {
+      "row": 22434,
+      "col": 10339,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22434/10339",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22434_10339.tile"
+    },
+    {
+      "row": 22434,
+      "col": 10340,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22434/10340",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22434_10340.tile"
+    },
+    {
+      "row": 22434,
+      "col": 10341,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22434/10341",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22434_10341.tile"
+    },
+    {
+      "row": 22434,
+      "col": 10342,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22434/10342",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22434_10342.tile"
+    },
+    {
+      "row": 22434,
+      "col": 10343,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22434/10343",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22434_10343.tile"
+    },
+    {
+      "row": 22434,
+      "col": 10344,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22434/10344",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22434_10344.tile"
+    },
+    {
+      "row": 22434,
+      "col": 10345,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22434/10345",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22434_10345.tile"
+    },
+    {
+      "row": 22434,
+      "col": 10346,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22434/10346",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22434_10346.tile"
+    },
+    {
+      "row": 22434,
+      "col": 10347,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22434/10347",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22434_10347.tile"
+    },
+    {
+      "row": 22434,
+      "col": 10348,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22434/10348",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22434_10348.tile"
+    },
+    {
+      "row": 22434,
+      "col": 10349,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22434/10349",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22434_10349.tile"
+    },
+    {
+      "row": 22434,
+      "col": 10350,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22434/10350",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22434_10350.tile"
+    },
+    {
+      "row": 22434,
+      "col": 10351,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22434/10351",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22434_10351.tile"
+    },
+    {
+      "row": 22434,
+      "col": 10352,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22434/10352",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22434_10352.tile"
+    },
+    {
+      "row": 22434,
+      "col": 10353,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22434/10353",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22434_10353.tile"
+    },
+    {
+      "row": 22434,
+      "col": 10354,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22434/10354",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22434_10354.tile"
+    },
+    {
+      "row": 22434,
+      "col": 10355,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22434/10355",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22434_10355.tile"
+    },
+    {
+      "row": 22434,
+      "col": 10356,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22434/10356",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22434_10356.tile"
+    },
+    {
+      "row": 22434,
+      "col": 10357,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22434/10357",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22434_10357.tile"
+    },
+    {
+      "row": 22434,
+      "col": 10358,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22434/10358",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22434_10358.tile"
+    },
+    {
+      "row": 22434,
+      "col": 10359,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22434/10359",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22434_10359.tile"
+    },
+    {
+      "row": 22435,
+      "col": 10326,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22435/10326",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22435_10326.tile"
+    },
+    {
+      "row": 22435,
+      "col": 10327,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22435/10327",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22435_10327.tile"
+    },
+    {
+      "row": 22435,
+      "col": 10328,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22435/10328",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22435_10328.tile"
+    },
+    {
+      "row": 22435,
+      "col": 10329,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22435/10329",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22435_10329.tile"
+    },
+    {
+      "row": 22435,
+      "col": 10330,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22435/10330",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22435_10330.tile"
+    },
+    {
+      "row": 22435,
+      "col": 10331,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22435/10331",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22435_10331.tile"
+    },
+    {
+      "row": 22435,
+      "col": 10332,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22435/10332",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22435_10332.tile"
+    },
+    {
+      "row": 22435,
+      "col": 10333,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22435/10333",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22435_10333.tile"
+    },
+    {
+      "row": 22435,
+      "col": 10334,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22435/10334",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22435_10334.tile"
+    },
+    {
+      "row": 22435,
+      "col": 10335,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22435/10335",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22435_10335.tile"
+    },
+    {
+      "row": 22435,
+      "col": 10336,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22435/10336",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22435_10336.tile"
+    },
+    {
+      "row": 22435,
+      "col": 10337,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22435/10337",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22435_10337.tile"
+    },
+    {
+      "row": 22435,
+      "col": 10338,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22435/10338",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22435_10338.tile"
+    },
+    {
+      "row": 22435,
+      "col": 10339,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22435/10339",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22435_10339.tile"
+    },
+    {
+      "row": 22435,
+      "col": 10340,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22435/10340",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22435_10340.tile"
+    },
+    {
+      "row": 22435,
+      "col": 10341,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22435/10341",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22435_10341.tile"
+    },
+    {
+      "row": 22435,
+      "col": 10342,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22435/10342",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22435_10342.tile"
+    },
+    {
+      "row": 22435,
+      "col": 10343,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22435/10343",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22435_10343.tile"
+    },
+    {
+      "row": 22435,
+      "col": 10344,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22435/10344",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22435_10344.tile"
+    },
+    {
+      "row": 22435,
+      "col": 10345,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22435/10345",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22435_10345.tile"
+    },
+    {
+      "row": 22435,
+      "col": 10346,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22435/10346",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22435_10346.tile"
+    },
+    {
+      "row": 22435,
+      "col": 10347,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22435/10347",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22435_10347.tile"
+    },
+    {
+      "row": 22435,
+      "col": 10348,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22435/10348",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22435_10348.tile"
+    },
+    {
+      "row": 22435,
+      "col": 10349,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22435/10349",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22435_10349.tile"
+    },
+    {
+      "row": 22435,
+      "col": 10350,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22435/10350",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22435_10350.tile"
+    },
+    {
+      "row": 22435,
+      "col": 10351,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22435/10351",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22435_10351.tile"
+    },
+    {
+      "row": 22435,
+      "col": 10352,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22435/10352",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22435_10352.tile"
+    },
+    {
+      "row": 22435,
+      "col": 10353,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22435/10353",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22435_10353.tile"
+    },
+    {
+      "row": 22435,
+      "col": 10354,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22435/10354",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22435_10354.tile"
+    },
+    {
+      "row": 22435,
+      "col": 10355,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22435/10355",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22435_10355.tile"
+    },
+    {
+      "row": 22435,
+      "col": 10356,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22435/10356",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22435_10356.tile"
+    },
+    {
+      "row": 22435,
+      "col": 10357,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22435/10357",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22435_10357.tile"
+    },
+    {
+      "row": 22435,
+      "col": 10358,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22435/10358",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22435_10358.tile"
+    },
+    {
+      "row": 22435,
+      "col": 10359,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22435/10359",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22435_10359.tile"
+    },
+    {
+      "row": 22436,
+      "col": 10326,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22436/10326",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22436_10326.tile"
+    },
+    {
+      "row": 22436,
+      "col": 10327,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22436/10327",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22436_10327.tile"
+    },
+    {
+      "row": 22436,
+      "col": 10328,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22436/10328",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22436_10328.tile"
+    },
+    {
+      "row": 22436,
+      "col": 10329,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22436/10329",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22436_10329.tile"
+    },
+    {
+      "row": 22436,
+      "col": 10330,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22436/10330",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22436_10330.tile"
+    },
+    {
+      "row": 22436,
+      "col": 10331,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22436/10331",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22436_10331.tile"
+    },
+    {
+      "row": 22436,
+      "col": 10332,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22436/10332",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22436_10332.tile"
+    },
+    {
+      "row": 22436,
+      "col": 10333,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22436/10333",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22436_10333.tile"
+    },
+    {
+      "row": 22436,
+      "col": 10334,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22436/10334",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22436_10334.tile"
+    },
+    {
+      "row": 22436,
+      "col": 10335,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22436/10335",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22436_10335.tile"
+    },
+    {
+      "row": 22436,
+      "col": 10336,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22436/10336",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22436_10336.tile"
+    },
+    {
+      "row": 22436,
+      "col": 10337,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22436/10337",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22436_10337.tile"
+    },
+    {
+      "row": 22436,
+      "col": 10338,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22436/10338",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22436_10338.tile"
+    },
+    {
+      "row": 22436,
+      "col": 10339,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22436/10339",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22436_10339.tile"
+    },
+    {
+      "row": 22436,
+      "col": 10340,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22436/10340",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22436_10340.tile"
+    },
+    {
+      "row": 22436,
+      "col": 10341,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22436/10341",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22436_10341.tile"
+    },
+    {
+      "row": 22436,
+      "col": 10342,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22436/10342",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22436_10342.tile"
+    },
+    {
+      "row": 22436,
+      "col": 10343,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22436/10343",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22436_10343.tile"
+    },
+    {
+      "row": 22436,
+      "col": 10344,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22436/10344",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22436_10344.tile"
+    },
+    {
+      "row": 22436,
+      "col": 10345,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22436/10345",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22436_10345.tile"
+    },
+    {
+      "row": 22436,
+      "col": 10346,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22436/10346",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22436_10346.tile"
+    },
+    {
+      "row": 22436,
+      "col": 10347,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22436/10347",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22436_10347.tile"
+    },
+    {
+      "row": 22436,
+      "col": 10348,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22436/10348",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22436_10348.tile"
+    },
+    {
+      "row": 22436,
+      "col": 10349,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22436/10349",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22436_10349.tile"
+    },
+    {
+      "row": 22436,
+      "col": 10350,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22436/10350",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22436_10350.tile"
+    },
+    {
+      "row": 22436,
+      "col": 10351,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22436/10351",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22436_10351.tile"
+    },
+    {
+      "row": 22436,
+      "col": 10352,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22436/10352",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22436_10352.tile"
+    },
+    {
+      "row": 22436,
+      "col": 10353,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22436/10353",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22436_10353.tile"
+    },
+    {
+      "row": 22436,
+      "col": 10354,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22436/10354",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22436_10354.tile"
+    },
+    {
+      "row": 22436,
+      "col": 10355,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22436/10355",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22436_10355.tile"
+    },
+    {
+      "row": 22436,
+      "col": 10356,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22436/10356",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22436_10356.tile"
+    },
+    {
+      "row": 22436,
+      "col": 10357,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22436/10357",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22436_10357.tile"
+    },
+    {
+      "row": 22436,
+      "col": 10358,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22436/10358",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22436_10358.tile"
+    },
+    {
+      "row": 22436,
+      "col": 10359,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22436/10359",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22436_10359.tile"
+    },
+    {
+      "row": 22437,
+      "col": 10326,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22437/10326",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22437_10326.tile"
+    },
+    {
+      "row": 22437,
+      "col": 10327,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22437/10327",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22437_10327.tile"
+    },
+    {
+      "row": 22437,
+      "col": 10328,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22437/10328",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22437_10328.tile"
+    },
+    {
+      "row": 22437,
+      "col": 10329,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22437/10329",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22437_10329.tile"
+    },
+    {
+      "row": 22437,
+      "col": 10330,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22437/10330",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22437_10330.tile"
+    },
+    {
+      "row": 22437,
+      "col": 10331,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22437/10331",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22437_10331.tile"
+    },
+    {
+      "row": 22437,
+      "col": 10332,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22437/10332",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22437_10332.tile"
+    },
+    {
+      "row": 22437,
+      "col": 10333,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22437/10333",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22437_10333.tile"
+    },
+    {
+      "row": 22437,
+      "col": 10334,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22437/10334",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22437_10334.tile"
+    },
+    {
+      "row": 22437,
+      "col": 10335,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22437/10335",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22437_10335.tile"
+    },
+    {
+      "row": 22437,
+      "col": 10336,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22437/10336",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22437_10336.tile"
+    },
+    {
+      "row": 22437,
+      "col": 10337,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22437/10337",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22437_10337.tile"
+    },
+    {
+      "row": 22437,
+      "col": 10338,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22437/10338",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22437_10338.tile"
+    },
+    {
+      "row": 22437,
+      "col": 10339,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22437/10339",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22437_10339.tile"
+    },
+    {
+      "row": 22437,
+      "col": 10340,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22437/10340",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22437_10340.tile"
+    },
+    {
+      "row": 22437,
+      "col": 10341,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22437/10341",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22437_10341.tile"
+    },
+    {
+      "row": 22437,
+      "col": 10342,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22437/10342",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22437_10342.tile"
+    },
+    {
+      "row": 22437,
+      "col": 10343,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22437/10343",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22437_10343.tile"
+    },
+    {
+      "row": 22437,
+      "col": 10344,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22437/10344",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22437_10344.tile"
+    },
+    {
+      "row": 22437,
+      "col": 10345,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22437/10345",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22437_10345.tile"
+    },
+    {
+      "row": 22437,
+      "col": 10346,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22437/10346",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22437_10346.tile"
+    },
+    {
+      "row": 22437,
+      "col": 10347,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22437/10347",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22437_10347.tile"
+    },
+    {
+      "row": 22437,
+      "col": 10348,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22437/10348",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22437_10348.tile"
+    },
+    {
+      "row": 22437,
+      "col": 10349,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22437/10349",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22437_10349.tile"
+    },
+    {
+      "row": 22437,
+      "col": 10350,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22437/10350",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22437_10350.tile"
+    },
+    {
+      "row": 22437,
+      "col": 10351,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22437/10351",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22437_10351.tile"
+    },
+    {
+      "row": 22437,
+      "col": 10352,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22437/10352",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22437_10352.tile"
+    },
+    {
+      "row": 22437,
+      "col": 10353,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22437/10353",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22437_10353.tile"
+    },
+    {
+      "row": 22437,
+      "col": 10354,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22437/10354",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22437_10354.tile"
+    },
+    {
+      "row": 22437,
+      "col": 10355,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22437/10355",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22437_10355.tile"
+    },
+    {
+      "row": 22437,
+      "col": 10356,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22437/10356",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22437_10356.tile"
+    },
+    {
+      "row": 22437,
+      "col": 10357,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22437/10357",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22437_10357.tile"
+    },
+    {
+      "row": 22437,
+      "col": 10358,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22437/10358",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22437_10358.tile"
+    },
+    {
+      "row": 22437,
+      "col": 10359,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22437/10359",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22437_10359.tile"
+    },
+    {
+      "row": 22438,
+      "col": 10329,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22438/10329",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22438_10329.tile"
+    },
+    {
+      "row": 22438,
+      "col": 10330,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22438/10330",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22438_10330.tile"
+    },
+    {
+      "row": 22438,
+      "col": 10331,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22438/10331",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22438_10331.tile"
+    },
+    {
+      "row": 22438,
+      "col": 10332,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22438/10332",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22438_10332.tile"
+    },
+    {
+      "row": 22438,
+      "col": 10333,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22438/10333",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22438_10333.tile"
+    },
+    {
+      "row": 22438,
+      "col": 10334,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22438/10334",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22438_10334.tile"
+    },
+    {
+      "row": 22438,
+      "col": 10335,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22438/10335",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22438_10335.tile"
+    },
+    {
+      "row": 22438,
+      "col": 10336,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22438/10336",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22438_10336.tile"
+    },
+    {
+      "row": 22438,
+      "col": 10337,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22438/10337",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22438_10337.tile"
+    },
+    {
+      "row": 22438,
+      "col": 10338,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22438/10338",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22438_10338.tile"
+    },
+    {
+      "row": 22438,
+      "col": 10339,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22438/10339",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22438_10339.tile"
+    },
+    {
+      "row": 22438,
+      "col": 10340,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22438/10340",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22438_10340.tile"
+    },
+    {
+      "row": 22438,
+      "col": 10341,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22438/10341",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22438_10341.tile"
+    },
+    {
+      "row": 22438,
+      "col": 10342,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22438/10342",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22438_10342.tile"
+    },
+    {
+      "row": 22438,
+      "col": 10343,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22438/10343",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22438_10343.tile"
+    },
+    {
+      "row": 22438,
+      "col": 10344,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22438/10344",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22438_10344.tile"
+    },
+    {
+      "row": 22438,
+      "col": 10345,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22438/10345",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22438_10345.tile"
+    },
+    {
+      "row": 22438,
+      "col": 10346,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22438/10346",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22438_10346.tile"
+    },
+    {
+      "row": 22438,
+      "col": 10347,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22438/10347",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22438_10347.tile"
+    },
+    {
+      "row": 22438,
+      "col": 10348,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22438/10348",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22438_10348.tile"
+    },
+    {
+      "row": 22438,
+      "col": 10349,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22438/10349",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22438_10349.tile"
+    },
+    {
+      "row": 22438,
+      "col": 10350,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22438/10350",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22438_10350.tile"
+    },
+    {
+      "row": 22438,
+      "col": 10351,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22438/10351",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22438_10351.tile"
+    },
+    {
+      "row": 22438,
+      "col": 10352,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22438/10352",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22438_10352.tile"
+    },
+    {
+      "row": 22438,
+      "col": 10353,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22438/10353",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22438_10353.tile"
+    },
+    {
+      "row": 22438,
+      "col": 10354,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22438/10354",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22438_10354.tile"
+    },
+    {
+      "row": 22438,
+      "col": 10355,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22438/10355",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22438_10355.tile"
+    },
+    {
+      "row": 22438,
+      "col": 10356,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22438/10356",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22438_10356.tile"
+    },
+    {
+      "row": 22438,
+      "col": 10357,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22438/10357",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22438_10357.tile"
+    },
+    {
+      "row": 22438,
+      "col": 10358,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22438/10358",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22438_10358.tile"
+    },
+    {
+      "row": 22438,
+      "col": 10359,
+      "url": "https://tiles.arcgis.com/tiles/qrcTTRTwUoS8N47o/arcgis/rest/services/Orthophotos_2022/MapServer/tile/16/22438/10359",
+      "path": "data\\raw\\imagery\\orthophoto-imagery-2022\\16\\22438_10359.tile"
+    }
+  ]
+}

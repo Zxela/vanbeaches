@@ -32,6 +32,10 @@ jobs:
 
       - name: Build client
         run: pnpm --filter @van-beaches/client build
+        env:
+          COAST_ASSET_ARCHIVE_URL: ${{ vars.COAST_ASSET_ARCHIVE_URL || 'https://github.com/Zxela/vanbeaches/releases/download/coast-world-2026-09-27/coast-web.tar.gz' }}
+          COAST_ASSET_ARCHIVE_SHA256: ${{ vars.COAST_ASSET_ARCHIVE_SHA256 || 'fc67cbe6971a3746addcdb8b644e98e386ff801b58623d092856b3208d99538b' }}
+          VITE_COAST_MANIFEST_URL: ${{ vars.VITE_COAST_MANIFEST_URL }}
 
       - name: Upload shared dist
         uses: actions/upload-artifact@v4
@@ -151,8 +155,30 @@ jobs:
       - name: Install Chromium
         run: pnpm --filter @van-beaches/client exec playwright install --with-deps chromium
 
+      - name: Restore the exact world assets tested for deployment
+        uses: actions/download-artifact@v4
+        with:
+          name: client-dist
+          path: .artifacts/client-dist
+
+      - name: Make exported assets available to the browser harness
+        run: |
+          if [ -d .artifacts/client-dist/coast-assets ]; then
+            cp -R .artifacts/client-dist/coast-assets client/public/coast-assets
+          fi
+
       - name: Run browser tests
-        run: pnpm --filter @van-beaches/client exec playwright test --project=chromium
+        run: pnpm --filter @van-beaches/client exec playwright test --project=chromium --workers=1
+
+      - name: Preserve world acceptance captures and failure traces
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: browser-acceptance
+          path: |
+            client/playwright-report
+            client/test-results
+          retention-days: 7
 
   deploy:
     name: Deploy
@@ -189,6 +215,11 @@ jobs:
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+
+      - name: Verify coastal assets before deployment
+        run: node scripts/coast-assets.mjs verify client/dist/coast-assets
+        env:
+          VITE_COAST_MANIFEST_URL: ${{ vars.VITE_COAST_MANIFEST_URL }}
 
       - name: Deploy Pages (preview)
         if: github.event_name == 'pull_request'

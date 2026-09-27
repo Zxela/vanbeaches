@@ -1,0 +1,10 @@
+/coast-assets/tile_*
+  Cache-Control: public, max-age=31536000, immutable
+/coast-assets/depth-*
+  Cache-Control: public, max-age=31536000, immutable
+/coast-assets/decoders/*
+  Cache-Control: public, max-age=86400, must-revalidate
+/coast-assets/manifest.json
+  Cache-Control: public, max-age=0, must-revalidate
+/coast-assets/NOTICE.txt
+  Cache-Control: public, max-age=0, must-revalidate

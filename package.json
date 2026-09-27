@@ -5,6 +5,15 @@
   "type": "module",
   "description": "Vancouver beach conditions dashboard",
   "scripts": {
+    "3d:export": "python 3d/pipeline.py export",
+    "3d:urban": "python 3d/pipeline.py urban",
+    "3d:marine": "python 3d/pipeline.py marine",
+    "3d:finalize": "python 3d/pipeline.py finalize --threads 4",
+    "coast:stamp": "node scripts/coast-assets.mjs stamp",
+    "coast:verify": "node scripts/coast-assets.mjs verify",
+    "coast:package": "node scripts/coast-assets.mjs package",
+    "coast:profile": "node client/scripts/profile-coast.mjs",
+    "coast:benchmark": "node 3d/export/benchmark_compression.mjs",
     "dev": "wrangler pages dev client/dist",
     "build": "pnpm -r build",
     "test": "pnpm -r test",
@@ -13,7 +22,8 @@
     "type-check": "pnpm -r type-check",
     "deploy:preview": "wrangler pages deploy client/dist --project-name=vanbeaches",
     "deploy:production": "wrangler pages deploy client/dist --project-name=vanbeaches --branch=master",
-    "prepare": "husky"
+    "prepare": "husky",
+    "test:functions": "vitest run --config functions/vitest.config.ts functions"
   },
   "dependencies": {
     "@van-beaches/shared": "workspace:*"
@@ -21,14 +31,21 @@
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
     "@cloudflare/workers-types": "^4.20260702.1",
+    "@gltf-transform/core": "4.2.1",
+    "@gltf-transform/extensions": "4.2.1",
+    "@gltf-transform/functions": "4.2.1",
+    "draco3dgltf": "1.5.7",
     "husky": "^9.1.7",
     "lint-staged": "^16.4.0",
+    "meshoptimizer": "0.25.0",
+    "sharp": "0.35.0",
     "typescript": "^5.9.3",
+    "vitest": "^5.0.0",
     "wrangler": "^4.129.0"
   },
   "lint-staged": {
-    "*.{ts,tsx,js,jsx}": ["biome check --write"],
-    "*.{json,css,md}": ["biome format --write"]
+    "*.{ts,tsx,js,jsx}": ["biome check --write --no-errors-on-unmatched"],
+    "*.{json,css,md}": ["biome format --write --no-errors-on-unmatched"]
   },
   "packageManager": "pnpm@9.15.0",
   "engines": {

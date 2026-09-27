@@ -1,0 +1,26 @@
+{
+  "horizonsUrl": "horizons-5fc94bceebfd.json",
+  "earthRadiusMetres": 6371008.8,
+  "snow": {
+    "lineMetres": 1400,
+    "amount": 0.35,
+    "transitionMetres": 200
+  },
+  "budgets": {
+    "coarseTriangles": 280000,
+    "detailTriangles": 500000,
+    "downloadBytes": 30000000,
+    "textureBytes": 0,
+    "drawCalls": 200
+  },
+  "measured": {
+    "coarseTriangles": 241477,
+    "detailTriangles": 419289,
+    "downloadBytes": 18803828,
+    "textureBytes": 0,
+    "drawCalls": 183
+  },
+  "maxDistanceMetres": 140000,
+  "sourceAttribution": "Natural Resources Canada, CanElevation HRDEM Mosaic DTM and MRDEM DTM. Open Government Licence \u2013 Canada.",
+  "verticalOffsetMetres": -0.12
+}

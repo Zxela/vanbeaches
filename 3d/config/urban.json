@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "bounds": [-123.27, 49.245, -123.095, 49.333],
+  "buildingMinimumHeight": 12,
+  "buildingMinimumArea": 300,
+  "footprintSimplificationMetres": 0.7,
+  "skylineMinimumHeight": 35,
+  "floorHeightMetres": 3.2,
+  "roadSampleSpacingMetres": 25,
+  "maximumAssetBytes": 7000000,
+  "bridges": {
+    "Lions Gate Bridge": {"deckHeight": 67, "towerHeight": 111, "width": 16, "style": "suspension"},
+    "Burrard Bridge": {"deckHeight": 25, "towerHeight": 43, "width": 25, "style": "truss"},
+    "Granville Bridge": {"deckHeight": 29, "towerHeight": 29, "width": 28, "style": "girder"},
+    "Cambie Bridge": {"deckHeight": 18, "towerHeight": 18, "width": 28, "style": "girder"}
+  }
+}

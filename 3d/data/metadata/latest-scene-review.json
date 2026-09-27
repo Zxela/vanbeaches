@@ -1,0 +1,212 @@
+{
+  "config_sha256": "a87b3515abcafebcfa59cde186bd64b768e0247eb5c8ed2a6e18e1a6faaa90d4",
+  "presentation_sha256": "87df9a2f091104f732ee3ed13d9348b8d957bfe577c36f5574c37923ea6d07c9",
+  "status": "READY_WITH_SOURCE_WARNINGS",
+  "numeric_tests_passed": 24,
+  "lint_and_format": "passed",
+  "primary_source_preservation": "GIS geometry unchanged in this presentation pass",
+  "builds": {
+    "coastal": {
+      "blender": "4.4.3",
+      "objects": 955,
+      "scene_lod": "coastal",
+      "triangles": 18653797,
+      "geometry_build_seconds": 24.079,
+      "build_and_save_seconds": 26.366,
+      "blend_bytes": 398035031,
+      "source_status": "READY_WITH_SOURCE_WARNINGS",
+      "tide_driver_test": "all five states passed",
+      "output": "vancouver_coast.blend",
+      "config_sha256": "a87b3515abcafebcfa59cde186bd64b768e0247eb5c8ed2a6e18e1a6faaa90d4",
+      "presentation_sha256": "87df9a2f091104f732ee3ed13d9348b8d957bfe577c36f5574c37923ea6d07c9",
+      "numerical_acceptance_pass": true,
+      "source_warnings": [
+        "Measured land/NONNA overlap disagrees by > configured tolerance; inspect provenance and seams",
+        "Large elevation step at a measured-source boundary; inspect rejected joins"
+      ],
+      "experience_output": "vancouver_coast_shore_experience.blend",
+      "experience_bytes": 398035603,
+      "experience_frames_checked": 480,
+      "experience_minimum_ground_clearance_m": 1.75,
+      "experience_frames_over_unknown_ground": 0
+    },
+    "overview": {
+      "blender": "4.4.3",
+      "objects": 816,
+      "scene_lod": "overview",
+      "triangles": 2023427,
+      "geometry_build_seconds": 4.298,
+      "build_and_save_seconds": 4.642,
+      "blend_bytes": 56961354,
+      "source_status": "READY_WITH_SOURCE_WARNINGS",
+      "tide_driver_test": "all five states passed",
+      "output": "vancouver_coast_overview.blend",
+      "config_sha256": "a87b3515abcafebcfa59cde186bd64b768e0247eb5c8ed2a6e18e1a6faaa90d4",
+      "presentation_sha256": "87df9a2f091104f732ee3ed13d9348b8d957bfe577c36f5574c37923ea6d07c9",
+      "numerical_acceptance_pass": true,
+      "source_warnings": [
+        "Measured land/NONNA overlap disagrees by > configured tolerance; inspect provenance and seams",
+        "Large elevation step at a measured-source boundary; inspect rejected joins"
+      ],
+      "experience_output": "vancouver_coast_overview_shore_experience.blend",
+      "experience_bytes": 56962431,
+      "experience_frames_checked": 480,
+      "experience_minimum_ground_clearance_m": 1.75,
+      "experience_frames_over_unknown_ground": 0
+    }
+  },
+  "saved_scene_checks": {
+    "vancouver_coast": {
+      "blender": "4.4.3",
+      "scene_lod": "coastal",
+      "saved_scene_tide_states_pass": true,
+      "five_tide_updates_seconds": 0.0505,
+      "mesh_triangles": 18653797,
+      "note": "Headless dependency-graph timings, not interactive viewport FPS",
+      "renders": [],
+      "shore_experience": {
+        "frames_checked": 480,
+        "low_world_z": -2.5,
+        "high_world_z": 2.0
+      },
+      "sidebar_registration_and_tide_preset": "passed",
+      "independent_free_camera_and_rising_tide": "passed"
+    },
+    "vancouver_coast_shore_experience": {
+      "blender": "4.4.3",
+      "scene_lod": "coastal",
+      "saved_scene_tide_states_pass": true,
+      "five_tide_updates_seconds": 0.054,
+      "mesh_triangles": 18653797,
+      "note": "Headless dependency-graph timings, not interactive viewport FPS",
+      "renders": [],
+      "shore_experience": {
+        "frames_checked": 480,
+        "low_world_z": -2.5,
+        "high_world_z": 2.0
+      },
+      "sidebar_registration_and_tide_preset": "passed",
+      "independent_free_camera_and_rising_tide": "passed"
+    },
+    "vancouver_coast_overview": {
+      "blender": "4.4.3",
+      "scene_lod": "overview",
+      "saved_scene_tide_states_pass": true,
+      "five_tide_updates_seconds": 0.046,
+      "mesh_triangles": 2023427,
+      "note": "Headless dependency-graph timings, not interactive viewport FPS",
+      "renders": [],
+      "shore_experience": {
+        "frames_checked": 480,
+        "low_world_z": -2.5,
+        "high_world_z": 2.0
+      },
+      "sidebar_registration_and_tide_preset": "passed",
+      "independent_free_camera_and_rising_tide": "passed"
+    },
+    "vancouver_coast_overview_shore_experience": {
+      "blender": "4.4.3",
+      "scene_lod": "overview",
+      "saved_scene_tide_states_pass": true,
+      "five_tide_updates_seconds": 0.0461,
+      "mesh_triangles": 2023427,
+      "note": "Headless dependency-graph timings, not interactive viewport FPS",
+      "renders": [],
+      "shore_experience": {
+        "frames_checked": 480,
+        "low_world_z": -2.5,
+        "high_world_z": 2.0
+      },
+      "sidebar_registration_and_tide_preset": "passed",
+      "independent_free_camera_and_rising_tide": "passed"
+    }
+  },
+  "render_checks": {
+    "blender": "4.4.3",
+    "scene_lod": "coastal",
+    "saved_scene_tide_states_pass": true,
+    "five_tide_updates_seconds": 0.069,
+    "mesh_triangles": 18653797,
+    "note": "Headless dependency-graph timings, not interactive viewport FPS",
+    "renders": [
+      {
+        "name": "depth-low",
+        "seconds": 14.111
+      },
+      {
+        "name": "depth-high",
+        "seconds": 14.77
+      },
+      {
+        "name": "natural",
+        "seconds": 13.954
+      },
+      {
+        "name": "provenance",
+        "seconds": 17.429
+      },
+      {
+        "name": "spanish-low",
+        "seconds": 14.52
+      },
+      {
+        "name": "spanish-high",
+        "seconds": 22.905
+      },
+      {
+        "name": "coastal",
+        "seconds": 18.616
+      },
+      {
+        "name": "beach-level",
+        "seconds": 15.193
+      },
+      {
+        "name": "shore-low",
+        "seconds": 13.555
+      },
+      {
+        "name": "shore-high",
+        "seconds": 15.619
+      }
+    ],
+    "shore_experience": {
+      "frames_checked": 480,
+      "low_world_z": -2.5,
+      "high_world_z": 2.0
+    },
+    "sidebar_registration_and_tide_preset": "passed",
+    "independent_free_camera_and_rising_tide": "passed"
+  },
+  "visual_review": [
+    "Overview approach and shoreline arrival inspected against measured terrain",
+    "Low, intermediate and high tide at the same eye-level viewpoint",
+    "Water absorption boundary artifact corrected and rerendered",
+    "Natural, depth and provenance renders inspected; survey gaps remain visible in diagnostics",
+    "Final 240-frame MP4 decoded successfully; 960x600, 12fps, 20 seconds"
+  ],
+  "movie_review": {
+    "file": "shore-experience.mp4",
+    "bytes": 1867788,
+    "duration_seconds": 20,
+    "rendered_frames": 240,
+    "rendered_fps": 12,
+    "tide_cd_m": [
+      0.5,
+      5.0
+    ],
+    "monotonic_rise": true,
+    "note": "Accelerated offline review; not a tide forecast or interactive FPS measurement"
+  },
+  "remaining_limitations": [
+    "Source coverage holes persist, including nearshore and Spanish Banks bathymetry",
+    "Pier/deck and seabed overlap cannot be represented by one heightfield; steep connectors are excluded",
+    "Nominal local vertical datum relationships, not survey-grade transformations",
+    "Headless timings do not measure interactive viewport FPS",
+    "Aerial imagery supplies appearance, not reconstructed buildings",
+    "Close-up shoreline faceting is limited by actual 2m land and approximately 10m bathymetric geometry",
+    "Wave normals and procedural sediment detail are appearance, not measured sub-metre geometry",
+    "No breaking surf, wetting-history simulation or North Shore mountain backdrop",
+    "Clearance validation applies to the guided path; native manual fly navigation is unrestricted"
+  ]
+}

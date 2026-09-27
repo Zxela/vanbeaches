@@ -1,0 +1,37 @@
+{
+  "ground": {
+    "dry_sand": [0.38, 0.29, 0.18, 1],
+    "wet_sand": [0.115, 0.105, 0.075, 1],
+    "wet_transition_m": 0.8,
+    "sand_relief_m": 0.018,
+    "grain_relief_m": 0.0008
+  },
+  "water": {
+    "surface_colour": [0.80, 0.94, 0.96],
+    "roughness": 0.065,
+    "absorption_colour": [0.12, 0.52, 0.62, 1],
+    "absorption_density": 0.045,
+    "volume_floor_m": -550
+  },
+  "light": {
+    "sun_elevation_degrees": 28,
+    "sun_rotation_degrees": 215,
+    "sun_energy": 2.0,
+    "sky_strength": 0.3,
+    "exposure": -0.3
+  },
+  "experience": {
+    "fps": 24,
+    "duration_seconds": 20,
+    "arrival_seconds": 8,
+    "tide_start_seconds": 9,
+    "tide_end_seconds": 18,
+    "eye_height_m": 1.75,
+    "shore_offset_xy_m": [0, 10],
+    "minimum_ground_clearance_m": 1.5,
+    "lens_mm": 28,
+    "preview_width": 960,
+    "preview_height": 600,
+    "preview_samples": 16
+  }
+}

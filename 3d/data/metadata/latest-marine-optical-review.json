@@ -1,0 +1,98 @@
+{
+  "coastUnchanged": true,
+  "knownThresholdsUnchanged": true,
+  "opticalOnlyCells": 123797,
+  "unknownCells": 193584,
+  "components": [
+    {
+      "component": 1,
+      "unknownAreaM2": 17180800,
+      "opticalAreaM2": 11104600
+    },
+    {
+      "component": 134,
+      "unknownAreaM2": 508600,
+      "opticalAreaM2": 508600
+    },
+    {
+      "component": 12,
+      "unknownAreaM2": 168600,
+      "opticalAreaM2": 168600
+    },
+    {
+      "component": 37,
+      "unknownAreaM2": 138700,
+      "opticalAreaM2": 0
+    },
+    {
+      "component": 84,
+      "unknownAreaM2": 79800,
+      "opticalAreaM2": 79800
+    },
+    {
+      "component": 33,
+      "unknownAreaM2": 71600,
+      "opticalAreaM2": 71600
+    },
+    {
+      "component": 274,
+      "unknownAreaM2": 69000,
+      "opticalAreaM2": 69000
+    },
+    {
+      "component": 36,
+      "unknownAreaM2": 50900,
+      "opticalAreaM2": 50900
+    },
+    {
+      "component": 141,
+      "unknownAreaM2": 43800,
+      "opticalAreaM2": 0
+    },
+    {
+      "component": 28,
+      "unknownAreaM2": 34800,
+      "opticalAreaM2": 34800
+    },
+    {
+      "component": 131,
+      "unknownAreaM2": 33500,
+      "opticalAreaM2": 33500
+    },
+    {
+      "component": 16,
+      "unknownAreaM2": 31400,
+      "opticalAreaM2": 0
+    }
+  ],
+  "descriptor": {
+    "assetUrl": "marine-a77d081c811c.png",
+    "bounds": [
+      -6687.109224495303,
+      -4905.455647868104,
+      6822.890775504697,
+      4104.544352131896
+    ],
+    "bytes": 799964,
+    "sha256": "a77d081c811cc16ea5e89735cb3bf20851158fe70f3c032fefbba55800f65675",
+    "encoding": "RG uint16 centimetres above -512m; alpha coverage",
+    "opticalOnlyCells": 123797,
+    "opticalOnlyAreaM2": 12379700.0,
+    "opticalEncoding": "Blue=255: 2D OSM sea affiliation only; no surveyed depth; RG sentinel -512m",
+    "opticalLimitation": "Fixed mapped sea affiliation only inside unknown survey cells; tide/bed relationship is unknown there",
+    "sourceAttribution": "OpenStreetMap contributors, ODbL 1.0",
+    "sources": [
+      {
+        "id": "osm-coastline-optical-affiliation",
+        "url": "https://www.openstreetmap.org/copyright",
+        "definition": "https://wiki.openstreetmap.org/wiki/Tag:natural%3Dcoastline",
+        "query": "[out:json][timeout:60];way[natural=coastline](49.224999999999994,-123.3,49.34,-123.08);out tags geom;",
+        "requestKey": "51cd8b7697781783c10d1a6c712915384049f63d76fe43bb6a05f20e664baf30",
+        "retrievedAt": "2026-09-19T08:46:57.107632+00:00",
+        "sha256": "76c9e194b6ec68421a5558ea167e7db6a60a1d56a8e778b2504b363697b0e0ee",
+        "license": "ODbL 1.0; copyright OpenStreetMap contributors",
+        "purpose": "2D optical sea affiliation in unknown survey cells; not elevation or depth"
+      }
+    ]
+  }
+}
